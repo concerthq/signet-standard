@@ -1,0 +1,9 @@
+# Default owners for everything in this repository.
+# The normative core changes only through the Concert Standards Committee
+# revision process (see README → Versioning & governance).
+*                       @concertfoundation
+
+# Normative artifacts — the schema is the source of truth.
+/schema/                @concertfoundation
+/codelists/             @concertfoundation
+/.github/workflows/     @concertfoundation

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Specification & governance
+    url: https://concert.foundation/standard
+    about: Read the rendered specification and the IP & Licensing Policy.
+  - name: General discussion
+    url: https://github.com/concerthq/signet-standard/discussions
+    about: Ask questions and discuss the standard with the community.
