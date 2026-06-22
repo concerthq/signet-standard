@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/obligation.schema.json",
+  "title": "Obligation",
+  "description": "A contractual obligation, deliverable, or milestone with a compliance state.",
+  "type": "object",
+  "required": [
+    "id",
+    "description",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "Obligation"
+    },
+    "id": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "responsibleParty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "met",
+        "breached",
+        "waived"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Document"
+      }
+    }
+  }
+}

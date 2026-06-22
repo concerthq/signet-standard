@@ -1,0 +1,101 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Invoice",
+  "id": {
+    "scheme": "peppol",
+    "id": "INV-2026-000512"
+  },
+  "invoiceTypeCode": "380",
+  "issueDate": "2026-10-05T00:00:00Z",
+  "currency": "EUR",
+  "contract": {
+    "scheme": "did",
+    "id": "did:web:vtpc.example#contract-3310"
+  },
+  "order": {
+    "scheme": "did",
+    "id": "did:web:vtpc.example#order-7781"
+  },
+  "seller": {
+    "scheme": "gleif:lei",
+    "id": "5299000ACME00NETWRK1"
+  },
+  "buyer": {
+    "scheme": "gleif:lei",
+    "id": "529900VTPC0000JAGUAR"
+  },
+  "lines": [
+    {
+      "id": "1",
+      "itemName": "Core router managed service — monthly",
+      "quantity": 100,
+      "unitOfMeasure": "MON",
+      "itemNetPrice": {
+        "amount": 50,
+        "currency": "EUR"
+      },
+      "netAmount": {
+        "amount": 5000,
+        "currency": "EUR"
+      },
+      "classification": {
+        "scheme": "cpv",
+        "id": "72720000"
+      },
+      "vatCategoryCode": "S",
+      "vatRate": 21
+    },
+    {
+      "id": "2",
+      "itemName": "Field engineering — day rate",
+      "quantity": 10,
+      "unitOfMeasure": "DAY",
+      "itemNetPrice": {
+        "amount": 120,
+        "currency": "EUR"
+      },
+      "netAmount": {
+        "amount": 1200,
+        "currency": "EUR"
+      },
+      "vatCategoryCode": "S",
+      "vatRate": 21
+    }
+  ],
+  "vatBreakdown": [
+    {
+      "taxableAmount": {
+        "amount": 6200,
+        "currency": "EUR"
+      },
+      "taxAmount": {
+        "amount": 1302,
+        "currency": "EUR"
+      },
+      "categoryCode": "S",
+      "rate": 21
+    }
+  ],
+  "lineExtensionTotal": {
+    "amount": 6200,
+    "currency": "EUR"
+  },
+  "taxExclusiveTotal": {
+    "amount": 6200,
+    "currency": "EUR"
+  },
+  "taxTotal": {
+    "amount": 1302,
+    "currency": "EUR"
+  },
+  "taxInclusiveTotal": {
+    "amount": 7502,
+    "currency": "EUR"
+  },
+  "payableAmount": {
+    "amount": 7502,
+    "currency": "EUR"
+  },
+  "paymentDueDate": "2026-11-04T00:00:00Z",
+  "paymentTerms": "Net 30 days from invoice date."
+}

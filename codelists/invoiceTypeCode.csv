@@ -1,0 +1,6 @@
+Code,Title,Description
+380,Commercial invoice,Standard commercial invoice (EN 16931 BT-3 default).
+381,Credit note,Document cancelling all or part of an invoice.
+384,Corrected invoice,Invoice correcting a previously issued invoice.
+389,Self-billed invoice,Invoice raised by the buyer on behalf of the supplier.
+326,Partial invoice,Invoice for part of a delivery or contract.

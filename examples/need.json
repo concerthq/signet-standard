@@ -1,0 +1,29 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Need",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:vtpc.example#need-0420"
+  },
+  "title": "Managed network services — Northern region refresh",
+  "requestingParty": {
+    "scheme": "did",
+    "id": "did:web:vtpc.example#vtpc"
+  },
+  "budget": {
+    "amount": 12000000,
+    "currency": "EUR"
+  },
+  "classification": {
+    "scheme": "cpv",
+    "id": "72720000",
+    "description": "Wide area network services"
+  },
+  "rationale": "End-of-life transport equipment refresh across the northern operating region.",
+  "governingPolicies": [
+    {
+      "scheme": "did",
+      "id": "did:web:vtpc.example#policy-elig-iso27001"
+    }
+  ]
+}

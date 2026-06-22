@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/contract.schema.json",
+  "title": "Contract",
+  "description": "The binding agreement (OCDS contract stage).",
+  "type": "object",
+  "required": [
+    "id",
+    "parties",
+    "title",
+    "value",
+    "period"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Contract"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "award": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The award it derives from."
+    },
+    "parties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      }
+    },
+    "title": {
+      "type": "string"
+    },
+    "value": {
+      "$ref": "definitions.schema.json#/definitions/Value"
+    },
+    "period": {
+      "$ref": "definitions.schema.json#/definitions/Period"
+    },
+    "obligations": {
+      "type": "array",
+      "items": {
+        "$ref": "https://concert.foundation/signet/v0.1/obligation.schema.json"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Document"
+      }
+    },
+    "governingPolicies": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      }
+    }
+  }
+}

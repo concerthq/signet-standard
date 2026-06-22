@@ -301,6 +301,128 @@
           "description": "Why this score."
         }
       }
+    },
+    "Unit": {
+      "type": "object",
+      "title": "Unit",
+      "description": "Unit of measure and unit price.",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "UN/ECE Rec 20 unit-of-measure code (e.g. C62, DAY, MTR)."
+        },
+        "name": {
+          "type": "string"
+        },
+        "unitPrice": {
+          "$ref": "#/definitions/Value"
+        }
+      }
+    },
+    "InvoiceLine": {
+      "type": "object",
+      "title": "InvoiceLine",
+      "description": "A single invoice line. Aligned to EN 16931 BG-25 (INVOICE LINE).",
+      "required": [
+        "id",
+        "quantity",
+        "netAmount",
+        "itemName"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "$comment": "EN 16931 BT-126 Invoice line identifier",
+          "description": "Invoice line identifier."
+        },
+        "note": {
+          "type": "string",
+          "$comment": "EN 16931 BT-127 Invoice line note"
+        },
+        "quantity": {
+          "type": "number",
+          "$comment": "EN 16931 BT-129 Invoiced quantity"
+        },
+        "unitOfMeasure": {
+          "type": "string",
+          "$comment": "EN 16931 BT-130 Invoiced quantity unit of measure code (UN/ECE Rec 20)"
+        },
+        "itemName": {
+          "type": "string",
+          "$comment": "EN 16931 BT-153 Item name"
+        },
+        "itemNetPrice": {
+          "$comment": "EN 16931 BT-146 Item net price",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Value"
+            }
+          ]
+        },
+        "netAmount": {
+          "$comment": "EN 16931 BT-131 Invoice line net amount",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Value"
+            }
+          ]
+        },
+        "classification": {
+          "$comment": "EN 16931 BT-158 Item classification identifier",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Classification"
+            }
+          ]
+        },
+        "vatCategoryCode": {
+          "type": "string",
+          "$comment": "EN 16931 BT-151 Invoiced item VAT category code"
+        },
+        "vatRate": {
+          "type": "number",
+          "$comment": "EN 16931 BT-152 Invoiced item VAT rate"
+        }
+      }
+    },
+    "VatBreakdown": {
+      "type": "object",
+      "title": "VatBreakdown",
+      "description": "A VAT category subtotal. Aligned to EN 16931 BG-23 (VAT BREAKDOWN).",
+      "required": [
+        "taxableAmount",
+        "taxAmount",
+        "categoryCode"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "taxableAmount": {
+          "$comment": "EN 16931 BT-116 VAT category taxable amount",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Value"
+            }
+          ]
+        },
+        "taxAmount": {
+          "$comment": "EN 16931 BT-117 VAT category tax amount",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Value"
+            }
+          ]
+        },
+        "categoryCode": {
+          "type": "string",
+          "$comment": "EN 16931 BT-118 VAT category code (e.g. S, Z, E, AE)"
+        },
+        "rate": {
+          "type": "number",
+          "$comment": "EN 16931 BT-119 VAT category rate"
+        }
+      }
     }
   }
 }
