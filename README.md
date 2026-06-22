@@ -11,9 +11,13 @@ SIGNET — *Secure Intelligent Governed Network for Exchange and Trade* — is t
 
 ```
 schema/        JSON Schema (Draft-07) — the normative Canonical Data Model
-  definitions.schema.json   Foundation building blocks (Identifier, Party, Value, …)
-  party / sourcing-event / submission / policy / synthetic-agent /
-  mandate / decision / event / consent .schema.json
+  definitions.schema.json   Foundation blocks (Identifier, Party, Value, …)
+                            incl. EN 16931 blocks (Unit, InvoiceLine, VatBreakdown)
+  need / sourcing-event / submission / evaluation / award /
+  contract / order / catalogue / obligation / invoice .schema.json   (process layer)
+  synthetic-agent / mandate / decision / policy .schema.json          (agent layer)
+  event / consent .schema.json                                        (trust layer)
+  party .schema.json
   context.jsonld            JSON-LD @context (aligns to ePO, PROV, W3C VC)
 codelists/     Controlled vocabularies (CSV: Code, Title, Description)
 examples/      Worked instances, validated in CI
@@ -35,7 +39,26 @@ Four layers (see the full specification in `docs/`):
 | **Agent** | SyntheticAgent · AgentCapability · Mandate · Decision · Policy |
 | **Trust** | Event · Provenance · Consent |
 
-This v0.1 repository ships JSON Schema for the core objects across all four layers; the remaining process-layer objects land in subsequent drafts (see `CHANGELOG.md`).
+This repository ships JSON Schema for all four layers, including the **complete process layer** (Need → SourcingEvent → Submission → Evaluation → Award → Contract → Order / Catalogue → Obligation → Invoice). The **Invoice** is mapped to 33 EN 16931 Business Terms and Groups (BT-1…BT-158, BG-4/7/23/25), making a SIGNET invoice convertible to Peppol BIS Billing / UBL Invoice / Factur-X — the structural basis for EU ViDA cross-border e-invoicing compliance. See `CHANGELOG.md`.
+
+## Demonstrating ViDA compliance end to end
+
+The repository ships a runnable proof that a SIGNET invoice is convertible to the
+format EU e-invoicing mandates require:
+
+```bash
+npm run transform     # projects examples/invoice.json -> examples/invoice.ubl.xml
+npm run verify-ubl    # parses the UBL and reconciles every EN 16931 value
+```
+
+`tools/signet-to-ubl.js` projects the canonical Invoice into **UBL 2.1 / Peppol
+BIS Billing 3.0** (EN 16931 compliant), and `tools/verify-ubl.py` confirms the
+projection is faithful — well-formed XML, every Business Term preserved, and the
+monetary totals reconciling (€6,200 net + €1,302 VAT @ 21% = €7,502 payable).
+Both run in CI on every push. This is the concrete basis for the ViDA
+cross-border e-invoicing alignment: a SIGNET network can emit the exact artefact
+a tax authority or Access Point expects.
+
 
 ## Built on, and convertible to, the standards you already use
 

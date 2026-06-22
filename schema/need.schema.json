@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/need.schema.json",
+  "title": "Need",
+  "description": "The demand signal that initiates procurement (OCDS planning stage).",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "requestingParty"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Need"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "requestingParty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "budget": {
+      "$ref": "definitions.schema.json#/definitions/Value"
+    },
+    "classification": {
+      "$ref": "definitions.schema.json#/definitions/Classification"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "governingPolicies": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      },
+      "description": "Policy references constraining this procurement."
+    }
+  }
+}

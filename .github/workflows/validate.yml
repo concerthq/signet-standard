@@ -35,3 +35,8 @@ jobs:
             node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" || { echo "Invalid JSON: $f"; exit 1; }
           done
           echo "All JSON files well-formed."
+
+      - name: Project invoice to Peppol BIS Billing UBL and verify
+        run: |
+          node tools/signet-to-ubl.js > /tmp/invoice.ubl.xml
+          python3 tools/verify-ubl.py /tmp/invoice.ubl.xml examples/invoice.json

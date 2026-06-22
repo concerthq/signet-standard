@@ -1,0 +1,8 @@
+Code,Title,Description
+S,Standard rate,Standard VAT rate applies (EN 16931 BT-151/BT-118).
+Z,Zero rated,Goods/services taxed at zero rate.
+E,Exempt,Exempt from VAT.
+AE,Reverse charge,VAT reverse charge applies (buyer accounts for VAT).
+G,Export outside EU,Free export item, VAT not charged.
+K,Intra-community supply,Zero-rated intra-community supply of goods/services.
+O,Outside scope,Services outside the scope of VAT.

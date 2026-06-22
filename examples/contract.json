@@ -1,0 +1,46 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Contract",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:vtpc.example#contract-3310"
+  },
+  "award": {
+    "scheme": "did",
+    "id": "did:web:vtpc.example#award-2208"
+  },
+  "parties": [
+    {
+      "scheme": "did",
+      "id": "did:web:vtpc.example#vtpc"
+    },
+    {
+      "scheme": "did",
+      "id": "did:web:acme-networks.example#acme"
+    }
+  ],
+  "title": "Managed network services — Northern region",
+  "value": {
+    "amount": 12000000,
+    "currency": "EUR"
+  },
+  "period": {
+    "startDate": "2026-09-01T00:00:00Z",
+    "endDate": "2029-08-31T23:59:59Z"
+  },
+  "obligations": [
+    {
+      "type": "Obligation",
+      "id": "ob-1",
+      "description": "Achieve 99.95% core availability each calendar month.",
+      "status": "pending"
+    },
+    {
+      "type": "Obligation",
+      "id": "ob-2",
+      "description": "Complete northern transport migration by 2027-06-30.",
+      "dueDate": "2027-06-30T00:00:00Z",
+      "status": "pending"
+    }
+  ]
+}

@@ -33,6 +33,9 @@ const map = {
   "award-decision.json": "decision.schema.json",
   "sourcing-event.json": "sourcing-event.schema.json",
   "policy-evaluation.json": "policy.schema.json",
+  "need.json": "need.schema.json",
+  "contract.json": "contract.schema.json",
+  "invoice.json": "invoice.schema.json",
 };
 
 let failures = 0;

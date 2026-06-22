@@ -1,12 +1,17 @@
 {
   "name": "signet-standard",
-  "version": "0.1.0",
-  "description": "SIGNET Canonical Data Model — the normative open standard for governed procurement networks. Stewarded by Concert Foundation.",
+  "version": "0.3.0",
+  "description": "SIGNET Canonical Data Model \u2014 the normative open standard for governed procurement networks. Stewarded by Concert Foundation.",
   "license": "CC0-1.0",
   "homepage": "https://concert.foundation/standard",
-  "repository": { "type": "git", "url": "https://github.com/concerthq/signet-standard" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/concerthq/signet-standard"
+  },
   "scripts": {
-    "validate": "node validate.js"
+    "validate": "node validate.js",
+    "transform": "node tools/signet-to-ubl.js > examples/invoice.ubl.xml",
+    "verify-ubl": "python3 tools/verify-ubl.py"
   },
   "devDependencies": {
     "ajv": "^8.12.0",

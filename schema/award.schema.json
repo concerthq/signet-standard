@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/award.schema.json",
+  "title": "Award",
+  "description": "The decision to award (OCDS award stage).",
+  "type": "object",
+  "required": [
+    "id",
+    "sourcingEvent",
+    "awardedParty",
+    "value",
+    "decision"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Award"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "sourcingEvent": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "awardedParty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "value": {
+      "$ref": "definitions.schema.json#/definitions/Value"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "decision": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The Decision record supporting the award."
+    },
+    "standstillPeriod": {
+      "$ref": "definitions.schema.json#/definitions/Period",
+      "description": "Where regulation requires a standstill (e.g. UK Procurement Act)."
+    }
+  }
+}
