@@ -1,0 +1,45 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "SourcingEvent",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:vtpc.example#event-1207"
+  },
+  "title": "Network managed services — Northern region",
+  "procuringParty": {
+    "scheme": "did",
+    "id": "did:web:vtpc.example#vtpc"
+  },
+  "procedure": "competitiveFlexible",
+  "status": "active",
+  "lots": [
+    {
+      "id": "lot-1",
+      "title": "Core transport",
+      "value": {
+        "amount": 12000000,
+        "currency": "EUR"
+      }
+    }
+  ],
+  "value": {
+    "amount": 12000000,
+    "currency": "EUR"
+  },
+  "eligibilityCriteria": [
+    {
+      "scheme": "did",
+      "id": "did:web:vtpc.example#policy-elig-iso27001"
+    }
+  ],
+  "evaluationCriteria": [
+    {
+      "scheme": "did",
+      "id": "did:web:vtpc.example#policy-eval-mat"
+    }
+  ],
+  "period": {
+    "startDate": "2026-07-01T00:00:00Z",
+    "endDate": "2026-08-15T17:00:00Z"
+  }
+}

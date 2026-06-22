@@ -1,0 +1,37 @@
+name: Validate SIGNET standard
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install validation tooling
+        run: npm install ajv@8 ajv-formats@3 ajv-cli@5 --no-save
+
+      - name: Validate examples against schemas
+        run: node validate.js
+
+      - name: Lint codelists (CSV header check)
+        run: |
+          for f in codelists/*.csv; do
+            head -1 "$f" | grep -q '^Code,Title,Description' || { echo "Bad header in $f"; exit 1; }
+          done
+          echo "All codelists have a valid header."
+
+      - name: Check JSON well-formedness
+        run: |
+          for f in schema/*.json examples/*.json schema/context.jsonld; do
+            node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" || { echo "Invalid JSON: $f"; exit 1; }
+          done
+          echo "All JSON files well-formed."

@@ -1,0 +1,6 @@
+Code,Title,Description
+eligibility,Eligibility,Entry criteria for participation.
+evaluation,Evaluation,Scoring model for submissions.
+approval,Approval,Approval routing and thresholds.
+constraint,Constraint,Hard limits on agent behaviour.
+compliance,Compliance,Regulatory or policy compliance rules.

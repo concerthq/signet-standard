@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/event.schema.json",
+  "title": "Event",
+  "description": "An append-only record of a material change. Tamper-evident via hash chaining.",
+  "type": "object",
+  "required": [
+    "id",
+    "eventType",
+    "subject",
+    "actor",
+    "timestamp",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Event"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "eventType": {
+      "type": "string",
+      "description": "See codelists/eventType.csv (open)."
+    },
+    "subject": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "actor": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "previousEventHash": {
+      "type": "string",
+      "description": "Hash of the prior event, forming a tamper-evident chain."
+    },
+    "provenance": {
+      "$ref": "definitions.schema.json#/definitions/Provenance"
+    }
+  }
+}

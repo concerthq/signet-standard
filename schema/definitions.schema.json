@@ -1,0 +1,306 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/definitions.schema.json",
+  "title": "SIGNET Foundation Definitions",
+  "description": "Reusable foundation-layer building blocks for the SIGNET Canonical Data Model.",
+  "$comment": "Normative. Licensed CC0 1.0 by Concert Foundation.",
+  "definitions": {
+    "Identifier": {
+      "type": "object",
+      "title": "Identifier",
+      "description": "A typed, scheme-qualified identifier.",
+      "required": [
+        "scheme",
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "description": "Identifier scheme. See codelists/identifierScheme.csv.",
+          "examples": [
+            "did",
+            "gleif:lei",
+            "gs1:gln",
+            "vat",
+            "companies-house",
+            "peppol"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier value within the scheme."
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Resolvable URI for the identified entity, where one exists."
+        }
+      }
+    },
+    "Value": {
+      "type": "object",
+      "title": "Value",
+      "description": "A monetary amount (EN 16931 aligned).",
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Numeric amount."
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "ISO 4217 three-letter code."
+        },
+        "taxIncluded": {
+          "type": "boolean",
+          "description": "Whether the amount is tax-inclusive."
+        }
+      }
+    },
+    "Period": {
+      "type": "object",
+      "title": "Period",
+      "description": "A span of time.",
+      "additionalProperties": false,
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Inclusive start."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Inclusive end."
+        },
+        "durationInDays": {
+          "type": "integer",
+          "description": "Convenience duration where dates are indicative."
+        }
+      }
+    },
+    "Classification": {
+      "type": "object",
+      "title": "Classification",
+      "description": "A coded classification against a controlled scheme.",
+      "required": [
+        "scheme",
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "description": "Classification scheme.",
+          "examples": [
+            "cpv",
+            "unspsc",
+            "gsin"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Code value."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable label."
+        }
+      }
+    },
+    "Item": {
+      "type": "object",
+      "title": "Item",
+      "description": "A line item.",
+      "required": [
+        "id",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Item identifier, unique within its containing object."
+        },
+        "description": {
+          "type": "string",
+          "description": "What the item is."
+        },
+        "classification": {
+          "$ref": "#/definitions/Classification"
+        },
+        "additionalClassifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Classification"
+          }
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity."
+        },
+        "unitPrice": {
+          "$ref": "#/definitions/Value",
+          "description": "Price per unit."
+        }
+      }
+    },
+    "Credential": {
+      "type": "object",
+      "title": "Credential",
+      "description": "Reference to a W3C Verifiable Credential asserting a claim about a Party.",
+      "required": [
+        "id",
+        "type",
+        "issuer",
+        "issuanceDate",
+        "credentialSubject",
+        "proof"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri",
+          "description": "Credential identifier."
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "VC types."
+        },
+        "issuer": {
+          "$ref": "#/definitions/Identifier",
+          "description": "Issuing authority."
+        },
+        "issuanceDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "credentialSubject": {
+          "type": "object",
+          "description": "The claims, per the VC data model."
+        },
+        "proof": {
+          "type": "object",
+          "description": "Cryptographic proof (may be a BBS selective-disclosure proof)."
+        },
+        "selectiveDisclosure": {
+          "type": "boolean",
+          "description": "Whether the credential supports zero-knowledge selective disclosure."
+        }
+      }
+    },
+    "Document": {
+      "type": "object",
+      "title": "Document",
+      "description": "A reference to a document or attachment.",
+      "required": [
+        "id",
+        "documentType"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentType": {
+          "type": "string",
+          "description": "Coded type. See codelists/documentType.csv."
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Content hash for integrity."
+        },
+        "accessGrant": {
+          "$ref": "#/definitions/Identifier",
+          "description": "Reference to a Consent object where access is controlled."
+        }
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "title": "Provenance",
+      "description": "Who or what produced an assertion, when, and from what (W3C PROV aligned).",
+      "required": [
+        "generatedBy",
+        "generatedAt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "generatedBy": {
+          "$ref": "#/definitions/Identifier",
+          "description": "The agent or activity that produced the assertion."
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "derivedFrom": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identifier"
+          }
+        },
+        "usedPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identifier"
+          }
+        },
+        "signature": {
+          "type": "object",
+          "description": "Cryptographic signature over the assertion."
+        }
+      }
+    },
+    "Score": {
+      "type": "object",
+      "title": "Score",
+      "description": "A per-criterion evaluation score.",
+      "required": [
+        "criterion",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "criterion": {
+          "type": "string",
+          "description": "The criterion scored."
+        },
+        "value": {
+          "type": "number",
+          "description": "The score."
+        },
+        "weight": {
+          "type": "number",
+          "description": "Criterion weight, where applicable."
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Why this score."
+        }
+      }
+    }
+  }
+}

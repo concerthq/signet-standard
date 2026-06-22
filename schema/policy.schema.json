@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/policy.schema.json",
+  "title": "Policy",
+  "description": "A machine-readable, human-auditable rule. Rules-as-code.",
+  "type": "object",
+  "required": [
+    "id",
+    "policyType",
+    "expressionLanguage",
+    "expression",
+    "humanReadable",
+    "version",
+    "issuedBy"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Policy"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "policyType": {
+      "type": "string",
+      "enum": [
+        "eligibility",
+        "evaluation",
+        "approval",
+        "constraint",
+        "compliance"
+      ]
+    },
+    "expressionLanguage": {
+      "type": "string",
+      "description": "e.g. rego, dmn, cel."
+    },
+    "expression": {
+      "type": "string",
+      "description": "The executable rule."
+    },
+    "humanReadable": {
+      "type": "string",
+      "description": "Plain-language statement of the same rule. MANDATORY."
+    },
+    "version": {
+      "type": "string"
+    },
+    "issuedBy": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    }
+  }
+}

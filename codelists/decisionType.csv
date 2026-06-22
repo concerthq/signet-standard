@@ -1,0 +1,5 @@
+Code,Title,Description
+admissibility,Admissibility,Whether a submission is admissible.
+evaluation,Evaluation,Scoring of a submission.
+award,Award,Decision to award.
+negotiationMove,Negotiation move,A move within a negotiation.

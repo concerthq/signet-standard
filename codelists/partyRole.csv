@@ -1,0 +1,10 @@
+Code,Title,Description
+buyer,Buyer,The party acquiring goods/services.
+supplier,Supplier,The party offering goods/services.
+procuringEntity,Procuring entity,The entity running the procurement on behalf of the buyer.
+payer,Payer,The party making payment.
+payee,Payee,The party receiving payment.
+humanAgent,Human agent,A natural person acting in the network.
+syntheticAgent,Synthetic agent,An AI agent acting in the network.
+certifier,Certifier,An authority issuing verifiable credentials.
+observer,Observer,A read-only participant (auditor, regulator).

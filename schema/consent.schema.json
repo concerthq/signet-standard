@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/consent.schema.json",
+  "title": "Consent",
+  "description": "A data-sovereignty access grant (Solid pattern expressed as CDM data).",
+  "type": "object",
+  "required": [
+    "id",
+    "grantor",
+    "grantee",
+    "resource",
+    "purpose",
+    "validity",
+    "revocable"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Consent"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "grantor": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "grantee": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "resource": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      }
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "validity": {
+      "$ref": "definitions.schema.json#/definitions/Period"
+    },
+    "revocable": {
+      "type": "boolean"
+    },
+    "proof": {
+      "type": "object"
+    }
+  }
+}

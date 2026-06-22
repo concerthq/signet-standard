@@ -1,0 +1,35 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "signet": "https://concert.foundation/signet/v0.1/vocab#",
+    "ePO": "http://data.europa.eu/a4g/ontology#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "vc": "https://www.w3.org/2018/credentials#",
+    "Party": "signet:Party",
+    "SourcingEvent": "signet:SourcingEvent",
+    "Submission": "signet:Submission",
+    "Decision": "signet:Decision",
+    "Policy": "signet:Policy",
+    "SyntheticAgent": "signet:SyntheticAgent",
+    "Mandate": "signet:Mandate",
+    "Event": "signet:Event",
+    "Consent": "signet:Consent",
+    "id": "@id",
+    "type": "@type",
+    "madeBy": {
+      "@id": "prov:wasAttributedTo"
+    },
+    "generatedBy": {
+      "@id": "prov:wasGeneratedBy"
+    },
+    "derivedFrom": {
+      "@id": "prov:wasDerivedFrom"
+    },
+    "procuringParty": {
+      "@id": "ePO:hasBuyer"
+    },
+    "submittingParty": {
+      "@id": "ePO:hasTenderer"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/synthetic-agent.schema.json",
+  "title": "SyntheticAgent",
+  "description": "An AI agent operating in the network as a first-class Party.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "operatedBy",
+    "capabilities",
+    "mandate"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "SyntheticAgent"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "name": {
+      "type": "string"
+    },
+    "operatedBy": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "model": {
+      "type": "string",
+      "description": "Underlying model family (provenance only; SIGNET is model-agnostic)."
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "inputSchema": {
+            "type": "object"
+          },
+          "outputSchema": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "mandate": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "agentCard": {
+      "type": "string",
+      "format": "uri",
+      "description": "A2A Agent Card location."
+    }
+  }
+}

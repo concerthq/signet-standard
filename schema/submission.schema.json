@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/submission.schema.json",
+  "title": "Submission",
+  "description": "A supplier's response to a SourcingEvent: bid, tender, quote, or proposal.",
+  "type": "object",
+  "required": [
+    "id",
+    "sourcingEvent",
+    "submittingParty",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Submission"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "sourcingEvent": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "lot": {
+      "type": "string"
+    },
+    "submittingParty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "submittedBy": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Item"
+      }
+    },
+    "value": {
+      "$ref": "definitions.schema.json#/definitions/Value"
+    },
+    "disclosedCredentials": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Credential"
+      }
+    },
+    "sealedProof": {
+      "type": "object",
+      "description": "Encrypted submission + proof where sealed-bid cryptography applies."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "submitted",
+        "withdrawn",
+        "admissible",
+        "inadmissible"
+      ]
+    }
+  }
+}

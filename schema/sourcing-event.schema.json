@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/sourcing-event.schema.json",
+  "title": "SourcingEvent",
+  "description": "A request to the market: RFP, RFQ, ITT, tender, or call-off competition (OCDS tender stage).",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "procuringParty",
+    "procedure",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "SourcingEvent"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "title": {
+      "type": "string"
+    },
+    "procuringParty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "procedure": {
+      "type": "string",
+      "description": "See codelists/procedure.csv."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "active",
+        "evaluating",
+        "complete",
+        "cancelled",
+        "withdrawn"
+      ]
+    },
+    "lots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "definitions.schema.json#/definitions/Item"
+            }
+          },
+          "value": {
+            "$ref": "definitions.schema.json#/definitions/Value"
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Item"
+      }
+    },
+    "value": {
+      "$ref": "definitions.schema.json#/definitions/Value"
+    },
+    "eligibilityCriteria": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      },
+      "description": "References to Policy objects."
+    },
+    "evaluationCriteria": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      },
+      "description": "References to Policy objects."
+    },
+    "period": {
+      "$ref": "definitions.schema.json#/definitions/Period"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Document"
+      }
+    }
+  }
+}

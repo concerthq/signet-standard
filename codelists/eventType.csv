@@ -1,0 +1,9 @@
+Code,Title,Description
+need.raised,Need raised,A procurement need was raised.
+sourcingEvent.published,Sourcing event published,A sourcing event was published to the market.
+submission.lodged,Submission lodged,A supplier lodged a submission.
+evaluation.completed,Evaluation completed,A submission was evaluated.
+award.decided,Award decided,An award decision was taken.
+contract.signed,Contract signed,A contract was executed.
+mandate.granted,Mandate granted,An agent mandate was granted.
+mandate.revoked,Mandate revoked,An agent mandate was revoked.

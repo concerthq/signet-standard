@@ -1,0 +1,21 @@
+CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+
+The SIGNET Canonical Data Model and all normative and reference artifacts in
+this repository are dedicated to the public domain by Concert Foundation under
+the Creative Commons CC0 1.0 Universal Public Domain Dedication.
+
+To the extent possible under law, Concert Foundation has waived all copyright
+and related or neighboring rights to these artifacts. You can copy, modify,
+distribute and use the work, including for commercial purposes, all without
+asking permission.
+
+Full legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+NOTE ON MARKS: CC0 covers copyright only. "SIGNET", "Concert", and
+"SIGNET Certified" are marks administered by Concert Foundation under the
+IP & Licensing Policy (https://concert.foundation/governance). The public-domain
+dedication of these artifacts does not grant any right to use those marks.
+
+NOTE ON REFERENCED STANDARDS: This model references third-party standards
+(PEPPOL, UBL, EN 16931, OCDS, W3C VC/DID, MCP, A2A, ePO), each retaining its
+own licence. CC0 applies to SIGNET-original content only.

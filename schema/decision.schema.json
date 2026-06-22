@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/decision.schema.json",
+  "title": "Decision",
+  "description": "A decision taken in the network, by a human or synthetic agent, with inputs and rationale.",
+  "type": "object",
+  "required": [
+    "id",
+    "decisionType",
+    "madeBy",
+    "rationale",
+    "outcome",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Decision"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "decisionType": {
+      "type": "string",
+      "description": "See codelists/decisionType.csv."
+    },
+    "madeBy": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "underMandate": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      }
+    },
+    "policiesApplied": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      }
+    },
+    "rationale": {
+      "type": "string",
+      "description": "Human-readable rationale. MANDATORY."
+    },
+    "outcome": {
+      "type": "object",
+      "description": "The decision outcome."
+    },
+    "humanApproval": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "provenance": {
+      "$ref": "definitions.schema.json#/definitions/Provenance"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+Code,Title,Description
+did,Decentralised Identifier,W3C DID. RECOMMENDED for parties and agents.
+gleif:lei,Legal Entity Identifier,ISO 17442 LEI issued under GLEIF.
+gs1:gln,Global Location Number,GS1 GLN.
+vat,VAT number,National VAT registration number.
+companies-house,UK Companies House number,UK company registration number.
+peppol,PEPPOL Participant Identifier,Peppol network participant id.
