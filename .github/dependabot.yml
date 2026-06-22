@@ -1,0 +1,18 @@
+version: 2
+updates:
+  # Keep GitHub Actions in the CI and Pages workflows current.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "ci"
+
+  # The only npm surface is the validation tooling (ajv / ajv-formats).
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
