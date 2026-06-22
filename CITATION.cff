@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: SIGNET — Secure Intelligent Governed Network for Exchange and Trade
+message: >-
+  If you use the SIGNET standard, please cite it using the metadata in
+  this file.
+type: dataset
+abstract: >-
+  SIGNET is the open specification for procurement networks in which human
+  and synthetic agents operate under shared governance, decentralised
+  identity, and cryptographic trust. This repository holds the normative
+  artifacts: the Canonical Data Model as JSON Schema, the JSON-LD context,
+  controlled codelists, worked examples, and conformance materials.
+authors:
+  - name: Concert Foundation
+    website: https://concert.foundation
+keywords:
+  - procurement
+  - open-standard
+  - data-model
+  - json-schema
+  - json-ld
+  - synthetic-agents
+  - EN 16931
+  - Peppol BIS Billing
+  - OCDS
+license: CC0-1.0
+version: 0.3.0
+date-released: "2026-06-22"
+url: https://concert.foundation/standard
+repository-code: https://github.com/concerthq/signet-standard
