@@ -20,8 +20,8 @@ The single most important governance distinction:
 
 | Tier | What | How it changes |
 |------|------|----------------|
-| **Normative** | `schema/` and **closed** codelists | Only through the **Standards Committee revision process**, with a published comment period. |
-| **Non-normative** | `docs/`, `examples/`, **open** codelist values, mapping notes, this wiki | May be updated **freely** by pull request. |
+| **Normative** | `schema/`, **closed** codelists, and `conformance/levels.md` + the conformance `suite/` + `report-schema.json` | Only through the **Standards Committee revision process**, with a published comment period. |
+| **Non-normative** | `docs/`, `examples/`, **open** codelist values, mapping notes, the conformance `adapter/` reference code, this wiki | May be updated **freely** by pull request. |
 
 > **The schema takes precedence** over the prose if they ever conflict. See
 > [Validation & Conformance → Precedence](Validation-and-Conformance#precedence).
@@ -37,12 +37,19 @@ The CDM uses [Semantic Versioning](https://semver.org/):
 Every published version is **permanently retrievable** at a version-stable URI under
 `concert.foundation/signet/<version>/`. Implementations declare the CDM version they target.
 
+The **conformance suite is versioned with the CDM**: a certification is always qualified by
+both versions (e.g. *"SIGNET Full — CDM v0.1, suite v0.1"*). A new CDM **major** version
+requires re-certification; minor/patch suite updates that only add or clarify tests do not
+invalidate existing certifications but may apply at renewal. See
+[Conformance Harness](Conformance-Harness).
+
 ### Release history
 
 From [CHANGELOG.md](https://github.com/concerthq/signet-standard/blob/main/CHANGELOG.md):
 
 | Version | Highlights |
 |---------|-----------|
+| **0.4.0** (2026-06) | [Conformance harness](Conformance-Harness) (`conformance/`): Core/Full levels, the public suite, a reference adapter (reaches Full) and a broken adapter (rejected), neutrality rules CN-1…CN-4; `signet-to-ubl.js` refactored to a pure `toUBL()`; CI runs the harness on every commit. |
 | **0.3.0** (2026-06) | Runnable `signet-to-ubl.js` transform → Peppol BIS Billing 3.0; `verify-ubl.py` reconciliation; CI now proves convertibility on every push; committed `invoice.ubl.xml`. |
 | **0.2.0** (2026-06) | Complete OCDS-aligned process layer (Need, Evaluation, Award, Contract, Order, Catalogue, Obligation, Invoice); EN 16931 building blocks (Unit, InvoiceLine, VatBreakdown); EN 16931-mapped Invoice (33 BTs/BGs); Draft-07 `allOf` fix preserving BT annotations on `$ref`. |
 | **0.1.0** (2026-06) | Foundation layer; initial process layer (SourcingEvent, Submission, Policy); agent layer (SyntheticAgent, Mandate, Decision); trust layer (Event, Consent); JSON-LD context; codelists; CI-validated examples. |

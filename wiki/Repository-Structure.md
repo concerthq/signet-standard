@@ -15,6 +15,7 @@ schema/        JSON Schema (Draft-07) — the normative Canonical Data Model
   context.jsonld            JSON-LD @context (aligns to ePO, PROV, W3C VC)
 codelists/     Controlled vocabularies (CSV: Code, Title, Description)
 examples/      Worked instances, validated in CI
+conformance/   Machine-runnable conformance harness (levels, suite, adapters, runner)
 docs/          The prose specification (rendered on concert.foundation/standard)
 tools/         Reference transforms + the Pages renderer
 .github/       CI workflows, issue/PR templates, CODEOWNERS, Dependabot
@@ -48,6 +49,23 @@ content of each list and which fields they constrain.
 CI-validated instances covering the lifecycle, plus the generated `invoice.ubl.xml`. See
 [Worked Examples](Worked-Examples).
 
+## `conformance/` — the conformance harness
+
+Added in **v0.4.0**: the machine-runnable suite behind the "SIGNET Certified" mark.
+
+| Path | Purpose |
+|------|---------|
+| `levels.md` | Conformance levels (Core / Full) + neutrality rules CN-1…CN-4 (**normative**). |
+| `certification.md` | The identical-for-all certification process. |
+| `report-schema.json` | Schema every conformance report conforms to (CN-4). |
+| `suite/` | The test cases: `document-conformance.json` (C-DOC) and `implementation-conformance.json`. |
+| `fixtures/invalid/` | Documents that MUST be rejected (one per rule). |
+| `adapter/` | The adapter contract, a reference adapter (reaches Full), and a broken adapter (rejected). |
+| `runner/` | `run-conformance.js` (the harness) + `lib.js` (schema loading, hashing, chain verification). |
+| `reports/` | Generated reports; two samples (pass + fail) are committed, the rest git-ignored. |
+
+See the dedicated [Conformance Harness](Conformance-Harness) page.
+
 ## `docs/` — the prose specification
 
 `docs/specification.md` is the human-readable specification (the normative text; the schema
@@ -67,7 +85,8 @@ See [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 ## `.github/` — automation & governance
 
 - `workflows/validate.yml` — validation, codelist lint, JSON well-formedness, invoice
-  projection + verification (see [Validation & Conformance](Validation-and-Conformance)).
+  projection + verification, and the **conformance harness** (reference + broken adapters);
+  see [Validation & Conformance](Validation-and-Conformance).
 - `workflows/pages.yml` — publishes the specification to GitHub Pages.
 - `ISSUE_TEMPLATE/` — `change-proposal.md` and `spec-defect.md` (plus `config.yml`).
 - `PULL_REQUEST_TEMPLATE.md`, `CODEOWNERS`, `dependabot.yml`.
@@ -76,7 +95,7 @@ See [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 
 | File | Purpose |
 |------|---------|
-| `package.json` | npm scripts (`validate`, `transform`, `verify-ubl`) and dev dependencies. |
+| `package.json` | npm scripts (`validate`, `transform`, `verify-ubl`, `conformance`, `conformance:broken`) and dev dependencies. |
 | `validate.js` | The example validator run by `npm run validate` and CI. |
 | `LICENSE` | CC0 1.0 dedication. |
 | `CONTRIBUTING.md` | Contribution process and CLA — see [Contributing](Contributing). |

@@ -20,10 +20,17 @@ npm run transform   # node tools/signet-to-ubl.js > examples/invoice.ubl.xml
 npm run verify-ubl  # python3 tools/verify-ubl.py
 ```
 
+To run the **conformance harness** (new in v0.4.0 — see [Conformance Harness](Conformance-Harness)):
+
+```bash
+npm run conformance         # reference adapter must reach Core+ (exits 0)
+npm run conformance:broken  # the broken adapter must be rejected (exits 1)
+```
+
 ## What CI checks
 
 `.github/workflows/validate.yml` runs on every push to `main`/`dev` and every PR to `main`.
-It performs four checks — a PR cannot merge while any fail:
+It performs six checks — a PR cannot merge while any fail:
 
 1. **Schema validation.** `node validate.js` validates every example against the schemas.
 2. **Codelist lint.** Every `codelists/*.csv` must start with the header
@@ -33,6 +40,10 @@ It performs four checks — a PR cannot merge while any fail:
 4. **Invoice projection + verification.** Projects `examples/invoice.json` to Peppol BIS
    Billing UBL and runs `tools/verify-ubl.py` to reconcile every EN 16931 Business Term and
    the monetary totals.
+5. **Conformance — reference implementation.** Runs the [harness](Conformance-Harness); the
+   bundled reference adapter must reach **Core+**.
+6. **Conformance — broken implementation.** The deliberately broken adapter must be
+   **rejected** (the step inverts its exit code), proving the suite discriminates.
 
 A separate workflow, `.github/workflows/pages.yml`, renders `docs/specification.md` to HTML
 and publishes it to GitHub Pages (it runs `tools/build-pages.js` with `marked`).
@@ -65,10 +76,15 @@ That is exactly what `npm run validate` checks for the shipped examples.
 >    fields; and
 > 3. preserves provenance and event integrity for every material change it makes.
 
-Conformance is verified against the **SIGNET conformance test suite** (a separate normative
-artifact, Apache-2.0 licensed) and its synthetic test datasets (CDLA-Permissive).
-Certification of conformance, and the **"SIGNET Certified"** mark, are administered by
-Concert under the IP & Licensing Policy on identical terms to all implementers.
+Since **v0.4.0** this is verified by the **machine-runnable conformance harness** shipped in
+`conformance/` (Apache-2.0 licensed). It defines two levels — **Core** (C-DOC, C-EVT,
+C-PROV) and **Full** (Core + F-MAP, F-SEM) — runs them against any implementation through a
+small adapter, and emits a reproducible report. Certification of conformance, and the
+**"SIGNET Certified"** mark, are administered by Concert under the IP & Licensing Policy on
+identical terms to all implementers (neutrality rules CN-1…CN-4).
+
+See the dedicated **[Conformance Harness](Conformance-Harness)** page for the levels, the
+requirements, the adapter contract, and the certification process.
 
 ## Precedence
 
@@ -80,6 +96,7 @@ When sources disagree, this is the order of authority:
 
 ## Where to go next
 
+- [Conformance Harness](Conformance-Harness) — levels, requirements, and certification.
 - [Worked Examples](Worked-Examples) — the instances CI validates.
 - [Repository Structure](Repository-Structure) — where everything lives.
 - [Governance & Versioning](Governance-and-Versioning) — how the normative artifacts change.

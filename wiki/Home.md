@@ -28,6 +28,7 @@ the normative artifacts in the repository.
 | Map SIGNET to OCDS / EN 16931 / UBL / Peppol / VC-DID / ePO | [Standards Mapping](Standards-Mapping) |
 | Understand the e-invoicing / EU ViDA story | [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing) |
 | Run validation or check conformance | [Validation & Conformance](Validation-and-Conformance) |
+| Understand certification & the test suite | [Conformance Harness](Conformance-Harness) |
 | Find the controlled vocabularies | [Codelists](Codelists) |
 | See complete worked instances | [Worked Examples](Worked-Examples) |
 | Contribute, or understand governance | [Contributing](Contributing) · [Governance & Versioning](Governance-and-Versioning) |
@@ -79,13 +80,16 @@ SIGNET defines a **Canonical Data Model (CDM)** organised into four layers:
 - **Proven, not asserted.** The repository ships a runnable transform that projects a
   canonical Invoice into Peppol BIS Billing UBL and verifies it in CI on every push. See
   [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
+- **Conformance is machine-runnable.** A public test harness decides whether an
+  implementation is SIGNET Certified — and at which level (Core / Full) — through the
+  identical suite for everyone. See [Conformance Harness](Conformance-Harness).
 
 ---
 
 ## Status & licensing
 
 - **Specification version:** v0.1 (Working Draft / Request for Comments)
-- **Repository / artifact version:** v0.3.0
+- **Repository / artifact version:** v0.4.0
 - **Licence:** [CC0 1.0](https://github.com/concerthq/signet-standard/blob/main/LICENSE)
   (public-domain dedication of the artifacts; the marks are administered separately).
 - **Marks:** "SIGNET", "Concert", and "SIGNET Certified" are marks administered by Concert

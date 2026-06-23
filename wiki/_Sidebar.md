@@ -22,6 +22,7 @@
 **Using SIGNET**
 - [Worked Examples](Worked-Examples)
 - [Validation & Conformance](Validation-and-Conformance)
+- [Conformance Harness](Conformance-Harness)
 - [Repository Structure](Repository-Structure)
 - [Extensions](Extensions)
 

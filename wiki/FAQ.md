@@ -47,6 +47,19 @@ Business Term and the totals — both run on every push. It is a faithful *refer
 projection, not a substitute for official Peppol XSD + Schematron validation. See
 [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 
+### How does an implementation become "SIGNET Certified"?
+Run the public, machine-runnable [conformance harness](Conformance-Harness) (`conformance/`)
+against your system through a small adapter, get a passing report, and submit it to Concert,
+which re-runs the *identical* suite to confirm it. There are two levels — **Core** (C-DOC,
+C-EVT, C-PROV) and **Full** (Core + F-MAP, F-SEM). The process is mechanical and identical
+for everyone (neutrality rules CN-1…CN-4) — no committee judgement, no preferential path.
+
+### Is the conformance suite real, or just a claim?
+Real and in the repo since **v0.4.0**. It ships a **reference adapter** that reaches Full and
+a deliberately **broken adapter** that the harness correctly fails at C-EVT and F-MAP — so
+the suite demonstrably *discriminates*, and both run in CI on every commit. Run it with
+`npm run conformance` / `npm run conformance:broken`.
+
 ### Does SIGNET help with regulatory compliance?
 Yes, by design. The [Decision](Agent-Layer#decision) record supports the assessment-summary
 and decision-record obligations of the **UK Procurement Act 2023** and the documentation
@@ -56,7 +69,7 @@ expectations for AI-assisted evaluation under the **EU AI Act**; the
 ### How is the model versioned?
 [Semantic Versioning](Governance-and-Versioning). Major = breaking core change; minor =
 backward-compatible additions; patch = clarifications. Every version is permanently
-retrievable at a version-stable URI. The repository is at **v0.3.0**; the specification is a
+retrievable at a version-stable URI. The repository is at **v0.4.0**; the specification is a
 **v0.1 working draft**.
 
 ### How do I extend SIGNET for my domain?

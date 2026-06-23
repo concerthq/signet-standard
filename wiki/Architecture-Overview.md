@@ -117,7 +117,9 @@ See [Foundation Layer → Identifier](Foundation-Layer#identifier) and
 The specification uses RFC 2119 / RFC 8174 keywords (**MUST, MUST NOT, REQUIRED, SHALL,
 SHOULD, RECOMMENDED, MAY, OPTIONAL**). Field cardinality is written as `1` (exactly one,
 required), `0..1` (optional single), `1..*` (one or more, required), `0..*` (zero or more).
-These same conventions are used throughout this wiki's layer pages.
+These same conventions are used throughout this wiki's layer pages. Whether an implementation
+actually *meets* these requirements is decided mechanically by the
+[Conformance Harness](Conformance-Harness).
 
 ## Where to go next
 
@@ -125,3 +127,4 @@ These same conventions are used throughout this wiki's layer pages.
   [Agent](Agent-Layer) · [Trust](Trust-Layer).
 - See the bridges: [Standards Mapping](Standards-Mapping).
 - Understand the serialisation: [Serialisation (JSON-LD)](Serialisation).
+- Check conformance: [Conformance Harness](Conformance-Harness).

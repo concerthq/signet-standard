@@ -23,6 +23,7 @@ to the wiki.
 | `Serialisation.md` | JSON-LD context and cryptographic envelopes |
 | `Worked-Examples.md` | Complete instances from `examples/` |
 | `Validation-and-Conformance.md` | Local + CI validation, conformance tiers |
+| `Conformance-Harness.md` | The v0.4.0 machine-runnable suite, levels, and certification |
 | `Repository-Structure.md` | What lives where |
 | `Extensions.md` | Extending without forking |
 | `Governance-and-Versioning.md` | Stewardship, SemVer, change control |
