@@ -1,0 +1,8 @@
+{
+  "type": "SourcingEvent",
+  "id": { "scheme": "did", "id": "did:web:x#se" },
+  "title": "Bad",
+  "procuringParty": { "scheme": "did", "id": "did:web:x#buyer" },
+  "procedure": "open",
+  "status": "in-progress"
+}

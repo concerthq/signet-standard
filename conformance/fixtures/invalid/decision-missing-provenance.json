@@ -1,0 +1,8 @@
+{
+  "type": "Decision",
+  "id": { "scheme": "did", "id": "did:web:x#d1" },
+  "decisionType": "award",
+  "madeBy": { "scheme": "did", "id": "did:web:x#agent" },
+  "rationale": "because",
+  "outcome": { "awarded": "x" }
+}
