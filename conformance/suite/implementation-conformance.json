@@ -1,0 +1,12 @@
+{
+  "scenarios": [
+    { "requirement": "C-EVT", "level": "Core", "normativeRef": "CDM 1.7, 7.1", "kind": "event-integrity",
+      "description": "Material changes emit append-only, hash-chained events; tampering is detectable." },
+    { "requirement": "C-PROV", "level": "Core", "normativeRef": "CDM 6.4, 7.2", "kind": "provenance-presence",
+      "description": "Every event and decision carries provenance with generatedBy + generatedAt." },
+    { "requirement": "F-MAP", "level": "Full", "normativeRef": "CDM 8, 13.2(b)", "kind": "mapping-fidelity",
+      "description": "Invoice projects to Peppol BIS Billing 3.0 preserving EN 16931 BTs; totals reconcile." },
+    { "requirement": "F-SEM", "level": "Full", "normativeRef": "CDM 6.3-6.5", "kind": "behavioural-semantics",
+      "description": "Policies carry executable + human-readable rules; decisions cite inputs and policies." }
+  ]
+}

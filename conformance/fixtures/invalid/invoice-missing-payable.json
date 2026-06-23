@@ -1,0 +1,10 @@
+{
+  "type": "Invoice",
+  "id": { "scheme": "peppol", "id": "INV-BAD-1" },
+  "issueDate": "2026-10-05T00:00:00Z",
+  "currency": "EUR",
+  "seller": { "scheme": "gleif:lei", "id": "5299000ACME00NETWRK1" },
+  "buyer": { "scheme": "gleif:lei", "id": "529900VTPC0000JAGUAR" },
+  "lines": [ { "id": "1", "itemName": "X", "quantity": 1, "netAmount": { "amount": 10, "currency": "EUR" } } ],
+  "taxTotal": { "amount": 2.1, "currency": "EUR" }
+}

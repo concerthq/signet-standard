@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/conformance/report-schema.json",
+  "title": "SIGNET Conformance Report",
+  "description": "Machine-readable result emitted by the SIGNET conformance harness. A certification claim MUST cite a report conforming to this schema (CN-4).",
+  "type": "object",
+  "required": ["standard", "cdmVersion", "suiteVersion", "adapter", "timestamp", "levelAchieved", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "standard": { "const": "SIGNET" },
+    "cdmVersion": { "type": "string" },
+    "suiteVersion": { "type": "string" },
+    "adapter": { "type": "string", "description": "Identifier of the implementation adapter assessed." },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "levelAchieved": { "type": "string", "enum": ["Full", "Core", "none"] },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement", "level", "status"],
+        "additionalProperties": true,
+        "properties": {
+          "requirement": { "type": "string", "enum": ["C-DOC", "C-EVT", "C-PROV", "F-MAP", "F-SEM"] },
+          "level": { "type": "string", "enum": ["Core", "Full"] },
+          "normativeRef": { "type": "string" },
+          "status": { "type": "string", "enum": ["pass", "fail", "not-applicable"] },
+          "detail": { "type": "object" }
+        }
+      }
+    }
+  }
+}

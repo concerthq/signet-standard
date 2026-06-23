@@ -40,3 +40,14 @@ jobs:
         run: |
           node tools/signet-to-ubl.js > /tmp/invoice.ubl.xml
           python3 tools/verify-ubl.py /tmp/invoice.ubl.xml examples/invoice.json
+
+      - name: Conformance harness — reference implementation must reach Core+
+        run: node conformance/runner/run-conformance.js
+
+      - name: Conformance harness — broken implementation must be rejected
+        run: |
+          if node conformance/runner/run-conformance.js --adapter conformance/adapter/broken-adapter.js; then
+            echo "ERROR: broken adapter was not rejected"; exit 1
+          else
+            echo "OK: harness correctly failed the broken adapter"
+          fi

@@ -1,0 +1,135 @@
+{
+  "standard": "SIGNET",
+  "cdmVersion": "v0.1",
+  "suiteVersion": "v0.1",
+  "adapter": "broken-adapter.js",
+  "timestamp": "2026-06-22T20:45:45.867Z",
+  "levelAchieved": "none",
+  "results": [
+    {
+      "requirement": "C-DOC",
+      "level": "Core",
+      "normativeRef": "CDM 13.1",
+      "status": "pass",
+      "detail": {
+        "positives": [
+          {
+            "file": "examples/need.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          },
+          {
+            "file": "examples/sourcing-event.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          },
+          {
+            "file": "examples/policy-evaluation.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          },
+          {
+            "file": "examples/award-decision.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          },
+          {
+            "file": "examples/contract.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          },
+          {
+            "file": "examples/invoice.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          }
+        ],
+        "negatives": [
+          {
+            "file": "conformance/fixtures/invalid/invoice-missing-payable.json",
+            "expected": "rejected",
+            "correctlyRejected": true,
+            "targets": "BT-115 payableAmount is required"
+          },
+          {
+            "file": "conformance/fixtures/invalid/policy-missing-humanreadable.json",
+            "expected": "rejected",
+            "correctlyRejected": true,
+            "targets": "Policy.humanReadable is mandatory"
+          },
+          {
+            "file": "conformance/fixtures/invalid/decision-missing-provenance.json",
+            "expected": "rejected",
+            "correctlyRejected": true,
+            "targets": "Decision.provenance is mandatory"
+          },
+          {
+            "file": "conformance/fixtures/invalid/party-bad.json",
+            "expected": "rejected",
+            "correctlyRejected": true,
+            "targets": "partyType enum + additionalProperties"
+          },
+          {
+            "file": "conformance/fixtures/invalid/sourcing-bad-status.json",
+            "expected": "rejected",
+            "correctlyRejected": true,
+            "targets": "status enum"
+          }
+        ]
+      }
+    },
+    {
+      "requirement": "C-EVT",
+      "level": "Core",
+      "normativeRef": "CDM 1.7,7.1",
+      "status": "fail",
+      "detail": {
+        "events": 3,
+        "chainVerifies": false,
+        "tamperDetected": true
+      }
+    },
+    {
+      "requirement": "C-PROV",
+      "level": "Core",
+      "normativeRef": "CDM 6.4,7.2",
+      "status": "pass",
+      "detail": {
+        "decisionHasProvenance": true,
+        "allEventsHaveProvenance": true
+      }
+    },
+    {
+      "requirement": "F-MAP",
+      "level": "Full",
+      "normativeRef": "CDM 8,13.2(b)",
+      "status": "fail",
+      "detail": {
+        "wellFormedTotals": false,
+        "reconciles": false,
+        "payable": 7502,
+        "taxIncl": 7502,
+        "taxExcl": 6200,
+        "lineExt": 6200,
+        "taxAmt": null
+      }
+    },
+    {
+      "requirement": "F-SEM",
+      "level": "Full",
+      "normativeRef": "CDM 6.3-6.5",
+      "status": "pass",
+      "detail": {
+        "policyHasBothForms": true,
+        "decisionCitesInputs": true,
+        "decisionCitesPolicies": true
+      }
+    }
+  ]
+}

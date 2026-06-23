@@ -4,6 +4,29 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [0.4.0] — 2026-06 — Working Draft
+
+### Added
+- **Conformance harness** (`conformance/`) — the machine-runnable suite behind the
+  "SIGNET Certified" mark. Implements CDM §13 and the certification neutrality
+  rules CN-1…CN-4.
+  - `levels.md` — Core vs Full levels; requirements C-DOC, C-EVT, C-PROV (Core)
+    and F-MAP, F-SEM (Full); CN neutrality rules.
+  - `certification.md` — the identical-for-all certification process.
+  - `runner/run-conformance.js` — runs the suite against any implementation via a
+    small adapter, emits a machine-readable report, computes the level achieved.
+  - `adapter/reference-adapter.js` — a complete conformant implementation (reaches
+    **Full**); `adapter/broken-adapter.js` — deliberately non-conformant, **failed**
+    by the harness at C-EVT and F-MAP, proving the suite discriminates.
+  - Positive + negative document fixtures (invalid documents that MUST be rejected).
+  - `report-schema.json` — schema every conformance report conforms to (CN-4).
+- CI now runs the harness on every commit: the reference implementation must reach
+  Core+, and the broken implementation must be rejected.
+
+### Changed
+- `tools/signet-to-ubl.js` refactored to export a pure `toUBL(invoice)` function
+  (shared by the CLI, the harness, and the website); CLI output unchanged.
+
 ## [0.3.0] — 2026-06 — Working Draft
 
 ### Added
