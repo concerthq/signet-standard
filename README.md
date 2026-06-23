@@ -73,6 +73,26 @@ npm run validate   # validates every example against the schemas
 
 CI runs the same validation on every push and pull request; examples cannot drift from the schema.
 
+## Agent demonstration
+
+The `agent/` demo is the proof of SIGNET's distinctive claim: a synthetic agent
+taking a consequential action — awarding a contract — under governance.
+
+```bash
+npm run agent
+```
+
+An agent reads a SourcingEvent, is bounded by a **Mandate** (the €12M value exceeds
+its €10M autonomous ceiling, so **human approval is required**), applies the
+**published** evaluation Policy, and emits an Award **Decision** with rationale,
+inputs, policies applied, human approval, and provenance — plus a hash-chained Event
+trail. The runner then **verifies the output is conformance-clean**: every object
+validates, the chain holds, and tampering is detected. The reasoning layer is
+model-pluggable (deterministic by default; swap in a live model per
+`agent/LIVE_MODEL_NOTE.md` with no change to the harness). Agent autonomy and
+auditable governance are not in tension — the harness is what makes the autonomy
+safe to grant.
+
 ## Versioning & governance
 
 Semantic versioning. The **normative** core (`schema/`, closed codelists) changes only through the Concert Standards Committee revision process with a published comment period. **Non-normative** material (`docs/`, `examples/`, open codelist values) iterates freely. Every published version is permanently retrievable at a version-stable URL under `concert.foundation/signet/<version>/`.

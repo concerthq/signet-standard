@@ -1,0 +1,4 @@
+{
+  "did:web:vtpc.example#submission-5521": { "quality": 0.90, "social": 0.70 },
+  "did:web:vtpc.example#submission-5522": { "quality": 0.78, "social": 0.85 }
+}

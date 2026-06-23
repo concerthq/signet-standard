@@ -1,0 +1,10 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Submission",
+  "id": { "scheme": "did", "id": "did:web:vtpc.example#submission-5522" },
+  "sourcingEvent": { "scheme": "did", "id": "did:web:vtpc.example#event-1207" },
+  "lot": "lot-1",
+  "submittingParty": { "scheme": "did", "id": "did:web:globex.example#globex" },
+  "value": { "amount": 10800000, "currency": "EUR" },
+  "status": "admissible"
+}

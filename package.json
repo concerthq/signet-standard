@@ -1,6 +1,6 @@
 {
   "name": "signet-standard",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "SIGNET Canonical Data Model \u2014 the normative open standard for governed procurement networks. Stewarded by Concert Foundation.",
   "license": "CC0-1.0",
   "homepage": "https://concert.foundation/standard",
@@ -13,7 +13,8 @@
     "transform": "node tools/signet-to-ubl.js > examples/invoice.ubl.xml",
     "verify-ubl": "python3 tools/verify-ubl.py",
     "conformance": "node conformance/runner/run-conformance.js",
-    "conformance:broken": "node conformance/runner/run-conformance.js --adapter conformance/adapter/broken-adapter.js"
+    "conformance:broken": "node conformance/runner/run-conformance.js --adapter conformance/adapter/broken-adapter.js",
+    "agent": "node agent/run-agent.js"
   },
   "devDependencies": {
     "ajv": "^8.12.0",

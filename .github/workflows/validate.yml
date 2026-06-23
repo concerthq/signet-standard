@@ -51,3 +51,6 @@ jobs:
           else
             echo "OK: harness correctly failed the broken adapter"
           fi
+
+      - name: Agent demonstration — governed action must be conformance-clean
+        run: node agent/run-agent.js

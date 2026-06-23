@@ -1,0 +1,24 @@
+{
+  "name": "VTPC Evaluation Agent",
+  "description": "Synthetic procurement agent that evaluates submissions against a published policy and proposes an award, under a bounded mandate, with full provenance.",
+  "url": "https://agents.vtpc.example/eval-agent",
+  "provider": { "organization": "did:web:vtpc.example#vtpc" },
+  "version": "1.0.0",
+  "capabilities": { "streaming": false, "stateTransitionHistory": true },
+  "skills": [
+    {
+      "id": "evaluate.submission",
+      "name": "Evaluate submission",
+      "description": "Score a submission against an evaluation Policy (MCP-style tool).",
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "award.decision",
+      "name": "Propose award decision",
+      "description": "Rank evaluations and propose the most advantageous award.",
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    }
+  ]
+}

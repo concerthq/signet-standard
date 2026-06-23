@@ -4,6 +4,28 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [0.5.0] — 2026-06 — Working Draft
+
+### Added
+- **Agent demonstration** (`agent/`) — a runnable proof that a synthetic agent can
+  take a governed, accountable, conformant action. An agent reads a SourcingEvent,
+  is bounded by a **Mandate** (its €12M value exceeds the €10M autonomous ceiling, so
+  **human approval is required**), applies the **published** MAT evaluation Policy
+  (weights parsed from the Policy's own expression), and emits an Award **Decision**
+  with rationale, inputs, policies applied, human approval, and provenance — plus a
+  five-event, hash-chained audit trail.
+  - `agent-card.json` (A2A), `mandate.json`, two `Submission` bids, assessment inputs.
+  - `reasoner.js` — the pluggable "Model" (deterministic default; marked seam for a
+    live frontier model via MCP/A2A).
+  - `agent-runtime.js` — the "Harness": mandate gate, policy application, provenance,
+    event-chaining.
+  - `run-agent.js` — runs the scenario, narrates it, and **verifies the output is
+    conformance-clean** (every object validates; chain holds; tampering detected).
+  - `LIVE_MODEL_NOTE.md` — how to swap in a real model for a live demo with no change
+    to the harness.
+- CI now runs the agent demo on every commit; its output must validate and the event
+  chain must hold.
+
 ## [0.4.0] — 2026-06 — Working Draft
 
 ### Added
