@@ -2,11 +2,12 @@
 
 **Standard:** SIGNET · **Steward:** Concert Foundation · **Version:** 1.0
 
-> **Status — working text pending ratification.** This document formalises the
-> contribution terms already stated in [`CONTRIBUTING.md`](CONTRIBUTING.md). The
-> authoritative, legally reviewed version is published by Concert Foundation at
-> <https://concert.foundation/governance/cla>; if the two differ, the published
-> version governs. Concert should replace this note once the text is ratified.
+> This document formalises the contribution terms already stated in
+> [`CONTRIBUTING.md`](CONTRIBUTING.md). The authoritative, legally
+> reviewed version is published by Concert Foundation at
+> <https://concert.foundation/governance/cla>; if the two differ,
+> the published version governs. Concert should replace this note
+> once the text is ratified.
 
 Thank you for contributing to SIGNET. To keep the standard open for everyone — and
 to give every implementer the patent assurance a standard requires — Concert
