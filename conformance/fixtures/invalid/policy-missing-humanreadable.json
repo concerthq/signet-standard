@@ -1,0 +1,9 @@
+{
+  "type": "Policy",
+  "id": { "scheme": "did", "id": "did:web:x#p1" },
+  "policyType": "evaluation",
+  "expressionLanguage": "rego",
+  "expression": "score := 1",
+  "version": "1.0.0",
+  "issuedBy": { "scheme": "did", "id": "did:web:x#org" }
+}

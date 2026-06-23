@@ -1,0 +1,21 @@
+{
+  "requirement": "C-DOC",
+  "level": "Core",
+  "normativeRef": "CDM 13.1",
+  "description": "Emitted documents validate; invalid documents are rejected.",
+  "positive": [
+    { "file": "examples/need.json", "schema": "need.schema.json" },
+    { "file": "examples/sourcing-event.json", "schema": "sourcing-event.schema.json" },
+    { "file": "examples/policy-evaluation.json", "schema": "policy.schema.json" },
+    { "file": "examples/award-decision.json", "schema": "decision.schema.json" },
+    { "file": "examples/contract.json", "schema": "contract.schema.json" },
+    { "file": "examples/invoice.json", "schema": "invoice.schema.json" }
+  ],
+  "negative": [
+    { "file": "conformance/fixtures/invalid/invoice-missing-payable.json", "schema": "invoice.schema.json", "targets": "BT-115 payableAmount is required" },
+    { "file": "conformance/fixtures/invalid/policy-missing-humanreadable.json", "schema": "policy.schema.json", "targets": "Policy.humanReadable is mandatory" },
+    { "file": "conformance/fixtures/invalid/decision-missing-provenance.json", "schema": "decision.schema.json", "targets": "Decision.provenance is mandatory" },
+    { "file": "conformance/fixtures/invalid/party-bad.json", "schema": "party.schema.json", "targets": "partyType enum + additionalProperties" },
+    { "file": "conformance/fixtures/invalid/sourcing-bad-status.json", "schema": "sourcing-event.schema.json", "targets": "status enum" }
+  ]
+}

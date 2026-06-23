@@ -16,10 +16,12 @@
 const fs = require("fs");
 const path = require("path");
 
-const inPath = process.argv[2] || path.join(__dirname, "..", "examples", "invoice.json");
-const inv = JSON.parse(fs.readFileSync(inPath, "utf8"));
-
-// --- helpers ---
+/**
+ * Pure transform: SIGNET canonical Invoice -> Peppol BIS Billing 3.0 UBL string.
+ * No I/O; safe to import in Node or the browser.
+ */
+function toUBL(inv) {
+  // --- helpers ---
 const esc = (s) => String(s)
   .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
   .replace(/"/g, "&quot;").replace(/'/g, "&apos;");
@@ -132,4 +134,14 @@ for (const ln of inv.lines) {
 }
 
 w(`</Invoice>`);
-process.stdout.write(L.join("\n") + "\n");
+  return L.join("\n") + "\n";
+}
+
+// --- CLI wrapper ---
+if (require.main === module) {
+  const inPath = process.argv[2] || path.join(__dirname, "..", "examples", "invoice.json");
+  const inv = JSON.parse(fs.readFileSync(inPath, "utf8"));
+  process.stdout.write(toUBL(inv));
+}
+
+module.exports = { toUBL };

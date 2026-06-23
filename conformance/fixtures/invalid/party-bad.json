@@ -1,0 +1,8 @@
+{
+  "type": "Party",
+  "id": { "scheme": "did", "id": "did:web:x#party" },
+  "name": "Acme",
+  "roles": ["supplier"],
+  "partyType": "robot",
+  "unexpectedField": true
+}
