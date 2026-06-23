@@ -12,12 +12,14 @@ while ensuring no contributor — and no commercial operator, including Score
 Networks — gains a preferential position.
 
 - Individual contributors: the CLA assistant will ask you to accept on your
-  first pull request.
+  first pull request — read [`CLA.md`](CLA.md) and post the one-line agreement
+  the bot requests.
 - Organisations: execute the Corporate CLA (one signatory covers all staff).
 
 You keep ownership of your contribution. You grant Concert a royalty-free
 copyright licence and a royalty-free, non-exclusive patent licence to essential
-claims (W3C model). See https://concert.foundation/governance/cla.
+claims (W3C model). See [`CLA.md`](CLA.md) and
+https://concert.foundation/governance/cla.
 
 ## What is normative vs non-normative
 
