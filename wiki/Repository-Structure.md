@@ -16,6 +16,7 @@ schema/        JSON Schema (Draft-07) — the normative Canonical Data Model
 codelists/     Controlled vocabularies (CSV: Code, Title, Description)
 examples/      Worked instances, validated in CI
 conformance/   Machine-runnable conformance harness (levels, suite, adapters, runner)
+agent/         Runnable agent demonstration — a governed, conformance-verified award (v0.5.0)
 docs/          The prose specification (rendered on concert.foundation/standard)
 tools/         Reference transforms + the Pages renderer
 .github/       CI workflows, issue/PR templates, CODEOWNERS, Dependabot
@@ -66,6 +67,27 @@ Added in **v0.4.0**: the machine-runnable suite behind the "SIGNET Certified" ma
 
 See the dedicated [Conformance Harness](Conformance-Harness) page.
 
+## `agent/` — the agent demonstration
+
+Added in **v0.5.0**: a runnable proof that a synthetic agent can take a **governed,
+accountable, conformant** action — awarding a contract under a Mandate. Run it with
+`npm run agent`.
+
+| Path | Purpose |
+|------|---------|
+| `agent-card.json` | The agent's A2A Agent Card (declared capabilities). |
+| `mandate.json` | The bounded authority — permitted capabilities and the €10M autonomous-value ceiling. |
+| `submissions/`, `assessment-inputs.json` | Two `Submission` bids and the assessment inputs the agent evaluates. |
+| `reasoner.js` | The pluggable "Model" — deterministic by default; a marked seam for a live frontier model (see `LIVE_MODEL_NOTE.md`). |
+| `agent-runtime.js` | The "Harness" — mandate gate, policy application, provenance, and event-chaining. |
+| `run-agent.js` | Runs the scenario, narrates it, and **verifies the output is conformance-clean** (every object validates; chain holds; tampering detected). |
+| `LIVE_MODEL_NOTE.md` | How to swap in a real model for a live demo with no change to the harness. |
+| `output/` | Generated at runtime (decision, award, evaluations, events) — git-ignored. |
+
+The €12M event value exceeds the mandate's €10M ceiling, so the agent requires **human
+approval** before awarding — the structural demonstration that agent autonomy and auditable
+governance are not in tension. See the [Agent Layer](Agent-Layer).
+
 ## `docs/` — the prose specification
 
 `docs/specification.md` is the human-readable specification (the normative text; the schema
@@ -85,8 +107,8 @@ See [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 ## `.github/` — automation & governance
 
 - `workflows/validate.yml` — validation, codelist lint, JSON well-formedness, invoice
-  projection + verification, and the **conformance harness** (reference + broken adapters);
-  see [Validation & Conformance](Validation-and-Conformance).
+  projection + verification, the **conformance harness** (reference + broken adapters), and
+  the **agent demonstration**; see [Validation & Conformance](Validation-and-Conformance).
 - `workflows/pages.yml` — publishes the specification to GitHub Pages.
 - `ISSUE_TEMPLATE/` — `change-proposal.md` and `spec-defect.md` (plus `config.yml`).
 - `PULL_REQUEST_TEMPLATE.md`, `CODEOWNERS`, `dependabot.yml`.
@@ -95,7 +117,7 @@ See [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 
 | File | Purpose |
 |------|---------|
-| `package.json` | npm scripts (`validate`, `transform`, `verify-ubl`, `conformance`, `conformance:broken`) and dev dependencies. |
+| `package.json` | npm scripts (`validate`, `transform`, `verify-ubl`, `conformance`, `conformance:broken`, `agent`) and dev dependencies. |
 | `validate.js` | The example validator run by `npm run validate` and CI. |
 | `LICENSE` | CC0 1.0 dedication. |
 | `CONTRIBUTING.md` | Contribution process and CLA — see [Contributing](Contributing). |

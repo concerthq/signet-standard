@@ -49,6 +49,7 @@ From [CHANGELOG.md](https://github.com/concerthq/signet-standard/blob/main/CHANG
 
 | Version | Highlights |
 |---------|-----------|
+| **0.5.0** (2026-06) | [Agent demonstration](Agent-Layer) (`agent/`): a runnable proof that a synthetic agent takes a **governed, accountable, conformant** action — reads a SourcingEvent, is bounded by a Mandate (its €12M value exceeds the €10M autonomous ceiling, so human approval is required), applies the published MAT evaluation Policy, and emits an Award Decision with rationale, inputs, policies applied, human approval, and provenance, plus a five-event hash-chained trail; the runner verifies the output is conformance-clean (every object validates, the chain holds, tampering is detected); CI runs the demo on every commit. |
 | **0.4.0** (2026-06) | [Conformance harness](Conformance-Harness) (`conformance/`): Core/Full levels, the public suite, a reference adapter (reaches Full) and a broken adapter (rejected), neutrality rules CN-1…CN-4; `signet-to-ubl.js` refactored to a pure `toUBL()`; CI runs the harness on every commit. |
 | **0.3.0** (2026-06) | Runnable `signet-to-ubl.js` transform → Peppol BIS Billing 3.0; `verify-ubl.py` reconciliation; CI now proves convertibility on every push; committed `invoice.ubl.xml`. |
 | **0.2.0** (2026-06) | Complete OCDS-aligned process layer (Need, Evaluation, Award, Contract, Order, Catalogue, Obligation, Invoice); EN 16931 building blocks (Unit, InvoiceLine, VatBreakdown); EN 16931-mapped Invoice (33 BTs/BGs); Draft-07 `allOf` fix preserving BT annotations on `$ref`. |

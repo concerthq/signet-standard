@@ -89,7 +89,7 @@ SIGNET defines a **Canonical Data Model (CDM)** organised into four layers:
 ## Status & licensing
 
 - **Specification version:** v0.1 (Working Draft / Request for Comments)
-- **Repository / artifact version:** v0.4.0
+- **Repository / artifact version:** v0.5.0
 - **Licence:** [CC0 1.0](https://github.com/concerthq/signet-standard/blob/main/LICENSE)
   (public-domain dedication of the artifacts; the marks are administered separately).
 - **Marks:** "SIGNET", "Concert", and "SIGNET Certified" are marks administered by Concert

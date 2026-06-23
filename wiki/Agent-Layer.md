@@ -28,6 +28,14 @@ The three guarantees that make a SIGNET network *governed* rather than merely au
    *and* a `humanReadable` statement of the same rule — so the rule that governs the agent
    is the rule a human can review.
 
+> **See it run (v0.5.0).** The repository ships a runnable proof of exactly these three
+> guarantees: the [`agent/` demonstration](https://github.com/concerthq/signet-standard/tree/main/agent)
+> (`npm run agent`). A synthetic agent awards a €12M contract — bounded by a Mandate whose
+> €10M autonomous-value ceiling forces **human approval**, applying the **published** MAT
+> evaluation Policy — and the runner then **verifies the agent's output is conformance-clean**:
+> every Decision, Evaluation, and Award validates, the five-event hash chain holds, and
+> tampering is detected. See [Repository Structure → `agent/`](Repository-Structure#agent--the-agent-demonstration).
+
 ---
 
 ## SyntheticAgent

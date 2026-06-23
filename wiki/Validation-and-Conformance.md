@@ -27,10 +27,17 @@ npm run conformance         # reference adapter must reach Core+ (exits 0)
 npm run conformance:broken  # the broken adapter must be rejected (exits 1)
 ```
 
+To run the **agent demonstration** (new in v0.5.0 — a governed, conformance-verified agent
+action; see [Agent Layer](Agent-Layer)):
+
+```bash
+npm run agent               # an agent awards a contract under a Mandate; its output must be conformance-clean
+```
+
 ## What CI checks
 
 `.github/workflows/validate.yml` runs on every push to `main`/`dev` and every PR to `main`.
-It performs six checks — a PR cannot merge while any fail:
+It performs seven checks — a PR cannot merge while any fail:
 
 1. **Schema validation.** `node validate.js` validates every example against the schemas.
 2. **Codelist lint.** Every `codelists/*.csv` must start with the header
@@ -44,6 +51,9 @@ It performs six checks — a PR cannot merge while any fail:
    bundled reference adapter must reach **Core+**.
 6. **Conformance — broken implementation.** The deliberately broken adapter must be
    **rejected** (the step inverts its exit code), proving the suite discriminates.
+7. **Agent demonstration.** Runs `node agent/run-agent.js`; the agent's governed action must
+   be conformance-clean — every Decision, Evaluation, and Award validates, the event chain
+   holds, and tampering is detected.
 
 A separate workflow, `.github/workflows/pages.yml`, renders `docs/specification.md` to HTML
 and publishes it to GitHub Pages (it runs `tools/build-pages.js` with `marked`).
