@@ -1,0 +1,1 @@
+SIGNET Standard — stewarded by [Concert Foundation](https://concert.foundation) · Licensed [CC0 1.0](https://github.com/concerthq/signet-standard/blob/main/LICENSE) · The **JSON Schema is the source of truth**. · Comments: hello@concert.foundation
