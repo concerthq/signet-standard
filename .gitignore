@@ -3,6 +3,9 @@ node_modules/
 .DS_Store
 _site/
 
+# Local delivery/handoff packs — not part of the standard.
+handoffs/
+
 # Conformance reports are generated; the two committed samples show pass/fail.
 conformance/reports/*-report.json
 !conformance/reports/reference-adapter-report.json
