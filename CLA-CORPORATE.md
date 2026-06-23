@@ -2,7 +2,7 @@
 
 **Standard:** SIGNET · **Steward:** Concert Foundation · **Variant:** Corporate
 
-> **Status — working text pending ratification.** This document formalises the
+> **Status — ratified.** This document formalises the
 > Corporate variant of the Individual CLA, with the same grants. The authoritative,
 > legally reviewed version is published by Concert Foundation at
 > <https://concert.foundation/governance/cla-corporate>; if the two differ, the
