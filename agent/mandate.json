@@ -1,12 +1,12 @@
 {
   "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
   "type": "Mandate",
-  "id": { "scheme": "did", "id": "did:web:vtpc.example#mandate-eval-3" },
-  "agent": { "scheme": "did", "id": "did:web:vtpc.example#agent-eval-3" },
-  "grantedBy": { "scheme": "did", "id": "did:web:vtpc.example#vtpc" },
+  "id": { "scheme": "did", "id": "did:web:buyer.example#mandate-eval-3" },
+  "agent": { "scheme": "did", "id": "did:web:buyer.example#agent-eval-3" },
+  "grantedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
   "permittedCapabilities": ["evaluate.submission", "award.decision"],
-  "constraints": [ { "scheme": "did", "id": "did:web:vtpc.example#policy-eval-mat" } ],
-  "approvalThresholds": [ { "scheme": "did", "id": "did:web:vtpc.example#policy-approval-10m" } ],
-  "scope": { "sourcingEvent": "did:web:vtpc.example#event-1207", "maxAutonomousValue": { "amount": 10000000, "currency": "EUR" } },
+  "constraints": [ { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" } ],
+  "approvalThresholds": [ { "scheme": "did", "id": "did:web:buyer.example#policy-approval-10m" } ],
+  "scope": { "sourcingEvent": "did:web:buyer.example#event-1207", "maxAutonomousValue": { "amount": 10000000, "currency": "EUR" } },
   "validity": { "startDate": "2026-06-01T00:00:00Z", "endDate": "2026-12-31T23:59:59Z" }
 }

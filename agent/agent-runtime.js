@@ -16,7 +16,7 @@ const DIR = __dirname;
 const rd = (p) => JSON.parse(fs.readFileSync(path.join(DIR, p), "utf8"));
 const rdRepo = (p) => JSON.parse(fs.readFileSync(path.join(DIR, "..", p), "utf8"));
 
-const AGENT = { scheme: "did", id: "did:web:vtpc.example#agent-eval-3" };
+const AGENT = { scheme: "did", id: "did:web:buyer.example#agent-eval-3" };
 const TS = "2026-06-22T00:00:00Z";
 const prov = (derivedFrom = [], usedPolicies = []) => ({
   generatedBy: AGENT, generatedAt: TS,
@@ -37,7 +37,7 @@ function runScenario({ reasoner }) {
   const weights = parseWeights(policy);
   const events = [];
   const emit = (eventType, subject, payload) => {
-    const e = { type: "Event", id: { scheme: "did", id: `did:web:vtpc.example#evt-${events.length + 1}` },
+    const e = { type: "Event", id: { scheme: "did", id: `did:web:buyer.example#evt-${events.length + 1}` },
       eventType, subject: { scheme: "did", id: subject }, actor: AGENT, timestamp: TS, payload, provenance: prov() };
     if (events.length) e.previousEventHash = eventHash(events[events.length - 1]);
     events.push(e);
@@ -68,7 +68,7 @@ function runScenario({ reasoner }) {
     const evaluation = {
       "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
       type: "Evaluation",
-      id: { scheme: "did", id: `did:web:vtpc.example#eval-${shortId(sub.id.id)}` },
+      id: { scheme: "did", id: `did:web:buyer.example#eval-${shortId(sub.id.id)}` },
       submission: sub.id,
       criteria: policy.id,
       scores: out.scores,
@@ -90,7 +90,7 @@ function runScenario({ reasoner }) {
   const decision = {
     "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
     type: "Decision",
-    id: { scheme: "did", id: "did:web:vtpc.example#decision-8842" },
+    id: { scheme: "did", id: "did:web:buyer.example#decision-8842" },
     decisionType: "award",
     madeBy: AGENT,
     underMandate: mandate.id,
@@ -101,7 +101,7 @@ function runScenario({ reasoner }) {
     provenance: prov(submissions.map(s => s.id), [policy.id]),
   };
   if (requiresHumanApproval) {
-    decision.humanApproval = { scheme: "did", id: "did:web:vtpc.example#approval-771" };
+    decision.humanApproval = { scheme: "did", id: "did:web:buyer.example#approval-771" };
     log(`Human approval ${shortId(decision.humanApproval.id)} attached (mandate threshold exceeded).`);
   }
   emit("decision.made", decision.id.id, { decisionType: "award", awarded: decisionOut.winner });
@@ -110,7 +110,7 @@ function runScenario({ reasoner }) {
   const award = {
     "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
     type: "Award",
-    id: { scheme: "did", id: "did:web:vtpc.example#award-2208" },
+    id: { scheme: "did", id: "did:web:buyer.example#award-2208" },
     sourcingEvent: event.id,
     awardedParty: winnerSub.submittingParty,
     value: winnerSub.value,

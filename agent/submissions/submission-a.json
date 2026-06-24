@@ -1,8 +1,8 @@
 {
   "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
   "type": "Submission",
-  "id": { "scheme": "did", "id": "did:web:vtpc.example#submission-5521" },
-  "sourcingEvent": { "scheme": "did", "id": "did:web:vtpc.example#event-1207" },
+  "id": { "scheme": "did", "id": "did:web:buyer.example#submission-5521" },
+  "sourcingEvent": { "scheme": "did", "id": "did:web:buyer.example#event-1207" },
   "lot": "lot-1",
   "submittingParty": { "scheme": "did", "id": "did:web:acme-networks.example#acme" },
   "value": { "amount": 11400000, "currency": "EUR" },

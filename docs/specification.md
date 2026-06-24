@@ -563,24 +563,24 @@ A minimal award Decision made by a synthetic evaluation agent, in canonical JSON
 {
   "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
   "type": "Decision",
-  "id": { "scheme": "did", "id": "did:web:vtpc.example#decision-8842" },
+  "id": { "scheme": "did", "id": "did:web:buyer.example#decision-8842" },
   "decisionType": "award",
-  "madeBy": { "scheme": "did", "id": "did:web:vtpc.example#agent-eval-3" },
-  "underMandate": { "scheme": "did", "id": "did:web:vtpc.example#mandate-eval-3" },
+  "madeBy": { "scheme": "did", "id": "did:web:buyer.example#agent-eval-3" },
+  "underMandate": { "scheme": "did", "id": "did:web:buyer.example#mandate-eval-3" },
   "inputs": [
-    { "scheme": "did", "id": "did:web:vtpc.example#submission-5521" },
-    { "scheme": "did", "id": "did:web:vtpc.example#submission-5522" }
+    { "scheme": "did", "id": "did:web:buyer.example#submission-5521" },
+    { "scheme": "did", "id": "did:web:buyer.example#submission-5522" }
   ],
   "policiesApplied": [
-    { "scheme": "did", "id": "did:web:vtpc.example#policy-eval-mat" }
+    { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" }
   ],
   "rationale": "Submission 5521 ranked highest on the published MAT model (price 40%, quality 35%, social value 25%).",
-  "outcome": { "awardedSubmission": "did:web:vtpc.example#submission-5521" },
-  "humanApproval": { "scheme": "did", "id": "did:web:vtpc.example#approval-771" },
+  "outcome": { "awardedSubmission": "did:web:buyer.example#submission-5521" },
+  "humanApproval": { "scheme": "did", "id": "did:web:buyer.example#approval-771" },
   "provenance": {
-    "generatedBy": { "scheme": "did", "id": "did:web:vtpc.example#agent-eval-3" },
+    "generatedBy": { "scheme": "did", "id": "did:web:buyer.example#agent-eval-3" },
     "generatedAt": "2026-06-21T14:08:00Z",
-    "usedPolicies": [{ "scheme": "did", "id": "did:web:vtpc.example#policy-eval-mat" }],
+    "usedPolicies": [{ "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" }],
     "signature": { "type": "Ed25519Signature2020", "value": "z58…" }
   }
 }

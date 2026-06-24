@@ -41,7 +41,7 @@ A `did`-scheme identifier (e.g. `did:web:supplier.example.com`) makes the Party
 self-sovereign and resolvable without a central registry (principle 1.4).
 
 ```json
-{ "scheme": "did", "id": "did:web:vtpc.example#vtpc" }
+{ "scheme": "did", "id": "did:web:buyer.example#buyer" }
 { "scheme": "gleif:lei", "id": "5299000ACME00NETWRK1" }
 ```
 

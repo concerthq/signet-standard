@@ -43,13 +43,13 @@ network services), governed by an ISO 27001 eligibility policy.
 {
   "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
   "type": "Need",
-  "id": { "scheme": "did", "id": "did:web:vtpc.example#need-0420" },
+  "id": { "scheme": "did", "id": "did:web:buyer.example#need-0420" },
   "title": "Managed network services — Northern region refresh",
-  "requestingParty": { "scheme": "did", "id": "did:web:vtpc.example#vtpc" },
+  "requestingParty": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
   "budget": { "amount": 12000000, "currency": "EUR" },
   "classification": { "scheme": "cpv", "id": "72720000", "description": "Wide area network services" },
   "rationale": "End-of-life transport equipment refresh across the northern operating region.",
-  "governingPolicies": [ { "scheme": "did", "id": "did:web:vtpc.example#policy-elig-iso27001" } ]
+  "governingPolicies": [ { "scheme": "did", "id": "did:web:buyer.example#policy-elig-iso27001" } ]
 }
 ```
 
@@ -66,13 +66,13 @@ window. Note the criteria are references to [Policy](Agent-Layer#policy) objects
 ```json
 {
   "type": "SourcingEvent",
-  "id": { "scheme": "did", "id": "did:web:vtpc.example#event-1207" },
-  "procuringParty": { "scheme": "did", "id": "did:web:vtpc.example#vtpc" },
+  "id": { "scheme": "did", "id": "did:web:buyer.example#event-1207" },
+  "procuringParty": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
   "procedure": "competitiveFlexible",
   "status": "active",
   "lots": [ { "id": "lot-1", "title": "Core transport", "value": { "amount": 12000000, "currency": "EUR" } } ],
-  "eligibilityCriteria": [ { "scheme": "did", "id": "did:web:vtpc.example#policy-elig-iso27001" } ],
-  "evaluationCriteria": [ { "scheme": "did", "id": "did:web:vtpc.example#policy-eval-mat" } ],
+  "eligibilityCriteria": [ { "scheme": "did", "id": "did:web:buyer.example#policy-elig-iso27001" } ],
+  "evaluationCriteria": [ { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" } ],
   "period": { "startDate": "2026-07-01T00:00:00Z", "endDate": "2026-08-15T17:00:00Z" }
 }
 ```
@@ -90,13 +90,13 @@ the mandatory dual requirement.
 ```json
 {
   "type": "Policy",
-  "id": { "scheme": "did", "id": "did:web:vtpc.example#policy-eval-mat" },
+  "id": { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" },
   "policyType": "evaluation",
   "expressionLanguage": "rego",
   "expression": "package signet.eval\nscore := price*0.4 + quality*0.35 + social*0.25",
   "humanReadable": "Most Advantageous Tender: price 40%, quality 35%, social value 25%.",
   "version": "1.0.0",
-  "issuedBy": { "scheme": "did", "id": "did:web:vtpc.example#vtpc" }
+  "issuedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" }
 }
 ```
 
@@ -114,22 +114,22 @@ submission **inputs**, applying the MAT **policy**, with a plain-language **rati
 ```json
 {
   "type": "Decision",
-  "id": { "scheme": "did", "id": "did:web:vtpc.example#decision-8842" },
+  "id": { "scheme": "did", "id": "did:web:buyer.example#decision-8842" },
   "decisionType": "award",
-  "madeBy": { "scheme": "did", "id": "did:web:vtpc.example#agent-eval-3" },
-  "underMandate": { "scheme": "did", "id": "did:web:vtpc.example#mandate-eval-3" },
+  "madeBy": { "scheme": "did", "id": "did:web:buyer.example#agent-eval-3" },
+  "underMandate": { "scheme": "did", "id": "did:web:buyer.example#mandate-eval-3" },
   "inputs": [
-    { "scheme": "did", "id": "did:web:vtpc.example#submission-5521" },
-    { "scheme": "did", "id": "did:web:vtpc.example#submission-5522" }
+    { "scheme": "did", "id": "did:web:buyer.example#submission-5521" },
+    { "scheme": "did", "id": "did:web:buyer.example#submission-5522" }
   ],
-  "policiesApplied": [ { "scheme": "did", "id": "did:web:vtpc.example#policy-eval-mat" } ],
+  "policiesApplied": [ { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" } ],
   "rationale": "Submission 5521 ranked highest on the published MAT model (price 40%, quality 35%, social value 25%).",
-  "outcome": { "awardedSubmission": "did:web:vtpc.example#submission-5521" },
-  "humanApproval": { "scheme": "did", "id": "did:web:vtpc.example#approval-771" },
+  "outcome": { "awardedSubmission": "did:web:buyer.example#submission-5521" },
+  "humanApproval": { "scheme": "did", "id": "did:web:buyer.example#approval-771" },
   "provenance": {
-    "generatedBy": { "scheme": "did", "id": "did:web:vtpc.example#agent-eval-3" },
+    "generatedBy": { "scheme": "did", "id": "did:web:buyer.example#agent-eval-3" },
     "generatedAt": "2026-06-21T14:08:00Z",
-    "usedPolicies": [ { "scheme": "did", "id": "did:web:vtpc.example#policy-eval-mat" } ],
+    "usedPolicies": [ { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" } ],
     "signature": { "type": "Ed25519Signature2020", "value": "z58…" }
   }
 }
@@ -149,10 +149,10 @@ migration milestone).
 ```json
 {
   "type": "Contract",
-  "id": { "scheme": "did", "id": "did:web:vtpc.example#contract-3310" },
-  "award": { "scheme": "did", "id": "did:web:vtpc.example#award-2208" },
+  "id": { "scheme": "did", "id": "did:web:buyer.example#contract-3310" },
+  "award": { "scheme": "did", "id": "did:web:buyer.example#award-2208" },
   "parties": [
-    { "scheme": "did", "id": "did:web:vtpc.example#vtpc" },
+    { "scheme": "did", "id": "did:web:buyer.example#buyer" },
     { "scheme": "did", "id": "did:web:acme-networks.example#acme" }
   ],
   "value": { "amount": 12000000, "currency": "EUR" },
@@ -182,7 +182,7 @@ against the contract and an order. It is arithmetically self-consistent: **€6,
   "invoiceTypeCode": "380",
   "issueDate": "2026-10-05T00:00:00Z",
   "currency": "EUR",
-  "contract": { "scheme": "did", "id": "did:web:vtpc.example#contract-3310" },
+  "contract": { "scheme": "did", "id": "did:web:buyer.example#contract-3310" },
   "seller": { "scheme": "gleif:lei", "id": "5299000ACME00NETWRK1" },
   "buyer":  { "scheme": "gleif:lei", "id": "529900VTPC0000JAGUAR" },
   "lines": [

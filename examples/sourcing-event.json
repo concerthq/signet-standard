@@ -3,12 +3,12 @@
   "type": "SourcingEvent",
   "id": {
     "scheme": "did",
-    "id": "did:web:vtpc.example#event-1207"
+    "id": "did:web:buyer.example#event-1207"
   },
   "title": "Network managed services — Northern region",
   "procuringParty": {
     "scheme": "did",
-    "id": "did:web:vtpc.example#vtpc"
+    "id": "did:web:buyer.example#buyer"
   },
   "procedure": "competitiveFlexible",
   "status": "active",
@@ -29,13 +29,13 @@
   "eligibilityCriteria": [
     {
       "scheme": "did",
-      "id": "did:web:vtpc.example#policy-elig-iso27001"
+      "id": "did:web:buyer.example#policy-elig-iso27001"
     }
   ],
   "evaluationCriteria": [
     {
       "scheme": "did",
-      "id": "did:web:vtpc.example#policy-eval-mat"
+      "id": "did:web:buyer.example#policy-eval-mat"
     }
   ],
   "period": {

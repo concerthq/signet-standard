@@ -66,22 +66,22 @@ suite).
 
 ## 6. Patent licence (W3C model)
 
-You grant Concert and recipients of the standard a perpetual, worldwide,
-non-exclusive, royalty-free, irrevocable (except as stated below) patent licence to
-make, have made, use, offer to sell, sell, import, and otherwise transfer the work,
-where such licence applies only to those patent claims licensable by You that are
-**necessarily infringed** by Your Contribution alone or by combination of Your
-Contribution with the project to which it was submitted.
+The Organisation grants Concert and recipients of the standard a perpetual,
+worldwide, non-exclusive, royalty-free, irrevocable (except as stated below) patent
+licence to make, have made, use, offer to sell, sell, import, and otherwise transfer
+the work, where such licence applies only to those patent claims licensable by the
+Organisation that are **necessarily infringed** by a Contribution alone or by
+combination of a Contribution with the project to which it was submitted.
 
-If any entity institutes patent litigation against You or any other contributor
-alleging that Your Contribution, or the work to which You contributed, constitutes
-direct or contributory patent infringement, then any patent licences granted under
-this Agreement for that Contribution terminate as of the date such litigation is
-filed.
+If any entity institutes patent litigation against the Organisation or any other
+contributor alleging that a Contribution, or the work to which it contributed,
+constitutes direct or contributory patent infringement, then any patent licences
+granted under this Agreement for that Contribution terminate as of the date such
+litigation is filed.
 
 ## 7. Neutrality
 
-Acceptance of Your Contribution under this Agreement gives no contributor — and no
+Acceptance of a Contribution under this Agreement gives no contributor — and no
 commercial operator, including Score Networks — any preferential position in the
 standard. The same terms apply to everyone (see the Concert IP & Licensing Policy).
 

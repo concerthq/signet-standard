@@ -3,7 +3,7 @@
   "type": "Policy",
   "id": {
     "scheme": "did",
-    "id": "did:web:vtpc.example#policy-eval-mat"
+    "id": "did:web:buyer.example#policy-eval-mat"
   },
   "policyType": "evaluation",
   "expressionLanguage": "rego",
@@ -12,6 +12,6 @@
   "version": "1.0.0",
   "issuedBy": {
     "scheme": "did",
-    "id": "did:web:vtpc.example#vtpc"
+    "id": "did:web:buyer.example#buyer"
   }
 }

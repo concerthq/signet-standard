@@ -3,16 +3,16 @@
   "type": "Contract",
   "id": {
     "scheme": "did",
-    "id": "did:web:vtpc.example#contract-3310"
+    "id": "did:web:buyer.example#contract-3310"
   },
   "award": {
     "scheme": "did",
-    "id": "did:web:vtpc.example#award-2208"
+    "id": "did:web:buyer.example#award-2208"
   },
   "parties": [
     {
       "scheme": "did",
-      "id": "did:web:vtpc.example#vtpc"
+      "id": "did:web:buyer.example#buyer"
     },
     {
       "scheme": "did",

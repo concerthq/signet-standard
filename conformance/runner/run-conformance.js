@@ -84,7 +84,7 @@ function runImplConformance(adapter) {
     const { document } = adapter.createObject("Decision", dec);
     const decProv = !!(document.provenance && document.provenance.generatedBy && document.provenance.generatedAt);
     // every event emitted so far must carry provenance
-    const allEvents = [].concat(...["did:web:vtpc.example#need-0420"].map(s => adapter.getEvents(s)));
+    const allEvents = [].concat(...["did:web:buyer.example#need-0420"].map(s => adapter.getEvents(s)));
     const evProv = allEvents.length > 0 && allEvents.every(e => e.provenance && e.provenance.generatedBy && e.provenance.generatedAt);
     record("C-PROV", "Core", "CDM 6.4,7.2", decProv && evProv,
       { decisionHasProvenance: decProv, allEventsHaveProvenance: evProv });

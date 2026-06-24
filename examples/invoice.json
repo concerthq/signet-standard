@@ -10,11 +10,11 @@
   "currency": "EUR",
   "contract": {
     "scheme": "did",
-    "id": "did:web:vtpc.example#contract-3310"
+    "id": "did:web:buyer.example#contract-3310"
   },
   "order": {
     "scheme": "did",
-    "id": "did:web:vtpc.example#order-7781"
+    "id": "did:web:buyer.example#order-7781"
   },
   "seller": {
     "scheme": "gleif:lei",

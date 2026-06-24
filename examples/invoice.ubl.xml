@@ -9,8 +9,8 @@
   <cbc:DueDate>2026-11-04</cbc:DueDate>
   <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
   <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
-  <cac:OrderReference><cbc:ID>did:web:vtpc.example#order-7781</cbc:ID></cac:OrderReference>
-  <cac:ContractDocumentReference><cbc:ID>did:web:vtpc.example#contract-3310</cbc:ID></cac:ContractDocumentReference>
+  <cac:OrderReference><cbc:ID>did:web:buyer.example#order-7781</cbc:ID></cac:OrderReference>
+  <cac:ContractDocumentReference><cbc:ID>did:web:buyer.example#contract-3310</cbc:ID></cac:ContractDocumentReference>
   <cac:AccountingSupplierParty><cac:Party><cac:PartyLegalEntity>
     <cbc:CompanyID schemeID="0199">5299000ACME00NETWRK1</cbc:CompanyID>
   </cac:PartyLegalEntity></cac:Party></cac:AccountingSupplierParty>
