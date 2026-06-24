@@ -1,0 +1,72 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "SupplierQualification",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#qual-acme"
+  },
+  "supplier": {
+    "scheme": "did",
+    "id": "did:web:acme-networks.example#acme"
+  },
+  "qualifiedBy": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#buyer"
+  },
+  "status": "conditional",
+  "conditions": [
+    {
+      "conditionType": "valueCap",
+      "description": "Qualified to a maximum single-contract value of EUR 5,000,000 pending an upgraded financial-standing check.",
+      "valueCap": {
+        "amount": 5000000,
+        "currency": "EUR"
+      }
+    },
+    {
+      "conditionType": "pendingCheck",
+      "description": "Upgraded financial-standing credential due before unconditional qualification.",
+      "dueDate": "2026-09-30T00:00:00Z"
+    }
+  ],
+  "classifications": [
+    {
+      "scheme": "cpv",
+      "id": "72720000",
+      "description": "Wide area network services"
+    }
+  ],
+  "credentials": [
+    {
+      "id": "urn:cred:iso27001:acme",
+      "type": [
+        "VerifiableCredential",
+        "certification"
+      ],
+      "issuer": {
+        "scheme": "did",
+        "id": "did:web:ukas.example#ukas"
+      },
+      "issuanceDate": "2025-09-01T00:00:00Z",
+      "expirationDate": "2028-09-01T00:00:00Z",
+      "credentialSubject": {
+        "standard": "ISO/IEC 27001:2022"
+      },
+      "proof": {
+        "type": "manualAttestation"
+      }
+    }
+  ],
+  "validity": {
+    "startDate": "2026-06-22T00:00:00Z",
+    "endDate": "2027-06-22T00:00:00Z"
+  },
+  "lastDecision": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#decision-onb-4471"
+  },
+  "originatingCase": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#onboarding-4471"
+  }
+}

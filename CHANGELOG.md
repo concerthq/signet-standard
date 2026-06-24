@@ -4,6 +4,17 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [0.6.0] — 2026-06 — Working Draft
+
+### Added
+- **Supplier onboarding extension** — process-layer objects `OnboardingCase`
+  (buyer-internal workflow; invited + submitted entry; revalidation/remediation
+  case types) and `SupplierQualification` (durable status with first-class
+  `conditional` qualification, value caps and category restrictions). Reuses
+  Credential/Policy/Decision/Event/Consent. Screening results carried as
+  attestations, never performed by SIGNET. Open `credentialType` codelist; two
+  worked examples. Workflow states are normative; credential types are extensible.
+
 ## [0.5.0] — 2026-06 — Working Draft
 
 ### Added

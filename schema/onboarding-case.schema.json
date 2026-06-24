@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/onboarding-case.schema.json",
+  "title": "OnboardingCase",
+  "description": "A supplier onboarding/qualification workflow instance. Buyer-internal, transactional. Produces or refreshes a SupplierQualification. The workflow states are stable and normative; the credential types it collects are extensible and may evolve (manual attestation today, issuer-signed credentials later) without changing this lifecycle.",
+  "type": "object",
+  "required": [
+    "id",
+    "subjectParty",
+    "initiatingParty",
+    "caseType",
+    "entryMode",
+    "status",
+    "eligibilityPolicy"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "OnboardingCase"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "subjectParty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The supplier Party being onboarded."
+    },
+    "initiatingParty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The buyer / procuring entity running the case."
+    },
+    "caseType": {
+      "type": "string",
+      "enum": [
+        "onboarding",
+        "revalidation",
+        "remediation"
+      ],
+      "description": "A revalidation or remediation is a NEW case against an EXISTING qualification, not a re-onboard."
+    },
+    "entryMode": {
+      "type": "string",
+      "enum": [
+        "invited",
+        "submitted"
+      ],
+      "description": "invited = buyer-initiated (primary); submitted = supplier self-registration."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "initiated",
+        "invited",
+        "submitted",
+        "under_verification",
+        "info_requested",
+        "pending_approval",
+        "qualified",
+        "rejected",
+        "withdrawn"
+      ]
+    },
+    "eligibilityPolicy": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "Reference to the eligibility Policy the case is assessed against."
+    },
+    "requiredCredentialTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The credential types this case requires (the extensible layer). See codelists/credentialType.csv."
+    },
+    "collectedCredentials": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Credential"
+      },
+      "description": "Verified facts gathered during the case."
+    },
+    "decision": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The qualification Decision (decisionType: qualification) that closed the case."
+    },
+    "producesQualification": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The SupplierQualification this case creates or refreshes."
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Document"
+      }
+    },
+    "period": {
+      "$ref": "definitions.schema.json#/definitions/Period",
+      "description": "When the case opened and closed."
+    }
+  }
+}

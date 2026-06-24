@@ -36,6 +36,8 @@ const map = {
   "need.json": "need.schema.json",
   "contract.json": "contract.schema.json",
   "invoice.json": "invoice.schema.json",
+  "onboarding-conditional.json": "onboarding-case.schema.json",
+  "supplier-qualification-conditional.json": "supplier-qualification.schema.json",
 };
 
 let failures = 0;

@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/supplier-qualification.schema.json",
+  "title": "SupplierQualification",
+  "description": "The durable qualification status of a supplier, distinct from the OnboardingCase that produced it. Persists across events and re-validations. This is the object that, in a federated marketplace, a supplier could own and present across buyers; build it separate from the Case so portability is an extension, not a rebuild.",
+  "type": "object",
+  "required": [
+    "id",
+    "supplier",
+    "qualifiedBy",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "SupplierQualification"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "supplier": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The qualified supplier Party."
+    },
+    "qualifiedBy": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The party holding the qualification (the buyer today; potentially supplier-held in federation)."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "conditional",
+        "suspended",
+        "expired",
+        "offboarded"
+      ]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "conditionType",
+          "description"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "conditionType": {
+            "type": "string",
+            "enum": [
+              "valueCap",
+              "categoryRestriction",
+              "pendingCheck",
+              "other"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "valueCap": {
+            "$ref": "definitions.schema.json#/definitions/Value",
+            "description": "Maximum value the supplier is qualified for, when conditionType is valueCap."
+          },
+          "restrictedTo": {
+            "type": "array",
+            "items": {
+              "$ref": "definitions.schema.json#/definitions/Classification"
+            },
+            "description": "Categories the supplier is limited to, when categoryRestriction."
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When a pendingCheck must be resolved by."
+          }
+        }
+      },
+      "description": "Limits attached when status is conditional."
+    },
+    "classifications": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Classification"
+      },
+      "description": "Categories the supplier is qualified for (e.g. CPV)."
+    },
+    "credentials": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Credential"
+      },
+      "description": "The durable verified facts. Screening results (sanctions/AML) appear here as result credentials with provenance — SIGNET carries the attestation; it does not perform the determination."
+    },
+    "validity": {
+      "$ref": "definitions.schema.json#/definitions/Period",
+      "description": "The qualification validity window; expiry triggers a revalidation case."
+    },
+    "lastDecision": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The Decision that set the current status."
+    },
+    "originatingCase": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The OnboardingCase that first produced this qualification."
+    }
+  }
+}

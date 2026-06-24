@@ -1,0 +1,88 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "OnboardingCase",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#onboarding-4471"
+  },
+  "subjectParty": {
+    "scheme": "did",
+    "id": "did:web:acme-networks.example#acme"
+  },
+  "initiatingParty": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#buyer"
+  },
+  "caseType": "onboarding",
+  "entryMode": "invited",
+  "status": "qualified",
+  "eligibilityPolicy": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#policy-onboarding-telco"
+  },
+  "requiredCredentialTypes": [
+    "identity",
+    "insurance",
+    "certification",
+    "financialStanding",
+    "sanctionsScreening"
+  ],
+  "collectedCredentials": [
+    {
+      "id": "urn:cred:iso27001:acme",
+      "type": [
+        "VerifiableCredential",
+        "certification"
+      ],
+      "issuer": {
+        "scheme": "did",
+        "id": "did:web:ukas.example#ukas"
+      },
+      "issuanceDate": "2025-09-01T00:00:00Z",
+      "expirationDate": "2028-09-01T00:00:00Z",
+      "credentialSubject": {
+        "standard": "ISO/IEC 27001:2022"
+      },
+      "proof": {
+        "type": "manualAttestation",
+        "attestedBy": "did:web:buyer.example#verifier-2"
+      }
+    },
+    {
+      "id": "urn:cred:sanctions:acme:2026-06",
+      "type": [
+        "VerifiableCredential",
+        "sanctionsScreening"
+      ],
+      "issuer": {
+        "scheme": "did",
+        "id": "did:web:screening-provider.example#provider"
+      },
+      "issuanceDate": "2026-06-20T00:00:00Z",
+      "credentialSubject": {
+        "result": "clear",
+        "listsChecked": [
+          "UN",
+          "OFAC",
+          "EU",
+          "UK-HMT"
+        ]
+      },
+      "proof": {
+        "type": "providerAttestation"
+      }
+    }
+  ],
+  "decision": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#decision-onb-4471"
+  },
+  "producesQualification": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#qual-acme"
+  },
+  "period": {
+    "startDate": "2026-06-15T00:00:00Z",
+    "endDate": "2026-06-22T00:00:00Z"
+  }
+}
