@@ -1,5 +1,5 @@
 {
-  "name": "VTPC Evaluation Agent",
+  "name": "Buyer Evaluation Agent",
   "description": "Synthetic procurement agent that evaluates submissions against a published policy and proposes an award, under a bounded mandate, with full provenance.",
   "url": "https://agents.buyer.example/eval-agent",
   "provider": { "organization": "did:web:buyer.example#buyer" },

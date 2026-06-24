@@ -3,7 +3,7 @@
 The `examples/` directory holds complete, CI-validated instances of the CDM. Every example
 is validated against its schema on each push and pull request (see
 [Validation & Conformance](Validation-and-Conformance)), so the examples can never drift from
-the schema. They share a fictional procurement: **VTPC**'s "Managed network services —
+the schema. They share a fictional procurement: **Buyer**'s "Managed network services —
 Northern region refresh", awarded to **Acme Networks**.
 
 | File | Object | Stage |
@@ -142,7 +142,7 @@ see [Agent Layer → Decision](Agent-Layer#decision).
 
 ## Contract
 
-`examples/contract.json` — a €12M, three-year contract derived from the award, between VTPC
+`examples/contract.json` — a €12M, three-year contract derived from the award, between Buyer
 and Acme Networks, with two embedded [Obligations](Process-Layer#obligation) (an SLA and a
 migration milestone).
 
@@ -184,7 +184,7 @@ against the contract and an order. It is arithmetically self-consistent: **€6,
   "currency": "EUR",
   "contract": { "scheme": "did", "id": "did:web:buyer.example#contract-3310" },
   "seller": { "scheme": "gleif:lei", "id": "5299000ACME00NETWRK1" },
-  "buyer":  { "scheme": "gleif:lei", "id": "529900VTPC0000JAGUAR" },
+  "buyer":  { "scheme": "gleif:lei", "id": "5299000BUYER00000001" },
   "lines": [
     { "id": "1", "itemName": "Core router managed service — monthly", "quantity": 100, "unitOfMeasure": "MON",
       "itemNetPrice": { "amount": 50, "currency": "EUR" }, "netAmount": { "amount": 5000, "currency": "EUR" },
