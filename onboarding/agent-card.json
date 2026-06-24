@@ -1,0 +1,12 @@
+{
+  "name": "Supplier Qualification Agent",
+  "description": "Synthetic agent that qualifies a supplier against a buyer's eligibility policy, under a bounded mandate, producing a governed qualification decision with provenance.",
+  "url": "https://agents.buyer.example/qualification-agent",
+  "provider": { "organization": "did:web:buyer.example#buyer" },
+  "version": "1.0.0",
+  "capabilities": { "streaming": false, "stateTransitionHistory": true },
+  "skills": [
+    { "id": "verify.credential", "name": "Verify credential", "description": "Check a presented credential's presence, validity, and sufficiency.", "inputModes": ["application/json"], "outputModes": ["application/json"] },
+    { "id": "qualify.supplier", "name": "Qualify supplier", "description": "Assess credentials against an eligibility policy and propose a qualification outcome.", "inputModes": ["application/json"], "outputModes": ["application/json"] }
+  ]
+}

@@ -14,7 +14,8 @@
     "verify-ubl": "python3 tools/verify-ubl.py",
     "conformance": "node conformance/runner/run-conformance.js",
     "conformance:broken": "node conformance/runner/run-conformance.js --adapter conformance/adapter/broken-adapter.js",
-    "agent": "node agent/run-agent.js"
+    "agent": "node agent/run-agent.js",
+    "onboarding": "node onboarding/run-onboarding.js"
   },
   "devDependencies": {
     "ajv": "^8.12.0",

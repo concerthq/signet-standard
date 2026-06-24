@@ -54,3 +54,6 @@ jobs:
 
       - name: Agent demonstration — governed action must be conformance-clean
         run: node agent/run-agent.js
+
+      - name: Supplier-qualification demo — conditional outcome, conformance-clean
+        run: node onboarding/run-onboarding.js

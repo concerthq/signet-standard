@@ -8,6 +8,7 @@ handoffs/
 
 # Agent demo output is generated at runtime.
 agent/output/
+onboarding/output/
 
 # Conformance reports are generated; the two committed samples show pass/fail.
 conformance/reports/*-report.json

@@ -1,0 +1,16 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Mandate",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#mandate-qual-2" },
+  "agent": { "scheme": "did", "id": "did:web:buyer.example#agent-qual-2" },
+  "grantedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+  "permittedCapabilities": ["verify.credential", "qualify.supplier"],
+  "constraints": [ { "scheme": "did", "id": "did:web:buyer.example#policy-onboarding-telco" } ],
+  "approvalThresholds": [ { "scheme": "did", "id": "did:web:buyer.example#policy-approval-conditional" } ],
+  "scope": {
+    "autonomousOutcomes": ["qualified", "rejected"],
+    "humanApprovalRequiredFor": ["conditional"],
+    "note": "The agent may clear or reject autonomously; attaching CONDITIONS to a qualification is a judgement that requires a named human approver."
+  },
+  "validity": { "startDate": "2026-06-01T00:00:00Z", "endDate": "2026-12-31T23:59:59Z" }
+}

@@ -1,0 +1,9 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Policy",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#policy-onboarding-telco" },
+  "policyType": "eligibility",
+  "humanReadable": "To qualify for WAN services (CPV 72720000), a supplier must present: valid legal identity; current insurance; ISO/IEC 27001 certification; a clear sanctions screening; and financial standing sufficient for the category value tier (EUR 12,000,000). A financial-standing shortfall is non-blocking: qualify conditionally, capped at the supported value, pending an upgraded financial credential.",
+  "expression": "package signet.onboarding\nrequired := {\"identity\",\"insurance\",\"certification\",\"sanctionsScreening\",\"financialStanding\"}\nblocking := {\"identity\",\"insurance\",\"certification\",\"sanctionsScreening\"}\ncategory_value := 12000000",
+  "appliesTo": { "scheme": "cpv", "id": "72720000", "description": "Wide area network services" }
+}
