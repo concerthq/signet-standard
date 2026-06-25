@@ -216,8 +216,13 @@ milestone with a `status` of `pending`/`met`/`breached`/`waived` and `evidence` 
 embedded in the [Contract](Process-Layer#contract), and the EN 16931-aligned
 [Invoice](Process-Layer#invoice) that closes the financial loop — itself convertible to
 Peppol BIS Billing and natively ViDA-aligned (see
-[EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing)). Each transition is recorded as
-an immutable [Event](Trust-Layer#event), so discharge is auditable, not merely declared.
+[EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing)). The loop is **closed
+explicitly**, not assumed: `Obligation.dischargedBy` references the settling artefact, and
+`Invoice.settles` references the obligation it discharges, so *"this obligation was discharged
+by that invoice"* is a link you can mechanically traverse — not an inference. The transition
+is recorded as an immutable `obligation.discharged` [Event](Trust-Layer#event), so discharge is
+auditable, not merely declared. (`Invoice.settles` is SIGNET-original and is omitted on the
+Peppol BIS projection, so closing the loop costs nothing in ViDA convertibility.)
 
 ## The two cross-cutting commitments
 

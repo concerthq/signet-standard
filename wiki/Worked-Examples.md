@@ -27,10 +27,16 @@ Need (12M EUR)  ──>  SourcingEvent (competitiveFlexible)  ──>  [evaluate
         │
         ▼
    Contract (#contract-3310, 12M EUR, 2026–2029, 2 obligations)
-        │
-        ▼
+        │                                    ▲
+        ▼                                    │ settles ob-1 / dischargedBy
    Invoice (Peppol INV-2026-000512, €7,502 payable)  ──>  invoice.ubl.xml
+        └── settles ──> Obligation ob-1 (status: met)  [loop closed]
 ```
+
+The Invoice `settles` the SLA obligation `ob-1`, and `ob-1` back-references the Invoice via
+`dischargedBy` — the commitment made in the Contract is discharged explicitly, as data. The
+`settles` link is SIGNET-original and is **omitted on the UBL projection**, so
+`invoice.ubl.xml` is unchanged.
 
 ---
 
@@ -158,7 +164,8 @@ migration milestone).
   "value": { "amount": 12000000, "currency": "EUR" },
   "period": { "startDate": "2026-09-01T00:00:00Z", "endDate": "2029-08-31T23:59:59Z" },
   "obligations": [
-    { "type": "Obligation", "id": "ob-1", "description": "Achieve 99.95% core availability each calendar month.", "status": "pending" },
+    { "type": "Obligation", "id": "ob-1", "description": "Achieve 99.95% core availability each calendar month.",
+      "status": "met", "dischargedBy": [ { "scheme": "peppol", "id": "INV-2026-000512" } ] },
     { "type": "Obligation", "id": "ob-2", "description": "Complete northern transport migration by 2027-06-30.", "dueDate": "2027-06-30T00:00:00Z", "status": "pending" }
   ]
 }
@@ -183,6 +190,7 @@ against the contract and an order. It is arithmetically self-consistent: **€6,
   "issueDate": "2026-10-05T00:00:00Z",
   "currency": "EUR",
   "contract": { "scheme": "did", "id": "did:web:buyer.example#contract-3310" },
+  "settles": [ { "scheme": "did", "id": "did:web:buyer.example#contract-3310/ob-1" } ],
   "seller": { "scheme": "gleif:lei", "id": "5299000ACME00NETWRK1" },
   "buyer":  { "scheme": "gleif:lei", "id": "5299000BUYER00000001" },
   "lines": [

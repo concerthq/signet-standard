@@ -101,6 +101,7 @@ Codelists are split into two tiers (see [Governance & Versioning](Governance-and
 | `contract.signed` | Contract signed | A contract was executed. |
 | `mandate.granted` | Mandate granted | An agent mandate was granted. |
 | `mandate.revoked` | Mandate revoked | An agent mandate was revoked. |
+| `obligation.discharged` | Obligation discharged | An obligation reached `met`, discharged by a settling artefact (Order/Invoice/Document). |
 
 ## documentType
 

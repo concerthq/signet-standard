@@ -16,6 +16,12 @@
     "scheme": "did",
     "id": "did:web:buyer.example#order-7781"
   },
+  "settles": [
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#contract-3310/ob-1"
+    }
+  ],
   "seller": {
     "scheme": "gleif:lei",
     "id": "5299000ACME00NETWRK1"

@@ -205,6 +205,14 @@ embedded inside a [Contract](#contract).
 | `responsibleParty` | Identifier | 0..1 | Who is responsible. |
 | `status` | string | 1 | `pending`, `met`, `breached`, `waived`. |
 | `evidence` | Document[] | 0..* | Evidence of fulfilment. |
+| `dischargedBy` | Identifier[] | 0..* | The Order, Invoice, or Document(s) that discharged this obligation. SHOULD be present once `status` is `met`. |
+
+`evidence` and `dischargedBy` are distinct: `evidence` carries the *proof* that the work was
+done (a report, a certificate); `dischargedBy` carries the *settling artefact* — the order or
+invoice that constitutes the doing. Together with the [`obligation.discharged`
+event](Codelists#eventtype) and the [Invoice `settles`](#invoice) back-reference, they make the
+commitment→discharge loop traversable as data (see [Settlement in Concepts of Open
+Commerce](Concepts-of-Open-Commerce#9-settlement)).
 
 ---
 
@@ -223,6 +231,7 @@ traceability.
 | `currency` | string | 0..1 | BT-5 | Invoice currency code. |
 | `contract` | Identifier | 0..1 | BT-12 | Related contract. |
 | `order` | Identifier | 0..1 | BT-13 | Related order. |
+| `settles` | Identifier[] | 0..* | — | The [Obligation(s)](#obligation) this invoice settles. **SIGNET-original** — not an EN 16931 BT; omitted on Peppol BIS projection. |
 | `seller` | Identifier | 1 | BG-4 | Seller. |
 | `buyer` | Identifier | 1 | BG-7 | Buyer. |
 | `lines` | InvoiceLine[] | 1..* | BG-25 | [Invoice lines](Foundation-Layer#invoiceline). |
@@ -240,6 +249,11 @@ cross-border e-invoicing mandate (from July 2030) and the national B2B mandates 
 it. The repository ships a runnable, CI-verified projection to Peppol BIS Billing UBL — see
 [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing) and the worked instance
 [`examples/invoice.json`](Worked-Examples#invoice).
+
+`settles` sits outside the EN 16931 BT set, so the projection skips it by construction: a
+SIGNET invoice with or without `settles` projects to **byte-identical** Peppol BIS UBL. A
+conformance guard (`npm run test:projection-skip`) asserts this, so the settlement link can
+never silently leak into the e-invoicing projection and disturb ViDA convertibility.
 
 ## Where to go next
 
