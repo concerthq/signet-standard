@@ -88,6 +88,10 @@ A typical award flow generates, across the layers:
 5. An `award.decided` **Event** for the [Award](Process-Layer#award), again backed by a
    signed Decision.
 6. A `contract.signed` **Event** for the [Contract](Process-Layer#contract).
+7. An `obligation.discharged` **Event** when an [Obligation](Process-Layer#obligation) flips to
+   `met` — the [Invoice](Process-Layer#invoice) that settles it is recorded via `settles`, and
+   the obligation back-references it via `dischargedBy`. This is the step that **closes the
+   loop**: the commitment made at `contract.signed` is now discharged, traversably, as data.
 
 Each event is hash-chained to the last; each decision is signed; each policy applied is
 referenced. The audit trail *is* the system of record.

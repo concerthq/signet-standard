@@ -33,7 +33,13 @@
       "type": "Obligation",
       "id": "ob-1",
       "description": "Achieve 99.95% core availability each calendar month.",
-      "status": "pending"
+      "status": "met",
+      "dischargedBy": [
+        {
+          "scheme": "peppol",
+          "id": "INV-2026-000512"
+        }
+      ]
     },
     {
       "type": "Obligation",
