@@ -9,7 +9,10 @@
     { "file": "examples/policy-evaluation.json", "schema": "policy.schema.json" },
     { "file": "examples/award-decision.json", "schema": "decision.schema.json" },
     { "file": "examples/contract.json", "schema": "contract.schema.json" },
-    { "file": "examples/invoice.json", "schema": "invoice.schema.json" }
+    { "file": "examples/invoice.json", "schema": "invoice.schema.json" },
+    { "file": "examples/obligation.discharged.fixture.json", "schema": "obligation.schema.json" },
+    { "file": "examples/obligation.pending.fixture.json", "schema": "obligation.schema.json" },
+    { "file": "examples/invoice.settles.fixture.json", "schema": "invoice.schema.json" }
   ],
   "negative": [
     { "file": "conformance/fixtures/invalid/invoice-missing-payable.json", "schema": "invoice.schema.json", "targets": "BT-115 payableAmount is required" },

@@ -38,6 +38,9 @@ const map = {
   "invoice.json": "invoice.schema.json",
   "onboarding-conditional.json": "onboarding-case.schema.json",
   "supplier-qualification-conditional.json": "supplier-qualification.schema.json",
+  "obligation.discharged.fixture.json": "obligation.schema.json",
+  "obligation.pending.fixture.json": "obligation.schema.json",
+  "invoice.settles.fixture.json": "invoice.schema.json",
 };
 
 let failures = 0;

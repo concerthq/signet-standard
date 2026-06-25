@@ -65,6 +65,13 @@
         }
       ]
     },
+    "settles": {
+      "$comment": "SIGNET-original (not an EN 16931 BT). The Obligation(s) this invoice settles. Omitted on Peppol BIS projection.",
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      }
+    },
     "seller": {
       "$comment": "EN 16931 BG-4 SELLER (BT-27 seller name resolved via Party)",
       "allOf": [

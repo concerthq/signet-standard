@@ -41,6 +41,13 @@
       "items": {
         "$ref": "definitions.schema.json#/definitions/Document"
       }
+    },
+    "dischargedBy": {
+      "type": "array",
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      },
+      "description": "The Order, Invoice, or Document(s) that discharged this obligation. SHOULD be present once status is `met`."
     }
   }
 }

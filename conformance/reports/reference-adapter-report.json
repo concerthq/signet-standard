@@ -3,7 +3,7 @@
   "cdmVersion": "v0.1",
   "suiteVersion": "v0.1",
   "adapter": "reference-adapter.js",
-  "timestamp": "2026-06-24T13:19:11.988Z",
+  "timestamp": "2026-06-25T15:59:59.822Z",
   "levelAchieved": "Full",
   "results": [
     {
@@ -45,6 +45,24 @@
           },
           {
             "file": "examples/invoice.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          },
+          {
+            "file": "examples/obligation.discharged.fixture.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          },
+          {
+            "file": "examples/obligation.pending.fixture.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": []
+          },
+          {
+            "file": "examples/invoice.settles.fixture.json",
             "expected": "valid",
             "ok": true,
             "errors": []
