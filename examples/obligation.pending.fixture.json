@@ -1,0 +1,7 @@
+{
+  "type": "Obligation",
+  "id": "ob-2",
+  "description": "Complete northern transport migration by 2027-06-30.",
+  "dueDate": "2027-06-30T00:00:00Z",
+  "status": "pending"
+}

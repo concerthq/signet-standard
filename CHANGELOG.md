@@ -4,6 +4,25 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [0.7.0] — 2026-06 — Working Draft
+
+### Added (all optional, non-breaking)
+- **Settlement linkage** — makes the commitment→discharge loop traversable as data
+  (Concepts of Open Commerce §9, the Settlement primitive):
+  - `Obligation.dischargedBy` — references the Order/Invoice/Document(s) that
+    discharged the obligation. SHOULD be present once `status` is `met`.
+  - `Invoice.settles` — references the Obligation(s) the invoice settles.
+    SIGNET-original: it is **not** an EN 16931 Business Term and is **omitted on the
+    Peppol BIS projection**, so ViDA convertibility is unchanged. A new projection-skip
+    guard (`npm run test:projection-skip`) proves `settles` never leaks into UBL.
+  - `eventType` codelist: `obligation.discharged`.
+  - Three worked fixtures, all conformance-checked: a discharged obligation, a
+    *pending* obligation carrying neither new field (the machine proof the additions
+    are optional), and an invoice with `settles`.
+- Referent granularity uses a composite `contractId/obligationId` URI (option (a));
+  `Obligation.id` is unchanged. No existing field changed; documents valid before this
+  release remain valid.
+
 ## [0.6.0] — 2026-06 — Working Draft
 
 ### Added

@@ -7,3 +7,4 @@ award.decided,Award decided,An award decision was taken.
 contract.signed,Contract signed,A contract was executed.
 mandate.granted,Mandate granted,An agent mandate was granted.
 mandate.revoked,Mandate revoked,An agent mandate was revoked.
+obligation.discharged,Obligation discharged,An obligation reached `met`, discharged by a settling artefact (Order/Invoice/Document).

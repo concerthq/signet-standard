@@ -1,0 +1,17 @@
+{
+  "type": "Invoice",
+  "id": { "scheme": "peppol", "id": "INV-2026-000512" },
+  "issueDate": "2026-03-31T00:00:00Z",
+  "currency": "EUR",
+  "contract": { "scheme": "did", "id": "did:web:buyer.example#contract-3310" },
+  "settles": [
+    { "scheme": "did", "id": "did:web:buyer.example#contract-3310/ob-1" }
+  ],
+  "seller": { "scheme": "did", "id": "did:web:acme.example" },
+  "buyer": { "scheme": "did", "id": "did:web:buyer.example" },
+  "lines": [
+    { "id": "1", "itemName": "Managed network service — March 2026", "quantity": 1, "netAmount": { "amount": 7502, "currency": "EUR" } }
+  ],
+  "taxTotal": { "amount": 0, "currency": "EUR" },
+  "payableAmount": { "amount": 7502, "currency": "EUR" }
+}
