@@ -574,7 +574,7 @@ A minimal award Decision made by a synthetic evaluation agent, in canonical JSON
   "policiesApplied": [
     { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" }
   ],
-  "rationale": "Submission 5521 ranked highest on the published MAT model (price 40%, quality 35%, social value 25%).",
+  "rationale": "Most Advantageous Tender (price 0.2, quality 0.55, social 0.25). submission-5521 scored 0.859474, ahead of submission-5522 at 0.841500 (margin 0.017974). The dearer bid wins on materially higher quality, accepting a 5.56% price premium over the lower bid.",
   "outcome": { "awardedSubmission": "did:web:buyer.example#submission-5521" },
   "humanApproval": { "scheme": "did", "id": "did:web:buyer.example#approval-771" },
   "provenance": {

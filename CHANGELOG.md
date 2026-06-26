@@ -23,6 +23,25 @@ version changes only on a breaking change to the core model.
   `Obligation.id` is unchanged. No existing field changed; documents valid before this
   release remain valid.
 
+### Changed (non-breaking; examples only)
+- **MAT evaluation policy reweighted to price 20% / quality 55% / social value 25%**
+  (was 40 / 35 / 25). The change is carried in the policy's own `expression`
+  (`score := price*0.2 + quality*0.55 + social*0.25`) and its `humanReadable`
+  statement; `examples/policy-evaluation.json` bumped to `version: 1.1.0`. The agent
+  demo reads the weights from the Policy expression, so its trace and scores
+  regenerate from this single source.
+- **Award scenario now demonstrates a justified price premium.** Under the new
+  weighting the dearer bid wins: `submission-5521` (€11.4M, quality 0.9, social 0.7)
+  scores **0.859474**, ahead of `submission-5522` (€10.8M, quality 0.78, social 0.85)
+  at **0.841500** (margin 0.017974) — a 5.56% price premium accepted on materially
+  higher quality. The demo is now a proof of governed multi-criteria judgement rather
+  than a low-bid pick. `examples/award-decision.json` (Appendix A) and the agent run
+  resolve to the same winner, weights, and scores.
+- The **award value (€11.4M, the winning bid)** remains intentionally distinct from the
+  **contract value (€12M, the category tier)** in `examples/contract.json`: awards are
+  struck at the bid, contracts at the tier/ceiling. No schema or normative-grammar
+  changes; sub-criterion scores are unchanged, only the weighting and resulting totals.
+
 ## [0.6.0] — 2026-06 — Working Draft
 
 ### Added
