@@ -22,6 +22,8 @@ planning, tender, award, contract, implementation — are the canonical phase mo
 | [Catalogue](#catalogue) | implementation | UBL 2.3 Catalogue; Peppol BIS Catalogue |
 | [Obligation](#obligation) | contract/impl. | — |
 | [Invoice](#invoice) | implementation | EN 16931; Peppol BIS Billing; UBL Invoice; Factur-X |
+| [Auction](#auction) | tender → award | Profile of the sourcing flow; Prozorro-style neutral-core auction |
+| [Bid](#bid) | tender | The auction's Submission; a hash-chained `bid.placed` Event stream |
 
 See [Standards Mapping](Standards-Mapping) for the normative mapping table.
 
@@ -254,6 +256,110 @@ it. The repository ships a runnable, CI-verified projection to Peppol BIS Billin
 SIGNET invoice with or without `settles` projects to **byte-identical** Peppol BIS UBL. A
 conformance guard (`npm run test:projection-skip`) asserts this, so the settlement link can
 never silently leak into the e-invoicing projection and disturb ViDA convertibility.
+
+## Auction
+
+A **standardised auction** — a *profile of the sourcing flow*, not a separate mechanism. An
+auction is a specialised `SourcingEvent → Submission → Evaluation → Award` cycle in which
+submissions ([Bid](#bid)s) are revised over rounds and the close is a deterministic function
+of the bids and the published rules. It therefore **reuses** the sourcing machinery rather
+than duplicating it.
+
+The design principle is Prozorro's: the auction — the moment of *price formation* — lives in
+the **neutral, standardised layer**, while operators provide the front-end. The auction
+`rules` (below) and the canonical bid record are normative and operator-independent: **any
+conformant operator running the same rules over the same bids MUST reach the same close.**
+Bidding UX, notifications, and round mechanics are operator concerns; price formation and the
+[Award](#award) are not. This removes auction-clearing from the set of things any single
+operator could be accused of rigging — fairness becomes a conformance property, not a matter
+of trust. Reverse, English, Dutch, sealed-bid, and multi-criteria auctions are all profiles
+of this one object, parameterised by `auctionType` and `rules` (**one primitive, many
+profiles** — no per-type primitives).
+
+| Field | Type | Card. | Definition |
+|-------|------|-------|------------|
+| `id` | Identifier | 1 | Auction identifier. |
+| `sourcingEvent` | Identifier | 0..1 | The [SourcingEvent](#sourcingevent) / Need this auction realises. |
+| `procuringParty` | Identifier | 1 | The buyer / procuring entity. |
+| `auctionType` | string | 1 | Profile. See [auctionType codelist](Codelists#auctiontype): `reverse`, `english`, `dutch`, `sealed-bid`, `multi-criteria`. |
+| `lots` | string[] | 0..* | Lots this auction covers. |
+| `rules` | object | 1 | The deterministic, normative parameters — the conformance surface (below). |
+| `evaluationPolicy` | Identifier | 0..1 | For `multi-criteria`: the [Policy](Agent-Layer#policy) whose weights determine the winner (reuse of the MAT/MEAT pattern). |
+| `eligibility` | object | 0..1 | Who may bid. `requiresQualification` (boolean), `minStatus` (`active` \| `conditional`). Ties to `SupplierQualification`. |
+| `status` | string | 1 | `scheduled`, `open`, `in_progress`, `closed`, `cancelled` (`cancelled` reachable from any non-terminal state). |
+| `period` | Period | 0..1 | Auction window. |
+
+**`rules` — the conformance surface.** `roundStructure` (`single-round` \| `multi-round` \|
+`continuous`), optional `maxRounds`, `startPrice`, `reservePrice` (a floor for reverse /
+ceiling for forward — bids beyond it are invalid), `minStep` (minimum decrement or increment
+between successive bids), `closeCondition` (`fixed-time` \| `no-improvement` \| `max-rounds`),
+`tieBreak` (`earliest-bid` \| `random-seeded` \| `split`), and `identityDisclosure`
+(`sealed-until-close` \| `anonymous-ranks` \| `open`). `tieBreak: random-seeded` MUST use a
+**published seed** so resolution is reproducible — determinism is the whole point.
+
+**Eligibility inherits the onboarding firewall.** `eligibility` ties bidding to
+`SupplierQualification`: a conditionally-qualified supplier inherits its conditions — e.g. a
+€5M `valueCap` structurally bars it from *winning* a €12M auction even if it may observe or
+bid. The auction inherits the [onboarding firewall](Trust-Layer) for free.
+
+**The close reuses existing machinery.** At `closeCondition` the auction closes
+deterministically — **reverse** → the lowest valid bid; **english/dutch** → the highest;
+**sealed-bid** → the best at the single close; **multi-criteria** → the highest-scoring under
+`evaluationPolicy`. The winner is recorded as an [Award](#award) and a
+[Decision](Agent-Layer#decision) (`decisionType: award`) carrying rationale, the bids
+considered, the rules/policy applied, `provenance`, and `humanApproval` where the mandate
+threshold requires it — the same governance gate as the [agent award demo](Agent-Layer).
+Because the close is a deterministic function of the bids and `rules`, **two operators MUST
+produce the same `Award`** — this is the conformance test.
+
+**Transparency = the Event trail.** The ordered bid history, the rules applied, and the close
+are an append-only, hash-chained [Event](Trust-Layer#event) stream
+([`bid.placed`](Codelists#eventtype)) with `provenance`, disclosed after close per
+`identityDisclosure`. Altering any bid breaks the chain — so the auction "cannot be held in
+secret, and the record cannot be lost or altered" by construction, a stronger guarantee than
+central storage gives.
+
+**Scope boundary.** SIGNET governs the **rules and the canonical record**, not the real-time
+mechanics; conformance means *same outcome on the same bids and rules* — not identical UX or
+latency. It can defeat *some* manipulation structurally (sealed identities until close,
+deterministic close and tie-break, the tamper-evident trail) but **does not and cannot**
+resolve collusion or shill bidding by itself — those remain operator-policy and regulatory
+concerns. Implementations MUST NOT represent SIGNET conformance as a guarantee against
+collusion.
+
+See the worked instance: [`examples/auction-reverse.json`](Worked-Examples#auction). The full
+normative text is `docs/SIGNET_Auction_Extension_v0.1.md`.
+
+---
+
+## Bid
+
+A bid in an [Auction](#auction) — one bidder's offer in a given round. Each bid placement is
+emitted as a hash-chained [`bid.placed` Event](Codelists#eventtype); this object is the
+materialised *standing* bid.
+
+| Field | Type | Card. | Definition |
+|-------|------|-------|------------|
+| `id` | Identifier | 1 | Bid identifier. |
+| `auction` | Identifier | 1 | The [Auction](#auction) this bid belongs to. |
+| `bidder` | Identifier | 1 | The bidding [Party](Foundation-Layer#party). |
+| `qualification` | Identifier | 0..1 | The bidder's `SupplierQualification` (eligibility provenance). |
+| `round` | integer | 0..1 | The round the bid was placed in. |
+| `value` | Value | 1 | The offered value. |
+| `submittedAt` | date-time | 1 | When the bid was submitted. |
+| `status` | string | 1 | `active`, `superseded`, `withdrawn`, `winning`, `rejected`. |
+
+See the worked instance: [`examples/bid-reverse.json`](Worked-Examples#bid).
+
+---
+
+## Agent participation
+
+SIGNET's agent-native design lets bidding agents participate under [Mandate](Agent-Layer#mandate):
+a supplier's agent places and revises bids within its authorised limits; a buyer's (or a
+neutral) agent runs the close under the rules; every action is provenance-stamped, with human
+approval above threshold. The auction is thus the first multi-agent, cross-organisational
+SIGNET interaction — reusing both the qualification and award harnesses.
 
 ## Where to go next
 

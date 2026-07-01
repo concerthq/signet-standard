@@ -43,7 +43,7 @@ SIGNET defines a **Canonical Data Model (CDM)** organised into four layers:
 | Layer | Objects | Purpose |
 |-------|---------|---------|
 | **Foundation** | Identifier · Party · Value · Period · Classification · Item · Credential · Document · Provenance · Score · Unit · InvoiceLine · VatBreakdown | The primitive value types and reference objects used everywhere. |
-| **Process** | Need · SourcingEvent · Lot · Submission · Evaluation · Award · Contract · Order · Catalogue · Obligation · Invoice | The procurement lifecycle, aligned to the OCDS stages. |
+| **Process** | Need · SourcingEvent · Lot · Submission · Evaluation · Award · Contract · Order · Catalogue · Obligation · Invoice · Auction · Bid | The procurement lifecycle, aligned to the OCDS stages. Auction · Bid are a standardised-auction profile of the sourcing flow. |
 | **Agent** | SyntheticAgent · AgentCapability · Mandate · Decision · Policy | SIGNET's distinctive contribution: agents as first-class, governed participants. |
 | **Trust** | Event · Provenance · Consent | Cross-cutting auditability, provenance, and data-sovereignty. |
 

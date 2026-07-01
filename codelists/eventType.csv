@@ -8,3 +8,4 @@ contract.signed,Contract signed,A contract was executed.
 mandate.granted,Mandate granted,An agent mandate was granted.
 mandate.revoked,Mandate revoked,An agent mandate was revoked.
 obligation.discharged,Obligation discharged,An obligation reached `met`, discharged by a settling artefact (Order/Invoice/Document).
+bid.placed,Bid placed,A bid was placed or revised in an Auction; the ordered bid.placed stream is the hash-chained auction record.

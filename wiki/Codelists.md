@@ -16,6 +16,7 @@ Codelists are split into two tiers (see [Governance & Versioning](Governance-and
 | [partyRole](#partyrole) | [Party.roles](Foundation-Layer#party) |
 | [procedure](#procedure) | [SourcingEvent.procedure](Process-Layer#sourcingevent) |
 | [submissionStatus](#submissionstatus) | [Submission.status](Process-Layer#submission) |
+| [auctionType](#auctiontype) | [Auction.auctionType](Process-Layer#auction) |
 | [decisionType](#decisiontype) | [Decision.decisionType](Agent-Layer#decision) |
 | [policyType](#policytype) | [Policy.policyType](Agent-Layer#policy) |
 | [eventType](#eventtype) | [Event.eventType](Trust-Layer#event) |
@@ -70,6 +71,20 @@ Codelists are split into two tiers (see [Governance & Versioning](Governance-and
 | `admissible` | Admissible | Passed admissibility checks. |
 | `inadmissible` | Inadmissible | Failed admissibility checks. |
 
+## auctionType
+
+*Open list* — the profiles of the [`Auction`](Process-Layer#auction) primitive. Reverse,
+English, Dutch, sealed-bid, and multi-criteria auctions are all profiles of one object,
+parameterised by `auctionType` and `rules`; new profiles may be added by pull request.
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `reverse` | Reverse auction | Price-descending; lowest valid bid wins. |
+| `english` | English auction | Open ascending; highest bid wins. |
+| `dutch` | Dutch auction | Descending offer; first acceptor wins. |
+| `sealed-bid` | Sealed-bid auction | Single sealed round; best bid wins at close. |
+| `multi-criteria` | Multi-criteria auction | Bids scored on price and non-price criteria under an evaluation [Policy](Agent-Layer#policy). |
+
 ## decisionType
 
 | Code | Title | Description |
@@ -102,6 +117,7 @@ Codelists are split into two tiers (see [Governance & Versioning](Governance-and
 | `mandate.granted` | Mandate granted | An agent mandate was granted. |
 | `mandate.revoked` | Mandate revoked | An agent mandate was revoked. |
 | `obligation.discharged` | Obligation discharged | An obligation reached `met`, discharged by a settling artefact (Order/Invoice/Document). |
+| `bid.placed` | Bid placed | A bid was placed or revised in an [Auction](Process-Layer#auction); the ordered `bid.placed` stream is the hash-chained auction record. |
 
 ## documentType
 

@@ -15,6 +15,11 @@ Northern region refresh", awarded to **Acme Networks**.
 | `examples/contract.json` | [Contract](#contract) | contract |
 | `examples/invoice.json` | [Invoice](#invoice) | implementation |
 | `examples/invoice.ubl.xml` | UBL projection | implementation |
+| `examples/auction-reverse.json` | [Auction](#auction) | tender → award |
+| `examples/bid-reverse.json` | [Bid](#bid) | tender |
+
+The last two illustrate the [auction extension](Process-Layer#auction) on a separate,
+self-contained reverse-auction scenario (they are not part of the Acme Networks thread above).
 
 The examples trace a single thread through the lifecycle:
 
@@ -213,6 +218,66 @@ against the contract and an order. It is arithmetically self-consistent: **€6,
 See [Process Layer → Invoice](Process-Layer#invoice) and
 [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing) for the projection and
 verification.
+
+## Auction
+
+`examples/auction-reverse.json` — a **closed multi-round reverse auction**: start price €12M,
+reserve (floor) €9M, `minStep` €100k, closing on `no-improvement`, with `anonymous-ranks`
+identity disclosure and eligibility tied to an active `SupplierQualification`. Because the
+`rules` are fixed and normative, any conformant operator replaying the same bids closes it
+identically.
+
+```json
+{
+  "type": "Auction",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#auction-3310" },
+  "sourcingEvent": { "scheme": "did", "id": "did:web:buyer.example#event-1207" },
+  "procuringParty": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+  "auctionType": "reverse",
+  "rules": {
+    "roundStructure": "multi-round",
+    "maxRounds": 5,
+    "startPrice":   { "amount": 12000000, "currency": "EUR" },
+    "reservePrice": { "amount": 9000000,  "currency": "EUR" },
+    "minStep":      { "amount": 100000,   "currency": "EUR" },
+    "closeCondition": "no-improvement",
+    "tieBreak": "earliest-bid",
+    "identityDisclosure": "anonymous-ranks"
+  },
+  "eligibility": { "requiresQualification": true, "minStatus": "active" },
+  "status": "closed",
+  "period": { "startDate": "2026-07-01T09:00:00Z", "endDate": "2026-07-01T10:30:00Z" }
+}
+```
+
+See [Process Layer → Auction](Process-Layer#auction).
+
+---
+
+## Bid
+
+`examples/bid-reverse.json` — the **winning €10.8M bid** (round 3) in the auction above, from
+bidder Globex, carrying its `SupplierQualification` as eligibility provenance. The bid
+sequence is recorded as hash-chained [`bid.placed` Events](Codelists#eventtype); this object
+is the materialised standing bid, marked `winning` at the close.
+
+```json
+{
+  "type": "Bid",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#bid-3310-g3" },
+  "auction": { "scheme": "did", "id": "did:web:buyer.example#auction-3310" },
+  "bidder": { "scheme": "did", "id": "did:web:globex.example#globex" },
+  "qualification": { "scheme": "did", "id": "did:web:buyer.example#qual-globex" },
+  "round": 3,
+  "value": { "amount": 10800000, "currency": "EUR" },
+  "submittedAt": "2026-07-01T10:12:00Z",
+  "status": "winning"
+}
+```
+
+See [Process Layer → Bid](Process-Layer#bid).
+
+---
 
 ## Run them yourself
 

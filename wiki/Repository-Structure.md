@@ -7,8 +7,8 @@ that validates and projects them.
 schema/        JSON Schema (Draft-07) — the normative Canonical Data Model
   definitions.schema.json   Foundation blocks (Identifier, Party, Value, …)
                             incl. EN 16931 blocks (Unit, InvoiceLine, VatBreakdown)
-  need / sourcing-event / submission / evaluation / award /
-  contract / order / catalogue / obligation / invoice .schema.json   (process layer)
+  need / sourcing-event / submission / evaluation / award / contract /
+  order / catalogue / obligation / invoice / auction / bid .schema.json   (process layer)
   synthetic-agent / mandate / decision / policy .schema.json          (agent layer)
   event / consent .schema.json                                        (trust layer)
   party.schema.json
@@ -34,7 +34,7 @@ stable URI under `https://concert.foundation/signet/v0.1/`. Files map to the fou
 | Layer | Schema files |
 |-------|--------------|
 | Foundation | `definitions.schema.json`, `party.schema.json` |
-| Process | `need`, `sourcing-event`, `submission`, `evaluation`, `award`, `contract`, `order`, `catalogue`, `obligation`, `invoice` |
+| Process | `need`, `sourcing-event`, `submission`, `evaluation`, `award`, `contract`, `order`, `catalogue`, `obligation`, `invoice`, `auction`, `bid` |
 | Agent | `synthetic-agent`, `mandate`, `decision`, `policy` |
 | Trust | `event`, `consent` |
 
@@ -91,8 +91,10 @@ governance are not in tension. See the [Agent Layer](Agent-Layer).
 ## `docs/` — the prose specification
 
 `docs/specification.md` is the human-readable specification (the normative text; the schema
-still takes precedence). `docs/WEBSITE_BUILD_NOTE.md` documents the Pages build. The spec is
-published to GitHub Pages by `.github/workflows/pages.yml`.
+still takes precedence). `docs/SIGNET_Auction_Extension_v0.1.md` is the normative spec for the
+[Auction extension](Extensions#example-the-auction-extension). `docs/WEBSITE_BUILD_NOTE.md`
+documents the Pages build. The spec is published to GitHub Pages by
+`.github/workflows/pages.yml`.
 
 ## `tools/` — reference tooling
 

@@ -32,6 +32,22 @@ should be proposed as packages under an `/extensions` path. The general flow:
 
 See [Contributing](Contributing) and [Governance & Versioning](Governance-and-Versioning).
 
+## Example: the Auction extension
+
+The **[Auction extension](Process-Layer#auction)** (`docs/SIGNET_Auction_Extension_v0.1.md`)
+is a worked example of the pattern. It adds two process-layer objects — `Auction` and `Bid` —
+and one open codelist (`auctionType`), defining a standardised auction as a *profile of the
+sourcing flow*. It **adds, does not change**: the close reuses the existing
+[`Decision`](Agent-Layer#decision)/[`Award`](Process-Layer#award) objects, eligibility ties to
+`SupplierQualification`, and the bid history is a hash-chained [`Event`](Trust-Layer#event)
+trail — no core field is redefined.
+
+Because it reuses the core objects and is broadly useful, it is shipped **in-tree** (under the
+core `schema/`, `codelists/`, and `examples/` directories and the core `v0.1` namespace)
+rather than as a separately-namespaced package — it is effectively a candidate already on the
+[promotion path](Governance-and-Versioning). A domain extension that introduced genuinely new,
+domain-specific structure would instead live under its own namespace per the rules above.
+
 ## Relationship to the agent layer
 
 Note that the [Agent Layer](Agent-Layer) is **not** an extension — it is core, SIGNET's
