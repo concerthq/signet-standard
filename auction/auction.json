@@ -1,0 +1,21 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Auction",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#auction-3310" },
+  "sourcingEvent": { "scheme": "did", "id": "did:web:buyer.example#event-1207" },
+  "procuringParty": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+  "auctionType": "reverse",
+  "rules": {
+    "roundStructure": "multi-round",
+    "maxRounds": 8,
+    "startPrice": { "amount": 12000000, "currency": "EUR" },
+    "reservePrice": { "amount": 9000000, "currency": "EUR" },
+    "minStep": { "amount": 100000, "currency": "EUR" },
+    "closeCondition": "no-improvement",
+    "tieBreak": "earliest-bid",
+    "identityDisclosure": "anonymous-ranks"
+  },
+  "eligibility": { "requiresQualification": true, "minStatus": "active" },
+  "status": "open",
+  "period": { "startDate": "2026-07-01T09:00:00Z", "endDate": "2026-07-01T10:30:00Z" }
+}

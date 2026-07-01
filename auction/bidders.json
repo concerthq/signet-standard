@@ -1,0 +1,20 @@
+{
+  "bidders": [
+    {
+      "party": { "scheme": "did", "id": "did:web:acme-networks.example#acme" },
+      "qualification": { "scheme": "did", "id": "did:web:buyer.example#qual-acme" },
+      "agent": { "scheme": "did", "id": "did:web:acme-networks.example#bid-agent" },
+      "mandate": { "scheme": "did", "id": "did:web:acme-networks.example#mandate-bid" },
+      "floor": { "amount": 11000000, "currency": "EUR" },
+      "opening": { "amount": 11800000, "currency": "EUR" }
+    },
+    {
+      "party": { "scheme": "did", "id": "did:web:globex.example#globex" },
+      "qualification": { "scheme": "did", "id": "did:web:buyer.example#qual-globex" },
+      "agent": { "scheme": "did", "id": "did:web:globex.example#bid-agent" },
+      "mandate": { "scheme": "did", "id": "did:web:globex.example#mandate-bid" },
+      "floor": { "amount": 10600000, "currency": "EUR" },
+      "opening": { "amount": 11600000, "currency": "EUR" }
+    }
+  ]
+}

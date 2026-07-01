@@ -57,3 +57,6 @@ jobs:
 
       - name: Supplier-qualification demo — conditional outcome, conformance-clean
         run: node onboarding/run-onboarding.js
+
+      - name: Reverse-auction demo — deterministic, conformance-clean close
+        run: node auction/run-auction.js
