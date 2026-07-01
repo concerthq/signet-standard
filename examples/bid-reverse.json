@@ -1,0 +1,27 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Bid",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#bid-3310-g3"
+  },
+  "auction": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#auction-3310"
+  },
+  "bidder": {
+    "scheme": "did",
+    "id": "did:web:globex.example#globex"
+  },
+  "qualification": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#qual-globex"
+  },
+  "round": 3,
+  "value": {
+    "amount": 10800000,
+    "currency": "EUR"
+  },
+  "submittedAt": "2026-07-01T10:12:00Z",
+  "status": "winning"
+}

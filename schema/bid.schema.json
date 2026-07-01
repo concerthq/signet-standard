@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/bid.schema.json",
+  "title": "Bid",
+  "description": "A bid in an Auction — one bidder's offer in a given round. The bid sequence is recorded as hash-chained Events; this object is the materialised standing bid. A reverse auction awards the lowest valid bid; a forward auction the highest; a multi-criteria auction the highest-scoring under the evaluationPolicy.",
+  "type": "object",
+  "required": [
+    "id",
+    "auction",
+    "bidder",
+    "value",
+    "submittedAt",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Bid"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "auction": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The Auction this bid belongs to."
+    },
+    "bidder": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The bidding Party."
+    },
+    "qualification": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The bidder's SupplierQualification (eligibility provenance)."
+    },
+    "round": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "value": {
+      "$ref": "definitions.schema.json#/definitions/Value"
+    },
+    "submittedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "superseded",
+        "withdrawn",
+        "winning",
+        "rejected"
+      ]
+    }
+  }
+}

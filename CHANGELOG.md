@@ -4,6 +4,19 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Added
+- **Auction extension** — process-layer objects `Auction` (a profile of the sourcing
+  flow; reverse / english / dutch / sealed-bid / multi-criteria via `auctionType` +
+  deterministic `rules`) and `Bid`. The auction rules and canonical bid record are
+  normative and operator-independent — any conformant operator closing the same bids
+  under the same rules MUST reach the same `Award`. The close reuses `Decision`/`Award`;
+  eligibility ties to `SupplierQualification`; the bid history is a hash-chained `Event`
+  trail. Open `auctionType` codelist; reverse-auction worked example. Modelled on
+  Prozorro's neutral-core architecture: price formation in the standard, UX in the
+  operators.
+
 ## [0.7.0] — 2026-06 — Working Draft
 
 ### Added (all optional, non-breaking)

@@ -41,6 +41,8 @@ const map = {
   "obligation.discharged.fixture.json": "obligation.schema.json",
   "obligation.pending.fixture.json": "obligation.schema.json",
   "invoice.settles.fixture.json": "invoice.schema.json",
+  "auction-reverse.json": "auction.schema.json",
+  "bid-reverse.json": "bid.schema.json",
 };
 
 let failures = 0;

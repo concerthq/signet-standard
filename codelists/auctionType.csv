@@ -1,0 +1,6 @@
+Code,Title,Description
+reverse,Reverse auction,Price-descending; lowest valid bid wins.
+english,English auction,Open ascending; highest bid wins.
+dutch,Dutch auction,Descending offer; first acceptor wins.
+sealed-bid,Sealed-bid auction,Single sealed round; best bid wins at close.
+multi-criteria,Multi-criteria auction,Bids scored on price and non-price criteria under an evaluation Policy.

@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/auction.schema.json",
+  "title": "Auction",
+  "description": "A standardised auction process — a profile of the SIGNET sourcing flow. The auction RULES (deterministic parameters) and the canonical bid record are normative and operator-independent: any conformant operator running the same rules over the same bids MUST reach the same close. Bidding UX and round mechanics are operator concerns; price formation is not. Reverse, English, Dutch, sealed-bid, and multi-criteria are profiles of this one object, parameterised by `auctionType` and `rules`.",
+  "type": "object",
+  "required": [
+    "id",
+    "procuringParty",
+    "auctionType",
+    "rules",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Auction"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "sourcingEvent": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "The SourcingEvent / Need this auction realises."
+    },
+    "procuringParty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "auctionType": {
+      "type": "string",
+      "enum": [
+        "reverse",
+        "english",
+        "dutch",
+        "sealed-bid",
+        "multi-criteria"
+      ],
+      "description": "See codelists/auctionType.csv."
+    },
+    "lots": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rules": {
+      "type": "object",
+      "description": "The deterministic, normative auction parameters. Two operators applying these to the same bids MUST close identically.",
+      "required": [
+        "roundStructure",
+        "closeCondition",
+        "tieBreak",
+        "identityDisclosure"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "roundStructure": {
+          "type": "string",
+          "enum": [
+            "single-round",
+            "multi-round",
+            "continuous"
+          ]
+        },
+        "maxRounds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startPrice": {
+          "$ref": "definitions.schema.json#/definitions/Value"
+        },
+        "reservePrice": {
+          "$ref": "definitions.schema.json#/definitions/Value",
+          "description": "Floor (reverse) or ceiling depending on type; bids beyond it are invalid."
+        },
+        "minStep": {
+          "$ref": "definitions.schema.json#/definitions/Value",
+          "description": "Minimum decrement (reverse) or increment (forward) between successive bids."
+        },
+        "closeCondition": {
+          "type": "string",
+          "enum": [
+            "fixed-time",
+            "no-improvement",
+            "max-rounds"
+          ]
+        },
+        "tieBreak": {
+          "type": "string",
+          "enum": [
+            "earliest-bid",
+            "random-seeded",
+            "split"
+          ],
+          "description": "Deterministic tie resolution. 'random-seeded' uses a published seed so the result is reproducible."
+        },
+        "identityDisclosure": {
+          "type": "string",
+          "enum": [
+            "sealed-until-close",
+            "anonymous-ranks",
+            "open"
+          ]
+        }
+      }
+    },
+    "evaluationPolicy": {
+      "$ref": "definitions.schema.json#/definitions/Identifier",
+      "description": "For multi-criteria auctions: the Policy whose weights determine the winning bid (reuse of the MAT/MEAT evaluation pattern)."
+    },
+    "eligibility": {
+      "type": "object",
+      "description": "Who may bid. Ties to SupplierQualification — a conditionally-qualified supplier inherits its limits (e.g. a value cap structurally bars winning a larger auction).",
+      "additionalProperties": false,
+      "properties": {
+        "requiresQualification": {
+          "type": "boolean"
+        },
+        "minStatus": {
+          "type": "string",
+          "enum": [
+            "active",
+            "conditional"
+          ]
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "open",
+        "in_progress",
+        "closed",
+        "cancelled"
+      ]
+    },
+    "period": {
+      "$ref": "definitions.schema.json#/definitions/Period"
+    }
+  }
+}
