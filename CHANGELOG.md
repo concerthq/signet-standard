@@ -7,6 +7,13 @@ version changes only on a breaking change to the core model.
 ## [0.8.0] — 2026-07 — Working Draft
 
 ### Added
+- **Commodity-risk extension (Working Draft spec)** — `docs/SIGNET_Commodity_Risk_Extension_v0.1.md`:
+  portfolio-level commodity risk governance (positions, coverage corridors as Agent-layer
+  Policy subtypes, price marks, assessments, scenarios, hedge proposals bridging to core
+  `Need`). Accepted in principle by the Standards Committee
+  (`governance/reviews/2026-07-commodity-risk.md`) — the first member-proposed extension,
+  reviewed under the identical process as any proposer. Schemas, worked example, and
+  conformance rules to follow as a separate change.
 - **Auction extension** — process-layer objects `Auction` (a profile of the sourcing
   flow; reverse / english / dutch / sealed-bid / multi-criteria via `auctionType` +
   deterministic `rules`) and `Bid`. The auction rules and canonical bid record are
