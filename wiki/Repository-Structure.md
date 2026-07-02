@@ -91,7 +91,7 @@ governance are not in tension. See the [Agent Layer](Agent-Layer).
 ## `docs/` — the prose specification
 
 `docs/specification.md` is the human-readable specification (the normative text; the schema
-still takes precedence). `docs/SIGNET_Auction_Extension_v0.1.md` is the normative spec for the
+still takes precedence). `docs/extensions/SIGNET_Auction_Extension_v0.1.md` is the normative spec for the
 [Auction extension](Extensions#example-the-auction-extension). `docs/WEBSITE_BUILD_NOTE.md`
 documents the Pages build. The spec is published to GitHub Pages by
 `.github/workflows/pages.yml`.

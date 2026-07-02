@@ -34,7 +34,7 @@ See [Contributing](Contributing) and [Governance & Versioning](Governance-and-Ve
 
 ## Example: the Auction extension
 
-The **[Auction extension](Process-Layer#auction)** (`docs/SIGNET_Auction_Extension_v0.1.md`)
+The **[Auction extension](Process-Layer#auction)** (`docs/extensions/SIGNET_Auction_Extension_v0.1.md`)
 is a worked example of the pattern. It adds two process-layer objects — `Auction` and `Bid` —
 and one open codelist (`auctionType`), defining a standardised auction as a *profile of the
 sourcing flow*. It **adds, does not change**: the close reuses the existing

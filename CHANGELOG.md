@@ -7,7 +7,7 @@ version changes only on a breaking change to the core model.
 ## [0.8.0] — 2026-07 — Working Draft
 
 ### Added
-- **Commodity-risk extension (Working Draft spec)** — `docs/SIGNET_Commodity_Risk_Extension_v0.1.md`:
+- **Commodity-risk extension (Working Draft spec)** — `docs/extensions/SIGNET_Commodity_Risk_Extension_v0.1.md`:
   portfolio-level commodity risk governance (positions, coverage corridors as Agent-layer
   Policy subtypes, price marks, assessments, scenarios, hedge proposals bridging to core
   `Need`). Accepted in principle by the Standards Committee
