@@ -67,6 +67,15 @@ level definitions are illustrative of the model's shape and not yet frozen.
 To propose a change, see [Contributing](Contributing). For adding (rather than changing)
 structure, see [Extensions](Extensions).
 
+### Review records
+
+Standards Committee decision records are published in-repo under `governance/reviews/`, so the
+governance trail is public and versioned alongside the standard it governs. The first is
+`governance/reviews/2026-07-commodity-risk.md` — the review of the first **member-proposed**
+extension ([commodity-risk](Extensions#working-draft-the-commodity-risk-extension)), which
+records that member proposals are reviewed under the identical process, terms, and bar as any
+proposer, with no preferential path for any member.
+
 ## Marks
 
 "SIGNET", "Concert", and "SIGNET Certified" are marks administered by Concert Foundation

@@ -91,10 +91,13 @@ governance are not in tension. See the [Agent Layer](Agent-Layer).
 ## `docs/` — the prose specification
 
 `docs/specification.md` is the human-readable specification (the normative text; the schema
-still takes precedence). `docs/extensions/SIGNET_Auction_Extension_v0.1.md` is the normative spec for the
-[Auction extension](Extensions#example-the-auction-extension). `docs/WEBSITE_BUILD_NOTE.md`
-documents the Pages build. The spec is published to GitHub Pages by
-`.github/workflows/pages.yml`.
+still takes precedence). Extension specs live under **`docs/extensions/`**:
+`SIGNET_Auction_Extension_v0.1.md` (the normative spec for the
+[Auction extension](Extensions#example-the-auction-extension)) and
+`SIGNET_Commodity_Risk_Extension_v0.1.md` (the
+[commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension), a Working
+Draft spec). `docs/WEBSITE_BUILD_NOTE.md` documents the Pages build. The spec is published to
+GitHub Pages by `.github/workflows/pages.yml`.
 
 ## `tools/` — reference tooling
 

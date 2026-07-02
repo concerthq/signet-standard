@@ -48,6 +48,29 @@ rather than as a separately-namespaced package — it is effectively a candidate
 [promotion path](Governance-and-Versioning). A domain extension that introduced genuinely new,
 domain-specific structure would instead live under its own namespace per the rules above.
 
+## Working Draft: the commodity-risk extension
+
+The **commodity-risk extension** (`docs/extensions/SIGNET_Commodity_Risk_Extension_v0.1.md`)
+is the first extension **proposed by a member organisation**, reviewed under the identical
+process, terms, and bar that apply to any proposer (the Standards Committee's decision record
+is in-repo at `governance/reviews/2026-07-commodity-risk.md`). It adds **portfolio-level
+commodity risk governance** — positions, coverage corridors, price marks, coverage
+assessments, price-shock scenarios, and hedge proposals — with electricity as the reference
+commodity but a commodity-generic schema.
+
+It is a good illustration of the **separately-namespaced** case above (contrast the in-tree
+auction extension): its additions to core objects live under a dedicated **`commodityRisk`**
+namespace and MUST NOT alter any core object's `required` set or `additionalProperties`
+semantics. It still **adds, does not change** — an approved `HedgeProposal` instantiates a
+core [`Need`](Process-Layer#need); the coverage corridor is a subtype of the Agent-layer
+[`Policy`](Agent-Layer#policy) so it bounds a synthetic agent's `Mandate`; and every
+assessment is a hash-anchored [`Event`](Trust-Layer#event).
+
+**Status: Working Draft spec, accepted in principle.** Only the prose spec has landed so far;
+schemas (in the `concert.foundation/signet` namespace), codelists, a validated worked example,
+and the six conformance rules are a **separate change still to come**, so the extension is not
+yet in-tree under `schema/`, `codelists/`, or `examples/`, and no tag has been cut for it.
+
 ## Relationship to the agent layer
 
 Note that the [Agent Layer](Agent-Layer) is **not** an extension — it is core, SIGNET's
