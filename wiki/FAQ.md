@@ -69,7 +69,7 @@ expectations for AI-assisted evaluation under the **EU AI Act**; the
 ### How is the model versioned?
 [Semantic Versioning](Governance-and-Versioning). Major = breaking core change; minor =
 backward-compatible additions; patch = clarifications. Every version is permanently
-retrievable at a version-stable URI. The repository is at **v0.5.0**; the specification is a
+retrievable at a version-stable URI. The repository is at **v0.8.0**; the specification is a
 **v0.1 working draft**.
 
 ### How do I extend SIGNET for my domain?
