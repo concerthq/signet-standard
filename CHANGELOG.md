@@ -4,6 +4,12 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Added
+- **Onboarding extension spec** at `docs/extensions/onboarding.md` (previously
+  undelivered; schemas and demo shipped in 0.6.x).
+
 ## [0.9.0] — 2026-07-05 — Working Draft
 
 ### Added

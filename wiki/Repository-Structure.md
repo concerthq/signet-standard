@@ -92,7 +92,9 @@ governance are not in tension. See the [Agent Layer](Agent-Layer).
 
 `docs/specification.md` is the human-readable specification (the normative text; the schema
 still takes precedence). Extension specs live under **`docs/extensions/`**, each named for
-its extension/profile id (see `docs/extensions/README.md` for the index): `auction.md` (the
+its extension/profile id (see `docs/extensions/README.md` for the index): `onboarding.md` (the
+normative spec for the [onboarding extension](Extensions#the-onboarding-extension) —
+`OnboardingCase` and `SupplierQualification`, the supplier onboarding lifecycle), `auction.md` (the
 normative spec for the [Auction extension](Extensions#example-the-auction-extension)),
 `commodity-risk.md` (the
 [commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension), a Working

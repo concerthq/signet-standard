@@ -48,6 +48,23 @@ rather than as a separately-namespaced package — it is effectively a candidate
 [promotion path](Governance-and-Versioning). A domain extension that introduced genuinely new,
 domain-specific structure would instead live under its own namespace per the rules above.
 
+## The onboarding extension
+
+The **onboarding extension** (`docs/extensions/onboarding.md`) adds the supplier-onboarding
+lifecycle: two process-layer objects — `OnboardingCase` (a buyer-internal workflow instance)
+and `SupplierQualification` (a durable status with first-class `conditional` qualification,
+value caps, and category restrictions) — plus the open `credentialType` codelist. The workflow
+state machine is the normative conformance surface; the credential types it handles are an
+open, evolvable set. It **adds, does not change**: facts are
+[`Credential`](Foundation-Layer#credential)s with an upgradeable `proof`, the qualify/reject
+decision reuses [`Decision`](Agent-Layer#decision) with the agent-governance pattern
+(auto-qualify within mandate, human approval above it), and every state transition is a
+hash-chained [`Event`](Trust-Layer#event).
+
+Like the auction extension it ships **in-tree** (core `v0.1` namespace). **Status: schemas,
+validated worked examples, and a runnable demonstration are in-tree**; the normative spec is
+at `docs/extensions/onboarding.md`.
+
 ## Working Draft: the commodity-risk extension
 
 The **commodity-risk extension** (`docs/extensions/commodity-risk.md`)
