@@ -34,7 +34,7 @@ See [Contributing](Contributing) and [Governance & Versioning](Governance-and-Ve
 
 ## Example: the Auction extension
 
-The **[Auction extension](Process-Layer#auction)** (`docs/extensions/SIGNET_Auction_Extension_v0.1.md`)
+The **[Auction extension](Process-Layer#auction)** (`docs/extensions/auction.md`)
 is a worked example of the pattern. It adds two process-layer objects — `Auction` and `Bid` —
 and one open codelist (`auctionType`), defining a standardised auction as a *profile of the
 sourcing flow*. It **adds, does not change**: the close reuses the existing
@@ -50,7 +50,7 @@ domain-specific structure would instead live under its own namespace per the rul
 
 ## Working Draft: the commodity-risk extension
 
-The **commodity-risk extension** (`docs/extensions/SIGNET_Commodity_Risk_Extension_v0.1.md`)
+The **commodity-risk extension** (`docs/extensions/commodity-risk.md`)
 is the first extension **proposed by a member organisation**, reviewed under the identical
 process, terms, and bar that apply to any proposer (the Standards Committee's decision record
 is in-repo at `governance/reviews/2026-07-commodity-risk.md`). It adds **portfolio-level

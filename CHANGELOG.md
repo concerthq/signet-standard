@@ -4,7 +4,7 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
-## [Unreleased]
+## [0.9.0] — 2026-07-05 — Working Draft
 
 ### Added
 - **Identity profile (Working Draft)** — `docs/extensions/identity.md`: how SIGNET
@@ -16,17 +16,28 @@ version changes only on a breaking change to the core model.
   is an organisational obligation). Authentication is out of scope by design.
   The agent demo now emits the verifiable `Approval` at runtime and checks the
   approver's authority ceiling covers the award value.
-
-## [0.8.0] — 2026-07 — Working Draft
-
-### Added
-- **Commodity-risk extension (Working Draft spec)** — `docs/extensions/SIGNET_Commodity_Risk_Extension_v0.1.md`:
+- **Commodity-risk extension (Working Draft spec)** — `docs/extensions/commodity-risk.md`:
   portfolio-level commodity risk governance (positions, coverage corridors as Agent-layer
   Policy subtypes, price marks, assessments, scenarios, hedge proposals bridging to core
   `Need`). Accepted in principle by the Standards Committee
   (`governance/reviews/2026-07-commodity-risk.md`) — the first member-proposed extension,
   reviewed under the identical process as any proposer. Schemas, worked example, and
   conformance rules to follow as a separate change.
+
+### Changed
+- **Documentation & demo alignment.** Brought the repository's prose level with its code:
+  the top-level `README.md` now documents the conformance harness, the **three
+  demonstrations** (agent award, onboarding, auction) with their current outcomes, and an
+  **Extensions & profiles** table with per-item status. `agent/README.md` was corrected to
+  the current MAT weighting (price 0.20 / quality 0.55 / social 0.25 — the dearer,
+  higher-quality bid wins 0.859474 vs 0.8415) and the verifiable-`Approval` check. Extension
+  specs are consolidated under `docs/extensions/<id>.md` (the auction spec renamed to
+  `auction.md`) with a new `docs/extensions/README.md` index; the wiki sidebar points at the
+  specs and demos. No schema or normative change.
+
+## [0.8.0] — 2026-07 — Working Draft
+
+### Added
 - **Auction extension** — process-layer objects `Auction` (a profile of the sourcing
   flow; reverse / english / dutch / sealed-bid / multi-criteria via `auctionType` +
   deterministic `rules`) and `Bid`. The auction rules and canonical bid record are

@@ -32,9 +32,12 @@ A €12M "Network managed services" sourcing event with two admissible bids:
    so **human approval is required** before the award stands. The harness enforces
    this; the agent cannot self-authorise past its mandate.
 3. **Evaluate** — the agent derives a price score from each bid and combines it with
-   the quality/social assessment under the *published* MAT weights (price 0.4,
-   quality 0.35, social 0.25 — parsed from the Policy's own executable expression,
-   not hard-coded). Globex wins 0.8855 to 0.8689.
+   the quality/social assessment under the *published* MAT weights (price 0.20,
+   quality 0.55, social 0.25 — parsed from the Policy's own executable expression,
+   not hard-coded). Under this weighting **the dearer, higher-quality bid wins**:
+   Acme (`submission-5521`, €11.4M) scores **0.859474**, ahead of the cheaper Globex
+   bid (`submission-5522`, €10.8M) at **0.8415** — a justified price premium accepted
+   on materially higher quality, not a low-bid pick.
 4. **Decide** — it emits an award **Decision** citing its inputs (both submissions),
    the policy it applied, a human-readable rationale, the attached **human approval**,
    and cryptographic **provenance**.
@@ -48,6 +51,9 @@ The verification block proves the claim rather than asserting it:
 - the Decision, Evaluations, and Award all validate against the published schemas;
 - the Decision is **mandate-bound** and carries **human approval** because the
   threshold was exceeded;
+- that human approval resolves to a verifiable **`Approval`** (identity profile): it
+  validates against `approval.schema.json`, and the approver's authority ceiling
+  (band-4, €25M) covers the €11.4M award;
 - the Event stream is an **unbroken hash chain**, and tampering with any event is
   **detected**;
 - every assertion carries **provenance**.

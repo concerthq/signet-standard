@@ -28,6 +28,12 @@
 - [Repository Structure](Repository-Structure)
 - [Extensions](Extensions)
 
+**Extensions & demonstrations**
+- [Extension & profile specs](https://github.com/concerthq/signet-standard/tree/main/docs/extensions)
+- [Agent demo — governed award](https://github.com/concerthq/signet-standard/tree/main/agent)
+- [Onboarding demo — conditional qualification](https://github.com/concerthq/signet-standard/tree/main/onboarding)
+- [Auction demo — deterministic close](https://github.com/concerthq/signet-standard/tree/main/auction)
+
 **Project**
 - [Governance & Versioning](Governance-and-Versioning)
 - [Contributing](Contributing)

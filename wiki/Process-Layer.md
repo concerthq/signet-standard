@@ -328,7 +328,7 @@ concerns. Implementations MUST NOT represent SIGNET conformance as a guarantee a
 collusion.
 
 See the worked instance: [`examples/auction-reverse.json`](Worked-Examples#auction). The full
-normative text is `docs/extensions/SIGNET_Auction_Extension_v0.1.md`.
+normative text is `docs/extensions/auction.md`.
 
 ---
 
