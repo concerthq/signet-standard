@@ -71,6 +71,50 @@ schemas (in the `concert.foundation/signet` namespace), codelists, a validated w
 and the six conformance rules are a **separate change still to come**, so the extension is not
 yet in-tree under `schema/`, `codelists/`, or `examples/`, and no tag has been cut for it.
 
+## Working Draft: the identity profile
+
+The **identity profile** (`docs/extensions/identity.md`) specifies how SIGNET represents
+**natural persons** — the third identity plane alongside organisations
+([`Party`](Foundation-Layer#party)) and synthetic agents
+([`SyntheticAgent`](Agent-Layer#syntheticagent)) — and makes human authority symmetric with
+agent authority. Like the auction extension it ships **in-tree** (core `v0.1` namespace): it
+adds one object (`Approval`), one `credentialType` codelist value (`delegationOfAuthority`),
+and three normative rules, with **no change to any core object**.
+
+It leans entirely on primitives the core already has — it **adds, does not change**:
+
+- **Humans act under Mandates too.** A corporate delegation-of-authority matrix ("the category
+  director may approve to €10M; above that, the CFO") is a human [`Mandate`](Agent-Layer#mandate)
+  — the core object is reused **unchanged**, because `Mandate.agent` is an `Identifier` that
+  accepts any actor, person or synthetic agent. A threshold being exceeded is a verifiable
+  handoff from one mandate to another.
+- **Authority is a Credential.** A person's authority to approve is a `delegationOfAuthority`
+  [`Credential`](Foundation-Layer#credential) issued by their organisation — the
+  supplier-qualification pattern reapplied to people, upgradeable to a qualified eIDAS wallet
+  attestation with no structural change (the object upgrades its `proof`; nothing structural
+  moves).
+- **`Approval` makes `humanApproval` resolvable.** Where a [`Decision`](Agent-Layer#decision)
+  carries `humanApproval`, that reference SHOULD resolve to an `Approval` object — *who*
+  (pseudonymous), in *what role*, under *what authority*, approved *which decision*, *when* — so
+  a counterparty can verify *that an authorised person approved*, and that their authority
+  ceiling covered the decision's value, without learning who they are.
+
+**No personal data in hash-anchored records (normative).** Objects and
+[`Event`](Trust-Layer#event)s that participate in hash chains MUST NOT carry personal data;
+person references MUST be pseudonymous identifiers (e.g. `did:web:buyer.example#officer-7c2f`).
+An append-only, tamper-evident record is irreconcilable with erasure obligations (e.g. the GDPR
+right to erasure) if it carries PII; pseudonymisation preserves both chain integrity and
+erasability, and the pseudonym→person mapping is the identifying organisation's own
+access-controlled, erasable obligation. SIGNET records **who acted under what authority; it
+never authenticates anyone** — authentication (SSO, passkeys, identity-proofing) is permanently
+out of scope, as is any claim of identity assurance in the eIDAS/NIST sense.
+
+**Status: Working Draft, landed in-tree.** The `Approval` schema (`schema/approval.schema.json`)
+and a validated worked example (`examples/approval.json` — the approval behind the
+[agent demonstration](Agent-Layer)'s award) are in the repository, and the agent demo emits the
+verifiable `Approval` at runtime and checks the approver's authority ceiling covers the award
+value. No tag has been cut yet — it folds into the next release.
+
 ## Relationship to the agent layer
 
 Note that the [Agent Layer](Agent-Layer) is **not** an extension — it is core, SIGNET's

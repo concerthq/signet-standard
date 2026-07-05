@@ -12,6 +12,7 @@ Northern region refresh", awarded to **Acme Networks**.
 | `examples/sourcing-event.json` | [SourcingEvent](#sourcingevent) | tender |
 | `examples/policy-evaluation.json` | [Policy](#policy) | (governs tender) |
 | `examples/award-decision.json` | [Decision](#decision-award) | award |
+| `examples/approval.json` | [Approval](#approval) | award |
 | `examples/contract.json` | [Contract](#contract) | contract |
 | `examples/invoice.json` | [Invoice](#invoice) | implementation |
 | `examples/invoice.ubl.xml` | UBL projection | implementation |
@@ -148,6 +149,41 @@ submission **inputs**, applying the MAT **policy**, with a plain-language **rati
 
 This is the single object that distinguishes a SIGNET network from a conventional platform —
 see [Agent Layer → Decision](Agent-Layer#decision).
+
+---
+
+## Approval
+
+`examples/approval.json` — what the Decision's `humanApproval` reference (`#approval-771`)
+resolves to under the [identity profile](Extensions#working-draft-the-identity-profile). Because
+the €12M event value exceeds the agent's €10M autonomous ceiling, a human must approve; this
+object makes that approval **verifiable** rather than an opaque reference: a **pseudonymous**
+approver (`#officer-7c2f` — no personal data), the `category-director` **role**, and a
+`delegationOfAuthority` **[Credential](Foundation-Layer#credential)** whose band-4 ceiling
+(€25M) covers the award value, with provenance.
+
+```json
+{
+  "type": "Approval",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#approval-771" },
+  "decision": { "scheme": "did", "id": "did:web:buyer.example#decision-8842" },
+  "approver": { "scheme": "did", "id": "did:web:buyer.example#officer-7c2f" },
+  "role": "category-director",
+  "underMandate": { "scheme": "did", "id": "did:web:buyer.example#mandate-doa-band4" },
+  "authorityCredential": {
+    "type": ["VerifiableCredential", "delegationOfAuthority"],
+    "issuer": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+    "credentialSubject": { "authorityBand": "band-4", "approvalCeiling": { "amount": 25000000, "currency": "EUR" } },
+    "proof": { "type": "organisationAttestation", "attestedBy": "did:web:buyer.example#buyer" }
+  },
+  "approvedAt": "2026-06-22T00:00:00Z",
+  "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:buyer.example#officer-7c2f" }, "generatedAt": "2026-06-22T00:00:00Z" }
+}
+```
+
+The [agent demonstration](Agent-Layer) emits this object at runtime and verifies the approver's
+authority ceiling covers the award value — human authority made symmetric with the agent's
+[Mandate](Agent-Layer#mandate).
 
 ---
 

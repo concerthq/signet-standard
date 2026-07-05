@@ -109,7 +109,7 @@ and rationale that produced it. **The backbone of accountability.**
 | `policiesApplied` | Identifier[] | 0..* | The policies applied. |
 | `rationale` | string | 1 | Human-readable rationale. |
 | `outcome` | object | 1 | The decision outcome. |
-| `humanApproval` | Identifier | 0..1 | Where a mandate threshold required it, the approving Party and record. |
+| `humanApproval` | Identifier | 0..1 | Where a mandate threshold required it, a reference to the human approval record. Under the [identity profile](Extensions#working-draft-the-identity-profile) this SHOULD resolve to a verifiable `Approval` (pseudonymous approver, role, delegation-of-authority credential, provenance). |
 | `provenance` | Provenance | 1 | Full [Provenance](Trust-Layer#provenance). |
 
 A Decision record satisfies the "material decision" record-keeping that regulation
