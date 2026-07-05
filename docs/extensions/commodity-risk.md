@@ -290,3 +290,7 @@ executable checker at `conformance/rules/check-commodity-risk.js`
 - **Execution systems.** Positions and marks ingest from ETRM/treasury systems and
   market-data feeds; the extension is their governed network representation, not
   their replacement (§3).
+
+---
+
+**Status:** Merged as Working Draft; see `governance/reviews/2026-07-commodity-risk-merge.md`.

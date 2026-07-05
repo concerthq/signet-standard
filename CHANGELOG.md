@@ -4,6 +4,17 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Added
+- **Extension conformance rules** — executable cross-object checkers for the
+  onboarding (case↔qualification closure, conditional integrity), auction (the
+  recorded winner equals the deterministic close; reserve integrity), and identity
+  (Full-level: humanApproval resolves both ways; approver ceiling covers the decided
+  value) extensions, wired into CI. All four extensions now have machine-backed
+  conformance. Governance: commodity-risk resubmission record — merged as Working
+  Draft.
+
 ## [0.10.0] — 2026-07-05 — Working Draft
 
 ### Added

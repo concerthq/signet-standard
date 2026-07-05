@@ -15,6 +15,7 @@
     "conformance": "node conformance/runner/run-conformance.js",
     "conformance:broken": "node conformance/runner/run-conformance.js --adapter conformance/adapter/broken-adapter.js",
     "conformance:commodity-risk": "node conformance/rules/check-commodity-risk.js",
+    "conformance:extensions": "node conformance/rules/check-onboarding.js && node conformance/rules/check-auction.js && node conformance/rules/check-identity.js",
     "test:projection-skip": "node tools/test-projection-skip.js",
     "agent": "node agent/run-agent.js",
     "onboarding": "node onboarding/run-onboarding.js",

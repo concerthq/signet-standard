@@ -63,3 +63,6 @@ jobs:
 
       - name: Commodity-risk conformance rules (reconciliation, scenario integrity, ordering)
         run: node conformance/rules/check-commodity-risk.js
+
+      - name: Extension conformance rules (onboarding, auction, identity)
+        run: npm run conformance:extensions
