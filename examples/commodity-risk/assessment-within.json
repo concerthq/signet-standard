@@ -1,0 +1,73 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "CoverageAssessment",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#assess-de-2027-t2"
+  },
+  "market": "DE",
+  "deliveryPeriod": {
+    "year": 2027,
+    "basis": "fiscalYear"
+  },
+  "portfolioScope": "core",
+  "assessedAt": "2026-07-15T06:00:00Z",
+  "volumes": {
+    "hedged": {
+      "amount": 130000,
+      "unit": "MWh"
+    },
+    "floating": {
+      "amount": 70000,
+      "unit": "MWh"
+    },
+    "markToMarket": {
+      "amount": 200000,
+      "unit": "MWh"
+    }
+  },
+  "hedgedRatio": 0.65,
+  "policyEvaluation": {
+    "policyId": {
+      "scheme": "did",
+      "id": "did:web:buyer.example#policy-corridor-power"
+    },
+    "corridorApplied": {
+      "minimum": 0.6,
+      "target": 0.75,
+      "maximum": 0.85
+    },
+    "status": "withinCorridor",
+    "distanceToMinimum": 0.05
+  },
+  "reconciliation": {
+    "status": "reconciled",
+    "rule": "hedged + floating = markToMarket",
+    "tolerance": 0
+  },
+  "positions": [
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#pos-de-2027-hedged-0042"
+    },
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#pos-de-2027-hedged-0088"
+    },
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#pos-de-2027-floating-0089"
+    },
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#pos-de-2027-mtm-0044"
+    }
+  ],
+  "provenance": {
+    "generatedBy": {
+      "scheme": "did",
+      "id": "did:web:buyer.example#risk-agent-1"
+    },
+    "generatedAt": "2026-07-01T06:00:00Z"
+  }
+}

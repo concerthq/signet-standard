@@ -1,0 +1,6 @@
+Code,Title,Description
+policyBreach,Policy breach,A coverage assessment breached the corridor.
+marketOpportunity,Market opportunity,Favourable market conditions.
+demandRevision,Demand revision,Volume forecast changed.
+contractExpiry,Contract expiry,An existing hedge expires.
+manual,Manual,Manually raised.

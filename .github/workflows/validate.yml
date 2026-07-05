@@ -60,3 +60,6 @@ jobs:
 
       - name: Reverse-auction demo — deterministic, conformance-clean close
         run: node auction/run-auction.js
+
+      - name: Commodity-risk conformance rules (reconciliation, scenario integrity, ordering)
+        run: node conformance/rules/check-commodity-risk.js

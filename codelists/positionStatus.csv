@@ -1,0 +1,4 @@
+Code,Title,Description
+hedged,Hedged,Volume fixed under contract. CLOSED list — reconciliation depends on it.
+floating,Floating,Volume exposed to market price.
+markToMarket,Mark to market,Total open volume valued at the applicable PriceMark.

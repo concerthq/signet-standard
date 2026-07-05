@@ -1,0 +1,235 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/scenario.schema.json",
+  "title": "Scenario",
+  "description": "A defined set of price shocks applied to the open (floating + mark-to-market) position, with results. NORMATIVE integrity rule: impacts are computed on floating cost only — fixed cost is invariant under shock (conformance rule 2). Every result exposes total, fixed, and floating cost.",
+  "type": "object",
+  "required": [
+    "id",
+    "basePriceMarkSet",
+    "shockBands",
+    "results",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "Scenario"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "basePriceMarkSet": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "definitions.schema.json#/definitions/Identifier"
+      }
+    },
+    "shockBands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "band",
+          "multiplier"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "band": {
+            "type": "string"
+          },
+          "multiplier": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "deliveryPeriod",
+          "baseline",
+          "impacts"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "deliveryPeriod": {
+            "type": "object",
+            "required": [
+              "year",
+              "basis"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "year": {
+                "type": "integer"
+              },
+              "basis": {
+                "type": "string"
+              }
+            }
+          },
+          "baseline": {
+            "type": "object",
+            "required": [
+              "totalCost",
+              "fixedCost",
+              "floatingCost"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "totalCost": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "currency"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  },
+                  "currency": {
+                    "type": "string"
+                  },
+                  "unit": {
+                    "type": "string"
+                  }
+                }
+              },
+              "fixedCost": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "currency"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  },
+                  "currency": {
+                    "type": "string"
+                  },
+                  "unit": {
+                    "type": "string"
+                  }
+                }
+              },
+              "floatingCost": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "currency"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  },
+                  "currency": {
+                    "type": "string"
+                  },
+                  "unit": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "impacts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "shockBand",
+                "fixedCost",
+                "floatingCost",
+                "delta"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "shockBand": {
+                  "type": "string"
+                },
+                "fixedCost": {
+                  "type": "object",
+                  "required": [
+                    "amount",
+                    "currency"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "floatingCost": {
+                  "type": "object",
+                  "required": [
+                    "amount",
+                    "currency"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "delta": {
+                  "type": "object",
+                  "required": [
+                    "amount",
+                    "currency"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "$ref": "definitions.schema.json#/definitions/Provenance"
+    }
+  }
+}

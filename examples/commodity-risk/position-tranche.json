@@ -1,0 +1,51 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "ExposurePosition",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#pos-de-2027-hedged-0088"
+  },
+  "portfolioScope": "core",
+  "market": "DE",
+  "beneficiary": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#party-buyer-de"
+  },
+  "counterparty": {
+    "scheme": "did",
+    "id": "did:web:example-energy.example#supplier-y"
+  },
+  "commodity": "electricity",
+  "positionStatus": "hedged",
+  "instrument": "baseloadForward",
+  "contract": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#contract-2026-0203"
+  },
+  "deliveryPeriod": {
+    "year": 2027,
+    "basis": "fiscalYear"
+  },
+  "volume": {
+    "amount": 29700,
+    "unit": "MWh"
+  },
+  "economics": {
+    "price": {
+      "amount": 84.1,
+      "currency": "EUR",
+      "unit": "MWh"
+    },
+    "cost": {
+      "amount": 2497770,
+      "currency": "EUR"
+    }
+  },
+  "provenance": {
+    "generatedBy": {
+      "scheme": "did",
+      "id": "did:web:buyer.example#risk-agent-1"
+    },
+    "generatedAt": "2026-07-01T06:00:00Z"
+  }
+}

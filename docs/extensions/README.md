@@ -14,7 +14,7 @@ the document; the URL stays stable).
 | `onboarding` | `OnboardingCase`, `SupplierQualification` (durable status with first-class `conditional` qualification, value caps, category restrictions); `credentialType` codelist | **Schemas + demo shipped** (in-tree, core `v0.1`) | [`onboarding.md`](onboarding.md) |
 | `auction` | `Auction`, `Bid` (a profile of the sourcing flow — reverse / english / dutch / sealed-bid / multi-criteria; deterministic, operator-independent close); `auctionType` codelist | **Schemas + demo shipped** (in-tree, core `v0.1`) | [`auction.md`](auction.md) |
 | `identity` | `Approval` (verifiable human approval); `delegationOfAuthority` credential type; normative no-PII rule for hash-anchored records | **Working Draft** — schema + worked example shipped; demo emits `Approval` | [`identity.md`](identity.md) |
-| `commodity-risk` | Portfolio-level commodity risk governance (positions, coverage corridors as Policy subtypes, price marks, assessments, price-shock scenarios, hedge proposals bridging to core `Need`) | **Working Draft spec** — accepted in principle; schemas, example, and conformance rules to follow | [`commodity-risk.md`](commodity-risk.md) |
+| `commodity-risk` | Portfolio-level commodity risk governance (positions, coverage corridors as Policy subtypes, price marks, assessments, price-shock scenarios, hedge proposals bridging to core `Need`) | **Spec + schemas + conformance rules shipped** — six schemas, ten codelists, an eleven-file full-loop example, and the six rules as an executable checker (`conformance/rules/check-commodity-risk.js`); separately-namespaced | [`commodity-risk.md`](commodity-risk.md) |
 
 ## Status vocabulary
 

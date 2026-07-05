@@ -1,0 +1,10 @@
+Code,Title,Description
+ppa,PPA,Power purchase agreement.
+cppa,Corporate PPA,Corporate power purchase agreement.
+baseloadForward,Baseload forward,Baseload forward contract.
+peakForward,Peak forward,Peak forward contract.
+greenTariff,Green tariff,Renewable supply tariff.
+fixedPriceSupply,Fixed-price supply,Fixed-price supply contract.
+floatingSupply,Floating supply,Index-linked supply contract.
+financialSwap,Financial swap,Financially settled swap.
+other,Other,Other instrument.

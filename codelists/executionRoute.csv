@@ -1,0 +1,4 @@
+Code,Title,Description
+newSourcingEvent,New sourcing event,Instantiated Need produces a new SourcingEvent.
+callOffUnderFramework,Call-off under framework,Executed under an existing framework contract.
+directNegotiation,Direct negotiation,Direct negotiation with a counterparty.

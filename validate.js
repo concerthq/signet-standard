@@ -44,6 +44,17 @@ const map = {
   "auction-reverse.json": "auction.schema.json",
   "bid-reverse.json": "bid.schema.json",
   "approval.json": "approval.schema.json",
+  "commodity-risk/coverage-policy.json": "coverage-policy.schema.json",
+  "commodity-risk/position-hedged.json": "exposure-position.schema.json",
+  "commodity-risk/position-floating.json": "exposure-position.schema.json",
+  "commodity-risk/position-mtm.json": "exposure-position.schema.json",
+  "commodity-risk/position-tranche.json": "exposure-position.schema.json",
+  "commodity-risk/position-floating-t2.json": "exposure-position.schema.json",
+  "commodity-risk/price-mark.json": "price-mark.schema.json",
+  "commodity-risk/assessment-below.json": "coverage-assessment.schema.json",
+  "commodity-risk/assessment-within.json": "coverage-assessment.schema.json",
+  "commodity-risk/scenario.json": "scenario.schema.json",
+  "commodity-risk/hedge-proposal.json": "hedge-proposal.schema.json",
 };
 
 let failures = 0;

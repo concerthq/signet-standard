@@ -1,0 +1,5 @@
+Code,Title,Description
+withinCorridor,Within corridor,Hedged ratio inside the applicable band. CLOSED list.
+belowMinimum,Below minimum,Hedged ratio below the corridor minimum.
+aboveMaximum,Above maximum,Hedged ratio above the corridor maximum.
+noPolicyDefined,No policy defined,No corridor applies.

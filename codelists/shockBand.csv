@@ -1,0 +1,4 @@
+Code,Title,Description
+normalRange,Normal range,Shocks within normal market variation.
+persistentHigh,Persistent high,Sustained elevated prices.
+crisis,Crisis,Crisis-level price shock.

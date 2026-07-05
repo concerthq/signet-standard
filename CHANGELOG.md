@@ -4,11 +4,20 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
-## [Unreleased]
+## [0.10.0] — 2026-07-05 — Working Draft
 
 ### Added
 - **Onboarding extension spec** at `docs/extensions/onboarding.md` (previously
   undelivered; schemas and demo shipped in 0.6.x).
+- **Commodity-risk extension — technical artifacts.** Six schemas (ExposurePosition,
+  CoveragePolicy as a Policy subtype, PriceMark, CoverageAssessment, Scenario,
+  HedgeProposal), ten codelists (positionStatus and policyEvaluationStatus closed),
+  an eleven-file full-loop worked example (belowMinimum → proposal → executed →
+  withinCorridor, arithmetically reconciled), and the six conformance rules as an
+  executable checker (`conformance/rules/check-commodity-risk.js`) — three are
+  cross-object checks beyond schema validation: reconciliation arithmetic, scenario
+  fixed-cost invariance, escalation-first rule ordering. Completes the extension
+  accepted in principle in `governance/reviews/2026-07-commodity-risk.md`.
 
 ## [0.9.0] — 2026-07-05 — Working Draft
 

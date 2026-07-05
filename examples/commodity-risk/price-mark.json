@@ -1,0 +1,26 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "PriceMark",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#mark-de-base-2027-0701"
+  },
+  "commodity": "electricity",
+  "market": "DE",
+  "product": "baseload",
+  "deliveryPeriod": {
+    "year": 2027,
+    "basis": "fiscalYear"
+  },
+  "value": {
+    "amount": 82.3,
+    "currency": "EUR",
+    "unit": "MWh"
+  },
+  "markType": "forwardClose",
+  "source": {
+    "name": "Example Exchange",
+    "feedId": "EEX-BASE-Y1"
+  },
+  "observedAt": "2026-07-01T17:30:00Z"
+}

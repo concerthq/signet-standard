@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/price-mark.schema.json",
+  "title": "PriceMark",
+  "description": "An observed market price for a (commodity, market, product, delivery period), from a named source at a timestamp — the valuation input for mark-to-market volume and scenarios. Self-contained and commodity-generic; core graduation candidate (promoted when a second real consumer exists).",
+  "type": "object",
+  "required": [
+    "id",
+    "commodity",
+    "market",
+    "value",
+    "markType",
+    "source",
+    "observedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "PriceMark"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "commodity": {
+      "type": "string"
+    },
+    "market": {
+      "type": "string"
+    },
+    "product": {
+      "type": "string"
+    },
+    "deliveryPeriod": {
+      "type": "object",
+      "required": [
+        "year",
+        "basis"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "value": {
+      "type": "object",
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
+    },
+    "markType": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "feedId": {
+          "type": "string"
+        }
+      }
+    },
+    "observedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fxContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rateSetId": {
+          "type": "string"
+        },
+        "base": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

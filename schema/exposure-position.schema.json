@@ -1,0 +1,235 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/exposure-position.schema.json",
+  "title": "ExposurePosition",
+  "description": "One contract's (or open volume block's) contribution to commodity exposure in one market for one delivery period. positionStatus is CLOSED (hedged|floating|markToMarket) — reconciliation depends on it. A hedged position MUST reference the core Contract that creates it; markToMarket volume references none. Commodity-risk extension.",
+  "type": "object",
+  "required": [
+    "id",
+    "portfolioScope",
+    "market",
+    "beneficiary",
+    "commodity",
+    "positionStatus",
+    "deliveryPeriod",
+    "volume"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "ExposurePosition"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "portfolioScope": {
+      "type": "string"
+    },
+    "market": {
+      "type": "string"
+    },
+    "beneficiary": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "counterparty": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "commodity": {
+      "type": "string"
+    },
+    "positionStatus": {
+      "type": "string",
+      "enum": [
+        "hedged",
+        "floating",
+        "markToMarket"
+      ]
+    },
+    "instrument": {
+      "type": "string"
+    },
+    "contract": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "deliveryPeriod": {
+      "type": "object",
+      "required": [
+        "year",
+        "basis"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "basis": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "object",
+          "required": [
+            "unit",
+            "values"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "unit": {
+              "type": "string"
+            },
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "period",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "period": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}(-\\d{2})?(/.+)?$"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "volume": {
+      "type": "object",
+      "required": [
+        "amount",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
+    },
+    "economics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "price": {
+          "type": "object",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "type": "number"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
+        },
+        "cost": {
+          "type": "object",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "type": "number"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
+        },
+        "localCurrency": {
+          "type": "object"
+        },
+        "regulatedPrice": {
+          "type": "object",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "type": "number"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
+        },
+        "tcoPrice": {
+          "type": "object",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "type": "number"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "sourceReference": {
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "definitions.schema.json#/definitions/Provenance"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "positionStatus": {
+            "const": "hedged"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "contract"
+        ]
+      }
+    }
+  ]
+}

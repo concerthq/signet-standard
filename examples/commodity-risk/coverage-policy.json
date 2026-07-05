@@ -1,0 +1,73 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Policy",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#policy-corridor-power"
+  },
+  "policyType": "coverageCorridor",
+  "humanReadable": "Illustrative corridor: for a high-risk, high-volume market at horizon Y+1, hedged ratio must be 0.60–0.85, target 0.75. All values synthetic placeholders.",
+  "classification": {
+    "dimensions": [
+      {
+        "name": "risk",
+        "bands": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "name": "volume",
+        "bands": [
+          "small",
+          "medium",
+          "large"
+        ]
+      }
+    ]
+  },
+  "corridors": [
+    {
+      "bands": {
+        "risk": "high",
+        "volume": "large"
+      },
+      "horizon": "Y+1",
+      "hedgedRatio": {
+        "minimum": 0.6,
+        "target": 0.75,
+        "maximum": 0.85
+      }
+    }
+  ],
+  "marketClassifications": [
+    {
+      "market": "DE",
+      "bands": {
+        "risk": "high",
+        "volume": "large"
+      }
+    }
+  ],
+  "breachHandling": {
+    "rules": [
+      {
+        "when": "status == belowMinimum",
+        "action": "raise HedgeProposal (trigger: policyBreach)"
+      },
+      {
+        "when": "status == aboveMaximum",
+        "action": "escalate to risk committee"
+      },
+      {
+        "when": "*",
+        "action": "no action (catch-all)"
+      }
+    ]
+  },
+  "validity": {
+    "startDate": "2026-04-01T00:00:00Z",
+    "endDate": "2027-03-31T23:59:59Z"
+  }
+}

@@ -267,6 +267,11 @@ scenario → proposal → approval decision → instantiated Need → (stub) Awa
 new position → re-assessment (`withinCorridor`). It is the extension's CI-validated
 example in the standard repo.
 
+The example set (eleven files — the full loop above) lives at
+`examples/commodity-risk/`, and the six conformance rules (§9) are shipped as an
+executable checker at `conformance/rules/check-commodity-risk.js`
+(`npm run conformance:commodity-risk`).
+
 > **Synthetic data statement.** All volumes, prices, ratios, corridor values,
 > parties, and counterparties in this specification and its examples are synthetic.
 > No live position, policy parameter, or commercial term of any organisation appears

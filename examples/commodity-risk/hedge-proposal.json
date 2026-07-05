@@ -1,0 +1,44 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "HedgeProposal",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#proposal-de-2027-0009"
+  },
+  "trigger": {
+    "type": "policyBreach",
+    "coverageAssessment": {
+      "scheme": "did",
+      "id": "did:web:buyer.example#assess-de-2027-t1"
+    }
+  },
+  "market": "DE",
+  "deliveryPeriod": {
+    "year": 2027,
+    "basis": "fiscalYear"
+  },
+  "currentHedgedRatio": 0.5015,
+  "proposedHedgedRatio": 0.65,
+  "incrementalVolume": {
+    "amount": 29700,
+    "unit": "MWh"
+  },
+  "instrument": "baseloadForward",
+  "executionRoute": "newSourcingEvent",
+  "rationale": "Coverage 0.5015 is below the 0.60 corridor minimum for a high-risk, high-volume market at Y+1. Propose an incremental 29,700 MWh baseload tranche to reach 0.65, inside the corridor and below target, staged against further marks.",
+  "decision": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#decision-hedge-0009"
+  },
+  "status": "executed",
+  "onApproval": {
+    "instantiates": "Need",
+    "needTemplate": {
+      "title": "Baseload power DE FY2027 — incremental tranche",
+      "volume": {
+        "amount": 29700,
+        "unit": "MWh"
+      }
+    }
+  }
+}

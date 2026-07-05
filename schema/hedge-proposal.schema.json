@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/hedge-proposal.schema.json",
+  "title": "HedgeProposal",
+  "description": "The action item that carries a risk decision into procurement. An approved proposal instantiates a core Need (D1); everything downstream is unmodified core. Raised by a synthetic agent under mandate or by a human; the Decision record is the same either way.",
+  "type": "object",
+  "required": [
+    "id",
+    "trigger",
+    "market",
+    "deliveryPeriod",
+    "proposedHedgedRatio",
+    "incrementalVolume",
+    "executionRoute",
+    "rationale",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "type": {
+      "const": "HedgeProposal"
+    },
+    "id": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "trigger": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "coverageAssessment": {
+          "$ref": "definitions.schema.json#/definitions/Identifier"
+        }
+      }
+    },
+    "market": {
+      "type": "string"
+    },
+    "deliveryPeriod": {
+      "type": "object",
+      "required": [
+        "year",
+        "basis"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "currentHedgedRatio": {
+      "type": "number"
+    },
+    "proposedHedgedRatio": {
+      "type": "number"
+    },
+    "incrementalVolume": {
+      "type": "object",
+      "required": [
+        "amount",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
+    },
+    "instrument": {
+      "type": "string"
+    },
+    "executionRoute": {
+      "type": "string"
+    },
+    "frameworkContract": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "decision": {
+      "$ref": "definitions.schema.json#/definitions/Identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pendingApproval",
+        "approved",
+        "executing",
+        "executed",
+        "rejected",
+        "withdrawn"
+      ]
+    },
+    "onApproval": {
+      "type": "object",
+      "required": [
+        "instantiates"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "instantiates": {
+          "const": "Need"
+        },
+        "needTemplate": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

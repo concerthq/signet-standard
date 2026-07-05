@@ -1,0 +1,38 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "ExposurePosition",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#pos-de-2027-floating-0089"
+  },
+  "portfolioScope": "core",
+  "market": "DE",
+  "beneficiary": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#party-buyer-de"
+  },
+  "commodity": "electricity",
+  "positionStatus": "floating",
+  "deliveryPeriod": {
+    "year": 2027,
+    "basis": "fiscalYear"
+  },
+  "volume": {
+    "amount": 70000,
+    "unit": "MWh"
+  },
+  "economics": {
+    "price": {
+      "amount": 82.3,
+      "currency": "EUR",
+      "unit": "MWh"
+    }
+  },
+  "provenance": {
+    "generatedBy": {
+      "scheme": "did",
+      "id": "did:web:buyer.example#risk-agent-1"
+    },
+    "generatedAt": "2026-07-01T06:00:00Z"
+  }
+}

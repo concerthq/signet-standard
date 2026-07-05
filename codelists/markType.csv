@@ -1,0 +1,5 @@
+Code,Title,Description
+forwardClose,Forward close,Exchange forward closing price.
+spotSettlement,Spot settlement,Spot settlement price.
+brokerQuote,Broker quote,Broker-provided quote.
+internalCurve,Internal curve,Internally derived curve point.

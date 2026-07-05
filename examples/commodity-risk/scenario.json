@@ -1,0 +1,85 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Scenario",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#scenario-de-2027-shock-t1"
+  },
+  "basePriceMarkSet": [
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#mark-de-base-2027-0701"
+    }
+  ],
+  "shockBands": [
+    {
+      "band": "persistentHigh",
+      "multiplier": 1.5
+    },
+    {
+      "band": "crisis",
+      "multiplier": 2.5
+    }
+  ],
+  "results": [
+    {
+      "deliveryPeriod": {
+        "year": 2027,
+        "basis": "fiscalYear"
+      },
+      "baseline": {
+        "totalCost": {
+          "amount": 17874230,
+          "currency": "EUR"
+        },
+        "fixedCost": {
+          "amount": 9668920,
+          "currency": "EUR"
+        },
+        "floatingCost": {
+          "amount": 8205310,
+          "currency": "EUR"
+        }
+      },
+      "impacts": [
+        {
+          "shockBand": "persistentHigh",
+          "fixedCost": {
+            "amount": 9668920,
+            "currency": "EUR"
+          },
+          "floatingCost": {
+            "amount": 12307965,
+            "currency": "EUR"
+          },
+          "delta": {
+            "amount": 4102655,
+            "currency": "EUR"
+          }
+        },
+        {
+          "shockBand": "crisis",
+          "fixedCost": {
+            "amount": 9668920,
+            "currency": "EUR"
+          },
+          "floatingCost": {
+            "amount": 20513275,
+            "currency": "EUR"
+          },
+          "delta": {
+            "amount": 12307965,
+            "currency": "EUR"
+          }
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "generatedBy": {
+      "scheme": "did",
+      "id": "did:web:buyer.example#risk-agent-1"
+    },
+    "generatedAt": "2026-07-01T06:00:00Z"
+  }
+}

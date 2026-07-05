@@ -1,0 +1,105 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "ExposurePosition",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#pos-de-2027-hedged-0042"
+  },
+  "portfolioScope": "core",
+  "market": "DE",
+  "beneficiary": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#party-buyer-de"
+  },
+  "counterparty": {
+    "scheme": "did",
+    "id": "did:web:example-energy.example#supplier-x"
+  },
+  "commodity": "electricity",
+  "positionStatus": "hedged",
+  "instrument": "baseloadForward",
+  "contract": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#contract-2026-0117"
+  },
+  "deliveryPeriod": {
+    "year": 2027,
+    "basis": "fiscalYear",
+    "profile": {
+      "unit": "MWh",
+      "values": [
+        {
+          "period": "2027-04",
+          "value": 8500
+        },
+        {
+          "period": "2027-05",
+          "value": 8500
+        },
+        {
+          "period": "2027-06",
+          "value": 8200
+        },
+        {
+          "period": "2027-07",
+          "value": 8500
+        },
+        {
+          "period": "2027-08",
+          "value": 8500
+        },
+        {
+          "period": "2027-09",
+          "value": 8200
+        },
+        {
+          "period": "2027-10",
+          "value": 8500
+        },
+        {
+          "period": "2027-11",
+          "value": 8200
+        },
+        {
+          "period": "2027-12",
+          "value": 8500
+        },
+        {
+          "period": "2028-01",
+          "value": 8500
+        },
+        {
+          "period": "2028-02",
+          "value": 7700
+        },
+        {
+          "period": "2028-03",
+          "value": 8500
+        }
+      ]
+    }
+  },
+  "volume": {
+    "amount": 100300,
+    "unit": "MWh"
+  },
+  "economics": {
+    "price": {
+      "amount": 96.4,
+      "currency": "EUR",
+      "unit": "MWh"
+    },
+    "cost": {
+      "amount": 9668920,
+      "currency": "EUR"
+    }
+  },
+  "sourceReference": "DE2027|hedged|FY|buyer-de",
+  "provenance": {
+    "generatedBy": {
+      "scheme": "did",
+      "id": "did:web:buyer.example#risk-agent-1"
+    },
+    "generatedAt": "2026-07-01T06:00:00Z"
+  }
+}
