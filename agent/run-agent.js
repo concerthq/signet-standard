@@ -36,6 +36,7 @@ function main() {
   fs.writeFileSync(path.join(OUT, "award.json"), JSON.stringify(r.award, null, 2) + "\n");
   fs.writeFileSync(path.join(OUT, "events.json"), JSON.stringify(r.events, null, 2) + "\n");
   fs.writeFileSync(path.join(OUT, "evaluations.json"), JSON.stringify(r.evaluations, null, 2) + "\n");
+  if (r.approval) fs.writeFileSync(path.join(OUT, "approval.json"), JSON.stringify(r.approval, null, 2) + "\n");
 
   // --- verify the output is conformance-clean ---
   const { ajv, byFile } = loadSchemas();
@@ -63,6 +64,14 @@ function main() {
 
   const govt = !!r.decision.underMandate && (!r.requiresHumanApproval || !!r.decision.humanApproval);
   check("Decision is mandate-bound (+ human approval where required)", govt, "");
+
+  if (r.requiresHumanApproval) {
+    const apv = validateDoc(ajv, byFile, "approval.schema.json", r.approval);
+    check("Approval validates (approval.schema.json)", apv.ok, apv.errors.slice(0, 2).join("; "));
+    const ceiling = r.approval.authorityCredential.credentialSubject.approvalCeiling.amount;
+    check("approver's authority covers the award value", ceiling >= r.award.value.amount,
+      `ceiling ${ceiling.toLocaleString("en-GB")} >= award ${r.award.value.amount.toLocaleString("en-GB")}`);
+  }
 
   // tamper check — proves the chain would catch interference
   const tampered = JSON.parse(JSON.stringify(r.events));

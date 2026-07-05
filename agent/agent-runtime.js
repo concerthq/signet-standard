@@ -100,9 +100,35 @@ function runScenario({ reasoner }) {
     outcome: { awardedSubmission: decisionOut.winner, ranking: decisionOut.ranking },
     provenance: prov(submissions.map(s => s.id), [policy.id]),
   };
+  let approval = null;
   if (requiresHumanApproval) {
     decision.humanApproval = { scheme: "did", id: "did:web:buyer.example#approval-771" };
     log(`Human approval ${shortId(decision.humanApproval.id)} attached (mandate threshold exceeded).`);
+    // Emit the verifiable Approval the humanApproval reference resolves to (identity profile).
+    // Pseudonymous approver, role, and a delegation-of-authority credential whose ceiling
+    // is checked against the award value — human authority made symmetric with the agent's Mandate.
+    const APPROVER = { scheme: "did", id: "did:web:buyer.example#officer-7c2f" };
+    approval = {
+      "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+      type: "Approval",
+      id: decision.humanApproval,
+      decision: decision.id,
+      approver: APPROVER,
+      role: "category-director",
+      underMandate: { scheme: "did", id: "did:web:buyer.example#mandate-doa-band4" },
+      authorityCredential: {
+        id: "urn:cred:doa:officer-7c2f",
+        type: ["VerifiableCredential", "delegationOfAuthority"],
+        issuer: { scheme: "did", id: "did:web:buyer.example#buyer" },
+        issuanceDate: "2026-01-01T00:00:00Z",
+        expirationDate: "2026-12-31T23:59:59Z",
+        credentialSubject: { authorityBand: "band-4", approvalCeiling: { amount: 25000000, currency: "EUR" } },
+        proof: { type: "organisationAttestation", attestedBy: "did:web:buyer.example#buyer" },
+      },
+      approvedAt: TS,
+      provenance: { generatedBy: APPROVER, generatedAt: TS },
+    };
+    log(`Approval ${shortId(approval.id.id)}: ${shortId(APPROVER.id)} (${approval.role}), authority band-4 ceiling ${fmt(approval.authorityCredential.credentialSubject.approvalCeiling)} ≥ award ${fmt(winnerSub.value)}.`);
   }
   emit("decision.made", decision.id.id, { decisionType: "award", awarded: decisionOut.winner });
 
@@ -122,7 +148,7 @@ function runScenario({ reasoner }) {
   log(`Award ${shortId(award.id.id)} \u2192 ${shortId(winnerSub.submittingParty.id)} at ${fmt(winnerSub.value)} (10-day standstill).`);
   log(`Event stream: ${events.length} events, hash-chained.`);
 
-  return { event, policy, mandate, weights, evaluations: evaluations.map(e => e.evaluation), decision, award, events, requiresHumanApproval, trace };
+  return { event, policy, mandate, weights, evaluations: evaluations.map(e => e.evaluation), decision, approval, award, events, requiresHumanApproval, trace };
 }
 
 function fmt(v) { return `${(v.amount).toLocaleString("en-GB")} ${v.currency}`; }

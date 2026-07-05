@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/v0.1/approval.schema.json",
+  "title": "Approval",
+  "description": "A verifiable human approval: who (pseudonymous), in what role, under what authority, approved which decision, when. Makes human authority symmetric with agent authority (a Mandate bounds both). NORMATIVE: the approver identifier MUST be pseudonymous — no personal data (names, emails, employee numbers) appears in this object or any hash-anchored record; the pseudonym-to-person mapping lives in the approving organisation's own access-controlled, erasable system of record. SIGNET records who acted under what authority; it never authenticates anyone.",
+  "type": "object",
+  "required": ["id", "decision", "approver", "role", "authorityCredential", "approvedAt", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "@context": { "type": ["string", "object", "array"] },
+    "type": { "const": "Approval" },
+    "id": { "$ref": "definitions.schema.json#/definitions/Identifier" },
+    "decision": { "$ref": "definitions.schema.json#/definitions/Identifier", "description": "The Decision this approval authorises." },
+    "approver": { "$ref": "definitions.schema.json#/definitions/Identifier", "description": "Pseudonymous person identifier (e.g. did:web:buyer.example#officer-7c2f). MUST NOT encode personal data." },
+    "role": { "type": "string", "description": "The organisational role under which the approval is made (e.g. 'category-director')." },
+    "underMandate": { "$ref": "definitions.schema.json#/definitions/Identifier", "description": "The human Mandate (delegation of authority) the approver acts under. Mandate.agent holds any actor identifier — person or synthetic agent." },
+    "authorityCredential": { "$ref": "definitions.schema.json#/definitions/Credential", "description": "The delegation-of-authority credential (credentialType: delegationOfAuthority) attesting the approver's authority band. Issued by the organisation today; upgradeable to a qualified eIDAS attestation with no structural change." },
+    "approvedAt": { "type": "string", "format": "date-time" },
+    "provenance": { "$ref": "definitions.schema.json#/definitions/Provenance" }
+  }
+}

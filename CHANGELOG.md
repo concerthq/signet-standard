@@ -4,6 +4,19 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Added
+- **Identity profile (Working Draft)** — `docs/extensions/identity.md`: how SIGNET
+  represents natural persons. Humans act under Mandates (core `Mandate` reused —
+  `agent` accepts any actor); authority is a `delegationOfAuthority` Credential;
+  new `Approval` object makes `humanApproval` resolvable and verifiable
+  (approver pseudonym, role, authority credential, provenance). Normative no-PII
+  rule for hash-anchored records (pseudonymous person references only; resolution
+  is an organisational obligation). Authentication is out of scope by design.
+  The agent demo now emits the verifiable `Approval` at runtime and checks the
+  approver's authority ceiling covers the award value.
+
 ## [0.8.0] — 2026-07 — Working Draft
 
 ### Added

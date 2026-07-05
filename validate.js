@@ -43,6 +43,7 @@ const map = {
   "invoice.settles.fixture.json": "invoice.schema.json",
   "auction-reverse.json": "auction.schema.json",
   "bid-reverse.json": "bid.schema.json",
+  "approval.json": "approval.schema.json",
 };
 
 let failures = 0;

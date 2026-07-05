@@ -1,0 +1,20 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Approval",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#approval-771" },
+  "decision": { "scheme": "did", "id": "did:web:buyer.example#decision-8842" },
+  "approver": { "scheme": "did", "id": "did:web:buyer.example#officer-7c2f" },
+  "role": "category-director",
+  "underMandate": { "scheme": "did", "id": "did:web:buyer.example#mandate-doa-band4" },
+  "authorityCredential": {
+    "id": "urn:cred:doa:officer-7c2f",
+    "type": ["VerifiableCredential", "delegationOfAuthority"],
+    "issuer": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+    "issuanceDate": "2026-01-01T00:00:00Z",
+    "expirationDate": "2026-12-31T23:59:59Z",
+    "credentialSubject": { "authorityBand": "band-4", "approvalCeiling": { "amount": 25000000, "currency": "EUR" } },
+    "proof": { "type": "organisationAttestation", "attestedBy": "did:web:buyer.example#buyer" }
+  },
+  "approvedAt": "2026-06-22T00:00:00Z",
+  "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:buyer.example#officer-7c2f" }, "generatedAt": "2026-06-22T00:00:00Z" }
+}
