@@ -4,7 +4,7 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
-## [Unreleased]
+## [0.11.0] — 2026-07-06 — Working Draft
 
 ### Added
 - **Extension conformance rules** — executable cross-object checkers for the
