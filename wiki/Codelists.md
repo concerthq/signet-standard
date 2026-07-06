@@ -107,7 +107,7 @@ parameterised by `auctionType` and `rules`; new profiles may be added by pull re
 | `admissibility` | Admissibility | Whether a submission is admissible. |
 | `evaluation` | Evaluation | Scoring of a submission. |
 | `award` | Award | Decision to award. |
-| `negotiationMove` | Negotiation move | A move within a negotiation. |
+| `negotiationMove` | Negotiation move | A move within a negotiation (the object model is the [negotiation extension](Extensions#specified-as-working-drafts-schemas-to-follow), a Working Draft spec). |
 
 ## policyType
 

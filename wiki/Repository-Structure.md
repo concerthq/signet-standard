@@ -128,10 +128,13 @@ normative spec for the [onboarding extension](Extensions#the-onboarding-extensio
 `OnboardingCase` and `SupplierQualification`, the supplier onboarding lifecycle), `auction.md` (the
 normative spec for the [Auction extension](Extensions#example-the-auction-extension)),
 `commodity-risk.md` (the
-[commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension), a Working
-Draft spec), and `identity.md` (the
+[commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension), landed
+in-tree), and `identity.md` (the
 [identity profile](Extensions#working-draft-the-identity-profile), a Working Draft landed
-in-tree — adds the `Approval` object and the `delegationOfAuthority` credential type).
+in-tree — adds the `Approval` object and the `delegationOfAuthority` credential type). Five
+further specs are **spec-only Working Drafts** (schemas to follow per-extension after review):
+`receipt.md`, `performance.md`, `amendments.md`, `frameworks.md`, and `negotiation.md` — see
+[Extensions → Specified as Working Drafts](Extensions#specified-as-working-drafts-schemas-to-follow).
 `docs/WEBSITE_BUILD_NOTE.md` documents the Pages build. The spec is published to
 GitHub Pages by `.github/workflows/pages.yml`.
 

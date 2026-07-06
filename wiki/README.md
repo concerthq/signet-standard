@@ -21,7 +21,7 @@ to the wiki.
 | `Codelists.md` | Controlled vocabularies |
 | `Standards-Mapping.md` | OCDS / EN 16931 / UBL / Peppol / VC-DID / ePO bridges |
 | `Compliance-Map.md` | Regulatory & compliance map (UK Procurement Act, EU AI Act, ViDA) |
-| `Extensions.md` | Extending without forking — the auction, onboarding, identity & commodity-risk extensions |
+| `Extensions.md` | Extending without forking — the in-tree auction, onboarding, identity & commodity-risk extensions, plus five spec-only Working Drafts (receipt, performance, amendments, frameworks, negotiation) |
 | `EN-16931-and-ViDA-E-Invoicing.md` | The runnable, CI-verified invoicing pipeline |
 | `Serialisation.md` | JSON-LD context and cryptographic envelopes |
 | `Worked-Examples.md` | Complete instances from `examples/` |

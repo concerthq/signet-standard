@@ -153,6 +153,27 @@ pseudonymity, that the authority credential is a `delegationOfAuthority` carryin
 a `Decision`'s `humanApproval` resolves to an `Approval` that points back at it, and that the
 authority ceiling covers the decided value.
 
+## Specified as Working Drafts (schemas to follow)
+
+Five further extensions close the remaining purchasing (P2P) and supplier-management (SRM)
+coverage gaps. Each has landed as a **prose spec only** under `docs/extensions/`, following the
+spec-first sequence commodity-risk established — the Standards Committee reviews the spec, then
+schemas, worked examples, and conformance rules follow **per-extension** as a later patch. None
+is in-tree under `schema/` yet, and no tag has been cut for them.
+
+| Extension | Adds | Fills |
+|-----------|------|-------|
+| **receipt** (`docs/extensions/receipt.md`) | `Receipt`, `MatchResult` | Receipt/acceptance and the governed **three-way match** — tolerances as a `matchTolerance` [`Policy`](Agent-Layer#policy), the match itself a mandate-bound [`Decision`](Agent-Layer#decision). Closes the `Order → … → Invoice` gap. |
+| **performance** (`docs/extensions/performance.md`) | `ServiceLevelPolicy`, `PerformanceAssessment` | SLAs/KPIs as a `serviceLevel` [`Policy`](Agent-Layer#policy) and derived, event-anchored performance assessments (a sibling of commodity-risk's `CoverageAssessment`) that **feed the qualification lifecycle** — sustained breach drives `conditional`/`suspended`. |
+| **amendments** (`docs/extensions/amendments.md`) | `Amendment` | Event-anchored **contract deltas** (variation / extension / renewal / novation / termination); current state is derived by replaying executed amendments in sequence, so history stays tamper-evident. |
+| **frameworks** (`docs/extensions/frameworks.md`) | `FrameworkAgreement` (a `Contract` subtype), `CallOff` | **Framework agreements and call-offs** (direct award or mini-competition, the latter a [`SourcingEvent`](Process-Layer#sourcingevent) scoped to framework suppliers) with a conformance-checkable drawdown invariant (Σ call-offs ≤ ceiling). Supplies the objects behind commodity-risk's `callOffUnderFramework`. |
+| **negotiation** (`docs/extensions/negotiation.md`) | `Negotiation`, `Offer` | A governed exchange of offers over **named terms under per-term [`Mandate`](Agent-Layer#mandate)s** — the auction floor mechanic generalised from price to many terms. The object model behind the existing [`decisionType: negotiationMove`](Codelists#decisiontype). |
+
+Each **adds, does not change**: they reuse core `Policy`, `Decision`, `Event`, `Contract`,
+`Mandate`, and `SupplierQualification`, and where they touch a core object they do so through a
+namespaced additive field, never a redefinition. Priority order for the schema patches is
+receipt → performance → amendments → frameworks → negotiation.
+
 ## Relationship to the agent layer
 
 Note that the [Agent Layer](Agent-Layer) is **not** an extension — it is core, SIGNET's
