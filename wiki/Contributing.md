@@ -41,8 +41,9 @@ This determines how your change is reviewed (see
    impact, and at least one example instance.
 3. **Submit a pull request.** CI validates every example against the schema; **PRs cannot
    merge with failing validation** (see [Validation & Conformance](Validation-and-Conformance)).
-4. **Extensions** that add (rather than change) structure should be proposed as packages
-   under `/extensions` — see [Extensions](Extensions).
+4. **Extensions** that add (rather than change) structure should be proposed as a spec under
+   `docs/extensions/<id>.md` (with schemas, codelists, and worked examples in-tree, or under
+   the extension's own namespace) — see [Extensions](Extensions).
 
 ## Running validation locally
 

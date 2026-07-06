@@ -113,6 +113,27 @@ documents that **MUST be rejected**, one per rule:
 | `party-bad.json` | `partyType` enum + `additionalProperties` |
 | `sourcing-bad-status.json` | `status` enum |
 
+## Extension conformance rules
+
+The core suite above assesses the **core model only** (CN — a certification is a claim about
+core conformance). The four in-tree [extensions](Extensions) are conformance-assessed
+**separately**, by executable **cross-object** checkers under `conformance/rules/` that go
+beyond schema validation. All four run in CI on every commit.
+
+| Checker | Extension | What it checks (beyond schema) |
+|---------|-----------|--------------------------------|
+| `check-onboarding.js` | [Onboarding](Extensions#the-onboarding-extension) | Conditional qualifications carry their conditions (a `valueCap` has a cap, a `pendingCheck` a due date); a qualified case references its `Decision` and `producesQualification`; case↔qualification closure holds both ways. |
+| `check-auction.js` | [Auction](Extensions#example-the-auction-extension) | Exactly one winning `Bid` per closed `Auction`; the **recorded winner equals the deterministic close** (reverse/dutch: lowest; forward: highest) — the data-level statement of operator-independence; every bid respects the reserve. |
+| `check-identity.js` | [Identity](Extensions#working-draft-the-identity-profile) | (**Full** level) Approver identifiers are pseudonymous; the authority credential is a `delegationOfAuthority` carrying a basis; a `Decision`'s `humanApproval` resolves to an `Approval` that points back; the authority ceiling covers the decided value. |
+| `check-commodity-risk.js` | [Commodity-risk](Extensions#working-draft-the-commodity-risk-extension) | The six rules — three cross-object: reconciliation arithmetic (`hedged + floating = markToMarket`), scenario fixed-cost invariance under a price shock, and escalation-first `breachHandling` ordering. |
+
+```bash
+npm run conformance:commodity-risk   # the commodity-risk checker (runs over examples/commodity-risk/)
+npm run conformance:extensions       # onboarding + auction + identity checkers
+```
+
+Each exits 0 when every rule passes; each accepts `--dir` to run over any conformant dataset.
+
 ## Certification neutrality rules (CN)
 
 These bind **Concert as the certifier** — the operational form of the governance firewall:
@@ -164,6 +185,11 @@ conformance/
 ├── runner/
 │   ├── run-conformance.js     The harness
 │   └── lib.js                 Schema loading, canonical hashing, chain verification
+├── rules/                     Executable extension cross-object checkers (run in CI)
+│   ├── check-onboarding.js    Onboarding: conditional integrity, case↔qualification closure
+│   ├── check-auction.js       Auction: recorded winner == deterministic close; reserve integrity
+│   ├── check-identity.js      Identity (Full): humanApproval↔Approval resolvability; ceiling ≥ value
+│   └── check-commodity-risk.js  Commodity-risk: reconciliation, scenario integrity, rule ordering
 └── reports/                   Generated reports (two samples committed: pass + fail)
 ```
 

@@ -105,9 +105,9 @@ the mandatory dual requirement.
   "id": { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" },
   "policyType": "evaluation",
   "expressionLanguage": "rego",
-  "expression": "package signet.eval\nscore := price*0.4 + quality*0.35 + social*0.25",
-  "humanReadable": "Most Advantageous Tender: price 40%, quality 35%, social value 25%.",
-  "version": "1.0.0",
+  "expression": "package signet.eval\nscore := price*0.2 + quality*0.55 + social*0.25",
+  "humanReadable": "Most Advantageous Tender: price 20%, quality 55%, social value 25%.",
+  "version": "1.1.0",
   "issuedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" }
 }
 ```
@@ -135,7 +135,7 @@ submission **inputs**, applying the MAT **policy**, with a plain-language **rati
     { "scheme": "did", "id": "did:web:buyer.example#submission-5522" }
   ],
   "policiesApplied": [ { "scheme": "did", "id": "did:web:buyer.example#policy-eval-mat" } ],
-  "rationale": "Submission 5521 ranked highest on the published MAT model (price 40%, quality 35%, social value 25%).",
+  "rationale": "Most Advantageous Tender (price 0.2, quality 0.55, social 0.25). submission-5521 scored 0.859474, ahead of submission-5522 at 0.841500 (margin 0.017974). The dearer bid wins on materially higher quality, accepting a 5.56% price premium over the lower bid.",
   "outcome": { "awardedSubmission": "did:web:buyer.example#submission-5521" },
   "humanApproval": { "scheme": "did", "id": "did:web:buyer.example#approval-771" },
   "provenance": {

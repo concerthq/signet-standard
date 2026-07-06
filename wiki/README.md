@@ -14,11 +14,14 @@ to the wiki.
 |------|-----------|
 | `Home.md` | Landing page |
 | `_Sidebar.md` / `_Footer.md` | Navigation chrome (GitHub renders these automatically) |
+| `Concepts-of-Open-Commerce.md` | The conceptual frame — open commerce and its primitives |
 | `Introduction-and-Concepts.md` | What SIGNET is, the problem, design principles |
 | `Architecture-Overview.md` | The four-layer model and lifecycle |
 | `Foundation-Layer.md` · `Process-Layer.md` · `Agent-Layer.md` · `Trust-Layer.md` | The data model, layer by layer |
 | `Codelists.md` | Controlled vocabularies |
 | `Standards-Mapping.md` | OCDS / EN 16931 / UBL / Peppol / VC-DID / ePO bridges |
+| `Compliance-Map.md` | Regulatory & compliance map (UK Procurement Act, EU AI Act, ViDA) |
+| `Extensions.md` | Extending without forking — the auction, onboarding, identity & commodity-risk extensions |
 | `EN-16931-and-ViDA-E-Invoicing.md` | The runnable, CI-verified invoicing pipeline |
 | `Serialisation.md` | JSON-LD context and cryptographic envelopes |
 | `Worked-Examples.md` | Complete instances from `examples/` |

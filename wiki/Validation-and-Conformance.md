@@ -27,17 +27,26 @@ npm run conformance         # reference adapter must reach Core+ (exits 0)
 npm run conformance:broken  # the broken adapter must be rejected (exits 1)
 ```
 
-To run the **agent demonstration** (new in v0.5.0 — a governed, conformance-verified agent
-action; see [Agent Layer](Agent-Layer)):
+To run the **three demonstrations** (each ends with a conformance-clean check; see
+[Agent Layer](Agent-Layer) and [Extensions](Extensions)):
 
 ```bash
-npm run agent               # an agent awards a contract under a Mandate; its output must be conformance-clean
+npm run agent               # an agent awards a contract under a Mandate (governed, conformance-clean)
+npm run onboarding          # a supplier onboarding case reaches a conditional qualification
+npm run auction             # a reverse auction closes deterministically to a single winner
+```
+
+To run the **extension conformance rules** (cross-object checkers beyond schema validation):
+
+```bash
+npm run conformance:commodity-risk   # reconciliation arithmetic, scenario integrity, rule ordering
+npm run conformance:extensions       # onboarding, auction, and identity cross-object rules
 ```
 
 ## What CI checks
 
 `.github/workflows/validate.yml` runs on every push to `main`/`dev` and every PR to `main`.
-It performs seven checks — a PR cannot merge while any fail:
+It performs eleven checks — a PR cannot merge while any fail:
 
 1. **Schema validation.** `node validate.js` validates every example against the schemas.
 2. **Codelist lint.** Every `codelists/*.csv` must start with the header
@@ -54,6 +63,15 @@ It performs seven checks — a PR cannot merge while any fail:
 7. **Agent demonstration.** Runs `node agent/run-agent.js`; the agent's governed action must
    be conformance-clean — every Decision, Evaluation, and Award validates, the event chain
    holds, and tampering is detected.
+8. **Supplier-onboarding demonstration.** Runs `node onboarding/run-onboarding.js`; an
+   onboarding case reaches a **conditional** qualification, conformance-clean.
+9. **Reverse-auction demonstration.** Runs `node auction/run-auction.js`; the auction closes
+   **deterministically** to a single winner, conformance-clean.
+10. **Commodity-risk conformance rules.** Runs `node conformance/rules/check-commodity-risk.js`
+    — the six [commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension) rules,
+    including the cross-object reconciliation, scenario-integrity, and rule-ordering checks.
+11. **Extension conformance rules.** Runs `npm run conformance:extensions` — the cross-object
+    checkers for the onboarding, auction, and identity extensions.
 
 A separate workflow, `.github/workflows/pages.yml`, renders `docs/specification.md` to HTML
 and publishes it to GitHub Pages (it runs `tools/build-pages.js` with `marked`).

@@ -23,6 +23,21 @@ Codelists are split into two tiers (see [Governance & Versioning](Governance-and
 | [documentType](#documenttype) | [Document.documentType](Foundation-Layer#document) |
 | [invoiceTypeCode](#invoicetypecode) | [Invoice.invoiceTypeCode](Process-Layer#invoice) |
 | [vatCategory](#vatcategory) | [InvoiceLine.vatCategoryCode](Foundation-Layer#invoiceline), [VatBreakdown.categoryCode](Foundation-Layer#vatbreakdown) |
+| [credentialType](#credentialtype) | `SupplierQualification` / `Approval.authorityCredential` ([onboarding](Extensions#the-onboarding-extension) & [identity](Extensions#working-draft-the-identity-profile) extensions) |
+
+The lists below belong to the [commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension) (all open unless marked closed):
+
+| Codelist | Used by |
+|----------|---------|
+| [commodity](#commodity) | `ExposurePosition.commodity`, `CoveragePolicy`, `PriceMark` |
+| [positionStatus](#positionstatus) | `ExposurePosition.positionStatus` — **closed** |
+| [instrument](#instrument) | `ExposurePosition.instrument` |
+| [deliveryBasis](#deliverybasis) | position / horizon delivery basis |
+| [markType](#marktype) | `PriceMark.markType` |
+| [policyEvaluationStatus](#policyevaluationstatus) | `CoverageAssessment.status` — **closed** |
+| [portfolioScope](#portfolioscope) | portfolio classification band |
+| [executionRoute](#executionroute) | `HedgeProposal.executionRoute` |
+| [shockBand](#shockband) | `Scenario.shockBand` |
 
 ---
 
@@ -155,8 +170,141 @@ EN 16931 BT-151 / BT-118. Subset of UNTDID 5305.
 | `K` | Intra-community supply | Zero-rated intra-community supply of goods/services. |
 | `O` | Outside scope | Services outside the scope of VAT. |
 
+## credentialType
+
+*Open list* — the credential kinds handled by the [onboarding extension](Extensions#the-onboarding-extension)
+(carried on a [`SupplierQualification`](Extensions#the-onboarding-extension)) and the
+[identity profile](Extensions#working-draft-the-identity-profile) (an
+`Approval.authorityCredential` is a `delegationOfAuthority`). Screening results are carried as
+**attestations** — SIGNET never performs the check.
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `identity` | Legal identity | Incorporation / registration evidence. |
+| `vat` | VAT registration | Tax registration identifier. |
+| `beneficialOwnership` | Beneficial ownership | Ultimate beneficial owner declaration/evidence. |
+| `financialStanding` | Financial standing | Financial health / credit assessment result. |
+| `insurance` | Insurance cover | Proof of required insurance. |
+| `certification` | Certification | Standard or scheme certification (e.g. ISO 27001). |
+| `sanctionsScreening` | Sanctions screening result | Result of a sanctions/AML screening, attested by the screening provider. |
+| `delegationOfAuthority` | Delegation of authority | Attestation of a person's approval authority band issued by their organisation. |
+
+---
+
+## Commodity-risk extension codelists
+
+These lists belong to the [commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension).
+`positionStatus` and `policyEvaluationStatus` are **closed** — conformance and reconciliation
+depend on their values; the rest are open.
+
+### commodity
+
+*Open list.*
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `electricity` | Electricity | Electrical energy. |
+| `gas` | Gas | Natural gas. |
+| `fuel` | Fuel | Liquid fuels. |
+| `certificates-recEac` | Certificates (REC/EAC) | Renewable energy certificates / energy attribute certificates. |
+| `other` | Other | Other commodity. |
+
+### positionStatus
+
+**Closed list** — reconciliation depends on it (`hedged + floating = markToMarket`).
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `hedged` | Hedged | Volume fixed under contract. |
+| `floating` | Floating | Volume exposed to market price. |
+| `markToMarket` | Mark to market | Total open volume valued at the applicable PriceMark. |
+
+### instrument
+
+*Open list.*
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `ppa` | PPA | Power purchase agreement. |
+| `cppa` | Corporate PPA | Corporate power purchase agreement. |
+| `baseloadForward` | Baseload forward | Baseload forward contract. |
+| `peakForward` | Peak forward | Peak forward contract. |
+| `greenTariff` | Green tariff | Renewable supply tariff. |
+| `fixedPriceSupply` | Fixed-price supply | Fixed-price supply contract. |
+| `floatingSupply` | Floating supply | Index-linked supply contract. |
+| `financialSwap` | Financial swap | Financially settled swap. |
+| `other` | Other | Other instrument. |
+
+### deliveryBasis
+
+*Open list.*
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `calendarYear` | Calendar year | Jan–Dec delivery year. |
+| `fiscalYear` | Fiscal year | Organisation fiscal year. |
+| `quarter` | Quarter | Calendar quarter. |
+| `month` | Month | Calendar month. |
+
+### markType
+
+*Open list.*
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `forwardClose` | Forward close | Exchange forward closing price. |
+| `spotSettlement` | Spot settlement | Spot settlement price. |
+| `brokerQuote` | Broker quote | Broker-provided quote. |
+| `internalCurve` | Internal curve | Internally derived curve point. |
+
+### policyEvaluationStatus
+
+**Closed list** — conformance depends on it.
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `withinCorridor` | Within corridor | Hedged ratio inside the applicable band. |
+| `belowMinimum` | Below minimum | Hedged ratio below the corridor minimum. |
+| `aboveMaximum` | Above maximum | Hedged ratio above the corridor maximum. |
+| `noPolicyDefined` | No policy defined | No corridor applies. |
+
+### portfolioScope
+
+*Open list.*
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `core` | Core | Core portfolio. |
+| `nonCore` | Non-core | Non-core portfolio. |
+| `infrastructure` | Infrastructure | Infrastructure carve-out. |
+| `other` | Other | Other scope. |
+
+### executionRoute
+
+*Open list.*
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `newSourcingEvent` | New sourcing event | Instantiated Need produces a new SourcingEvent. |
+| `callOffUnderFramework` | Call-off under framework | Executed under an existing framework contract. |
+| `directNegotiation` | Direct negotiation | Direct negotiation with a counterparty. |
+
+### shockBand
+
+*Open list.*
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `normalRange` | Normal range | Shocks within normal market variation. |
+| `persistentHigh` | Persistent high | Sustained elevated prices. |
+| `crisis` | Crisis | Crisis-level price shock. |
+
+---
+
 ## Where to go next
 
 - [Foundation Layer](Foundation-Layer) / [Process Layer](Process-Layer) — the fields these
   lists constrain.
+- [Extensions](Extensions) — the onboarding, identity, and commodity-risk extensions whose
+  codelists appear above.
 - [Governance & Versioning](Governance-and-Versioning) — closed vs open lists.

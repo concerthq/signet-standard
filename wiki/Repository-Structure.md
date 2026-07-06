@@ -8,16 +8,23 @@ schema/        JSON Schema (Draft-07) — the normative Canonical Data Model
   definitions.schema.json   Foundation blocks (Identifier, Party, Value, …)
                             incl. EN 16931 blocks (Unit, InvoiceLine, VatBreakdown)
   need / sourcing-event / submission / evaluation / award / contract /
-  order / catalogue / obligation / invoice / auction / bid .schema.json   (process layer)
-  synthetic-agent / mandate / decision / policy .schema.json          (agent layer)
+  order / catalogue / obligation / invoice / auction / bid /
+  onboarding-case / supplier-qualification .schema.json               (process layer)
+  synthetic-agent / mandate / decision / policy / approval .schema.json   (agent layer)
   event / consent .schema.json                                        (trust layer)
+  exposure-position / coverage-policy / price-mark / coverage-assessment /
+  scenario / hedge-proposal .schema.json          (commodity-risk extension, in-tree)
   party.schema.json
   context.jsonld            JSON-LD @context (aligns to ePO, PROV, W3C VC)
 codelists/     Controlled vocabularies (CSV: Code, Title, Description)
-examples/      Worked instances, validated in CI
+examples/      Worked instances, validated in CI (incl. examples/commodity-risk/)
 conformance/   Machine-runnable conformance harness (levels, suite, adapters, runner)
+               + rules/ — executable extension cross-object checkers
 agent/         Runnable agent demonstration — a governed, conformance-verified award (v0.5.0)
-docs/          The prose specification (rendered on concert.foundation/standard)
+onboarding/    Supplier-onboarding demonstration — a conditional qualification (v0.6.0)
+auction/       Reverse-auction demonstration — a deterministic close (v0.8.0)
+governance/    Standards Committee decision records (governance/reviews/)
+docs/          The prose specification + docs/extensions/ (extension & profile specs)
 tools/         Reference transforms + the Pages renderer
 .github/       CI workflows, issue/PR templates, CODEOWNERS, Dependabot
 LICENSE        CC0 1.0 public-domain dedication
@@ -34,9 +41,15 @@ stable URI under `https://concert.foundation/signet/v0.1/`. Files map to the fou
 | Layer | Schema files |
 |-------|--------------|
 | Foundation | `definitions.schema.json`, `party.schema.json` |
-| Process | `need`, `sourcing-event`, `submission`, `evaluation`, `award`, `contract`, `order`, `catalogue`, `obligation`, `invoice`, `auction`, `bid` |
-| Agent | `synthetic-agent`, `mandate`, `decision`, `policy` |
+| Process | `need`, `sourcing-event`, `submission`, `evaluation`, `award`, `contract`, `order`, `catalogue`, `obligation`, `invoice`, `auction`, `bid`, `onboarding-case`, `supplier-qualification` |
+| Agent | `synthetic-agent`, `mandate`, `decision`, `policy`, `approval` |
 | Trust | `event`, `consent` |
+
+The auction, onboarding, identity, and commodity-risk [extensions](Extensions) ship **in-tree**:
+`auction`/`bid` and `onboarding-case`/`supplier-qualification` sit in the process layer,
+`approval` (identity) in the agent layer, and the commodity-risk objects
+(`exposure-position`, `coverage-policy`, `price-mark`, `coverage-assessment`, `scenario`,
+`hedge-proposal`) are their own schema files under the core `v0.1` namespace.
 
 `context.jsonld` is the JSON-LD context — see [Serialisation](Serialisation).
 
@@ -63,6 +76,7 @@ Added in **v0.4.0**: the machine-runnable suite behind the "SIGNET Certified" ma
 | `fixtures/invalid/` | Documents that MUST be rejected (one per rule). |
 | `adapter/` | The adapter contract, a reference adapter (reaches Full), and a broken adapter (rejected). |
 | `runner/` | `run-conformance.js` (the harness) + `lib.js` (schema loading, hashing, chain verification). |
+| `rules/` | Executable **extension** cross-object checkers (`check-onboarding.js`, `check-auction.js`, `check-identity.js`, `check-commodity-risk.js`), run in CI. |
 | `reports/` | Generated reports; two samples (pass + fail) are committed, the rest git-ignored. |
 
 See the dedicated [Conformance Harness](Conformance-Harness) page.
@@ -87,6 +101,23 @@ accountable, conformant** action — awarding a contract under a Mandate. Run it
 The €12M event value exceeds the mandate's €10M ceiling, so the agent requires **human
 approval** before awarding — the structural demonstration that agent autonomy and auditable
 governance are not in tension. See the [Agent Layer](Agent-Layer).
+
+## `onboarding/` and `auction/` — the extension demonstrations
+
+Two further runnable demos, each ending with a conformance-clean check (both run in CI):
+
+| Dir | Run | What it proves |
+|-----|-----|----------------|
+| `onboarding/` | `npm run onboarding` | A supplier [onboarding](Extensions#the-onboarding-extension) case reaches a **conditional** qualification (value cap + pending check), reusing Credential/Policy/Decision/Event. Added in **v0.6.0**. |
+| `auction/` | `npm run auction` | A reverse [auction](Extensions#example-the-auction-extension) closes **deterministically** to a single winner over a hash-chained bid trail — the data-level statement of operator-independence. Added in **v0.8.0**. |
+
+## `governance/` — Standards Committee records
+
+`governance/reviews/` holds the public decision records that version alongside the standard —
+e.g. `2026-07-commodity-risk.md` (accepted in principle) and `2026-07-commodity-risk-merge.md`
+(merged as a Working Draft), the trail of the first **member-proposed**
+[extension](Extensions#working-draft-the-commodity-risk-extension). See
+[Governance & Versioning](Governance-and-Versioning#review-records).
 
 ## `docs/` — the prose specification
 
@@ -116,9 +147,11 @@ See [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 
 ## `.github/` — automation & governance
 
-- `workflows/validate.yml` — validation, codelist lint, JSON well-formedness, invoice
-  projection + verification, the **conformance harness** (reference + broken adapters), and
-  the **agent demonstration**; see [Validation & Conformance](Validation-and-Conformance).
+- `workflows/validate.yml` — eleven checks: validation, codelist lint, JSON well-formedness,
+  invoice projection + verification, the **conformance harness** (reference + broken adapters),
+  the **three demonstrations** (agent, onboarding, auction), and the **extension conformance
+  rules** (commodity-risk + onboarding/auction/identity); see
+  [Validation & Conformance](Validation-and-Conformance).
 - `workflows/pages.yml` — publishes the specification to GitHub Pages.
 - `ISSUE_TEMPLATE/` — `change-proposal.md` and `spec-defect.md` (plus `config.yml`).
 - `PULL_REQUEST_TEMPLATE.md`, `CODEOWNERS`, `dependabot.yml`.
@@ -127,7 +160,7 @@ See [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 
 | File | Purpose |
 |------|---------|
-| `package.json` | npm scripts (`validate`, `transform`, `verify-ubl`, `conformance`, `conformance:broken`, `agent`) and dev dependencies. |
+| `package.json` | npm scripts (`validate`, `transform`, `verify-ubl`, `conformance`, `conformance:broken`, `conformance:commodity-risk`, `conformance:extensions`, `agent`, `onboarding`, `auction`) and dev dependencies. |
 | `validate.js` | The example validator run by `npm run validate` and CI. |
 | `LICENSE` | CC0 1.0 dedication. |
 | `CONTRIBUTING.md` | Contribution process and CLA — see [Contributing](Contributing). |

@@ -18,7 +18,10 @@ core lean.
    [change-control process](Governance-and-Versioning). This keeps the core lean while
    allowing domain-specific elaboration.
 3. **Separate conformance.** Core [conformance](Validation-and-Conformance) is assessed
-   against the **core model only**; extensions are conformance-assessed separately.
+   against the **core model only**; extensions are conformance-assessed separately. All four
+   in-tree extensions below now carry executable cross-object checkers under
+   `conformance/rules/` (run in CI), so each has **machine-backed conformance** beyond schema
+   validation — see [Conformance Harness → Extension conformance](Conformance-Harness#extension-conformance-rules).
 
 ## Proposing an extension
 
@@ -46,7 +49,10 @@ Because it reuses the core objects and is broadly useful, it is shipped **in-tre
 core `schema/`, `codelists/`, and `examples/` directories and the core `v0.1` namespace)
 rather than as a separately-namespaced package — it is effectively a candidate already on the
 [promotion path](Governance-and-Versioning). A domain extension that introduced genuinely new,
-domain-specific structure would instead live under its own namespace per the rules above.
+domain-specific structure would instead live under its own namespace per the rules above. Its
+cross-object rules — the recorded winner equals the deterministic close, and every bid respects
+the reserve — are machine-checked by `conformance/rules/check-auction.js`
+(`npm run conformance:extensions`), and a runnable demonstration is at `npm run auction`.
 
 ## The onboarding extension
 
@@ -62,8 +68,10 @@ decision reuses [`Decision`](Agent-Layer#decision) with the agent-governance pat
 hash-chained [`Event`](Trust-Layer#event).
 
 Like the auction extension it ships **in-tree** (core `v0.1` namespace). **Status: schemas,
-validated worked examples, and a runnable demonstration are in-tree**; the normative spec is
-at `docs/extensions/onboarding.md`.
+validated worked examples, and a runnable demonstration (`npm run onboarding`) are in-tree**;
+the normative spec is at `docs/extensions/onboarding.md`. Its cross-object rules — conditional
+qualifications carry their conditions, and case↔qualification closure holds both ways — are
+machine-checked by `conformance/rules/check-onboarding.js` (`npm run conformance:extensions`).
 
 ## Working Draft: the commodity-risk extension
 
@@ -75,18 +83,27 @@ commodity risk governance** — positions, coverage corridors, price marks, cove
 assessments, price-shock scenarios, and hedge proposals — with electricity as the reference
 commodity but a commodity-generic schema.
 
-It is a good illustration of the **separately-namespaced** case above (contrast the in-tree
-auction extension): its additions to core objects live under a dedicated **`commodityRisk`**
-namespace and MUST NOT alter any core object's `required` set or `additionalProperties`
-semantics. It still **adds, does not change** — an approved `HedgeProposal` instantiates a
-core [`Need`](Process-Layer#need); the coverage corridor is a subtype of the Agent-layer
-[`Policy`](Agent-Layer#policy) so it bounds a synthetic agent's `Mandate`; and every
-assessment is a hash-anchored [`Event`](Trust-Layer#event).
+It is a good illustration of the **namespaced-additions** case (contrast the auction
+extension, whose additions are all new core-namespace objects): its **additions to existing
+core objects** (`Contract`, `Need`, `Award`, `Decision`) live under a dedicated
+**`commodityRisk`** namespace key and MUST NOT alter any core object's `required` set or
+`additionalProperties` semantics. It still **adds, does not change** — an approved
+`HedgeProposal` instantiates a core [`Need`](Process-Layer#need); the coverage corridor is a
+subtype of the Agent-layer [`Policy`](Agent-Layer#policy) so it bounds a synthetic agent's
+`Mandate`; and every assessment is a hash-anchored [`Event`](Trust-Layer#event).
 
-**Status: Working Draft spec, accepted in principle.** Only the prose spec has landed so far;
-schemas (in the `concert.foundation/signet` namespace), codelists, a validated worked example,
-and the six conformance rules are a **separate change still to come**, so the extension is not
-yet in-tree under `schema/`, `codelists/`, or `examples/`, and no tag has been cut for it.
+**Status: Working Draft, landed in-tree (v0.10.0).** The full technical package has shipped:
+six schemas (`ExposurePosition`, `CoveragePolicy` as a `Policy` subtype, `PriceMark`,
+`CoverageAssessment`, `Scenario`, `HedgeProposal`), ten codelists (`positionStatus` and
+`policyEvaluationStatus` are **closed**), an eleven-file full-loop worked example under
+`examples/commodity-risk/` (`belowMinimum` → proposal → `executed` → `withinCorridor`,
+arithmetically reconciled), and the six conformance rules as an executable checker
+(`conformance/rules/check-commodity-risk.js`, run by `npm run conformance:commodity-risk`) —
+three of them cross-object checks beyond schema validation: reconciliation arithmetic,
+scenario fixed-cost invariance, and escalation-first rule ordering. The new object schemas
+ship in-tree under the core `v0.1` namespace; the additive fields on core objects use the
+namespaced `commodityRisk` key. The Standards Committee has **merged it as a Working Draft**
+(`governance/reviews/2026-07-commodity-risk-merge.md`).
 
 ## Working Draft: the identity profile
 
@@ -126,11 +143,15 @@ access-controlled, erasable obligation. SIGNET records **who acted under what au
 never authenticates anyone** — authentication (SSO, passkeys, identity-proofing) is permanently
 out of scope, as is any claim of identity assurance in the eIDAS/NIST sense.
 
-**Status: Working Draft, landed in-tree.** The `Approval` schema (`schema/approval.schema.json`)
-and a validated worked example (`examples/approval.json` — the approval behind the
-[agent demonstration](Agent-Layer)'s award) are in the repository, and the agent demo emits the
-verifiable `Approval` at runtime and checks the approver's authority ceiling covers the award
-value. No tag has been cut yet — it folds into the next release.
+**Status: Working Draft, landed in-tree (v0.9.0).** The `Approval` schema
+(`schema/approval.schema.json`) and a validated worked example (`examples/approval.json` — the
+approval behind the [agent demonstration](Agent-Layer)'s award) are in the repository, and the
+agent demo emits the verifiable `Approval` at runtime and checks the approver's authority
+ceiling covers the award value. Its cross-object rules are machine-checked at the **Full**
+level by `conformance/rules/check-identity.js` (`npm run conformance:extensions`): approver
+pseudonymity, that the authority credential is a `delegationOfAuthority` carrying a basis, that
+a `Decision`'s `humanApproval` resolves to an `Approval` that points back at it, and that the
+authority ceiling covers the decided value.
 
 ## Relationship to the agent layer
 
