@@ -14,6 +14,12 @@ version changes only on a breaking change to the core model.
   value) extensions, wired into CI. All four extensions now have machine-backed
   conformance. Governance: commodity-risk resubmission record — merged as Working
   Draft.
+- **Five P2P/SRM extension specs (Working Drafts, spec-first)** — receipt & governed
+  three-way match; supplier performance (SLAs as Policy, assessments feeding the
+  qualification lifecycle); contract amendments (event-anchored deltas, derived
+  state); framework agreements & call-offs; negotiation under per-term mandates.
+  Schemas and conformance rules follow per-extension after review, per the process
+  established by commodity-risk.
 
 ## [0.10.0] — 2026-07-05 — Working Draft
 

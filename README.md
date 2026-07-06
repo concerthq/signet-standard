@@ -155,6 +155,11 @@ Each spec lives under [`docs/extensions/`](docs/extensions/):
   portfolio-level commodity risk governance; the first **member-proposed** extension,
   reviewed under the identical process as any proposer.
 
+Five further extensions are specified as Working Drafts (receipt & three-way match, supplier
+performance, contract amendments, framework agreements, negotiation) — see
+[`docs/extensions/`](docs/extensions/); schemas and conformance rules follow per-extension
+after review, per the process commodity-risk established.
+
 Standards Committee decision records are public and versioned in-repo under
 [`governance/reviews/`](governance/reviews/) — the first records the review of the first
 member-proposed extension, confirming member proposals get no preferential path.

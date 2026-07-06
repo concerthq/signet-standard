@@ -287,6 +287,9 @@ executable checker at `conformance/rules/check-commodity-risk.js`
   internal-network objects and are not published to OCDS.
 - **Auction extension.** `PriceMark` and the auction extension's price handling are
   designed to compose (§4.3 graduation note).
+- **Frameworks extension.** The `executionRoute: callOffUnderFramework` and
+  `frameworkContract` references above are now specified by the framework agreements
+  extension — see [`frameworks.md`](frameworks.md) (`FrameworkAgreement`, `CallOff`).
 - **Execution systems.** Positions and marks ingest from ETRM/treasury systems and
   market-data feeds; the extension is their governed network representation, not
   their replacement (§3).
