@@ -65,7 +65,7 @@ invoice cannot participate.
 **33 EN 16931 Business Terms and Groups** (BT-1…BT-158, BG-4/7/23/25), with each schema field
 recording its BT/BG reference structurally. The repository ships a runnable transform that
 projects a canonical SIGNET Invoice to **UBL 2.1 / Peppol BIS Billing 3.0** and a verifier that
-reconciles every Business Term and the monetary totals — **both run in CI on every push**, so
+reconciles the key Business Terms and the monetary totals — **both run in CI on every push**, so
 convertibility is continuously proven, not asserted (conformance requirement F-MAP). See
 [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 
@@ -134,7 +134,7 @@ which compliance can be built.
 
 These mappings are credible because the structures behind them are **mechanically verified**,
 not merely described. The [conformance harness](Conformance-Harness) checks, on every commit,
-that an EN 16931 Invoice projects to Peppol BIS with every Business Term and total preserved
+that an EN 16931 Invoice projects to Peppol BIS with the key Business Terms and totals preserved
 (**F-MAP**), and that [Policies](Agent-Layer#policy) carry both executable and human-readable
 rules while [Decisions](Agent-Layer#decision) cite their inputs and policies (**F-SEM**). An
 implementation that claims to support these obligations can be *tested* against the identical

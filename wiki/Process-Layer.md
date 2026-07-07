@@ -230,7 +230,7 @@ traceability.
 | `id` | Identifier | 1 | BT-1 | Invoice number. |
 | `invoiceTypeCode` | string | 0..1 | BT-3 | Invoice type. See [invoiceTypeCode codelist](Codelists#invoicetypecode). |
 | `issueDate` | date-time | 1 | BT-2 | Issue date. |
-| `currency` | string | 0..1 | BT-5 | Invoice currency code. |
+| `currency` | string | 1 | BT-5 | Invoice currency code. |
 | `contract` | Identifier | 0..1 | BT-12 | Related contract. |
 | `order` | Identifier | 0..1 | BT-13 | Related order. |
 | `settles` | Identifier[] | 0..* | — | The [Obligation(s)](#obligation) this invoice settles. **SIGNET-original** — not an EN 16931 BT; omitted on Peppol BIS projection. |

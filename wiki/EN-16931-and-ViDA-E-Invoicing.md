@@ -3,7 +3,7 @@
 This is the one standards mapping in SIGNET that is not just asserted but **runnable and
 continuously proven in CI**. The repository ships a reference transform that projects a
 canonical SIGNET [Invoice](Process-Layer#invoice) into **UBL 2.1 / Peppol BIS Billing 3.0**
-(EN 16931 compliant), and a verifier that reconciles every Business Term and the monetary
+(EN 16931 compliant), and a verifier that reconciles the key Business Terms and the monetary
 totals.
 
 ## Why this matters: EU ViDA

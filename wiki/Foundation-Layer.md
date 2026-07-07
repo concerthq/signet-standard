@@ -1,8 +1,9 @@
 # Foundation Layer
 
 The foundation layer defines the primitive value types and reference objects used by every
-other layer. They live in a single schema file, `schema/definitions.schema.json`, and are
-referenced everywhere via JSON Schema `$ref`.
+other layer. Most live in a single schema file, `schema/definitions.schema.json`, and are
+referenced everywhere via JSON Schema `$ref`; [Party](#party) is large enough to warrant its
+own file, `schema/party.schema.json`.
 
 > **Cardinality notation:** `1` = required single · `0..1` = optional single ·
 > `1..*` = one or more required · `0..*` = zero or more. See
@@ -16,7 +17,7 @@ referenced everywhere via JSON Schema `$ref`.
 | [Period](#period) | A span of time | — |
 | [Classification](#classification) | A coded classification | CPV, UNSPSC, GSIN |
 | [Item](#item) | A line item | UBL/OCDS item |
-| [Credential](#credential) | A W3C Verifiable Credential reference | W3C VC 2.0 |
+| [Credential](#credential) | A W3C Verifiable Credential reference | W3C VC 1.1 |
 | [Document](#document) | A document/attachment reference | — |
 | [Provenance](#provenance) | Who/what produced an assertion | W3C PROV-O |
 | [Score](#score) | A per-criterion evaluation score | — |

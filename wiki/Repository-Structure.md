@@ -163,7 +163,7 @@ See [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 
 | File | Purpose |
 |------|---------|
-| `package.json` | npm scripts (`validate`, `transform`, `verify-ubl`, `conformance`, `conformance:broken`, `conformance:commodity-risk`, `conformance:extensions`, `agent`, `onboarding`, `auction`) and dev dependencies. |
+| `package.json` | npm scripts (`validate`, `transform`, `verify-ubl`, `conformance`, `conformance:broken`, `conformance:commodity-risk`, `conformance:extensions`, `test:projection-skip`, `agent`, `onboarding`, `auction`) and dev dependencies. |
 | `validate.js` | The example validator run by `npm run validate` and CI. |
 | `LICENSE` | CC0 1.0 dedication. |
 | `CONTRIBUTING.md` | Contribution process and CLA — see [Contributing](Contributing). |

@@ -38,6 +38,7 @@ The lists below belong to the [commodity-risk extension](Extensions#working-draf
 | [portfolioScope](#portfolioscope) | portfolio classification band |
 | [executionRoute](#executionroute) | `HedgeProposal.executionRoute` |
 | [shockBand](#shockband) | `Scenario.shockBand` |
+| [proposalTrigger](#proposaltrigger) | `HedgeProposal.trigger.type` |
 
 ---
 
@@ -108,6 +109,7 @@ parameterised by `auctionType` and `rules`; new profiles may be added by pull re
 | `evaluation` | Evaluation | Scoring of a submission. |
 | `award` | Award | Decision to award. |
 | `negotiationMove` | Negotiation move | A move within a negotiation (the object model is the [negotiation extension](Extensions#specified-as-working-drafts-schemas-to-follow), a Working Draft spec). |
+| `qualification` | Qualification | Decision to qualify a supplier (onboarding). |
 
 ## policyType
 
@@ -298,6 +300,18 @@ depend on their values; the rest are open.
 | `normalRange` | Normal range | Shocks within normal market variation. |
 | `persistentHigh` | Persistent high | Sustained elevated prices. |
 | `crisis` | Crisis | Crisis-level price shock. |
+
+### proposalTrigger
+
+*Open list.*
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `policyBreach` | Policy breach | A coverage assessment breached the corridor. |
+| `marketOpportunity` | Market opportunity | Favourable market conditions. |
+| `demandRevision` | Demand revision | Volume forecast changed. |
+| `contractExpiry` | Contract expiry | An existing hedge expires. |
+| `manual` | Manual | Manually raised. |
 
 ---
 

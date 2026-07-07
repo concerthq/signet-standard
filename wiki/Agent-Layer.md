@@ -102,7 +102,7 @@ and rationale that produced it. **The backbone of accountability.**
 | Field | Type | Card. | Definition |
 |-------|------|-------|------------|
 | `id` | Identifier | 1 | Decision identifier. |
-| `decisionType` | string | 1 | See [decisionType codelist](Codelists#decisiontype): `admissibility`, `evaluation`, `award`, `negotiationMove`. |
+| `decisionType` | string | 1 | See [decisionType codelist](Codelists#decisiontype): `admissibility`, `evaluation`, `award`, `negotiationMove`, `qualification`. |
 | `madeBy` | Identifier | 1 | The agent (human or synthetic) that decided. |
 | `underMandate` | Identifier | 0..1 | The mandate relied on, where the decider is synthetic. |
 | `inputs` | Identifier[] | 0..* | The objects considered (submissions, credentials, policies). |

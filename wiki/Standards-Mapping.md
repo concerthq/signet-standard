@@ -22,7 +22,7 @@ and data arriving in those formats can always be *lifted* into the CDM.
 | [Catalogue](Process-Layer#catalogue) | UBL 2.3 Catalogue; Peppol BIS Catalogue | UBL 2.3 |
 | [Invoice](Process-Layer#invoice) | EN 16931; Peppol BIS Billing; UBL Invoice; Factur-X | EN 16931 semantic model |
 | [Party](Foundation-Layer#party) | OCDS `parties`; ePO Agent | OCDS org; ePO |
-| [Credential](Foundation-Layer#credential) | W3C Verifiable Credentials 2.0 | VC data model |
+| [Credential](Foundation-Layer#credential) | W3C Verifiable Credentials 1.1 | VC data model |
 | [Identifier](Foundation-Layer#identifier) (`did`) | W3C DID 1.0 | DID core |
 | [Provenance](Trust-Layer#provenance) | W3C PROV-O | PROV |
 | Semantic layer (all) | EU eProcurement Ontology (ePO) | ePO OWL/RDF |

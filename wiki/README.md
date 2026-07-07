@@ -28,7 +28,6 @@ to the wiki.
 | `Validation-and-Conformance.md` | Local + CI validation, conformance tiers |
 | `Conformance-Harness.md` | The v0.4.0 machine-runnable suite, levels, and certification |
 | `Repository-Structure.md` | What lives where |
-| `Extensions.md` | Extending without forking |
 | `Governance-and-Versioning.md` | Stewardship, SemVer, change control |
 | `Contributing.md` | CLA and the change process |
 | `Glossary.md` · `FAQ.md` | Reference |
