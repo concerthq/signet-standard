@@ -34,7 +34,8 @@ governance/    Standards Committee decision records (governance/reviews/)
 tools/         Reference tooling (signet-to-ubl projection, UBL verifier, Pages build)
 wiki/          Long-form documentation (mirrors the GitHub wiki)
 .github/workflows/validate.yml   CI: validates examples, runs conformance + all three demos
-LICENSE        CC0 1.0 public-domain dedication
+LICENSE        CC0 1.0 public-domain dedication (the normative artifacts)
+conformance/LICENSE   Apache-2.0 — the machine-runnable conformance harness
 CONTRIBUTING.md   How to contribute (and the CLA)
 CHANGELOG.md   Semantic-versioned history
 ```
@@ -175,3 +176,7 @@ Contributions are welcome under the Concert Contributor Licence Agreement — se
 ## Marks
 
 "SIGNET", "Concert", and "SIGNET Certified" are marks administered by Concert Foundation under the [IP & Licensing Policy](https://concert.foundation/governance). The CC0 dedication covers copyright in the artifacts only; it grants no rights in the marks.
+
+## Licensing
+
+The **normative artifacts** — schemas, codelists, JSON-LD context, examples, and prose — are dedicated to the public domain under [CC0 1.0](LICENSE), so the vocabulary can be implemented everywhere without friction. The **conformance harness** under [`conformance/`](conformance/LICENSE) is instead licensed **Apache-2.0**: it is executable code that implementers run and embed, and Apache-2.0's express patent grant gives them the protection CC0 does not (CC0 waives copyright but not patent rights). Spec-under-CC0 / code-under-Apache is the established open-standard pattern.

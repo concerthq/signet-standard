@@ -9,6 +9,11 @@ how the standard is versioned, what counts as normative, and how changes are con
 - The artifacts are dedicated to the public domain under
   [CC0 1.0](https://github.com/concerthq/signet-standard/blob/main/LICENSE) — the vocabulary
   is meant to be implemented everywhere, by anyone, without friction or attribution burden.
+- The **conformance harness** under
+  [`conformance/`](https://github.com/concerthq/signet-standard/blob/main/conformance/LICENSE)
+  is instead licensed **Apache-2.0**: it is executable code implementers run and embed, and
+  Apache-2.0's express patent grant provides protection CC0 does not. Spec-under-CC0 /
+  code-under-Apache is the established open-standard pattern.
 - Concert holds **no proprietary claim** over the model; it stewards its evolution through
   the Standards Committee and the formal change-control process.
 - **No contributor, and no commercial operator (including Score Networks), gains a
