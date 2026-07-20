@@ -7,6 +7,10 @@ version changes only on a breaking change to the core model.
 ## [Unreleased]
 
 ### Added
+- **Auction conformance profile** — the first product-certification path
+  (`docs/profiles/auction-platform.md`), composing entirely from shipped artifacts: it
+  names five demonstrable requirements (valid objects, deterministic close, tamper-evident
+  record, governed awards, no PII in the chain) checkable with the public suite.
 - **Extension conformance rules** — executable cross-object checkers for the
   onboarding (case↔qualification closure, conditional integrity), auction (the
   recorded winner equals the deterministic close; reserve integrity), and identity

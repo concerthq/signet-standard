@@ -21,6 +21,16 @@ the document; the URL stays stable).
 | `frameworks` | `FrameworkAgreement` (Contract subtype), `CallOff` (direct award / mini-competition) with a conformance-checkable drawdown invariant (Σ call-offs ≤ ceiling) | **Working Draft (spec only; schemas to follow)** | [`frameworks.md`](frameworks.md) |
 | `negotiation` | `Negotiation`, `Offer` — a governed exchange of offers over named terms under **per-term Mandates**; the object model behind the existing `decisionType: negotiationMove` | **Working Draft (spec only; schemas to follow)** | [`negotiation.md`](negotiation.md) |
 
+## Profiles
+
+A **profile** names a subset of already-shipped requirements as the bar for a particular
+kind of product. It adds nothing normative of its own — it composes existing artifacts —
+and is named for its **id** (the filename), like extensions.
+
+| Id | What it is | Status | Spec |
+|----|------------|--------|------|
+| `auction-platform` | Certification profile for eAuction platforms — the first product-certification path; composes the auction + identity extensions and the public conformance suite into five demonstrable requirements (valid objects · deterministic close · tamper-evident record · governed awards · no PII in the chain) | **Working Draft** | [`../profiles/auction-platform.md`](../profiles/auction-platform.md) |
+
 ## Status vocabulary
 
 - **Working Draft (spec only; schemas to follow)** — the prose spec has landed and is under
