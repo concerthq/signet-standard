@@ -6,6 +6,8 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+## [0.12.0] — 2026-07-20 — Working Draft
+
 ### Added
 - **Auction conformance profile** — the first product-certification path
   (`docs/profiles/auction-platform.md`), composing entirely from shipped artifacts: it
