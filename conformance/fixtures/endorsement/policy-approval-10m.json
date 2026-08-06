@@ -1,0 +1,11 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Policy",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#policy-approval-10m" },
+  "policyType": "approval",
+  "expressionLanguage": "cel",
+  "expression": "action.value.amount <= 10000000",
+  "humanReadable": "An award at or below EUR 10,000,000 may be decided autonomously. Above that figure a human must approve the decision.",
+  "version": "1.0.0",
+  "issuedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" }
+}

@@ -11,7 +11,9 @@ agent/output/
 onboarding/output/
 auction/output/
 
-# Conformance reports are generated; the two committed samples show pass/fail.
+# Conformance reports are generated; the committed samples show pass/fail.
 conformance/reports/*-report.json
 !conformance/reports/reference-adapter-report.json
 !conformance/reports/broken-adapter-report.json
+!conformance/reports/reference-adapter-endorsement-report.json
+!conformance/reports/broken-adapter-endorsement-report.json

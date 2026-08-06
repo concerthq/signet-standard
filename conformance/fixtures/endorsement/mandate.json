@@ -1,0 +1,15 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Mandate",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#mandate-endorsement-1" },
+  "agent": { "scheme": "did", "id": "did:web:buyer.example#agent-award-1" },
+  "grantedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+  "permittedCapabilities": ["evaluate.submission", "award.decision"],
+  "constraints": [ { "scheme": "did", "id": "did:web:buyer.example#policy-constraint-ceiling" } ],
+  "approvalThresholds": [ { "scheme": "did", "id": "did:web:buyer.example#policy-approval-10m" } ],
+  "scope": {
+    "entities": ["did:web:buyer.example#event-1207"],
+    "maxAutonomousValue": { "amount": 10000000, "currency": "EUR" }
+  },
+  "validity": { "startDate": "2026-01-01T00:00:00Z", "endDate": "2026-12-31T23:59:59Z" }
+}

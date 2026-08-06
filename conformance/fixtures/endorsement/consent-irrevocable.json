@@ -1,0 +1,11 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Consent",
+  "id": { "scheme": "did", "id": "did:web:supplier.example#consent-4472" },
+  "grantor": { "scheme": "did", "id": "did:web:supplier.example#supplier" },
+  "grantee": { "scheme": "did", "id": "did:web:auditor.example#auditor" },
+  "resource": [ { "scheme": "did", "id": "did:web:supplier.example#doc-audit-2025" } ],
+  "purpose": "Statutory audit retention. Granted irrevocably for the retention period.",
+  "validity": { "startDate": "2026-01-01T00:00:00Z", "endDate": "2032-12-31T23:59:59Z" },
+  "revocable": false
+}
