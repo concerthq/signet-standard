@@ -65,7 +65,7 @@ are reported for diagnostics.
 
 | Check | Requirement |
 |-------|-------------|
-| **E-MDT-1** | An action exceeding an `approvalThresholds` policy MUST be refused, or MUST produce a Decision with `humanApproval` populated. |
+| **E-MDT-1** | An action exceeding an `approvalThresholds` policy MUST NOT complete autonomously. The adapter MUST return a `Refusal` citing `E-MDT-1`. |
 | **E-MDT-2** | An action within all thresholds MUST proceed **without** requiring `humanApproval`. |
 | **E-MDT-3** | An action invoking a capability absent from `permittedCapabilities` MUST be refused. |
 | **E-MDT-4** | An action on a subject outside the mandate's `scope` MUST be refused. |
@@ -75,14 +75,26 @@ are reported for diagnostics.
 
 Four of these carry most of the weight.
 
-**E-MDT-2 is the non-triviality guard.** Without it, an implementation demanding human approval for
-everything passes the whole set while proving nothing about bounded autonomy. A mandate that never
-permits is as broken as one that never refuses; the requirement is that the *boundary* sits where
-the mandate says it does.
+**E-MDT-1 and E-MDT-2 are one boundary test in two branches.** Below the threshold the action
+completes without approval; above it, the action does not complete. Both are observable from the
+adapter's return value, and neither can be satisfied by writing a field. A mandate that never
+permits is as broken as one that never refuses; together the two checks establish that the boundary
+sits where the mandate says it does, rather than merely that a boundary is described somewhere.
 
-**E-MDT-6 paired with E-MDT-1 makes the constraint/threshold distinction normative.** A hard limit
-an approval can override is not a hard limit. This pair is the first thing in the suite giving the
-two fields different observable meanings.
+**Honest limits — what E-MDT-1 does not establish.** The check establishes that the agent did not
+proceed on its own authority. It says nothing about what happens *after* a human approves. Real
+flows resume — the agent re-attempts carrying an approval — and the suite does not test that
+resumption, because testing it would require accepting a fabricated approval as harness input, and
+no conformance run has a human in it. Nor does the endorsement establish anything about the
+identity, authority, or existence of any approver: identity-proofing is out of scope for the
+standard. Implementations MUST NOT represent `E-MDT` as evidence that human oversight occurred,
+only that autonomous completion did not.
+
+**E-MDT-6 paired with E-MDT-1 makes the constraint/threshold distinction normative.** Both refuse,
+so the distinction is carried by what an offered approval changes: the suite presents one with the
+`constraints` breach and nothing moves — a hard limit an approval can override is not a hard limit
+— while the threshold breach is refused without an approval being offered at all. This pair is the
+first thing in the suite giving the two fields different observable meanings.
 
 **E-MDT-5 depends on CP-Grant-lifecycle**, which supplies the effective/revoked projection for all
 grant-type objects. Without it the check narrows to `validity` only and mandate revocation stays
@@ -208,8 +220,26 @@ per §7.
 **R4 — Place the requirement in Core.** Rejected: Core must remain universally applicable. An
 implementation with no agents would fail on a requirement irrelevant to it.
 
-**R5 — Require refusal only, with no approval path.** Rejected: would forbid the human-in-the-loop
-pattern `approvalThresholds` exists to express, collapsing bounded autonomy into prohibition.
+**R5 — Require refusal only, with no approval path.** ~~Rejected: would forbid the human-in-the-loop
+pattern `approvalThresholds` exists to express, collapsing bounded autonomy into prohibition.~~
+**Superseded — the check now requires refusal (§3, E-MDT-1).**
+
+The original objection confused what the *suite* requires with what the *standard* permits. Nothing
+in the amended check forbids the human-in-the-loop pattern: a real flow resumes after a human
+approves, and the model represents that resumption exactly as before. What changed is that the
+suite stops offering an alternative branch it cannot honestly evaluate. A conformance run is
+unattended — no person approves anything during one — so an implementation taking the approval
+branch was necessarily fabricating an approval record: writing an identifier for an event that did
+not occur.
+
+The disjunction therefore invited the behaviour the endorsement exists to detect, and the cheap
+branch proved nothing. Tightening what `humanApproval` must resolve to does not fix it: an
+implementation willing to fabricate an approval will fabricate a well-formed one, resolvable
+authority credential and all. Requiring a richer artifact buys a richer fiction.
+
+What survives is the observable claim — the agent did not proceed on its own authority — which is
+fully mechanical and needs no identity machinery. See the honest-limits statement in §3 for what
+that does not cover.
 
 **R6 — Extend `createObject` with an acting-agent context (E1), or add `actAsAgent` to the base
 contract (E2).** Rejected in favour of a separate agent adapter. E1 overloads a method whose
