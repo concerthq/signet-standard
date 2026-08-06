@@ -81,7 +81,7 @@ every modelling decision in the CDM.
   It has declared [capabilities](Agent-Layer#agentcapability), is bound by a
   [Mandate](Agent-Layer#mandate), and its actions produce accountable
   [Decisions](Agent-Layer#decision).
-- **Mandate.** The structure that bounds an agent's remit — what it may do, within what
+- **Mandate.** The record of an agent's remit — what it may do, within what
   limits, and where human approval is required.
 - **Decision.** The accountability backbone: a record of what was decided, by whom, under
   which mandate, from which inputs, under which policy, with what rationale, and with

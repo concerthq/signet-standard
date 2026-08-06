@@ -9,7 +9,7 @@ SIGNET document down to OCDS simply omits it (see [Standards Mapping](Standards-
 |--------|---------|
 | [SyntheticAgent](#syntheticagent) | An AI agent operating as a first-class Party. |
 | [AgentCapability](#agentcapability) | A declared, discoverable capability (A2A Agent Card aligned). |
-| [Mandate](#mandate) | The bounded authority granted to an agent — what it may do, within what limits, and where a human must approve. |
+| [Mandate](#mandate) | The bounded authority granted to an agent — what it may do, within what limits, and where human approval is required. |
 | [Decision](#decision) | The accountability record: what was decided, by whom, under what authority, from what, why. |
 | [Policy](#policy) | Machine-readable, human-auditable rules — "rules as code". |
 
@@ -79,8 +79,9 @@ are discoverable across organisational boundaries.
 ## Mandate
 
 The authority granted to an agent — what it may do, within what limits, and where human
-approval is required. **The structure that bounds an agent's remit, and makes an action
-outside it visible in the record.**
+approval is required. **The record of an agent's remit — the representation enforcement is
+tested against.** The Mandate states the bounds; whether an implementation applies them is a
+property of that implementation, assessed by the `E-MDT` endorsement.
 
 | Field | Type | Card. | Definition |
 |-------|------|-------|------------|
