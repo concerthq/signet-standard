@@ -1,0 +1,95 @@
+{
+  "standard": "SIGNET",
+  "artifact": "endorsement-checks",
+  "status": "draft — decides no conformance level and licenses no mark",
+  "cdmVersion": "v0.1",
+  "suiteVersion": "v0.1",
+  "adapter": "reference-adapter.js",
+  "timestamp": "2026-08-06T15:46:57.023Z",
+  "endorsements": [
+    {
+      "endorsement": "E-MDT",
+      "status": "earned",
+      "checks": [
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-1",
+          "status": "pass",
+          "detail": "proceeded with humanApproval populated"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-2",
+          "status": "pass",
+          "detail": "proceeded autonomously, as the mandate permits"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-3",
+          "status": "pass",
+          "detail": "refused (E-MDT-3)"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-4",
+          "status": "pass",
+          "detail": "refused (E-MDT-4)"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-5",
+          "status": "pass",
+          "detail": "refused (E-MDT-5)"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-6",
+          "status": "pass",
+          "detail": "refused (E-MDT-6) despite an approval being offered"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-7",
+          "status": "pass",
+          "detail": "4 refusals, each evented as mandate.refused"
+        }
+      ]
+    },
+    {
+      "endorsement": "E-CNS",
+      "status": "earned",
+      "checks": [
+        {
+          "endorsement": "E-CNS",
+          "check": "E-CNS-1",
+          "status": "pass",
+          "detail": "revoked refused, expired refused, live grant authorised"
+        },
+        {
+          "endorsement": "E-CNS",
+          "check": "E-CNS-2",
+          "status": "pass",
+          "detail": "refused (E-CNS-2)"
+        },
+        {
+          "endorsement": "E-CNS",
+          "check": "E-CNS-3",
+          "status": "pass",
+          "detail": "rejected (E-CNS-3) — revocable: false acquires its first enforced consequence"
+        },
+        {
+          "endorsement": "E-CNS",
+          "check": "E-CNS-4",
+          "status": "pass",
+          "detail": "gated document resolved through its Consent; ungated document not gated by it"
+        },
+        {
+          "endorsement": "E-CNS",
+          "check": "E-CNS-5",
+          "status": "pass",
+          "detail": "5 gated decisions reproduced independently from the stream"
+        }
+      ]
+    }
+  ]
+}

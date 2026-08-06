@@ -1,0 +1,16 @@
+{
+  "description": "Two Documents (definitions.schema.json#Document). One is gated by a Consent via accessGrant; one is not gated at all. E-CNS-4 tests both directions: an implementation that gates everything, or nothing, must fail.",
+  "documents": [
+    {
+      "id": "did:web:supplier.example#doc-financials-2025",
+      "documentType": "evidence",
+      "title": "Audited financial statements 2025",
+      "accessGrant": { "scheme": "did", "id": "did:web:supplier.example#consent-4471" }
+    },
+    {
+      "id": "did:web:supplier.example#doc-tender-notice",
+      "documentType": "tenderNotice",
+      "title": "Tender notice for sourcing event 1207"
+    }
+  ]
+}

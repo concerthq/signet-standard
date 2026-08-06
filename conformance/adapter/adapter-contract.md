@@ -58,3 +58,18 @@ third party can reproduce a conformance result.
 See `reference-adapter.js` for a complete, conformant implementation, and
 `broken-adapter.js` for a deliberately non-conformant one used to prove the
 harness discriminates.
+
+## Optional endorsement surfaces
+
+Two further adapter surfaces exist for the **endorsements** — a second, additive
+axis orthogonal to Core and Full (`conformance/levels.md` §2.4). They are
+optional: the four methods above remain the whole of what an implementation must
+expose to be certified at any level, and an implementation seeking no endorsement
+is unaffected by them.
+
+- `createAgentAdapter()` — governed agent actions, for `E-MDT` Mandate Enforcement.
+- `createConsentAdapter()` — access authorisation, for `E-CNS` Consent Enforcement.
+
+Both are specified in [`endorsement-adapters.md`](endorsement-adapters.md), and
+both are draft: they decide no level and license no mark until the corresponding
+change proposals carry.

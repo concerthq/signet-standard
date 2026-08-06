@@ -1,0 +1,11 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Consent",
+  "id": { "scheme": "did", "id": "did:web:supplier.example#consent-4471" },
+  "grantor": { "scheme": "did", "id": "did:web:supplier.example#supplier" },
+  "grantee": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+  "resource": [ { "scheme": "did", "id": "did:web:supplier.example#doc-financials-2025" } ],
+  "purpose": "Financial standing assessment for sourcing event 1207.",
+  "validity": { "startDate": "2026-01-01T00:00:00Z", "endDate": "2026-12-31T23:59:59Z" },
+  "revocable": true
+}

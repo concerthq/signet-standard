@@ -1,0 +1,64 @@
+{
+  "standard": "SIGNET",
+  "artifact": "endorsement-checks",
+  "status": "draft — decides no conformance level and licenses no mark",
+  "cdmVersion": "v0.1",
+  "suiteVersion": "v0.1",
+  "adapter": "broken-adapter.js",
+  "timestamp": "2026-08-06T14:37:25.931Z",
+  "endorsements": [
+    {
+      "endorsement": "E-MDT",
+      "status": "not-earned",
+      "checks": [
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-1",
+          "status": "fail",
+          "detail": "PROCEEDED WITHOUT humanApproval — the record is well-formed and false"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-2",
+          "status": "pass",
+          "detail": "proceeded autonomously, as the mandate permits"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-3",
+          "status": "fail",
+          "detail": "exercised a capability the mandate does not permit"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-4",
+          "status": "fail",
+          "detail": "acted on a subject outside the mandate's scope"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-5",
+          "status": "fail",
+          "detail": "acted under a revoked mandate"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-6",
+          "status": "fail",
+          "detail": "an approval cured a hard limit — a hard limit an approval can override is not a hard limit"
+        },
+        {
+          "endorsement": "E-MDT",
+          "check": "E-MDT-7",
+          "status": "fail",
+          "detail": "no refusal was produced by any check, so nothing was evented"
+        }
+      ]
+    },
+    {
+      "endorsement": "E-CNS",
+      "status": "not-implemented",
+      "checks": []
+    }
+  ]
+}

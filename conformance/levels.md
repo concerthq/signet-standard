@@ -76,6 +76,59 @@ the highest level fully satisfied: `Full`, `Core`, or `none`. A partial result
 (e.g. Core met, Full partially met) is reported honestly as `Core` with the
 failing Full requirements listed. There is no rounding up.
 
+**`not-applicable` is narrow, and it never contributes to a level.** A requirement
+is `not-applicable` only where the implementation does not exchange the object
+class the requirement constrains at all — the case F-MAP raises for an
+implementation that never handles invoices. It is not available for a requirement
+the implementation would rather not meet, and an implementation cannot reach
+**Full** on a set of results in which a Full requirement is `not-applicable`: it
+reaches **Core**, with the `not-applicable` requirement recorded as such. A level
+is claimed on what passed, never on what was skipped. Where a whole class of
+implementation cannot reach Full for this reason, the answer is a profile
+(`docs/profiles/`), which names the subset that applies to it — not an N/A that
+rounds up.
+
+### 2.4 Endorsements — a second axis (proposed, not yet in force)
+
+Some properties are worth certifying but do not belong on the Core/Full axis at
+all, because they are not universally applicable: an implementation may run
+synthetic agents but hold no access-controlled documents, or the reverse. Putting
+such a property in Core would fail implementations for which it is irrelevant.
+
+**Endorsements** are the second axis. An endorsement is prefixed `E-`, is earned
+only if every one of its checks passes, and is **additive**: it changes neither
+Core nor Full, blocks nobody from certifying, and is inert where unearned. An
+implementation either holds an endorsement or does not, so no `not-applicable`
+arises on this axis. Admission to the closed
+[endorsement register](../governance/endorsement-register.md) requires the
+three-part test in the [mark grammar](../governance/mark-grammar.md) R2: the
+property must be orthogonal to the level axis, not universally applicable, and
+machine-testable under CN-1.
+
+Two endorsements are proposed:
+
+| Endorsement | Checks | What it establishes | Proposal |
+|-------------|--------|---------------------|----------|
+| **`E-MDT` Mandate Enforcement** | E-MDT-1…7 | The limits a `Mandate` expresses are respected, not merely cited | [CP-Mandate-enforcement](../governance/proposals/CP-Mandate-enforcement.md) |
+| **`E-CNS` Consent Enforcement** | E-CNS-1…5 | The terms a `Consent` expresses are honoured in the implementation's own authorisation decisions | [CP-Consent-revocation](../governance/proposals/CP-Consent-revocation.md) |
+
+Both proposals are drafts. Their checks are implemented and runnable today
+(`node conformance/rules/check-endorsements.js`) so the gap they close is
+demonstrable rather than argumentative, but **they decide nothing**: they are not
+run by `run-conformance.js`, do not appear in a conformance report, and no
+endorsement may appear in a mark until the corresponding proposal carries and its
+register entry moves to `active`.
+
+### 2.5 Requirements outside the level axis
+
+| Rule | Requirement | Status |
+|------|-------------|--------|
+| **GRT-1** | Withdrawal of a grant-type object (`Consent`, `Mandate`) MUST be expressed as an appended event; the object MUST NOT be mutated in place (CDM §7.4). | Normative in the specification. Exercised only by the endorsement checks above, which are not in force — so it is **modelled and specified, not yet certified**. |
+
+Stating this plainly is the point. A MUST that no suite exercises is a MUST no
+certification establishes, and the distance between the two is exactly what §5
+records.
+
 ---
 
 ## 3. Certification neutrality rules (CN)
@@ -109,3 +162,42 @@ The suite is versioned with the CDM. A certification is always qualified by both
 versions, e.g. *"SIGNET Full — CDM v0.1, suite v0.1"*. A new CDM major version
 requires re-certification; minor/patch suite updates that only add or clarify
 tests do not invalidate existing certifications but may be required at renewal.
+
+The canonical form of a mark, and what may be abbreviated where, is fixed by the
+[mark grammar](../governance/mark-grammar.md).
+
+---
+
+## 5. What certification establishes — and what it does not
+
+Three statements are routinely run together, always in the direction that
+overstates. They are different claims:
+
+- **Modelled** — the CDM represents it. Says nothing about whether any
+  implementation does it.
+- **Tested** — the public suite exercises it against the implementation's own
+  behaviour.
+- **Certified** — a passing, reproducible report is on the registry against a
+  named CDM and suite version.
+
+CN-1 says conformance is decided solely by the machine-runnable suite. It does
+**not** say that every MUST in the specification is decided that way. The suite
+decides the requirements listed in §2, and those only.
+
+Two governance properties are currently **modelled but not tested**, and
+therefore not certified:
+
+| Property | Modelled | Tested | Note |
+|----------|----------|--------|------|
+| Consent terms have consequence — access is gated by a live grant, revocation takes effect, `Document.accessGrant` is honoured | Yes (CDM §7.3, §7.4) | **No** | `Consent` is validated structurally by C-DOC and nothing more. Addressed by `E-CNS`. |
+| Mandate limits are respected — not merely cited | Yes (CDM §6.3–6.5) | **No** | F-SEM requires a Decision to cite `policiesApplied`; nothing requires the limits in those policies to have been applied. Addressed by `E-MDT`. |
+
+A reader treating a **Full** certification as evidence that human oversight was
+enforced would be relying on something this suite does not establish. Concert's
+own reference implementation demonstrates the mandate gate, and CI runs that
+demonstration on every commit — but a demonstration binds only the code
+demonstrated, not every certified implementation.
+
+Nothing above is a defect in what the suite reports. It is a limit on what the
+report may be read to mean, and it is stated here so that no positioning copy has
+to be trusted to state it.

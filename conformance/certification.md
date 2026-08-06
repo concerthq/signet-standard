@@ -11,10 +11,16 @@ Policy. The process is identical for every implementer, including Score Networks
 
 ## 1. What certification asserts
 
-"SIGNET Certified — Core" or "— Full" asserts that, against a stated CDM version
-and suite version, the implementation produced a passing conformance report at
-that level from the public, machine-runnable suite. It asserts nothing more: it
-is not an endorsement, a security audit, or a guarantee of fitness.
+`SIGNET Certified: Core` or `SIGNET Certified: Full` asserts that, against a
+stated CDM version and suite version, the implementation produced a passing
+conformance report at that level from the public, machine-runnable suite. It
+asserts nothing more: it is not a security audit, or a guarantee of fitness.
+
+Nor does it assert that every MUST in the specification was met — only the
+requirements in `levels.md` §2, which the suite decides. Two governance
+properties are modelled but untested at any level, and `levels.md` §5 says which
+and why. A **Full** certification is not evidence that human oversight was
+enforced.
 
 ## 2. The process
 
@@ -38,13 +44,43 @@ There is no committee judgement, interview, or discretionary gate at any step.
 
 ## 3. Marks and their use
 
-- The mark is `SIGNET Certified — <Level>` and MUST always be qualified by the
-  CDM and suite versions in any formal claim (e.g. *"SIGNET Certified — Full
-  (CDM v0.1, suite v0.1)"*).
+The form of every mark Concert issues is fixed by the
+[mark grammar](../governance/mark-grammar.md), which is normative for licensees.
+In outline:
+
+- The canonical implementation mark is
+  `SIGNET Certified: <Core|Full>[; <endorsements>] (CDM vX.Y, suite vX.Y)` —
+  for example `SIGNET Certified: Full (CDM v0.1, suite v0.1)`. Mark strings are
+  ASCII, and the punctuation is fixed so the form can be linted in CI
+  (`npm run lint:marks`).
+- **The registry record is the source of truth; the string is a projection.** No
+  mark string is authored by hand.
+- **Short forms resolve or they are not licensed.** `SIGNET Certified: Full` is
+  permitted only alongside a resolvable link to the registry entry; the bare
+  badge only as a hyperlink. Print, slides, and spoken claims require the
+  canonical form — the qualification *is* the claim.
+- An endorsement MUST NOT appear without a level.
 - The mark licence is granted under the IP & Licensing Policy, on identical terms
   to all implementers, and is conditional on a current passing report.
 - Misuse — claiming a level not achieved, or omitting the version qualification in
-  a way that misleads — is grounds for withdrawal of the mark licence.
+  a way that misleads — is grounds for withdrawal of the mark licence, under the
+  complaint-driven escalation in mark grammar R5.
+
+**Anyone may say they implement SIGNET.** The artifacts are CC0, so *"Implements
+SIGNET CDM v0.1"* and *"Self-assessed against the SIGNET conformance suite v0.1 —
+Core"* need no permission. What requires a licence is the assertion that Concert
+assessed you. The qualifier `self-assessed` is mandatory in that construction.
+
+## 3.1 Registry entries
+
+A registry entry records the implementer, the level, the CDM and suite versions,
+the date, the report hash, any endorsements held — and the **endorsement register
+version in force at issuance**. The endorsement register is append-only, so
+without that last field every certification issued before a later admission would
+appear deficient against a register that grew after the fact.
+
+Failed attempts are not published. An implementation that tries, fails, fixes,
+and retries is behaviour worth encouraging.
 
 ## 4. Renewal and versioning
 
@@ -54,6 +90,9 @@ There is no committee judgement, interview, or discretionary gate at any step.
   existing certification immediately, but the current suite applies at renewal.
 - Concert publishes the current versions and a deprecation window for superseded
   ones.
+- A mark for a superseded CDM major version is not false, but it is misleading in
+  any form that hides the version — so it survives in canonical form only, and the
+  short and minimal forms are withdrawn (mark grammar §9).
 
 ## 5. Fees and neutrality
 

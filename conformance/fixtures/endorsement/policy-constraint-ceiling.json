@@ -1,0 +1,11 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Policy",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#policy-constraint-ceiling" },
+  "policyType": "constraint",
+  "expressionLanguage": "cel",
+  "expression": "action.value.amount <= 20000000",
+  "humanReadable": "No award above EUR 20,000,000 may be made under this mandate. This is a hard limit: no human approval cures a breach of it.",
+  "version": "1.0.0",
+  "issuedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" }
+}

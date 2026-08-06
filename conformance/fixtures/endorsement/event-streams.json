@@ -1,0 +1,78 @@
+{
+  "description": "Event streams for the grant-type objects under test. Withdrawal is an appended event, never a mutated field (CDM §7.4); the harness hash-chains these streams at load, so what the adapter receives is a well-formed chain and the projection is decidable from it alone.",
+  "streams": {
+    "mandate-live": [
+      {
+        "type": "Event",
+        "id": { "scheme": "did", "id": "did:web:buyer.example#evt-mdt-1" },
+        "eventType": "mandate.granted",
+        "subject": { "scheme": "did", "id": "did:web:buyer.example#mandate-endorsement-1" },
+        "actor": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+        "timestamp": "2026-01-01T00:00:00Z",
+        "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" }, "generatedAt": "2026-01-01T00:00:00Z" }
+      }
+    ],
+    "mandate-revoked": [
+      {
+        "type": "Event",
+        "id": { "scheme": "did", "id": "did:web:buyer.example#evt-mdt-1" },
+        "eventType": "mandate.granted",
+        "subject": { "scheme": "did", "id": "did:web:buyer.example#mandate-endorsement-1" },
+        "actor": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+        "timestamp": "2026-01-01T00:00:00Z",
+        "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" }, "generatedAt": "2026-01-01T00:00:00Z" }
+      },
+      {
+        "type": "Event",
+        "id": { "scheme": "did", "id": "did:web:buyer.example#evt-mdt-2" },
+        "eventType": "mandate.revoked",
+        "subject": { "scheme": "did", "id": "did:web:buyer.example#mandate-endorsement-1" },
+        "actor": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+        "timestamp": "2026-03-01T00:00:00Z",
+        "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:buyer.example#buyer" }, "generatedAt": "2026-03-01T00:00:00Z" }
+      }
+    ],
+    "consent-live": [
+      {
+        "type": "Event",
+        "id": { "scheme": "did", "id": "did:web:supplier.example#evt-cns-1" },
+        "eventType": "consent.granted",
+        "subject": { "scheme": "did", "id": "did:web:supplier.example#consent-4471" },
+        "actor": { "scheme": "did", "id": "did:web:supplier.example#supplier" },
+        "timestamp": "2026-01-01T00:00:00Z",
+        "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:supplier.example#supplier" }, "generatedAt": "2026-01-01T00:00:00Z" }
+      }
+    ],
+    "consent-revoked": [
+      {
+        "type": "Event",
+        "id": { "scheme": "did", "id": "did:web:supplier.example#evt-cns-1" },
+        "eventType": "consent.granted",
+        "subject": { "scheme": "did", "id": "did:web:supplier.example#consent-4471" },
+        "actor": { "scheme": "did", "id": "did:web:supplier.example#supplier" },
+        "timestamp": "2026-01-01T00:00:00Z",
+        "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:supplier.example#supplier" }, "generatedAt": "2026-01-01T00:00:00Z" }
+      },
+      {
+        "type": "Event",
+        "id": { "scheme": "did", "id": "did:web:supplier.example#evt-cns-2" },
+        "eventType": "consent.revoked",
+        "subject": { "scheme": "did", "id": "did:web:supplier.example#consent-4471" },
+        "actor": { "scheme": "did", "id": "did:web:supplier.example#supplier" },
+        "timestamp": "2026-03-01T00:00:00Z",
+        "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:supplier.example#supplier" }, "generatedAt": "2026-03-01T00:00:00Z" }
+      }
+    ],
+    "irrevocable-revocation-attempt": [
+      {
+        "type": "Event",
+        "id": { "scheme": "did", "id": "did:web:supplier.example#evt-cns-9" },
+        "eventType": "consent.revoked",
+        "subject": { "scheme": "did", "id": "did:web:supplier.example#consent-4472" },
+        "actor": { "scheme": "did", "id": "did:web:supplier.example#supplier" },
+        "timestamp": "2026-04-01T00:00:00Z",
+        "provenance": { "generatedBy": { "scheme": "did", "id": "did:web:supplier.example#supplier" }, "generatedAt": "2026-04-01T00:00:00Z" }
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "status": "draft — pending ballot of CP-Mandate-enforcement and CP-Consent-revocation",
+  "note": "Endorsements are a second axis, orthogonal to Core/Full. They are additive: an implementation that exposes neither optional adapter surface is unaffected, and an unearned endorsement is inert. These scenarios decide no conformance level and issue no mark.",
+  "endorsements": [
+    {
+      "endorsement": "E-MDT",
+      "markString": "Mandate Enforcement",
+      "adapter": "agent",
+      "normativeRef": "CDM 6.3-6.5, 7.4",
+      "description": "The limits a Mandate expresses are respected, not merely cited.",
+      "checks": [
+        { "check": "E-MDT-1", "requirement": "An action exceeding an approvalThresholds policy MUST be refused, or MUST produce a Decision with humanApproval populated." },
+        { "check": "E-MDT-2", "requirement": "An action within all thresholds MUST proceed without requiring humanApproval.", "role": "non-triviality guard" },
+        { "check": "E-MDT-3", "requirement": "An action invoking a capability absent from permittedCapabilities MUST be refused." },
+        { "check": "E-MDT-4", "requirement": "An action on a subject outside the mandate's scope MUST be refused." },
+        { "check": "E-MDT-5", "requirement": "An action under a mandate that is not effective, per the projection rule (CDM 7.4.3), MUST be refused." },
+        { "check": "E-MDT-6", "requirement": "An action violating a constraints policy MUST be refused, and MUST NOT be curable by humanApproval." },
+        { "check": "E-MDT-7", "requirement": "Every refusal under checks 1 and 3-6 MUST emit an event of type mandate.refused." }
+      ]
+    },
+    {
+      "endorsement": "E-CNS",
+      "markString": "Consent Enforcement",
+      "adapter": "consent",
+      "normativeRef": "CDM 7.3, 7.4",
+      "description": "The terms a Consent expresses are honoured in the implementation's own authorisation decisions.",
+      "scopeLimit": "Certifies the interoperability of the grant, not runtime access enforcement. Whether a production system physically refuses a read is a security-posture property assessed under ISO 27001 and SOC 2 regimes.",
+      "checks": [
+        { "check": "E-CNS-1", "requirement": "A Consent that is not effective at time T MUST NOT authorise access at T." },
+        { "check": "E-CNS-2", "requirement": "An access request by a party not named in grantee MUST NOT be authorised." },
+        { "check": "E-CNS-3", "requirement": "A consent.revoked event whose subject has revocable: false MUST be rejected." },
+        { "check": "E-CNS-4", "requirement": "A Document carrying accessGrant MUST resolve authorisation through the referenced Consent; one without accessGrant MUST NOT be gated by it.", "role": "non-triviality guard" },
+        { "check": "E-CNS-5", "requirement": "The effective/not-effective determination MUST be reproducible by a third party from the published event stream alone." }
+      ]
+    }
+  ]
+}
