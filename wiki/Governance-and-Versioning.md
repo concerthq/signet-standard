@@ -77,6 +77,25 @@ level definitions are illustrative of the model's shape and not yet frozen.
 To propose a change, see [Contributing](Contributing). For adding (rather than changing)
 structure, see [Extensions](Extensions).
 
+### Change proposals
+
+A substantive change is drafted as a **change proposal** in `governance/proposals/`: the problem
+stated against the shipped artifacts, the smallest change that closes it, the schema impact
+(stated as "none" explicitly where there is none), the conformance rules, backward compatibility,
+and what was rejected and why. Four are open — grant lifecycle, mandate enforcement, consent
+revocation, credential semantics — and **none has been balloted**.
+
+### Interim resolutions
+
+No Standards Committee is yet constituted. Referring every structural decision to a body that
+does not exist would defer all of them indefinitely, and several are materially cheaper to settle
+before the standard is published under a stable URI — and before the first mark issues. Decisions
+taken in that window are recorded as **interim resolutions**: in force, reasoned in writing, and
+ratifiable, amendable, or reversible by the committee once seated.
+
+Twenty are currently in force, listed in `governance/README.md`. An interim resolution is a
+decision, minuted as such — not a deferral.
+
 ### Review records
 
 Standards Committee decision records are published in-repo under `governance/reviews/`, so the
@@ -91,6 +110,28 @@ proposer, with no preferential path for any member.
 "SIGNET", "Concert", and "SIGNET Certified" are marks administered by Concert Foundation
 under the [IP & Licensing Policy](https://concert.foundation/governance). The CC0 dedication
 covers copyright in the artifacts **only**; it grants no rights in the marks.
+
+Their form is fixed by the **mark grammar** (`governance/mark-grammar.md`), which is normative
+for licensees and linted in CI. Three head terms, never crossed:
+
+| Subject | Head term | Canonical form |
+|---------|-----------|----------------|
+| An implementation | `SIGNET Certified` | `SIGNET Certified: Full (CDM v0.1, suite v0.1)` |
+| A person | `SIGNET Registered` | `SIGNET Registered: Mandate Steward (CDM v0.1)` |
+| A training provider | `SIGNET Accredited` | `SIGNET Accredited Training Provider (syllabus v0.1)` |
+
+A person is never *Certified*; an implementation is never *Registered*. Abbreviated forms are
+licensed only where they resolve to the registry entry, because a claim that travels without its
+qualification becomes a claim about something else.
+
+**The mark governs claims of assessment, not claims of implementation.** Anyone may implement
+SIGNET and say so — *"Implements SIGNET CDM v0.1"*, or *"Self-assessed against the SIGNET
+conformance suite v0.1 — Core"*, where the `self-assessed` qualifier is mandatory. What requires
+a licence is the assertion that Concert assessed you.
+
+Enforcement is complaint-driven; Concert builds no monitoring function. The primary remedy is
+the registry itself, which is the sole authority on what is held, and it is faster and stronger
+than litigation.
 
 ## Where to go next
 

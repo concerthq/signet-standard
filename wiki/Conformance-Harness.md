@@ -30,7 +30,35 @@ This page summarises `conformance/levels.md`, `conformance/certification.md`, an
 
 The suite reports `pass | fail | not-applicable` per requirement and computes the **highest
 level fully satisfied** (`Full`, `Core`, or `none`). Partial results are reported honestly —
-**there is no rounding up.**
+**there is no rounding up.** `not-applicable` is narrow: it is available only where the
+implementation does not exchange the object class a requirement constrains at all, and it never
+contributes to a level.
+
+### Endorsements — a second axis (draft, not in force)
+
+Some properties are worth certifying but do not belong on the level axis, because they are not
+universally applicable — an implementation may run agents but hold no access-controlled
+documents, or the reverse. **Endorsements** are additive: they change neither level, block
+nobody from certifying, and are inert where unearned.
+
+| Endorsement | What it would establish |
+|-------------|-------------------------|
+| **`E-MDT` Mandate Enforcement** | The limits a [Mandate](Agent-Layer#mandate) expresses were *respected*, not merely cited |
+| **`E-CNS` Consent Enforcement** | The terms a [Consent](Trust-Layer#consent) expresses are honoured in the implementation's own authorisation decisions |
+
+Both are drafts. Their checks run today (`node conformance/rules/check-endorsements.js`) so the
+gap they close is demonstrable, but they decide no level and no endorsement may appear in a mark
+until the corresponding proposal carries.
+
+### What certification does not establish
+
+Conformance is decided solely by this suite — but that is narrower than "every MUST in the
+specification". The suite decides the five requirements below and no others. Two governance
+properties are currently **modelled but not tested**, and therefore not certified: that consent
+terms have consequence, and that mandate limits are respected. **A Full certification is not
+evidence that human oversight was enforced.** *Modelled*, *tested*, and *certified* are three
+different statements, and the endorsements above exist to close the distance between the first
+two.
 
 ## The requirements
 
@@ -92,13 +120,22 @@ The suite ships **two** adapters:
 
 - `adapter/reference-adapter.js` — a complete, conformant in-memory implementation that
   reaches **Full**.
-- `adapter/broken-adapter.js` — deliberately non-conformant, with two planted defects
-  (events not hash-chained, and a dropped tax total in the UBL projection). The harness
-  **correctly fails it at C-EVT and F-MAP**, earning level `none`.
+- `adapter/broken-adapter.js` — deliberately non-conformant, with **three** planted defects.
+  Events are not hash-chained, so it fails **C-EVT**; the UBL projection drops the tax total,
+  so it fails **F-MAP**; earning level `none`.
 
 A suite that passes everything proves nothing; this one demonstrably **discriminates**. Both
 runs execute in CI on every commit, so the conformance claim is continuously proven, not
 asserted. See [Validation & Conformance](Validation-and-Conformance) for the CI wiring.
+
+**The third defect is the instructive one**, because it is not a breakage. The broken adapter's
+agent cites its mandate and its policies impeccably — `underMandate` names the mandate,
+`policiesApplied` names every policy, the rationale reads well, provenance is present, the
+`Decision` validates — and never checks whether the limits those policies express were
+respected. It awards €25,000,000 under a mandate whose hard ceiling is €20,000,000, with no
+human approval. **It passes F-SEM and fails E-MDT-1.** Everything the current levels examine is
+present and correct; the record is well-formed, provenance-bearing, and false. That distance is
+the whole argument for the endorsement, and it is visible in one diff.
 
 ## The negative document fixtures (C-DOC)
 
@@ -163,9 +200,10 @@ The process is identical for every implementer (`certification.md`):
 5. **Publish** — the report and registry entry are public.
 
 There is no committee judgement, interview, or discretionary gate. A certification is always
-qualified by both versions, e.g. *"SIGNET Certified — Full (CDM v0.1, suite v0.1)"*. A new
-CDM **major** version requires re-certification. Fees, where charged, are published and
-identical for all (CN-3) — you pay to be assessed, not to pass.
+qualified by both versions, in the canonical form fixed by the mark grammar:
+`SIGNET Certified: Full (CDM v0.1, suite v0.1)`. A new CDM **major** version requires
+re-certification. Fees, where charged, are published and identical for all (CN-3) — you pay
+to be assessed, not to pass.
 
 ## Layout
 

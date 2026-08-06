@@ -133,8 +133,17 @@ A line item — a unit of what is being bought, offered, ordered, or invoiced.
 
 ## Credential
 
-A reference to a [W3C Verifiable Credential](Glossary#verifiable-credential) asserting a
-claim about a Party (e.g. ISO 27001 certification, EcoVadis rating, insurance cover).
+A [W3C Verifiable Credential](Glossary#verifiable-credential) asserting a claim about a Party
+(e.g. ISO 27001 certification, EcoVadis rating, insurance cover).
+
+> **Open question — pointer or embedding?** The prose has described this as a *reference to* a
+> credential, while the schema **requires** `credentialSubject` and `proof`, which are the
+> credential's substance. The two readings differ in freshness (a reference resolves live and
+> shows revocation; an embedding freezes at the moment of copying), availability, disclosure,
+> and size — so the difference is not cosmetic. Today the schema governs, and the embedding form
+> is what validates. `governance/proposals/CP-Credential-semantics.md` proposes admitting both
+> with an explicit discriminator; it is a draft with open gates, and it blocks the deferred
+> decision on selective disclosure for person marks.
 
 | Field | Type | Card. | Definition |
 |-------|------|-------|------------|

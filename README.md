@@ -23,6 +23,7 @@ schema/        JSON Schema (Draft-07) — the normative Canonical Data Model
   party .schema.json
   context.jsonld            JSON-LD @context (aligns to ePO, PROV, W3C VC)
 codelists/     Controlled vocabularies (CSV: Code, Title, Description)
+  eventTypeCore.csv         The closed, normative subset of eventType (grant lifecycle)
 examples/      Worked instances, validated in CI
 conformance/   The machine-runnable conformance harness (Core/Full levels, adapters)
 agent/         Demonstration — a synthetic agent awards a contract under governance
@@ -30,7 +31,12 @@ onboarding/    Demonstration — an agent qualifies a supplier (conditional qual
 auction/       Demonstration — a deterministic, multi-party reverse-auction close
 docs/          The prose specification (rendered on concert.foundation/standard)
 docs/extensions/   Extension & profile specs (auction, onboarding, identity, commodity-risk)
-governance/    Standards Committee decision records (governance/reviews/)
+governance/    Marks, registers, change proposals, and decision records
+  mark-grammar.md           The complete set of marks Concert issues, and their form
+  endorsement-register.md   Closed, append-only register governing endorsement marks
+  role-register.md          Closed, append-only register governing person marks
+  proposals/                Change proposals against the model and the suite
+  reviews/                  Standards Committee decision records
 tools/         Reference tooling (signet-to-ubl projection, UBL verifier, Pages build)
 wiki/          Long-form documentation (mirrors the GitHub wiki)
 .github/workflows/validate.yml   CI: validates examples, runs conformance + all three demos
@@ -169,6 +175,10 @@ member-proposed extension, confirming member proposals get no preferential path.
 
 Semantic versioning. The **normative** core (`schema/`, closed codelists) changes only through the Concert Standards Committee revision process with a published comment period. **Non-normative** material (`docs/`, `examples/`, open codelist values) iterates freely. Every published version is permanently retrievable at a version-stable URL under `concert.foundation/signet/<version>/`.
 
+Proposed changes are drafted as **change proposals** in [`governance/proposals/`](governance/proposals/), each stating the problem in the shipped artifacts, the smallest change that closes it, what was rejected and why. Four are open, and none has been balloted: no Standards Committee is yet constituted, so structural decisions that could not wait have been taken as **interim resolutions** — in force, reasoned in writing, and reversible by the committee on the record rather than by silent drift. [`governance/README.md`](governance/README.md) lists all twenty.
+
+**What certification establishes is narrower than the specification's MUSTs.** Conformance is decided solely by the machine-runnable suite, which decides the requirements in [`conformance/levels.md`](conformance/levels.md) §2 and no others. Two governance properties are currently modelled but untested — that consent terms have consequence, and that mandate limits are respected rather than merely cited — so a **Full** certification is not evidence that human oversight was enforced. This is stated in §5 of that document, and two proposed endorsements would close it.
+
 ## Contributing
 
 Contributions are welcome under the Concert Contributor Licence Agreement — see [CONTRIBUTING.md](CONTRIBUTING.md). You keep ownership of your work; you grant Concert royalty-free copyright and patent licences so the standard stays open for everyone. No contributor, and no commercial operator (including Score Networks), gains a preferential position.
@@ -176,6 +186,10 @@ Contributions are welcome under the Concert Contributor Licence Agreement — se
 ## Marks
 
 "SIGNET", "Concert", and "SIGNET Certified" are marks administered by Concert Foundation under the [IP & Licensing Policy](https://concert.foundation/governance). The CC0 dedication covers copyright in the artifacts only; it grants no rights in the marks.
+
+The form of every mark — and the constructions that are prohibited — is fixed by the [mark grammar](governance/mark-grammar.md), which is checked in CI (`npm run lint:marks`). The canonical implementation mark is `SIGNET Certified: Full (CDM v0.1, suite v0.1)`; a person is *Registered*, never *Certified*; and a training provider is *Accredited*, never either.
+
+**The mark governs claims of assessment, not claims of implementation.** The artifacts are CC0: anyone may implement SIGNET and say so. *"Implements SIGNET CDM v0.1"* and *"Self-assessed against the SIGNET conformance suite v0.1 — Core"* need no permission from anyone. What requires a licence is the assertion that Concert assessed you.
 
 ## Licensing
 

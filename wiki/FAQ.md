@@ -54,11 +54,44 @@ which re-runs the *identical* suite to confirm it. There are two levels — **Co
 C-EVT, C-PROV) and **Full** (Core + F-MAP, F-SEM). The process is mechanical and identical
 for everyone (neutrality rules CN-1…CN-4) — no committee judgement, no preferential path.
 
+### What may I actually claim, and when?
+Anyone may implement SIGNET and say so — the artifacts are CC0. *"Implements SIGNET CDM v0.1"*
+and *"Self-assessed against the SIGNET conformance suite v0.1 — Core"* need no permission from
+anyone, and the `self-assessed` qualifier is mandatory in the second. What requires a licence is
+the assertion that **Concert assessed you**.
+
+The licensed form is fixed by the mark grammar (`governance/mark-grammar.md`) and linted in CI:
+`SIGNET Certified: Full (CDM v0.1, suite v0.1)`. Short forms are licensed only where they
+resolve to the registry entry, because a claim that travels without its qualification becomes a
+claim about something else.
+
+<!-- mark-lint-ignore-next-line: these constructions are named here in order to prohibit them -->
+*SIGNET Compliant*, *SIGNET Ready*, *SIGNET Approved*, *SIGNET Partner*, and *Certified by
+SIGNET* are prohibited outright — conformance is not compliance, and nothing is approved.
+
+A person is **Registered**, never Certified; a training provider is **Accredited**, never
+either. Employing a registered individual is not certification of the employer.
+
+### Does certification mean my agents are governed?
+No — and this is the sharpest limit worth knowing. The suite decides the requirements in
+`conformance/levels.md` §2 and no others. F-SEM requires a Decision to **cite** the policies it
+applied; nothing at Core or Full requires that the limits in those policies were **respected**.
+An implementation can award beyond its mandate's approval threshold with no human approval,
+record `underMandate` and `policiesApplied` correctly, and reach Full. The repository ships an
+adapter that does exactly this, in CI, to keep the point concrete.
+
+*Modelled*, *tested*, and *certified* are three different claims. Mandate enforcement and
+consent enforcement are currently modelled but not tested, which is what the two proposed
+[endorsements](Conformance-Harness#endorsements--a-second-axis-draft-not-in-force) would close.
+
 ### Is the conformance suite real, or just a claim?
-Real and in the repo since **v0.4.0**. It ships a **reference adapter** that reaches Full and
-a deliberately **broken adapter** that the harness correctly fails at C-EVT and F-MAP — so
-the suite demonstrably *discriminates*, and both run in CI on every commit. Run it with
-`npm run conformance` / `npm run conformance:broken`.
+Real and in the repo since **v0.4.0**. It ships a **reference adapter** that reaches Full and a
+deliberately **broken adapter** with three planted defects: events not hash-chained (fails
+C-EVT), a dropped tax total in the UBL projection (fails F-MAP), and an agent that cites its
+mandate and policies impeccably while enforcing neither — which **passes F-SEM** and fails
+E-MDT-1. The suite demonstrably *discriminates*, and every run is in CI on every commit. Run it
+with `npm run conformance` / `npm run conformance:broken`, and the endorsement checks with
+`npm run conformance:endorsements`.
 
 ### Does SIGNET help with regulatory compliance?
 Yes, by design. The [Decision](Agent-Layer#decision) record supports the assessment-summary

@@ -99,9 +99,10 @@ informed.
 decisions traceable by construction: it names the [SyntheticAgent](Agent-Layer#syntheticagent)
 that decided, the [Mandate](Agent-Layer#mandate) it acted under, the inputs it considered, the
 policies it applied, its rationale, and the human approval where one was required. The
-Mandate's `approvalThresholds` make **human-in-the-loop oversight structural** — above a
-defined ceiling the agent *cannot* act autonomously, as the [agent demonstration](Agent-Layer)
-shows (a €12M award exceeding a €10M ceiling forces human approval). The dual-form
+Mandate's `approvalThresholds` express **human-in-the-loop oversight as data** — a defined
+ceiling above which the agent must not act autonomously, as the
+[agent demonstration](Agent-Layer) shows (a €12M award exceeding a €10M ceiling forces human
+approval). The dual-form
 [Policy](Agent-Layer#policy) means the rule the agent executed is the same rule a human can
 review, and [Provenance](Trust-Layer#provenance) records what produced each assertion.
 
@@ -110,6 +111,18 @@ it does not classify your system's risk tier, perform a conformity assessment, o
 substantive obligations that follow from classification. It gives you the evidentiary
 substrate — a complete, tamper-evident record of how an AI-assisted decision was reached — on
 which compliance can be built.
+
+**And a second limit, on the oversight claim specifically.** A ceiling expressed in a Mandate is
+a ceiling *declared*, and the Decision record shows whether an approval was present. Neither
+Core nor Full certification tests that a certified implementation actually **refused** to act
+beyond it — an implementation that records `underMandate` and `policiesApplied` correctly while
+ignoring the thresholds those policies express reaches Full today. Concert's reference
+implementation demonstrates the gate and CI runs that demonstration on every commit, but a
+demonstration binds only the code demonstrated. If you are relying on SIGNET conformance as
+evidence of enforced human oversight, read
+[`conformance/levels.md` §5](https://github.com/concerthq/signet-standard/blob/main/conformance/levels.md)
+first: the proposed `E-MDT` endorsement is what would make enforcement a certified property, and
+it is not yet in force.
 
 ---
 
@@ -127,7 +140,7 @@ which compliance can be built.
 | **EU ViDA** | EN 16931 cross-border e-invoicing (from Jul 2030) | EN 16931-mapped [Invoice](Process-Layer#invoice) (33 BTs/BGs) | [EN 16931 & ViDA](EN-16931-and-ViDA-E-Invoicing) |
 | **EU ViDA** | Convertible to Peppol BIS Billing | CI-proven UBL 2.1 / Peppol BIS projection (F-MAP) | [EN 16931 & ViDA](EN-16931-and-ViDA-E-Invoicing) |
 | **EU AI Act** | Record-keeping for AI-assisted decisions | [Decision](Agent-Layer#decision) + [Provenance](Trust-Layer#provenance) | [Agent Layer](Agent-Layer#decision) |
-| **EU AI Act** | Human oversight of AI decisions | [Mandate.approvalThresholds](Agent-Layer#mandate) | [Agent Layer](Agent-Layer#mandate) |
+| **EU AI Act** | Human oversight of AI decisions | [Mandate.approvalThresholds](Agent-Layer#mandate) — expressed and recorded; enforcement is not a certified property, see above | [Agent Layer](Agent-Layer#mandate) |
 | **EU AI Act** | Reviewable decision logic | dual-form [Policy](Agent-Layer#policy) (`expression` + `humanReadable`) | [Agent Layer](Agent-Layer#policy) |
 
 ## Why the conformance harness matters here

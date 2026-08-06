@@ -111,13 +111,22 @@ Two further runnable demos, each ending with a conformance-clean check (both run
 | `onboarding/` | `npm run onboarding` | A supplier [onboarding](Extensions#the-onboarding-extension) case reaches a **conditional** qualification (value cap + pending check), reusing Credential/Policy/Decision/Event. Added in **v0.6.0**. |
 | `auction/` | `npm run auction` | A reverse [auction](Extensions#example-the-auction-extension) closes **deterministically** to a single winner over a hash-chained bid trail — the data-level statement of operator-independence. Added in **v0.8.0**. |
 
-## `governance/` — Standards Committee records
+## `governance/` — marks, registers, proposals, decision records
 
-`governance/reviews/` holds the public decision records that version alongside the standard —
-e.g. `2026-07-commodity-risk.md` (accepted in principle) and `2026-07-commodity-risk-merge.md`
-(merged as a Working Draft), the trail of the first **member-proposed**
-[extension](Extensions#working-draft-the-commodity-risk-extension). See
-[Governance & Versioning](Governance-and-Versioning#review-records).
+The layer above the model: who decides what, what Concert may certify, and what anyone may
+claim.
+
+| Path | What it is |
+|------|------------|
+| `mark-grammar.md` | The complete set of marks Concert issues, in one document: three head terms never crossed, an ASCII ABNF, short forms licensed only where they resolve, prohibited constructions, wind-down windows. Normative for licensees. |
+| `endorsement-register.md` | Closed, append-only. Governs which endorsements may appear in a mark, and records the three-part admission test against each entry. |
+| `role-register.md` | Closed, append-only. Governs which roles may appear in a person mark. |
+| `role-competency-framework.md` | Non-normative: what a person must be able to do, stated by reference to normative artifacts, with the assessment mode declared per domain. |
+| `person-assessment.md` | The rubric and the binding appeals route, required before any person mark issues. |
+| `proposals/` | Change proposals against the model and the suite. Four are open; none is balloted. |
+| `reviews/` | Public decision records versioning alongside the standard — e.g. the trail of the first **member-proposed** [extension](Extensions#working-draft-the-commodity-risk-extension). |
+
+See [Governance & Versioning](Governance-and-Versioning#review-records).
 
 ## `docs/` — the prose specification
 

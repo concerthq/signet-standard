@@ -100,6 +100,12 @@ is, *by construction*, non-conforming — not because a rule was broken after th
 because the authority to act was never present. Bounded authority is what lets agent autonomy
 and human oversight coexist instead of trading off.
 
+The concept is one thing; certifying it is another. Today the model **represents** the bound and
+the record **shows** whether it held — but no conformance level tests that a certified
+implementation refused to exceed it. Closing that distance is what the proposed `E-MDT`
+endorsement is for, and the honest form of this claim until it carries is *bounded authority is
+expressed and auditable*, not *bounded authority is enforced everywhere*.
+
 → *Realised in SIGNET as* the [Mandate](Agent-Layer#mandate): `permittedCapabilities`, hard
 `constraints`, and `approvalThresholds` that force human-in-the-loop above a ceiling. The
 [agent demonstration](Agent-Layer) shows it running — a €12M award bounded by a €10M
