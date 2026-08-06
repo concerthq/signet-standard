@@ -13,17 +13,16 @@ SIGNET document down to OCDS simply omits it (see [Standards Mapping](Standards-
 | [Decision](#decision) | The accountability record: what was decided, by whom, under what authority, from what, why. |
 | [Policy](#policy) | Machine-readable, human-auditable rules — "rules as code". |
 
-## How the agent layer makes governance legible
+## How the agent layer represents governance
 
-The three properties that make a SIGNET network *governed* rather than merely automated:
+The three structures that let a SIGNET network be *governed* rather than merely automated. Each is
+a representation the model requires; each becomes a guarantee only where an implementation is
+assessed against it:
 
 1. **Bounded authority.** A [Mandate](#mandate) lists exactly which capabilities an agent
    may exercise, the hard `constraints` it must respect, and the `approvalThresholds` above
-   which a human must approve. An agent acting outside its mandate is non-conforming — but
-   note what that does and does not mean today: the model **represents** the bound and the
-   record **shows** whether it was respected. Whether a certified implementation actually
-   enforces it is what the proposed `E-MDT` endorsement tests, and Core and Full do not.
-   See [Conformance Harness](Conformance-Harness).
+   which a human must approve. An implementation that permits an agent to act outside its mandate
+   fails the `E-MDT` endorsement; the core conformance levels do not test enforcement.
 2. **Accountable action.** Every material agent action produces a [Decision](#decision)
    recording the agent, the mandate relied on, the inputs considered, the policies applied,
    the rationale, the outcome, any human approval, and cryptographic provenance.
@@ -31,8 +30,9 @@ The three properties that make a SIGNET network *governed* rather than merely au
    *and* a `humanReadable` statement of the same rule — so the rule that governs the agent
    is the rule a human can review.
 
-> **See it run (v0.5.0).** The repository ships a runnable proof of exactly these three
-> guarantees: the [`agent/` demonstration](https://github.com/concerthq/signet-standard/tree/main/agent)
+> **See it run (v0.5.0).** The repository ships a runnable demonstration of exactly these three
+> structures, in the reference implementation:
+> the [`agent/` demonstration](https://github.com/concerthq/signet-standard/tree/main/agent)
 > (`npm run agent`). A synthetic agent awards a €12M contract — bounded by a Mandate whose
 > €10M autonomous-value ceiling forces **human approval**, applying the **published** MAT
 > evaluation Policy — and the runner then **verifies the agent's output is conformance-clean**:

@@ -83,9 +83,9 @@ See the dedicated [Conformance Harness](Conformance-Harness) page.
 
 ## `agent/` — the agent demonstration
 
-Added in **v0.5.0**: a runnable proof that a synthetic agent can take a **governed,
-accountable, conformant** action — awarding a contract under a Mandate. Run it with
-`npm run agent`.
+Added in **v0.5.0**: a runnable demonstration, in the reference implementation, of a synthetic
+agent taking a **governed, accountable, conformant** action — awarding a contract under a
+Mandate. Run it with `npm run agent`.
 
 | Path | Purpose |
 |------|---------|
