@@ -71,9 +71,11 @@ property a global URI while remaining ordinary JSON to consumers that ignore the
 See [Serialisation](Serialisation).
 
 ### Mandate
-The **bounded authority** granted to an agent — what it may do, within what limits, and above
-what threshold a human must approve. A grant-type object: its withdrawal is recorded as an
-appended event, never as a mutated field. See [Mandate](Agent-Layer#mandate).
+The **bounded authority** granted to an agent — the record of what it may do, within what limits,
+and above which thresholds a human must approve. Whether an implementation applies those bounds
+is assessed by the `E-MDT` endorsement, not by the presence of the Mandate. A grant-type object:
+its withdrawal is recorded as an appended event, never as a mutated field.
+See [Mandate](Agent-Layer#mandate).
 
 ### MAT
 **Most Advantageous Tender.** A common evaluation model (e.g. price/quality/social-value
