@@ -383,7 +383,7 @@ A declared capability, aligned to the A2A Agent Card model so capabilities are d
 
 ### 6.3 Mandate
 
-The authority granted to an agent — what it may do, within what limits, and where human approval is required. The structural guarantee that agents cannot exceed their remit.
+The authority granted to an agent — what it may do, within what limits, and where human approval is required. The structure that bounds an agent's remit, and makes an action outside it visible in the record. A **grant-type object** (§7.4): its withdrawal is recorded by appending an event, never by mutating the object.
 
 | Field | Type | Card. | Definition |
 |-------|------|-------|------------|
@@ -478,6 +478,34 @@ A data-sovereignty access grant — the right of a named party, for a stated pur
 | `validity` | Period | 1 | Time bound. |
 | `revocable` | boolean | 1 | Whether revocable before expiry. |
 | `proof` | object | 0..1 | Signed grant. |
+
+`purpose` is a **human-readable statement** of the purpose for which access is granted, not a machine-evaluable term. The string interoperates; its evaluation is not defined by this specification. A profile MAY define a `purposeCode` extension with a codelist appropriate to its jurisdiction or sector (§11).
+
+`revocable` records whether a grant *may* be withdrawn. It does not record whether one *has* been: withdrawal is an event, per §7.4.
+
+### 7.4 Grant-type objects and withdrawal
+
+> **Grant-type object.** A CDM object that confers authority or permission from one party to another for a bounded period, and whose conferred authority may cease before the end of that period.
+
+**7.4.1** In this version the grant-type objects are **`Consent`** (§7.3) and **`Mandate`** (§6.3). The list is enumerated: a later primitive meeting the definition acquires the obligations below only through an explicit amendment naming it. Open-ended inheritance would let a future proposal's author acquire obligations silently.
+
+**7.4.2 Withdrawal is an event, not a field.** An implementation MUST NOT mutate a grant-type object to record that its authority has been withdrawn. Withdrawal is recorded by appending an `Event` (§7.1) whose `subject` is the grant object. This follows §1.7: current state is the projection of the ordered event stream, not mutable state carried on the object.
+
+**7.4.3 Projection rule (normative).** A grant-type object *G* is **effective** at time *T* if and only if:
+
+1. an event of type `<object>.granted` naming *G* as `subject` precedes *T*; and
+2. no event of type `<object>.revoked` naming *G* as `subject` precedes *T*; and
+3. *T* falls within *G*'s `validity` Period.
+
+The effective/not-effective determination MUST be reproducible by a third party from the published event stream alone.
+
+**7.4.4 Closed core within `eventType`.** The `eventType` codelist remains **open** as an extension space, but the subset published in `codelists/eventTypeCore.csv` is **closed and normative**: codes in that subset MUST carry the meanings given there, and MUST NOT be redefined, reused, or narrowed by implementations, extensions, or profiles. A code appears in exactly one of the two files, and consumers take the union. Admission to the closed subset is append-only and occurs only through the change-control process (§12); adding an entry is a minor version, and changing the meaning of an existing entry is a major version.
+
+The initial closed subset is `consent.granted`, `consent.revoked`, `mandate.granted`, `mandate.revoked`.
+
+No `*.expired` code exists. Expiry occurs by the clock rather than by any party's act, so an expiry event would have no honest `actor` — which `Event` requires — and clause 3 of the projection rule tests `validity` directly.
+
+**7.4.5** No field is added to `Consent` or `Mandate` by this section. `Event.subject` already carries the grant object's identifier, so withdrawal is fully expressible once the event types exist and their meanings are fixed.
 
 ---
 

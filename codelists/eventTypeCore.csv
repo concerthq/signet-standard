@@ -1,0 +1,5 @@
+Code,Title,Description
+consent.granted,Consent granted,A data-sovereignty access grant was issued.
+consent.revoked,Consent revoked,An access grant was withdrawn before expiry.
+mandate.granted,Mandate granted,Delegated authority was conferred on an agent.
+mandate.revoked,Mandate revoked,Delegated authority was withdrawn before expiry.

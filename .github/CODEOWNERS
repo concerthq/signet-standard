@@ -7,3 +7,15 @@
 /schema/                @concertfoundation
 /codelists/             @concertfoundation
 /.github/workflows/     @concertfoundation
+
+# Closed codelist subsets and the registers that govern the marks. These are not
+# ordinary content: a code in eventTypeCore.csv carries a fixed meaning that MUST NOT
+# be redefined, and a register entry decides what may be claimed. Admission is a
+# Standards Committee act, so the boundary is enforced by ownership and branch
+# protection rather than by a reviewer noticing (CP-Grant-lifecycle R-G1).
+# The open/closed split is additionally asserted in CI by
+# conformance/rules/check-codelists.js.
+/codelists/eventTypeCore.csv        @concertfoundation
+/governance/endorsement-register.md @concertfoundation
+/governance/role-register.md        @concertfoundation
+/governance/mark-grammar.md         @concertfoundation
