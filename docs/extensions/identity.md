@@ -53,9 +53,10 @@ This profile closes that asymmetry with the primitives the standard already has.
    access-controlled, erasable system of record, resolvable under audit or legal
    process. Accountability is preserved; the portable record carries no PII.
 3. **Approvals are verifiable objects.** Where a `Decision` carries `humanApproval`,
-   the referenced identifier SHOULD resolve to an `Approval` object (§4). A bare,
-   unresolvable approval reference is permitted only at conformance Core; SIGNET Full
-   requires resolvable Approvals.
+   the referenced identifier SHOULD resolve to an `Approval` object (§4).
+   Conformance with this profile requires resolvable Approvals. The core conformance
+   levels are unaffected: a profile cannot add requirements to Core or Full, which are
+   defined by the conformance suite.
 
 Cross-organisational note: a counterparty needs to verify *that an authorised person
 approved*, not *who they are*. The pseudonymous Approval plus the authority

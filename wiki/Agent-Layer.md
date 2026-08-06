@@ -153,6 +153,26 @@ reviewable by humans. Policies are referenced from the process layer as
 See the worked instance: [`examples/policy-evaluation.json`](Worked-Examples#policy) — a
 Most-Advantageous-Tender scoring model expressed in Rego with a plain-language equivalent.
 
+## Honest limits
+
+What this layer establishes, and what it does not.
+
+**It does establish** that agent authority is *representable* — a Mandate says what an agent may
+do, within what limits, and above which thresholds a human must approve; *attributable* — a
+Decision names who decided, under what authority, from what inputs, applying which policies; and
+*auditable* — the ordered, hash-chained Event stream lets a third party reconstruct what happened
+and detect alteration.
+
+**It does not establish that agents obey their mandates.** That is a property of an
+implementation, not of the model, and no conformance level tests it. An implementation can record
+`underMandate` and `policiesApplied` impeccably while ignoring the limits those policies express,
+and reach **Full**. The proposed `E-MDT` endorsement is what would test it; it is not yet in
+force. See [Conformance Harness](Conformance-Harness).
+
+Nor does it establish that a human reviewed anything. A populated `humanApproval` is a claim
+recorded in the trail, and the identity profile makes such a claim verifiable and attributable —
+but verifiable is not the same as true, and no part of the standard performs identity-proofing.
+
 ## Where to go next
 
 - [Trust Layer](Trust-Layer) — Provenance, Events, and Consent.
