@@ -9,18 +9,21 @@ SIGNET document down to OCDS simply omits it (see [Standards Mapping](Standards-
 |--------|---------|
 | [SyntheticAgent](#syntheticagent) | An AI agent operating as a first-class Party. |
 | [AgentCapability](#agentcapability) | A declared, discoverable capability (A2A Agent Card aligned). |
-| [Mandate](#mandate) | The bounded authority granted to an agent — the structural guarantee it cannot exceed its remit. |
+| [Mandate](#mandate) | The bounded authority granted to an agent — what it may do, within what limits, and where a human must approve. |
 | [Decision](#decision) | The accountability record: what was decided, by whom, under what authority, from what, why. |
 | [Policy](#policy) | Machine-readable, human-auditable rules — "rules as code". |
 
-## How the agent layer enforces governance
+## How the agent layer makes governance legible
 
-The three guarantees that make a SIGNET network *governed* rather than merely automated:
+The three properties that make a SIGNET network *governed* rather than merely automated:
 
 1. **Bounded authority.** A [Mandate](#mandate) lists exactly which capabilities an agent
    may exercise, the hard `constraints` it must respect, and the `approvalThresholds` above
-   which a human must approve. An agent acting outside its mandate is, by construction,
-   non-conforming.
+   which a human must approve. An agent acting outside its mandate is non-conforming — but
+   note what that does and does not mean today: the model **represents** the bound and the
+   record **shows** whether it was respected. Whether a certified implementation actually
+   enforces it is what the proposed `E-MDT` endorsement tests, and Core and Full do not.
+   See [Conformance Harness](Conformance-Harness).
 2. **Accountable action.** Every material agent action produces a [Decision](#decision)
    recording the agent, the mandate relied on, the inputs considered, the policies applied,
    the rationale, the outcome, any human approval, and cryptographic provenance.
@@ -76,7 +79,8 @@ are discoverable across organisational boundaries.
 ## Mandate
 
 The authority granted to an agent — what it may do, within what limits, and where human
-approval is required. **The structural guarantee that agents cannot exceed their remit.**
+approval is required. **The structure that bounds an agent's remit, and makes an action
+outside it visible in the record.**
 
 | Field | Type | Card. | Definition |
 |-------|------|-------|------------|

@@ -1,16 +1,20 @@
 # Auction Certification
 
 The **SIGNET Auction Conformance Profile** (`auction-platform`) is the standard's
-**first product-certification path**: the bar an electronic-auction platform clears to
-carry the **"SIGNET Certified — Auction Platform"** mark. It adds nothing normative — it
-**composes** already-shipped artifacts (the [auction](Extensions) and identity
-extensions plus the public conformance suite) and names the subset a *platform* must
-demonstrate.
+**first product-certification path**: the bar an electronic-auction platform clears to be
+certified against the profile. It adds nothing normative — it **composes** already-shipped
+artifacts (the [auction](Extensions) and identity extensions plus the public conformance
+suite) and names the subset a *platform* must demonstrate.
+
+A platform that clears it holds the ordinary implementation mark
+(`SIGNET Certified: Core (CDM v0.1, suite v0.1)` or `Full`), and its registry entry records
+the profile assessed. The mark grammar has no profile production, so there is no separate
+*"Auction Platform"* mark string — adding one is a question for the Standards Committee.
 
 This page summarises the profile. The authoritative document is
 [`docs/profiles/auction-platform.md`](https://github.com/concerthq/signet-standard/blob/main/docs/profiles/auction-platform.md).
 
-## What the mark warrants — and doesn't
+## What certification against the profile warrants — and doesn't
 
 It warrants that a platform closes auctions **deterministically**, keeps a
 **tamper-evident** record, and records **governed** awards — all re-runnable by anyone
@@ -30,8 +34,10 @@ behaviour.
 - **AP-3 · Tamper-evident record** — bids and the close form an append-only, hash-chained
   `Event` trail; any alteration is detectable.
 - **AP-4 · Governed awards** — the close is a `Decision` with rationale, the bids
-  considered, the rules applied, and provenance, with verifiable human approval where the
-  mandate threshold requires it.
+  considered, the rules applied, and provenance, carrying a human approval reference where
+  the mandate threshold requires it. What is tested is that the record is complete and
+  well-formed; that the *threshold was enforced* is the proposed `E-MDT` endorsement, which
+  no level currently requires. See [Conformance Harness](Conformance-Harness).
 - **AP-5 · No personal data in the chain** — person references are pseudonymous, per the
   identity profile.
 

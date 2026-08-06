@@ -46,31 +46,45 @@ npm run conformance:extensions       # onboarding, auction, and identity cross-o
 ## What CI checks
 
 `.github/workflows/validate.yml` runs on every push to `main`/`dev` and every PR to `main`.
-It performs eleven checks — a PR cannot merge while any fail:
+It performs fifteen checks — a PR cannot merge while any fail:
 
 1. **Schema validation.** `node validate.js` validates every example against the schemas.
 2. **Codelist lint.** Every `codelists/*.csv` must start with the header
    `Code,Title,Description`.
-3. **JSON well-formedness.** Every file in `schema/*.json`, `examples/*.json`, and
+3. **Codelist governance.** `node conformance/rules/check-codelists.js` — the open
+   `eventType.csv` and the closed, normative `eventTypeCore.csv` must never intersect, no file
+   may repeat a code, and no code may leave the closed subset. A closed codelist whose closure
+   depends on a reviewer noticing is not closed, so the boundary is asserted here.
+4. **Mark grammar lint.** `node tools/lint-mark-strings.js` — every worked form in
+   `governance/mark-grammar.md` parses against the ABNF; every endorsement and role register
+   entry renders a valid mark; and no superseded mark form or prohibited construction survives
+   anywhere in published copy.
+5. **JSON well-formedness.** Every file in `schema/*.json`, `examples/*.json`, and
    `schema/context.jsonld` must parse.
-4. **Invoice projection + verification.** Projects `examples/invoice.json` to Peppol BIS
+6. **Invoice projection + verification.** Projects `examples/invoice.json` to Peppol BIS
    Billing UBL and runs `tools/verify-ubl.py` to reconcile every EN 16931 Business Term and
    the monetary totals.
-5. **Conformance — reference implementation.** Runs the [harness](Conformance-Harness); the
+7. **Conformance — reference implementation.** Runs the [harness](Conformance-Harness); the
    bundled reference adapter must reach **Core+**.
-6. **Conformance — broken implementation.** The deliberately broken adapter must be
+8. **Conformance — broken implementation.** The deliberately broken adapter must be
    **rejected** (the step inverts its exit code), proving the suite discriminates.
-7. **Agent demonstration.** Runs `node agent/run-agent.js`; the agent's governed action must
-   be conformance-clean — every Decision, Evaluation, and Award validates, the event chain
-   holds, and tampering is detected.
-8. **Supplier-onboarding demonstration.** Runs `node onboarding/run-onboarding.js`; an
-   onboarding case reaches a **conditional** qualification, conformance-clean.
-9. **Reverse-auction demonstration.** Runs `node auction/run-auction.js`; the auction closes
-   **deterministically** to a single winner, conformance-clean.
-10. **Commodity-risk conformance rules.** Runs `node conformance/rules/check-commodity-risk.js`
+9. **Endorsement checks — reference implementation.** Runs
+   `node conformance/rules/check-endorsements.js`; the reference adapter must earn both `E-MDT`
+   and `E-CNS`. These are draft and decide no conformance level.
+10. **Endorsement checks — the cites-but-does-not-enforce adapter.** The broken adapter's agent
+    surface passes F-SEM at step 8 and must **fail E-MDT** here. This step is the argument for
+    the endorsement, run continuously rather than asserted.
+11. **Agent demonstration.** Runs `node agent/run-agent.js`; the agent's governed action must
+    be conformance-clean — every Decision, Evaluation, and Award validates, the event chain
+    holds, and tampering is detected.
+12. **Supplier-onboarding demonstration.** Runs `node onboarding/run-onboarding.js`; an
+    onboarding case reaches a **conditional** qualification, conformance-clean.
+13. **Reverse-auction demonstration.** Runs `node auction/run-auction.js`; the auction closes
+    **deterministically** to a single winner, conformance-clean.
+14. **Commodity-risk conformance rules.** Runs `node conformance/rules/check-commodity-risk.js`
     — the six [commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension) rules,
     including the cross-object reconciliation, scenario-integrity, and rule-ordering checks.
-11. **Extension conformance rules.** Runs `npm run conformance:extensions` — the cross-object
+15. **Extension conformance rules.** Runs `npm run conformance:extensions` — the cross-object
     checkers for the onboarding, auction, and identity extensions.
 
 A separate workflow, `.github/workflows/pages.yml`, renders `docs/specification.md` to HTML

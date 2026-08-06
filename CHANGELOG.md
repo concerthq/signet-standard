@@ -6,6 +6,85 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Added — governance: marks, registers, and two conformance findings
+
+A single workstream. It began as a question about where implementation-roadmap collateral
+should sit, and drafting a competency framework against the **actual JSON schemas** rather
+than the wiki prose surfaced two gaps between what is claimed and what is tested. Those are
+the substantive discovery; everything else is consequence.
+
+- **The two findings.** `Consent` has no conformance requirement — C-DOC validates it
+  structurally and nothing tests that access is gated, that revocation takes effect, or that
+  `Document.accessGrant` is honoured. And mandate enforcement is demonstrated, not certified —
+  F-SEM requires a `Decision` to *cite* `policiesApplied`; nothing requires the limits in those
+  policies to have been *respected*. An implementation that awards beyond an `approvalThresholds`
+  policy with no `humanApproval`, while recording `underMandate` and `policiesApplied` correctly,
+  passes F-SEM and reaches Full. The record is well-formed, hash-chained, provenance-bearing,
+  and false. Both are now stated plainly in `conformance/levels.md` §5 and
+  `conformance/README.md`, whatever happens to the proposals below.
+- **`governance/mark-grammar.md`** — the complete set of marks Concert issues, in one document
+  rather than extended per requirement: three head terms never crossed (`SIGNET Certified` for
+  implementations, `SIGNET Registered` for people, `SIGNET Accredited` for training providers),
+  an ASCII ABNF, short forms licensed only where they resolve to the registry, prohibited
+  constructions, the wind-down windows, and what anyone may say without a licence. Six interim
+  resolutions recorded with their reasoning. Marks as W3C Verifiable Credentials was considered
+  and **declined**, with the reasoning kept because the idea will return.
+- **`tools/lint-mark-strings.js`** (`npm run lint:marks`) — the ABNF, checked mechanically in
+  CI, against the registers rather than a hard-coded list. It also fails the build on a
+  superseded mark form or a prohibited construction anywhere in published copy.
+- **Two registers, closed and append-only** — `governance/endorsement-register.md` (two
+  entries, each recording the three-part admission test; `Consent Enforcement` carries its scope
+  limit in the register itself) and `governance/role-register.md` (four roles; `Foundations`
+  confers no mark).
+- **`governance/role-competency-framework.md`** and **`governance/person-assessment.md`** — what
+  a person must be able to do, stated by reference to normative artifacts, with the assessment
+  mode declared per domain, plus the rubric and the binding appeals route that must exist before
+  any person mark issues.
+- **Four change proposals** in `governance/proposals/`, none balloted: grant lifecycle,
+  mandate enforcement (`E-MDT`), consent revocation (`E-CNS`), and credential semantics.
+- **Endorsements — a second, additive axis** (`conformance/levels.md` §2.4). Draft and not in
+  force: `conformance/rules/check-endorsements.js` runs twelve checks against two optional
+  adapter surfaces (`conformance/adapter/endorsement-adapters.md`), decides no level, and
+  licenses no mark.
+- **A third planted defect in the broken adapter** — an agent that cites its mandate and its
+  policies correctly and does not enforce them. It **passes F-SEM** and **fails E-MDT-1**, in
+  CI, on every commit. The distance between those two results is the whole argument for the
+  endorsement, and it is worth keeping even if that proposal is declined.
+- **`codelists/eventTypeCore.csv`** — a closed, normative core subset within the open
+  `eventType` list, with `consent.granted`, `consent.revoked`, `mandate.granted`,
+  `mandate.revoked`. The two `mandate.*` codes are *promoted*, not added: their meanings are
+  fixed rather than changed. Protected by CODEOWNERS, and `conformance/rules/check-codelists.js`
+  asserts in CI that the open and closed files never intersect — a closed codelist whose closure
+  depends on someone noticing is not closed.
+
+### Changed
+
+- **Specification §7.4 — grant-type objects and withdrawal.** A normative defined term
+  (`Consent` and `Mandate`, enumerated), the rule that withdrawal is an appended event and never
+  a mutated field, and the effective/not-effective projection rule, reproducible by a third party
+  from the event stream alone. **No schema change** — `Event.subject` already carries the grant
+  identifier. No `*.expired` code exists: expiry has no actor, and `Event` requires one.
+- **Positioning corrected against the claim triad.** *Modelled*, *tested*, and *certified* are
+  three different statements, and the copy blurred them — always in the direction that
+  overstates. The Architecture Overview no longer says conformance with the specification's MUSTs
+  "is decided mechanically by the Conformance Harness" without qualification; `Mandate` is no
+  longer "the structural guarantee that agents cannot exceed their remit"; and the auction
+  profile's AP-4 now says it tests record completeness, not that the ceiling held.
+- **The canonical mark form is now `SIGNET Certified: Full (CDM v0.1, suite v0.1)`** — ASCII,
+  colon-delimited, lintable. The em-dash form is superseded and CI rejects it.
+- **`Consent.purpose` and `Consent.revocable` descriptions** — `purpose` is a human-readable
+  statement, not a machine-evaluable term, with the profile extension path stated; `revocable` is
+  a capability flag, not a status.
+
+### Note on status
+
+Nothing here has been balloted. Twenty interim resolutions are in force under the bootstrap
+clause, each ratifiable, amendable, or reversible by the Standards Committee once constituted.
+**CP-Grant-lifecycle is the only item that must clear before v1.0**; its mechanism is landed
+ahead of ballot because closing a codelist subset is materially cheaper before publication under
+a stable URI and DOI than after. Neither endorsement proposal gates v1.0 — both must land before
+the *first certification*, which is a separate and later constraint.
+
 ## [0.12.0] — 2026-07-20 — Working Draft
 
 ### Added

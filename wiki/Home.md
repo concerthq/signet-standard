@@ -82,7 +82,9 @@ SIGNET defines a **Canonical Data Model (CDM)** organised into four layers:
   [EN 16931 & ViDA E-Invoicing](EN-16931-and-ViDA-E-Invoicing).
 - **Conformance is machine-runnable.** A public test harness decides whether an
   implementation is SIGNET Certified — and at which level (Core / Full) — through the
-  identical suite for everyone. See [Conformance Harness](Conformance-Harness).
+  identical suite for everyone. What it decides is the requirements it tests, which is
+  narrower than every MUST in the specification: a **Full** certification is not evidence
+  that human oversight was enforced. See [Conformance Harness](Conformance-Harness).
 
 ---
 
@@ -94,6 +96,8 @@ SIGNET defines a **Canonical Data Model (CDM)** organised into four layers:
   (public-domain dedication of the artifacts; the marks are administered separately).
 - **Marks:** "SIGNET", "Concert", and "SIGNET Certified" are marks administered by Concert
   Foundation. CC0 covers copyright in the artifacts only; it grants no rights in the marks.
+  Their form — and the constructions that are prohibited — is fixed by the mark grammar
+  (`governance/mark-grammar.md`). See [Governance & Versioning](Governance-and-Versioning#marks).
 
 Comments are invited at **hello@concert.foundation** and through the
 [issue templates](https://github.com/concerthq/signet-standard/tree/main/.github/ISSUE_TEMPLATE).

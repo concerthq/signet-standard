@@ -30,6 +30,14 @@ matter, used in [Classification](Foundation-Layer#classification) (`scheme: cpv`
 central registry (e.g. `did:web:supplier.example.com`). RECOMMENDED for parties and agents —
 see [Identifier](Foundation-Layer#identifier).
 
+### Endorsement
+A certifiable property that sits **orthogonal to the Core/Full level axis**, because it is not
+universally applicable — an implementation may run agents but hold no access-controlled
+documents, or the reverse. Endorsements are additive: they change neither level, block nobody
+from certifying, and are inert where unearned. Two are proposed (`E-MDT` Mandate Enforcement,
+`E-CNS` Consent Enforcement) and neither is yet in force. See
+[Conformance Harness](Conformance-Harness#endorsements--a-second-axis-draft-not-in-force).
+
 ### EN 16931
 The **European standard for the semantic model of an electronic invoice.** SIGNET's
 [Invoice](Process-Layer#invoice) is mapped to its Business Terms (BT) and Business Groups
@@ -44,6 +52,12 @@ JSON-LD context aligns terms to ePO (e.g. `procuringParty` → `ePO:hasBuyer`).
 A **hybrid PDF/XML invoice format** (EN 16931 compliant). A SIGNET invoice is convertible to
 it.
 
+### Grant-type object
+A CDM object that confers authority or permission from one party to another for a bounded
+period, and whose conferred authority may cease before that period ends. In CDM v0.1 these are
+[Consent](Trust-Layer#consent) and [Mandate](Agent-Layer#mandate). Withdrawal of a grant is
+recorded by **appending an event**, never by mutating the object — see specification §7.4.
+
 ### GLEIF / LEI
 **Global Legal Entity Identifier Foundation / Legal Entity Identifier (ISO 17442).** A global
 organisation identifier scheme (`scheme: gleif:lei`).
@@ -57,8 +71,9 @@ property a global URI while remaining ordinary JSON to consumers that ignore the
 See [Serialisation](Serialisation).
 
 ### Mandate
-The **bounded authority** granted to an agent — the structural guarantee it cannot exceed its
-remit. See [Mandate](Agent-Layer#mandate).
+The **bounded authority** granted to an agent — what it may do, within what limits, and above
+what threshold a human must approve. A grant-type object: its withdrawal is recorded as an
+appended event, never as a mutated field. See [Mandate](Agent-Layer#mandate).
 
 ### MAT
 **Most Advantageous Tender.** A common evaluation model (e.g. price/quality/social-value
@@ -101,7 +116,10 @@ Catalogue, Invoice). SIGNET projects its Invoice to **UBL 2.1**.
 
 ### Verifiable Credential (VC)
 A **W3C standard** for tamper-evident, cryptographically verifiable claims about a subject.
-SIGNET's [Credential](Foundation-Layer#credential) is a VC reference.
+SIGNET's [Credential](Foundation-Layer#credential) is described in the prose as a *reference to*
+a VC, while the schema requires `credentialSubject` and `proof` — which is the credential's
+substance. That contradiction is open, and `governance/proposals/CP-Credential-semantics.md`
+proposes admitting both forms with an explicit discriminator.
 
 ### ViDA
 **VAT in the Digital Age.** An EU package mandating EN 16931-based cross-border e-invoicing

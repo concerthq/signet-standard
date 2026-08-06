@@ -76,6 +76,37 @@ A [Document](Foundation-Layer#document) whose access is controlled references a 
 object via its `accessGrant` field. This is how the model separates *an assertion* from *the
 right to access the data behind it* — the CDM never assumes a central data warehouse.
 
+`purpose` is a **human-readable statement**, not a machine-evaluable term: the string
+interoperates, and its evaluation is not defined by the standard. A profile may define a
+`purposeCode` extension with a codelist appropriate to its jurisdiction or sector — purpose and
+lawful-basis vocabularies differ enough that a single core list would be wrong for most adopters.
+
+`revocable` records whether a grant *may* be withdrawn. It does not record whether one *has*
+been — see below.
+
+### Withdrawal is an event
+
+`Consent` and `Mandate` are **grant-type objects**: they confer authority for a bounded period,
+and that authority may cease before the period ends. An implementation MUST NOT mutate the
+object to record withdrawal. It appends an `Event` — `consent.revoked`, `mandate.revoked`, both
+in the closed core of [eventType](Codelists#eventtype) — and a grant is **effective** at time
+*T* only if it was granted before *T*, not revoked before *T*, and *T* falls inside its
+`validity`.
+
+The determination must be reproducible by a third party from the published event stream alone.
+This is design principle 1.7 applied where it matters most: a status field on the object would
+be a second source of truth with no rule for which governs when the two disagree.
+
+There is no `*.expired` event. Expiry happens by the clock rather than by any party's act, so
+such an event would have no honest `actor` — and `Event` requires one. The projection tests
+`validity` directly. See specification §7.4.
+
+**What is tested, and what is not.** All of the above is *modelled*. No conformance requirement
+at Core or Full currently tests that access is actually gated by a live grant, that revocation
+takes effect, or that `accessGrant` is honoured — `Consent` is validated structurally by C-DOC
+and nothing more. The proposed `E-CNS` endorsement would test it. See
+[Conformance Harness](Conformance-Harness).
+
 ## Putting it together
 
 A typical award flow generates, across the layers:

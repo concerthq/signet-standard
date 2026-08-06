@@ -117,9 +117,22 @@ See [Foundation Layer → Identifier](Foundation-Layer#identifier) and
 The specification uses RFC 2119 / RFC 8174 keywords (**MUST, MUST NOT, REQUIRED, SHALL,
 SHOULD, RECOMMENDED, MAY, OPTIONAL**). Field cardinality is written as `1` (exactly one,
 required), `0..1` (optional single), `1..*` (one or more, required), `0..*` (zero or more).
-These same conventions are used throughout this wiki's layer pages. Whether an implementation
-actually *meets* these requirements is decided mechanically by the
-[Conformance Harness](Conformance-Harness).
+These same conventions are used throughout this wiki's layer pages.
+
+Whether an implementation meets **the requirements the suite tests** is decided mechanically by
+the [Conformance Harness](Conformance-Harness) — with no interview, committee, or discretionary
+gate. That is narrower than "every MUST in the specification", and the difference matters:
+
+- **Modelled** — the CDM represents it. Says nothing about whether anyone does it.
+- **Tested** — the public suite exercises it against an implementation's own behaviour.
+- **Certified** — a passing, reproducible report is on the registry against a named version.
+
+Two governance properties are currently modelled but not tested, and therefore not certified:
+that consent terms have consequence, and that mandate limits are respected rather than merely
+cited. A **Full** certification is not evidence that human oversight was enforced.
+[`conformance/levels.md` §5](https://github.com/concerthq/signet-standard/blob/main/conformance/levels.md)
+states which requirements the suite decides, and the two proposed endorsements that would close
+the gap.
 
 ## Where to go next
 

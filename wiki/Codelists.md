@@ -123,6 +123,33 @@ parameterised by `auctionType` and `rules`; new profiles may be added by pull re
 
 ## eventType
 
+`eventType` is the one codelist that is **both open and closed**, in two files. Consumers take
+the union of the two; CI asserts they never intersect.
+
+### eventTypeCore — closed, normative
+
+`codelists/eventTypeCore.csv`. Codes here MUST carry the meanings given, and MUST NOT be
+redefined, reused, or narrowed by implementations, extensions, or profiles. Admission is
+append-only and is a Standards Committee act. This is what makes withdrawal of a grant
+interoperable: an open value has no fixed meaning, so no conformance rule can reference it.
+
+| Code | Title | Description |
+|------|-------|-------------|
+| `consent.granted` | Consent granted | A data-sovereignty access grant was issued. |
+| `consent.revoked` | Consent revoked | An access grant was withdrawn before expiry. |
+| `mandate.granted` | Mandate granted | Delegated authority was conferred on an agent. |
+| `mandate.revoked` | Mandate revoked | Delegated authority was withdrawn before expiry. |
+
+The two `mandate.*` codes were **promoted** from the open list, not added: their meanings are
+fixed rather than changed. There is no `*.expired` code — expiry occurs by the clock, not by any
+party's act, so an expiry event would have no honest `actor`, and the projection rule tests
+`validity` directly. See [Trust Layer](Trust-Layer) and specification §7.4.
+
+### eventType — open, non-normative
+
+`codelists/eventType.csv`. The extension space. Values may be added freely by pull request, and
+nothing fixes the meaning of any of them.
+
 | Code | Title | Description |
 |------|-------|-------------|
 | `need.raised` | Need raised | A procurement need was raised. |
@@ -131,8 +158,7 @@ parameterised by `auctionType` and `rules`; new profiles may be added by pull re
 | `evaluation.completed` | Evaluation completed | A submission was evaluated. |
 | `award.decided` | Award decided | An award decision was taken. |
 | `contract.signed` | Contract signed | A contract was executed. |
-| `mandate.granted` | Mandate granted | An agent mandate was granted. |
-| `mandate.revoked` | Mandate revoked | An agent mandate was revoked. |
+| `mandate.refused` | Mandate refused | An agent action was refused because it fell outside the mandate relied on. |
 | `obligation.discharged` | Obligation discharged | An obligation reached `met`, discharged by a settling artefact (Order/Invoice/Document). |
 | `bid.placed` | Bid placed | A bid was placed or revised in an [Auction](Process-Layer#auction); the ordered `bid.placed` stream is the hash-chained auction record. |
 
