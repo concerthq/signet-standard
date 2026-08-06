@@ -181,20 +181,21 @@ function createAgentAdapter() {
         }
       }
 
-      // 5. Approval thresholds. Exceeding one does not forbid the action; it moves a
-      //    human into the loop, which is the whole point of bounded autonomy. (E-MDT-1)
-      const breached = (mandate.approvalThresholds || [])
-        .map((ref) => ({ ref, policy: policies[idOf(ref)] }))
-        .filter(({ policy }) => policy && !evaluatePolicy(policy, { action }));
+      // 5. Approval thresholds. Exceeding one moves a human into the loop, which is the whole
+      //    point of bounded autonomy — so the agent halts here. It does not approve on the
+      //    human's behalf, and it does not write an approval record for a decision nobody has
+      //    taken yet. A real flow resumes when a human approves and the action is re-attempted;
+      //    that resumption is outside what an unattended conformance run can observe. (E-MDT-1)
+      for (const ref of mandate.approvalThresholds || []) {
+        const policy = policies[idOf(ref)];
+        if (!policy) return refuse("E-MDT-1", `Approval-threshold policy ${idOf(ref)} was not resolvable.`, ref);
+        if (!evaluatePolicy(policy, { action })) {
+          return refuse("E-MDT-1", `Action requires human approval and none has been given: ${policy.humanReadable}`, ref);
+        }
+      }
 
-      const applied = [
-        ...(mandate.constraints || []),
-        ...breached.map(({ ref }) => ref),
-      ];
-
-      const approval = breached.length
-        ? (humanApproval || { scheme: "did", id: "did:web:buyer.example#approval-771" })
-        : undefined;
+      // Every limit the mandate expresses is satisfied, so the agent acts on its own authority.
+      const applied = [...(mandate.constraints || [])];
 
       const decision = {
         type: "Decision",
@@ -204,13 +205,12 @@ function createAgentAdapter() {
         underMandate: mandate.id,
         inputs: [subject],
         policiesApplied: applied,
-        rationale: breached.length
-          ? `Action of ${action.value.amount} ${action.value.currency} exceeds an approval threshold; ` +
-            `proceeded only with recorded human approval.`
-          : `Action of ${action.value.amount} ${action.value.currency} is within every limit the mandate expresses; ` +
-            `decided autonomously under ${mandateId}.`,
+        rationale: `Action of ${action.value.amount} ${action.value.currency} is within every limit ` +
+          `the mandate expresses; decided autonomously under ${mandateId}.`,
         outcome: { action: capability, subject: idOf(subject), value: action.value },
-        ...(approval ? { humanApproval: approval } : {}),
+        // An approval offered with the attempt is recorded, never invented. Where none is
+        // offered the field is absent, because there is nothing to point at.
+        ...(humanApproval ? { humanApproval } : {}),
         provenance: prov(atTime),
       };
 

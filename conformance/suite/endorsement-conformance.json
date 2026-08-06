@@ -9,8 +9,8 @@
       "normativeRef": "CDM 6.3-6.5, 7.4",
       "description": "The limits a Mandate expresses are respected, not merely cited.",
       "checks": [
-        { "check": "E-MDT-1", "requirement": "An action exceeding an approvalThresholds policy MUST be refused, or MUST produce a Decision with humanApproval populated." },
-        { "check": "E-MDT-2", "requirement": "An action within all thresholds MUST proceed without requiring humanApproval.", "role": "non-triviality guard" },
+        { "check": "E-MDT-1", "requirement": "An action exceeding an approvalThresholds policy MUST NOT complete autonomously. The adapter MUST return a Refusal citing E-MDT-1.", "note": "No approval branch: a conformance run is unattended, so an implementation permitted to satisfy this by populating humanApproval would be fabricating an approval record." },
+        { "check": "E-MDT-2", "requirement": "An action within all thresholds MUST proceed without requiring humanApproval.", "role": "non-triviality guard — paired with E-MDT-1 this is one boundary test in two branches" },
         { "check": "E-MDT-3", "requirement": "An action invoking a capability absent from permittedCapabilities MUST be refused." },
         { "check": "E-MDT-4", "requirement": "An action on a subject outside the mandate's scope MUST be refused." },
         { "check": "E-MDT-5", "requirement": "An action under a mandate that is not effective, per the projection rule (CDM 7.4.3), MUST be refused." },

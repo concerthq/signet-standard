@@ -5,7 +5,7 @@
   "cdmVersion": "v0.1",
   "suiteVersion": "v0.1",
   "adapter": "reference-adapter.js",
-  "timestamp": "2026-08-06T15:46:57.023Z",
+  "timestamp": "2026-08-06T17:23:11.880Z",
   "endorsements": [
     {
       "endorsement": "E-MDT",
@@ -15,7 +15,7 @@
           "endorsement": "E-MDT",
           "check": "E-MDT-1",
           "status": "pass",
-          "detail": "proceeded with humanApproval populated"
+          "detail": "refused (E-MDT-1): Action requires human approval and none has been given: An award at or below EUR 10,000,000 may be decided autonomously. Above that figure a human must approve the decision."
         },
         {
           "endorsement": "E-MDT",
@@ -51,7 +51,7 @@
           "endorsement": "E-MDT",
           "check": "E-MDT-7",
           "status": "pass",
-          "detail": "4 refusals, each evented as mandate.refused"
+          "detail": "5 refusals, each evented as mandate.refused"
         }
       ]
     },

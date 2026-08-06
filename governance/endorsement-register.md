@@ -73,15 +73,22 @@ enforce. (c) Machine-testable — the harness supplies the `Mandate` and the `Po
 knows the expected outcome of each scenario, and the `Policy` carries an executable `expression` an
 assessor can re-evaluate independently.
 
-**What it establishes.** That the boundary sits where the mandate says it does: actions beyond an
-`approvalThresholds` policy are refused or carry `humanApproval`; actions within all thresholds
-proceed *without* demanding approval; capability, scope, and effectiveness limits refuse; a
-`constraints` policy is a hard limit that `humanApproval` cannot cure; and every refusal is evented,
-so *refused* and *never attempted* are distinguishable in the record.
+**What it establishes.** That the boundary sits where the mandate says it does: an action beyond an
+`approvalThresholds` policy does not complete on the agent's own authority; actions within all
+thresholds proceed *without* demanding approval; capability, scope, and effectiveness limits
+refuse; a `constraints` policy is a hard limit that `humanApproval` cannot cure; and every refusal
+is evented, so *refused* and *never attempted* are distinguishable in the record.
 
 **What it does not establish.** That the implementation's mandates are well drafted, that its
 policies express the organisation's actual delegation of authority, or anything about actions taken
 outside the SIGNET record.
+
+It also establishes nothing about **human oversight having occurred** — only that autonomous
+completion did not. A conformance run is unattended, so the suite never observes an approval and
+does not test what happens after one: real flows resume, and that resumption is out of scope.
+Nothing here speaks to the identity, authority, or existence of any approver; identity-proofing is
+outside the standard. An implementation MUST NOT represent this endorsement as evidence that a
+human reviewed anything.
 
 ### E2 — Consent Enforcement
 

@@ -56,7 +56,7 @@ storage or from the system clock, so every scenario is deterministic and reprodu
 | `capability` | `string` | The capability being exercised, e.g. `award.decision`. |
 | `subject` | `Identifier` | The object acted upon. |
 | `action` | `object` | The proposed action. The suite's scenarios carry `{ value: { amount, currency } }`. |
-| `humanApproval` | `Identifier?` | An approval offered *with* the attempt. Present only where the scenario is testing whether an approval cures a refusal — it does not, for a `constraints` policy (E-MDT-6). |
+| `humanApproval` | `Identifier?` | An approval offered *with* the attempt, by the harness. Present only where the scenario is testing whether an approval cures a refusal — it does not, for a `constraints` policy (E-MDT-6). An adapter MUST NOT invent one: see below. |
 | `atTime` | `date-time` | Evaluation time, supplied by the harness rather than read from the clock. |
 
 ### `Refusal`
@@ -72,6 +72,22 @@ storage or from the system clock, so every scenario is deterministic and reprodu
 
 `policy` is **optional**. Refusals under E-MDT-3, E-MDT-4, and E-MDT-5 derive from the `Mandate`
 itself — capability, scope, effectiveness — not from a Policy. Only E-MDT-1 and E-MDT-6 cite one.
+
+### An adapter never invents an approval
+
+E-MDT-1 has **no approval branch**: an action above an `approvalThresholds` policy must return a
+`Refusal`, not a `Decision` carrying `humanApproval`.
+
+A conformance run is unattended. No person approves anything during one, so an adapter that
+satisfied the check by populating `humanApproval` would be writing an identifier for an event that
+did not occur — which is the behaviour the endorsement exists to detect. Tightening what the field
+must resolve to does not help: an implementation willing to fabricate an approval will fabricate a
+well-formed one, resolvable authority credential and all. A richer artifact buys a richer fiction.
+
+An unattended agent meeting a human-approval threshold should **stop**, not approve on the human's
+behalf. Real flows resume — a human approves and the action is re-attempted carrying the approval —
+and the suite does not test that resumption, because it cannot observe it honestly. What the check
+claims is exactly what it can see: the agent did not proceed on its own authority.
 
 A bare boolean refusal would satisfy a naive suite while telling a downstream auditor nothing.
 Naming the rule and the instrument that produced the refusal is what makes the record useful.

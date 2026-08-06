@@ -102,9 +102,20 @@ function runScenario({ reasoner }) {
   };
   let approval = null;
   if (requiresHumanApproval) {
+    // The agent stops here. It does not approve on the human's behalf.
+    //
+    // What follows is the SCENARIO supplying the approver's decision, so the demonstration can
+    // show the whole human-in-the-loop path — the agent halting, a human with sufficient
+    // delegated authority approving, and the award resuming under that approval. That is a
+    // legitimate thing for a narrated demonstration to do and an illegitimate thing for a
+    // conformance adapter to do: a conformance run is unattended, so an adapter producing this
+    // record would be asserting an event that never happened. Hence E-MDT-1 has no approval
+    // branch, and the reference adapter refuses instead of arriving here.
+    log(`Award value exceeds the autonomous ceiling: the agent HALTS and does not decide.`);
     decision.humanApproval = { scheme: "did", id: "did:web:buyer.example#approval-771" };
-    log(`Human approval ${shortId(decision.humanApproval.id)} attached (mandate threshold exceeded).`);
-    // Emit the verifiable Approval the humanApproval reference resolves to (identity profile).
+    log(`Scenario supplies a human decision: approval ${shortId(decision.humanApproval.id)} — ` +
+        `the award resumes under it, not under the agent's own authority.`);
+    // The verifiable Approval the humanApproval reference resolves to (identity profile).
     // Pseudonymous approver, role, and a delegation-of-authority credential whose ceiling
     // is checked against the award value — human authority made symmetric with the agent's Mandate.
     const APPROVER = { scheme: "did", id: "did:web:buyer.example#officer-7c2f" };
