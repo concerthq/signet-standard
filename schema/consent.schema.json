@@ -42,13 +42,15 @@
       }
     },
     "purpose": {
-      "type": "string"
+      "type": "string",
+      "description": "A human-readable statement of the purpose for which access is granted, not a machine-evaluable term. The string interoperates; its evaluation is not defined by this standard. A profile MAY define a purposeCode extension with a codelist appropriate to its jurisdiction or sector."
     },
     "validity": {
       "$ref": "definitions.schema.json#/definitions/Period"
     },
     "revocable": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Whether the grant may be withdrawn before expiry. This is a capability flag, not a status: withdrawal is recorded by appending a consent.revoked Event, never by mutating this object (specification §7.4)."
     },
     "proof": {
       "type": "object"
