@@ -1,0 +1,73 @@
+# SIGNET Governance
+
+The artifacts that govern **who decides what** about the standard, **what Concert may certify**,
+and **what anyone may claim**. The normative model itself lives in [`docs/specification.md`](../docs/specification.md);
+what it means to conform lives in [`conformance/levels.md`](../conformance/levels.md). This
+directory holds the layer above both.
+
+Everything here is CC0-1.0.
+
+## Contents
+
+| Artifact | Class | Status |
+|----------|-------|--------|
+| [mark-grammar.md](mark-grammar.md) | Normative for licensees (IP & Licensing Policy). Not a CDM artifact. | Interim resolution, in force pending ratification |
+| [endorsement-register.md](endorsement-register.md) | Normative. Closed, append-only. | v0.1 — two entries, both `proposed` |
+| [role-register.md](role-register.md) | Normative. Closed, append-only. | v0.1 — four entries, all `proposed` |
+| [role-competency-framework.md](role-competency-framework.md) | Non-normative | Working Draft |
+| [person-assessment.md](person-assessment.md) | Non-normative | Working Draft |
+| [proposals/](proposals/) | Change proposals against the CDM, the suite, and the codelists | See the [proposals index](proposals/README.md) |
+| [reviews/](reviews/) | Point-in-time reviews of merged work | — |
+
+## Status vocabulary
+
+Every artifact here is at one of three states, and the difference is load-bearing:
+
+- **Draft** — written, not decided. Carries no obligation.
+- **Interim resolution** — decided under the bootstrap clause, in force, and recorded with its
+  reasoning. An interim resolution is a decision, minuted as such — not a deferral. The Standards
+  Committee may ratify, amend, or reverse it once constituted.
+- **Ratified** — carried by the Standards Committee. Nothing here has reached this state, because no
+  committee is yet constituted.
+
+## The bootstrap clause
+
+No Standards Committee is constituted. Referring every structural decision to a body that does not
+exist would defer all of them indefinitely, and several are materially cheaper to settle before the
+standard is published under a stable URI and DOI — and before the first mark issues. Decisions taken
+in that window are recorded as **interim resolutions**: in force, reasoned in writing, and
+reversible by the committee on the record rather than by silent drift.
+
+Twenty interim resolutions are currently in force, across four documents:
+
+| Document | Resolutions |
+|----------|-------------|
+| [mark-grammar.md](mark-grammar.md) §10 | R1–R6 — head terms, endorsement register, wind-down, selective disclosure, enforcement, commencement |
+| [proposals/CP-Mandate-enforcement.md](proposals/CP-Mandate-enforcement.md) §9 | R-G1–R-G5 — endorsement axis, agent adapter, registry, sequencing, dependency hoist |
+| [proposals/CP-Consent-revocation.md](proposals/CP-Consent-revocation.md) §9 | R-G1–R-G2 — `purpose`, scope limit |
+| [proposals/CP-Grant-lifecycle.md](proposals/CP-Grant-lifecycle.md) §9 | R-G1–R-G3 — closure mechanism, `*.expired` dropped, defined term normative |
+| [role-competency-framework.md](role-competency-framework.md) §8 | R-G1–R-G4 — issuance split, close F1/F2, role rename, normative status split |
+
+## The claim triad
+
+Three statements are routinely confused, always in the direction that overstates:
+
+- **Modelled** — the CDM represents it. Says nothing about whether anyone does it.
+- **Tested** — the public suite exercises it against an implementation's own behaviour.
+- **Certified** — a passing, reproducible report is on the registry against a named version.
+
+Positioning copy must be checked against which of the three actually applies. Two properties are
+currently *modelled* but not *tested*, and therefore not *certified*: consent enforcement and
+mandate enforcement. Both are addressed by the endorsement proposals; neither is closed until those
+carry. See [proposals/README.md](proposals/README.md).
+
+## Open actions
+
+Items that do not wait on any gate, and are not code:
+
+- **Trademark registration — EU, UK, US.** Required to preserve the enforcement option under
+  mark-grammar R5. Registration is inexpensive, and becomes unobtainable if another party files
+  first. This is the only open action in this directory that Concert cannot discharge in the
+  repository. **Owner: Concert Foundation. Not yet filed.**
+- **Constitute the Standards Committee**, which converts every interim resolution above into a
+  ratification decision, and clears the bootstrap clause.
