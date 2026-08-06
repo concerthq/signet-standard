@@ -61,6 +61,30 @@ currently *modelled* but not *tested*, and therefore not *certified*: consent en
 mandate enforcement. Both are addressed by the endorsement proposals; neither is closed until those
 carry. See [proposals/README.md](proposals/README.md).
 
+## Tabled for the first constituted committee
+
+Not yet resolved, and recorded here rather than acted on unilaterally.
+
+**An "Honest limits" section as a required convention.** Proposed wording:
+
+> Every profile MUST carry a final **Honest limits** section stating, normatively, what
+> conformance with the profile does *not* establish, and prohibiting implementations from
+> representing profile conformance as the stronger claim.
+
+The identity profile already carries one ([`docs/extensions/identity.md`](../docs/extensions/identity.md)
+§7), written before the convention was proposed, and it is the model: it says the profile makes
+identity claims verifiable, attributable, and tamper-evident, and does not make identity-proofing
+true.
+
+The argument for making it mandatory is that it converts the claim triad from a review checklist
+into a structural habit. Both findings in this workstream were overclaims that survived review
+because nothing in the authoring process required their author to write down what the artifact did
+*not* do. A required section does require exactly that, at the moment the author knows most and is
+least motivated to say it.
+
+It binds no one until the committee adopts it. Applied voluntarily so far to the identity profile
+and to the [Agent Layer](../wiki/Agent-Layer.md) wiki page.
+
 ## Open actions
 
 Items that do not wait on any gate, and are not code:
