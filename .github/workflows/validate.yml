@@ -29,6 +29,12 @@ jobs:
           done
           echo "All codelists have a valid header."
 
+      - name: Codelist governance (open/core split, headers, append-only)
+        run: node conformance/rules/check-codelists.js
+
+      - name: Mark grammar linter (canonical strings, registers, ABNF)
+        run: node tools/lint-mark-strings.js
+
       - name: Check JSON well-formedness
         run: |
           for f in schema/*.json examples/*.json schema/context.jsonld; do
@@ -50,6 +56,20 @@ jobs:
             echo "ERROR: broken adapter was not rejected"; exit 1
           else
             echo "OK: harness correctly failed the broken adapter"
+          fi
+
+      # Endorsement checks are DRAFT and decide no conformance level. They run in CI so the
+      # gap they close stays demonstrable: the broken adapter passes F-SEM above and fails
+      # E-MDT-1 here, which is the whole argument for the endorsement in one diff.
+      - name: Endorsement checks — reference implementation must earn E-MDT and E-CNS
+        run: node conformance/rules/check-endorsements.js
+
+      - name: Endorsement checks — the cites-but-does-not-enforce adapter must fail E-MDT
+        run: |
+          if node conformance/rules/check-endorsements.js --adapter conformance/adapter/broken-adapter.js; then
+            echo "ERROR: an adapter that cites its mandate without enforcing it earned E-MDT"; exit 1
+          else
+            echo "OK: E-MDT correctly refused the cites-but-does-not-enforce adapter"
           fi
 
       - name: Agent demonstration — governed action must be conformance-clean
