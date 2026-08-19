@@ -23,11 +23,20 @@ https://concert.foundation/governance/cla.
 
 ## What is normative vs non-normative
 
-- **Normative** (`/schema`, `/codelists` closed lists): changes go through the
-  Standards Committee revision process with a published comment period. The
-  **schema takes precedence** over prose if they ever conflict.
-- **Non-normative** (`/docs`, `/examples`, open codelist values): may be
-  updated freely by pull request.
+- **Normative** (`/schema`, `/codelists` closed lists, `/conformance` levels,
+  suite and report schema): changes require a recorded resolution and a stated
+  comment period of at least 14 calendar days. The **schema takes precedence**
+  over prose if they ever conflict.
+- **Normative for licensees** (`governance/mark-grammar.md` and the two closed
+  registers): not CDM artifacts, but they decide what may be claimed, so they
+  follow the same rule.
+- **Non-normative** (`/docs`, `/wiki`, `/examples`, open codelist values, and
+  the rest of `/governance`): one approving review, no comment period.
+
+Both tiers arrive by pull request; direct commits to `main` are not a permitted
+route. The full rule, including the interim arrangement standing in for a
+Standards Committee that is **not yet constituted**, is in
+[`GOVERNANCE.md`](GOVERNANCE.md).
 
 ## How to propose a change
 

@@ -42,6 +42,7 @@ wiki/          Long-form documentation (mirrors the GitHub wiki)
 .github/workflows/validate.yml   CI: validates examples, runs conformance + all three demos
 LICENSE        CC0 1.0 public-domain dedication (the normative artifacts)
 conformance/LICENSE   Apache-2.0 — the machine-runnable conformance harness
+GOVERNANCE.md  How changes are proposed, reviewed, and adopted
 CONTRIBUTING.md   How to contribute (and the CLA)
 CHANGELOG.md   Semantic-versioned history
 ```
@@ -181,7 +182,7 @@ Proposed changes are drafted as **change proposals** in [`governance/proposals/`
 
 ## Contributing
 
-Contributions are welcome under the Concert Contributor Licence Agreement — see [CONTRIBUTING.md](CONTRIBUTING.md). You keep ownership of your work; you grant Concert royalty-free copyright and patent licences so the standard stays open for everyone. No contributor, and no commercial operator (including Score Networks), gains a preferential position.
+Contributions are welcome under the Concert Contributor Licence Agreement — see [CONTRIBUTING.md](CONTRIBUTING.md). How a change is reviewed and adopted once proposed — the two review tiers, the comment period for normative changes, and the interim arrangement standing in for a Standards Committee that is not yet constituted — is recorded in [GOVERNANCE.md](GOVERNANCE.md). You keep ownership of your work; you grant Concert royalty-free copyright and patent licences so the standard stays open for everyone. No contributor, and no commercial operator (including Score Networks), gains a preferential position.
 
 ## Marks
 
