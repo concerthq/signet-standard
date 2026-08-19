@@ -137,6 +137,11 @@ Changes merged before that date followed prior practice, which included direct c
 having followed this process, because they did not. They are superseded from the effective
 date.
 
+**This document's own merge is the last change under prior practice.** It could not be
+otherwise: a rule cannot govern the change that introduces it, and a document claiming it had
+been reviewed under a process that did not yet exist would fail its own first test. The first
+change subject to this process is the one after it.
+
 ## Changing this document
 
 `GOVERNANCE.md` is non-normative and changes under Tier 1 — with one exception. A change to
