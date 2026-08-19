@@ -122,6 +122,9 @@
         "id",
         "description"
       ],
+      "patternProperties": {
+        "^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9]*$": {}
+      },
       "additionalProperties": false,
       "properties": {
         "id": {
@@ -330,6 +333,9 @@
         "netAmount",
         "itemName"
       ],
+      "patternProperties": {
+        "^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9]*$": {}
+      },
       "additionalProperties": false,
       "properties": {
         "id": {

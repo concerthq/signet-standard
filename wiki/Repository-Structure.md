@@ -74,6 +74,7 @@ Added in **v0.4.0**: the machine-runnable suite behind the "SIGNET Certified" ma
 | `report-schema.json` | Schema every conformance report conforms to (CN-4). |
 | `suite/` | The test cases: `document-conformance.json` (C-DOC) and `implementation-conformance.json`. |
 | `fixtures/invalid/` | Documents that MUST be rejected (one per rule). |
+| `fixtures/valid/` | Documents that MUST validate but are not worked examples. |
 | `adapter/` | The adapter contract, a reference adapter (reaches Full), and a broken adapter (rejected). |
 | `runner/` | `run-conformance.js` (the harness) + `lib.js` (schema loading, hashing, chain verification). |
 | `rules/` | Executable **extension** cross-object checkers (`check-onboarding.js`, `check-auction.js`, `check-identity.js`, `check-commodity-risk.js`), run in CI. |

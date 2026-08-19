@@ -1,0 +1,18 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Order",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#order-6601" },
+  "buyer": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+  "seller": { "scheme": "did", "id": "did:web:acme-networks.example#acme" },
+  "items": [
+    {
+      "id": "item-1",
+      "description": "Transport module, 100G",
+      "quantity": 4,
+      "unitPrice": { "amount": 1550, "currency": "EUR" }
+    }
+  ],
+  "value": { "amount": 6200, "currency": "EUR" },
+  "example-org:costCentre": "CC-44120",
+  "example-org:approvalRef": "APR-2026-08812"
+}

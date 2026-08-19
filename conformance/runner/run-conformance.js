@@ -15,7 +15,7 @@
  */
 const fs = require("fs");
 const path = require("path");
-const { ROOT, loadSchemas, validateDoc, verifyChain } = require("./lib.js");
+const { ROOT, loadSchemas, validateDoc, findReservedProperties, verifyChain } = require("./lib.js");
 
 // --- args ---
 const args = process.argv.slice(2);
@@ -40,8 +40,15 @@ function runDocConformance() {
   for (const c of suite.positive) {
     const doc = rd(c.file);
     const r = validateDoc(ajv, byFile, c.schema, doc);
-    if (!r.ok) allOk = false;
-    detail.positives.push({ file: c.file, expected: "valid", ok: r.ok, errors: r.errors.slice(0, 2) });
+    // A conforming document validates AND carries no reserved or forbidden property.
+    const reserved = findReservedProperties(doc);
+    const ok = r.ok && reserved.length === 0;
+    if (!ok) allOk = false;
+    detail.positives.push({
+      file: c.file, expected: "valid", ok,
+      errors: r.errors.slice(0, 2),
+      reservedProperties: reserved.map(x => x.property),
+    });
   }
   for (const c of suite.negative) {
     const doc = rd(c.file);
@@ -50,6 +57,22 @@ function runDocConformance() {
     const ok = !r.ok;
     if (!ok) allOk = false;
     detail.negatives.push({ file: c.file, expected: "rejected", correctlyRejected: ok, targets: c.targets });
+  }
+  // Reserved-prefix negatives. These are structurally valid — the schema admits any
+  // namespaced property — and must be rejected by the governance rule instead. A fixture
+  // the schema already rejects would prove nothing about the rule, so both facts are
+  // asserted: it validates, and it is still refused.
+  detail.reservedPrefixNegatives = [];
+  for (const c of suite.reservedPrefixNegative || []) {
+    const doc = rd(c.file);
+    const schemaValidates = validateDoc(ajv, byFile, c.schema, doc).ok;
+    const reserved = findReservedProperties(doc);
+    const ok = schemaValidates && reserved.length > 0;
+    if (!ok) allOk = false;
+    detail.reservedPrefixNegatives.push({
+      file: c.file, expected: "rejected", correctlyRejected: ok,
+      schemaValidates, violations: reserved, targets: c.targets,
+    });
   }
   record("C-DOC", "Core", suite.normativeRef, allOk, detail);
 }
