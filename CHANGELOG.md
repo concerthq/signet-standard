@@ -6,6 +6,46 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Added — `GOVERNANCE.md`: the review rule, written down
+
+The rule was being followed by habit. Writing it down now makes it a choice; writing it after
+someone observes that normative changes were merged by a second account under the same control
+would be damage control, and would read as such.
+
+- **Two-tier review, by pull request only.** Tier 1 (non-normative) takes one approving review
+  and no comment period. Tier 2 (`schema/`, closed codelists, `conformance/levels.md`, the
+  suite, the report schema — and the mark grammar and the two closed registers, which are
+  normative for licensees rather than CDM artifacts) additionally requires a recorded
+  resolution and a **stated comment period of at least 14 calendar days**. Direct commits to
+  `main` are not a permitted route for any change of any class.
+- **The Standards Committee is not constituted, and the document says so.** It will be
+  constituted at the **first external certification** — externally observable, and not
+  quietly deferrable. Until then decisions are interim resolutions under the bootstrap clause,
+  which stays authoritative in `governance/README.md` and is referenced rather than
+  paraphrased.
+- **The two repository identities are disclosed.** `concertfoundation` authors;
+  `concertcustodian` reviews, approves and merges; **both are operated by the same natural
+  person.** The separation is procedural, not independent, and the document says that in those
+  words. A governance document that implied independence it lacks would be worse than none,
+  because it would convert an undisclosed limitation into a false statement.
+- **Registration is not adoption.** `governance/proposals/` is non-normative: a proposal's
+  presence in this repository is not a statement that it has been accepted, and it is not part
+  of the standard.
+- **An effective date, and no retroactive relabelling.** The process applies from 20 August
+  2026. Earlier changes followed prior practice — including direct commits to `main` and pull
+  requests merged with administrative override — and are recorded as superseded, not as having
+  followed a rule that did not exist.
+
+### Found — the published governance page contradicts the repository
+
+`concert.foundation/governance` presents the Standards Committee as a currently operating body,
+with a membership composition. The repository states that none is constituted, and twenty
+interim resolutions are in force precisely because none is. A draft correction for the page is
+recorded at `governance/site-alignment/`, **not applied** — the page is outside this
+repository. This is the same class of defect the claim triad exists to catch: a body that is
+designed being described as one that is operating.
+
+
 ## [0.14.0] — 2026-08-20 — Working Draft
 
 ### Added — the v1.0 train, specified and registered (not started)
