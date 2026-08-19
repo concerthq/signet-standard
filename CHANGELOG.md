@@ -6,40 +6,40 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
-### Added — CP-StateModel, registered with a verification record
+### Added — CP-StateModel (r3.1), registered with a verification record
 
 The model publishes state *vocabularies* for some objects and *transitions* for none, so two
 independently conformant implementations can disagree about whether a change was permitted and
 both stay conformant. [CP-StateModel](governance/proposals/CP-StateModel.md) proposes a canonical
-state model and a transition registry to close that.
+transition registry to close that. Registered, not adopted.
 
-It is registered, not adopted — and it is **not adoptable as written**. It was drafted against a
-v0.5.0 baseline and carries seven items requiring confirmation before submission. All seven were
-checked against v0.14.0 and recorded in a registrar's note at §15, appended without altering the
-author's text:
+**It arrived as r2, drafted against a v0.5.0 baseline, and was verified against v0.14.0 at
+registration.** That verification found one of its three defects to be non-existent, several
+inventory claims wrong, and — the serious one — its proposed remedy in conflict with a position
+the register already records as closed. r2 proposed stored `status` fields; the register rejects
+status fields on `Consent` because specification §1.7 makes current state a projection over the
+event stream, and CP-Grant-lifecycle **GRT-1** requires withdrawal to be an appended event rather
+than an in-place mutation. r2 had also contradicted itself, offering replay-derivability as proof
+that §1.7 holds while proposing the fields that would break it.
 
-- **`Policy.appliesTo` does not exist**, so defect D3 is not a current defect. The field is
-  proposed by CP-Policy-Applicability, which is itself unadopted.
-- **The proposal reopens a closed position.** It proposes stored state fields; the register
-  records status fields on `Consent` as rejected, because specification §1.7 defines current state
-  as a projection over event history, and a stored field creates a second source of truth with no
-  rule for which governs. It also runs against CP-Grant-lifecycle **GRT-1**: withdrawal is an
-  appended event and the object is not mutated in place. The proposal cites neither, because it
-  does not know they exist. This is the first thing for the Committee to settle — it decides
-  whether the proposal corrects the model or changes its state philosophy.
-- **Nine objects carry a state field, not six**, and the model has 29 schemas rather than the
-  "roughly twenty-one" the proposal counts. `Auction`, `Bid`, `HedgeProposal` and
-  `ExposurePosition` all postdate the baseline, and `Bid.status` already contains `superseded`,
-  which interacts with the proposal's own supersession rule.
-- **`criteria` is a field of `Evaluation`, not `Policy`**, and `criterionRef` does not exist.
-- **COV-011, the versioning proposal it may not be adopted without, is not in this repository.**
-- **Phase A targets v0.13.0, which has shipped.**
+**r3 inverted its own remedy in response.** It proposes **no new stored state field on any
+object**, withdraws the defect that rested on the absent `Policy.appliesTo`, re-argues the case on
+the two surviving defects alone, decouples the joint-adoption dependency on a versioning proposal
+that is not in this repository, and replaces a disclosure that cited a non-existent interests and
+recusals register with the disclosure stated in plain terms. The closed position held, and the
+defects it set out to close are unchanged.
 
-What survives verification is the core argument: defects **D1** and **D2** are real and confirmed
-against v0.14.0 — objects carry asserted lifecycles with nowhere to record state, and the event
-codelist contains entries corresponding to no modelled transition. The generalisation test, the
-`basis` field, and the derived-state discipline are sound. The problems are of premise and
-dependency, not of design.
+r3's own §15 declines to assert seven facts about the current model and leaves them for
+verification. All seven were checked and recorded at §17. Six confirm. One corrects a figure that
+originated in the registrar's note on r2 and propagated into r3's errata: **ten** objects carry a
+stored state field across 29 schemas, not nine. `ExposurePosition` is the awkward member — its
+field is `positionStatus`, not `status`, against a closed codelist that reconciliation arithmetic
+depends on, so a registry keyed on `status` will not see it.
+
+Also confirmed: no SourcingEvent codes are in the closed `eventTypeCore.csv`, so every transition
+code the proposal names is new; `Consent`, `Contract` and `Award` have acquired no state, so the
+register's position stands unqualified; and the proposal's Tier 1 / Tier 2 split is correct
+against `GOVERNANCE.md`.
 
 
 ### Found — one of twelve normative changes carries an approving review

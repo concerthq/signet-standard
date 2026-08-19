@@ -19,7 +19,7 @@ until balloted**. Nothing here has been balloted, because no Standards Committee
 | [CP-Mandate-Scope](CP-Mandate-Scope.md) | `Mandate.scope` is required and unconstrained: `{}` satisfies it | **Yes** | No — v1.0 or never | Draft; gates open |
 | [CP-Process-Spine](CP-Process-Spine.md) | `SourcingEvent` has no link back to `Need` — the one break in the spine | No | No | Draft; gates open |
 | [CP-Amendments-Round-2](CP-Amendments-Round-2.md) | Revises CP-Tenancy and CP-Codelist-Enforcement; two gates dissolved | Inherited | No | Draft; **applied** to both |
-| [CP-StateModel](CP-StateModel.md) | The model publishes state *vocabularies* for some objects and *transitions* for none, so two conformant implementations can disagree on whether a change was permitted | Phase A no; Phase B yes | No | Draft; **not adoptable as written** — see §15 |
+| [CP-StateModel](CP-StateModel.md) | The model publishes state *vocabularies* for some objects and *transitions* for none, so two conformant implementations can disagree on whether a change was permitted | Phase B only, and conditionally | No | Draft r3.1; verified against v0.14.0 (§17) |
 
 ## Delivery and dependencies
 
@@ -37,7 +37,7 @@ until balloted**. Nothing here has been balloted, because no Standards Committee
 | CP-Mandate-Scope | v1.0 train | `schema/mandate.schema.json`, `conformance/`, `agent/mandate.json` | CP-Tenancy | none |
 | CP-Process-Spine | v1.0 train, or earlier | `schema/sourcing-event.schema.json`, `examples/` | none | none |
 | CP-Amendments-Round-2 | with what it amends | CP-Tenancy §4.5, CP-Codelist-Enforcement §2.1/§3/§4/§6/§8 | none | drafting either of those two |
-| CP-StateModel | Phase A a v0.x minor; Phase B the v1.0 train | four layers, `codelists/eventType.csv`, `schema/submission.schema.json`, `conformance/`, the adapter contract | a versioning proposal (COV-011) **not present in this repository**; CP-Policy-Applicability for §6.4 | none |
+| CP-StateModel | Phase A a v0.x minor; Phase B the v1.0 train | a transition registry (new), `codelists/eventTypeCore.csv`, `conformance/`, existing stored `status` fields | none blocking | none |
 
 **The one hard dependency in this set: CP-Codelist-Enforcement MUST land in or before the v1.0
 train.** CP-Tenancy introduces `regulatoryRegime` and declares it closed. Without codelist
@@ -176,19 +176,21 @@ and optional, so nobody is blocked from certifying and an unearned endorsement i
 *If scope must be reduced, defer F1 rather than F2.* `E-MDT` is the differentiating claim and is
 fully testable; `E-CNS` is thinner and more easily walked back in copy.
 
-## A proposal that reopens a closed position
+## A closed position, tested and held
 
-[CP-StateModel](CP-StateModel.md) proposes stored state fields across the model. For grant-type
-objects that meets the position recorded below against status fields on `Consent`, and it meets
-the recorded objection directly: two sources of truth, with no rule for which governs on
-disagreement. It also runs against CP-Grant-lifecycle **GRT-1** — withdrawal is an appended
-event, and the object is not mutated in place.
+[CP-StateModel](CP-StateModel.md) is worth reading as a worked example of the register doing its
+job. Its r2 revision proposed stored state fields across the model, which for grant-type objects
+reopened the position recorded below against status fields on `Consent` — and met its objection
+exactly: two sources of truth, with no rule for which governs on disagreement. It also ran against
+CP-Grant-lifecycle **GRT-1**.
 
-The proposal may have new argument; its derived-state discipline is close to one. But it does not
-make the argument, because it was written against a v0.5.0 baseline and does not know the position
-exists. **That is the first thing for the Committee to settle**, because it decides whether the
-proposal is a correction to the model or a change to its state philosophy. Recorded at
-[CP-StateModel §15.3](CP-StateModel.md).
+The proposal had not seen either, having been drafted against a v0.5.0 baseline. Once that was
+recorded at registration, **r3 inverted its own remedy**: it now proposes no new stored state field
+on any object, and adopts the closed position rather than reopening it. The defects it set out to
+close are unchanged and still confirmed.
+
+That is what the convention is for. A closed position is not a wall; it is an argument that has to
+be beaten, and here it held.
 
 ## Positions that are closed, not open
 
