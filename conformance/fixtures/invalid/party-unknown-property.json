@@ -1,0 +1,9 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Party",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#buyer" },
+  "name": "Buyer Organisation",
+  "roles": ["buyer"],
+  "partyType": "organization",
+  "procurringParty": "typo of a core field, unprefixed"
+}

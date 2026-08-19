@@ -147,8 +147,23 @@ documents that **MUST be rejected**, one per rule:
 | `invoice-missing-payable.json` | BT-115 `payableAmount` is required |
 | `policy-missing-humanreadable.json` | `Policy.humanReadable` is mandatory |
 | `decision-missing-provenance.json` | `Decision.provenance` is mandatory |
-| `party-bad.json` | `partyType` enum + `additionalProperties` |
+| `party-bad.json` | `partyType` enum |
+| `party-unknown-property.json` | an unprefixed unknown property (`procurringParty`, a misspelling of a core field) |
 | `sourcing-bad-status.json` | `status` enum |
+| `party-reserved-prefix.json` | `signet:` — a reserved prefix |
+
+The last one is a different kind of negative. The object schemas admit any property matching
+`prefix:fieldName` (see [Extensions](Extensions#two-mechanisms-not-one)), so
+`party-reserved-prefix.json` **validates**; it is refused by the harness instead, which is
+where the reserved-prefix rule lives. The suite asserts both facts about it — that the schema
+accepts it and that C-DOC still rejects it — because a fixture the schema already refused
+would prove nothing about the rule.
+
+There is also a positive fixture that is not a worked example:
+`fixtures/valid/order-private-extension.json` carries `example-org:costCentre` and
+`example-org:approvalRef` on an otherwise ordinary `Order` and **must validate**. Without it
+the namespace escape hatch would be asserted rather than proven, and a later schema edit could
+close it unnoticed.
 
 ## Extension conformance rules
 
@@ -216,6 +231,7 @@ conformance/
 │   ├── document-conformance.json        C-DOC cases (positive + negative)
 │   └── implementation-conformance.json  C-EVT / C-PROV / F-MAP / F-SEM scenarios
 ├── fixtures/invalid/          Documents that MUST be rejected (one per rule)
+├── fixtures/valid/            Documents that MUST validate but are not worked examples
 ├── adapter/
 │   ├── adapter-contract.md    The interface a candidate implementation exposes
 │   ├── reference-adapter.js   A complete, conformant implementation (reaches Full)

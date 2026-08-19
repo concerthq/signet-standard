@@ -1,8 +1,7 @@
 {
   "type": "Party",
-  "id": { "scheme": "did", "id": "did:web:x#party" },
-  "name": "Acme",
+  "id": { "scheme": "did", "id": "did:web:buyer.example#party" },
+  "name": "Buyer Organisation",
   "roles": ["supplier"],
-  "partyType": "robot",
-  "unexpectedField": true
+  "partyType": "robot"
 }

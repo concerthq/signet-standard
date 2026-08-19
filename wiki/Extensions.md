@@ -4,15 +4,89 @@ The CDM is **extensible without forking**, following the OCDS extension pattern.
 let domains elaborate the model (e.g. defence procurement, construction) while keeping the
 core lean.
 
-## What an extension is
+## Two mechanisms, not one
+
+"Extension" has been doing duty for two different things, with different authorship,
+different governance, and different conformance treatment. They are now separated
+(CP-Extension-Composition; **not yet balloted**).
+
+| | **Published extension** | **Private local field** |
+|---|---|---|
+| Example | the commodity-risk package | `example-org:costCentre` |
+| Author | a community, via change proposal | one implementer |
+| Constrained by | its own published schema | **nothing** |
+| Conformance | separately assessed (see the rules below) | not assessed |
+| Promotion to core | via change proposal | never, without first becoming a published extension |
+| Mechanism | composition + constraint | permission to exist |
+
+### Published extension
 
 > An extension is a **published, versioned package** that adds object types, fields, or
 > codelist values **under its own namespace** (specification §11.1).
 
+This is the mechanism the rest of this page describes, and every in-tree extension below uses
+it.
+
+### Private local field
+
+Every object schema sets `additionalProperties: false`, which is what makes a SIGNET document
+a wire contract rather than a suggestion: a misspelling of a core field is refused rather than
+silently carried. The cost was that an implementer had nowhere to put a purely local value —
+an internal company code, a cost centre, an approval reference — without failing document
+conformance.
+
+Object schemas now also admit any property matching `prefix:fieldName`:
+
+```json
+"patternProperties": {
+  "^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9]*$": {}
+},
+"additionalProperties": false
+```
+
+So `example-org:costCentre` validates. `procurringParty` — a misspelling of a core field —
+is still refused, because it carries no prefix. That refusal is the property the wire contract
+rests on, and it is unchanged.
+
+**Say exactly what this is.** A prefixed field is *permitted by the core schema and constrained
+by nothing*. It is not modelled, it is not assessed by core conformance, it earns no mark, and
+it is never promoted into the core model without first becoming a published extension through
+[change control](Governance-and-Versioning). Permission to exist is the whole of what it gets.
+
+Two prefix rules are governed rather than private:
+
+- **`signet:` and `concert:` are reserved.** Implementer use is prohibited.
+- **Bare `x-` is forbidden** — unnamespaced, collision-prone, and carrying OpenAPI-legacy
+  expectations that do not apply here.
+
+Both are enforced by the [conformance harness](Conformance-Harness), not by the schema
+pattern. A negative-lookahead regex would work under Ajv, but lookahead sits outside the
+portable ECMA-262 subset that non-JavaScript validators reliably implement — encoding a
+governance rule there would leave it silently unenforced on exactly the implementations least
+likely to be checked. Everything else about a prefix is **self-asserted, first-come**: Concert
+operates no prefix registry, and collisions are the implementers' problem.
+
+### Prefixed fields are dropped during JSON-LD expansion
+
+Objects carry `@context`, so a prefixed field is a compact IRI. That has a consequence
+implementers should know before they meet it:
+
+- a **published extension** ships a context fragment mapping its prefix, so its fields expand
+  to proper IRIs and survive an RDF round-trip;
+- a **private field** has no context mapping and is therefore **dropped during JSON-LD
+  expansion**.
+
+The drop is semantically correct — a private field has no global meaning, so there is no IRI
+for it to expand to — but it is a real surprise if you were expecting lossless expansion. The
+corollary is a useful one: to make private data survive expansion you must publish a context,
+and publishing a context is the first step toward being an extension rather than a private
+field.
+
 ## The rules
 
 1. **Add, don't change.** Extensions **MUST NOT** redefine or remove core fields. They only
-   add new structure under their own namespace.
+   add new structure under their own namespace. The same holds for a private prefixed field:
+   it may carry local data, never a redefinition of core meaning.
 2. **Promotion path.** Community extensions **MAY** be submitted to Concert for review and,
    if broadly useful, promoted into the core model through the
    [change-control process](Governance-and-Versioning). This keeps the core lean while

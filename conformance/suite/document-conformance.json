@@ -12,13 +12,18 @@
     { "file": "examples/invoice.json", "schema": "invoice.schema.json" },
     { "file": "examples/obligation.discharged.fixture.json", "schema": "obligation.schema.json" },
     { "file": "examples/obligation.pending.fixture.json", "schema": "obligation.schema.json" },
-    { "file": "examples/invoice.settles.fixture.json", "schema": "invoice.schema.json" }
+    { "file": "examples/invoice.settles.fixture.json", "schema": "invoice.schema.json" },
+    { "file": "conformance/fixtures/valid/order-private-extension.json", "schema": "order.schema.json" }
   ],
   "negative": [
     { "file": "conformance/fixtures/invalid/invoice-missing-payable.json", "schema": "invoice.schema.json", "targets": "BT-115 payableAmount is required" },
     { "file": "conformance/fixtures/invalid/policy-missing-humanreadable.json", "schema": "policy.schema.json", "targets": "Policy.humanReadable is mandatory" },
     { "file": "conformance/fixtures/invalid/decision-missing-provenance.json", "schema": "decision.schema.json", "targets": "Decision.provenance is mandatory" },
-    { "file": "conformance/fixtures/invalid/party-bad.json", "schema": "party.schema.json", "targets": "partyType enum + additionalProperties" },
+    { "file": "conformance/fixtures/invalid/party-bad.json", "schema": "party.schema.json", "targets": "partyType enum" },
+    { "file": "conformance/fixtures/invalid/party-unknown-property.json", "schema": "party.schema.json", "targets": "an unprefixed unknown property is still refused by additionalProperties" },
     { "file": "conformance/fixtures/invalid/sourcing-bad-status.json", "schema": "sourcing-event.schema.json", "targets": "status enum" }
+  ],
+  "reservedPrefixNegative": [
+    { "file": "conformance/fixtures/invalid/party-reserved-prefix.json", "schema": "party.schema.json", "targets": "signet: is a reserved prefix — admitted by the schema, refused by the suite" }
   ]
 }

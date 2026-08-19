@@ -101,7 +101,22 @@ and publishes it to GitHub Pages (it runs `tools/build-pages.js` with `marked`).
   BT/BG traceability structurally intact — see
   [Foundation Layer → InvoiceLine](Foundation-Layer#invoiceline).
 - Most objects set `additionalProperties: false`, so unknown fields are rejected rather than
-  silently ignored.
+  silently ignored. It now sits alongside a namespace pattern —
+
+  ```json
+  "patternProperties": {
+    "^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9]*$": {}
+  },
+  "additionalProperties": false
+  ```
+
+  — so a prefixed private field (`example-org:costCentre`) validates while an unprefixed
+  unknown field (`procurringParty`, a misspelling of a core field) is still refused. The
+  pattern is permissive by design: a prefixed field is permitted by the core schema and
+  constrained by nothing, and core conformance does not assess it. `signet:` and `concert:`
+  are reserved and bare `x-` is forbidden; both are enforced by the harness rather than the
+  pattern, because a negative-lookahead regex sits outside the portable ECMA-262 subset that
+  non-JavaScript validators reliably implement. See [Extensions](Extensions#two-mechanisms-not-one).
 
 ## Document conformance (specification §13)
 

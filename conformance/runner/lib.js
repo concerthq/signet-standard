@@ -44,6 +44,37 @@ function validateDoc(ajv, byFile, schemaFile, doc) {
   return { ok, errors: ok ? [] : (v.errors || []).map(e => `${e.instancePath || e.dataPath || "(root)"} ${e.message}`) };
 }
 
+// Reserved and forbidden property prefixes.
+//
+// The object schemas admit any property matching ^prefix:FieldName, so an implementer can
+// carry a private local field without failing document conformance. Which prefixes are
+// *permitted* is a governance rule, and it is enforced here rather than in the schema: a
+// negative-lookahead regex works under Ajv but sits outside the portable ECMA-262 subset
+// that non-JavaScript validators reliably implement, so encoding the rule there would leave
+// it silently unenforced on exactly the implementations least likely to be checked.
+const RESERVED_PREFIXES = ["signet", "concert"];
+
+// Walk a document and return every property name that breaks the rule, with its path.
+function findReservedProperties(doc, at = "") {
+  const found = [];
+  if (Array.isArray(doc)) {
+    doc.forEach((v, i) => found.push(...findReservedProperties(v, `${at}[${i}]`)));
+    return found;
+  }
+  if (doc === null || typeof doc !== "object") return found;
+  for (const [key, value] of Object.entries(doc)) {
+    const path = `${at}/${key}`;
+    const prefix = key.includes(":") ? key.slice(0, key.indexOf(":")) : null;
+    if (prefix && RESERVED_PREFIXES.includes(prefix)) {
+      found.push({ path, property: key, rule: `${prefix}: is reserved` });
+    } else if (key.startsWith("x-")) {
+      found.push({ path, property: key, rule: "bare x- is forbidden" });
+    }
+    found.push(...findReservedProperties(value, path));
+  }
+  return found;
+}
+
 // Deterministic JSON (sorted keys) so hashes are reproducible (CN-4).
 function stableStringify(obj) {
   if (obj === null || typeof obj !== "object") return JSON.stringify(obj);
@@ -70,4 +101,4 @@ function verifyChain(events) {
   return { ok: true, brokenAt: -1 };
 }
 
-module.exports = { ROOT, loadSchemas, validateDoc, stableStringify, eventHash, verifyChain };
+module.exports = { ROOT, loadSchemas, validateDoc, findReservedProperties, RESERVED_PREFIXES, stableStringify, eventHash, verifyChain };

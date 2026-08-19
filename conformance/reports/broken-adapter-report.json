@@ -3,7 +3,7 @@
   "cdmVersion": "v0.1",
   "suiteVersion": "v0.1",
   "adapter": "broken-adapter.js",
-  "timestamp": "2026-08-06T17:21:03.418Z",
+  "timestamp": "2026-08-19T20:38:08.215Z",
   "levelAchieved": "none",
   "results": [
     {
@@ -17,55 +17,71 @@
             "file": "examples/need.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
           },
           {
             "file": "examples/sourcing-event.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
           },
           {
             "file": "examples/policy-evaluation.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
           },
           {
             "file": "examples/award-decision.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
           },
           {
             "file": "examples/contract.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
           },
           {
             "file": "examples/invoice.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
           },
           {
             "file": "examples/obligation.discharged.fixture.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
           },
           {
             "file": "examples/obligation.pending.fixture.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
           },
           {
             "file": "examples/invoice.settles.fixture.json",
             "expected": "valid",
             "ok": true,
-            "errors": []
+            "errors": [],
+            "reservedProperties": []
+          },
+          {
+            "file": "conformance/fixtures/valid/order-private-extension.json",
+            "expected": "valid",
+            "ok": true,
+            "errors": [],
+            "reservedProperties": []
           }
         ],
         "negatives": [
@@ -91,13 +107,35 @@
             "file": "conformance/fixtures/invalid/party-bad.json",
             "expected": "rejected",
             "correctlyRejected": true,
-            "targets": "partyType enum + additionalProperties"
+            "targets": "partyType enum"
+          },
+          {
+            "file": "conformance/fixtures/invalid/party-unknown-property.json",
+            "expected": "rejected",
+            "correctlyRejected": true,
+            "targets": "an unprefixed unknown property is still refused by additionalProperties"
           },
           {
             "file": "conformance/fixtures/invalid/sourcing-bad-status.json",
             "expected": "rejected",
             "correctlyRejected": true,
             "targets": "status enum"
+          }
+        ],
+        "reservedPrefixNegatives": [
+          {
+            "file": "conformance/fixtures/invalid/party-reserved-prefix.json",
+            "expected": "rejected",
+            "correctlyRejected": true,
+            "schemaValidates": true,
+            "violations": [
+              {
+                "path": "/signet:internalFlag",
+                "property": "signet:internalFlag",
+                "rule": "signet: is reserved"
+              }
+            ],
+            "targets": "signet: is a reserved prefix — admitted by the schema, refused by the suite"
           }
         ]
       }

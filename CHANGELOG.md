@@ -6,6 +6,72 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Added — extension composition, part 1: namespaced private fields
+
+Proposed under [CP-Extension-Composition](governance/proposals/CP-Extension-Composition.md),
+**held for Standards Committee approval** — `schema/` and `conformance/suite/` are normative
+and this lands as a change proposal rather than a direct merge, non-breaking though it is.
+
+The Extensions page has always told implementers to add structure "under their own namespace."
+Against the published schemas that instruction was unexecutable: every object schema sets
+`additionalProperties: false`, so an ERP company code, a cost centre or an internal approval
+reference could not be carried at all without failing document conformance.
+
+- **Object schemas now permit namespaced properties.** A `patternProperties` entry admitting
+  `^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9]*$` sits alongside the unchanged
+  `additionalProperties: false`, at 22 sites: the 18 root objects, `Obligation`, `Item`,
+  `InvoiceLine`, and the inline `Lot`. So `example-org:costCentre` validates, while
+  `procurringParty` — a misspelling of a core field — is still refused, because it carries no
+  prefix. That refusal is the property the wire contract rests on and it is untouched.
+- **Say exactly what a prefixed field is.** Permitted by the core schema and constrained by
+  nothing. It is not modelled, not assessed by core conformance, earns no mark, and is never
+  promoted into the core model without first becoming a published extension. Nothing here adds
+  tenancy, market or marketplace support, and nothing here is a partial delivery of
+  [CP-Tenancy](governance/proposals/CP-Tenancy.md).
+- **`signet:` and `concert:` are reserved; bare `x-` is forbidden.** Both are enforced by the
+  conformance suite rather than the schema pattern: a negative-lookahead regex works under Ajv
+  but sits outside the portable ECMA-262 subset that non-JavaScript validators reliably
+  implement, and a governance rule encoded there would be silently unenforced on exactly the
+  implementations least likely to be checked. Prefixes are otherwise self-asserted and
+  first-come — Concert operates no prefix registry.
+- **Four fixtures, so the escape hatch is proven rather than asserted.**
+  `fixtures/valid/order-private-extension.json` (new, and the load-bearing one) must validate;
+  `party-unknown-property.json` (new) must be rejected; `party-reserved-prefix.json` (new)
+  must validate against the schema and still be refused by C-DOC; and `party-bad.json` is
+  narrowed to the `partyType` enum rule alone, its `additionalProperties` role having moved to
+  `party-unknown-property.json`. Without the positive fixture a later schema edit could close
+  the hatch unnoticed.
+- **A JSON-LD corollary, documented so implementers do not meet it by surprise.** A private
+  prefixed field has no context mapping and is therefore dropped during JSON-LD expansion. That
+  is semantically correct — a private field has no global meaning — and it is a useful forcing
+  function: to survive expansion you must publish a context, which is the first step toward
+  being an extension rather than a private field.
+
+Non-breaking. Every instance valid before this change is still valid, and existing
+certifications are unaffected.
+
+### Added — the tenancy change-proposal set
+
+Three linked proposals registered in `governance/proposals/`, arising from a multi-market,
+multi-tenant implementation question. None is balloted and none is implemented beyond Part 1
+above.
+
+- **[CP-Extension-Composition](governance/proposals/CP-Extension-Composition.md)** — two
+  mechanisms where the model conflates one: a private prefixed field (Part 1, above) and a
+  composed published extension (Part 2, requiring the 2020-12 migration and therefore the v1.0
+  train). Three gates open.
+- **[CP-Tenancy](governance/proposals/CP-Tenancy.md)** — tenant, market and marketplace are
+  three independent concepts and none exists in the CDM; today all three are carried implicitly
+  in the DID authority of an identifier, which is unpatchable once instances exist. Breaking, so
+  v1.0 or never. Four gates open; `T-4` resolved as deferred — a network of SIGNETs is a
+  roadmap item, `Event.tenancy.marketplaces` would record the emitting node as attribution
+  only, and no federation capability is claimed.
+- **[CP-Codelist-Enforcement](governance/proposals/CP-Codelist-Enforcement.md)** — seven closed
+  codelists are enforced by nothing: they are `"type": "string"` with a CSV pointer in a
+  description, so `"procedure": "banana"` passes C-DOC today. Four gates open. It must land in
+  or before the v1.0 train **if CP-Tenancy does**, or v1.0 ships `regulatoryRegime` modelled as
+  closed and tested as open — the claim-triad failure the suite exists to prevent.
+
 ### Added — governance: marks, registers, and two conformance findings
 
 A single workstream. It began as a question about where implementation-roadmap collateral
