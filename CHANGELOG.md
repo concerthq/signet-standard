@@ -6,6 +6,51 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Added — the v1.0 train, specified and registered (not started)
+
+Four further proposals from a second round of multi-market, multi-tenant implementation
+questions, plus an amendment record that revises two of the existing ones. **Nothing here
+touches a normative artifact.** The seven proposals that make up the v1.0 train are registered
+so the train can be planned, sequenced and estimated; twenty-two gates are open and every one
+of them is for the Standards Committee.
+
+- **[CP-EventType-Closure](governance/proposals/CP-EventType-Closure.md)** — `eventType` has
+  eight values for eighteen objects and stops at `contract.signed`; the entire implementation
+  stage has no codes. The gap is already being filled silently: an implementation that places an
+  Order must emit an Event, there is no code for it, so it mints one and passes conformance. The
+  proposal **derives** the vocabulary from the existing lifecycle enums and checks it in CI for
+  drift, rather than curating it by hand.
+- **[CP-Policy-Applicability](governance/proposals/CP-Policy-Applicability.md)** — every gate in
+  the model is opt-in at instance level: a `Policy` that is never cited is never applied. Adds
+  `Policy.appliesTo` and a derived required-set, with a new `F-GATE` requirement at Full.
+- **[CP-Mandate-Scope](governance/proposals/CP-Mandate-Scope.md)** — `Mandate.scope` is required
+  and completely unconstrained. `{}` satisfies it. Adds structure, and an `F-SCOPE` requirement
+  whose limit is stated rather than left to be discovered: SIGNET can test what an agent
+  *declares* it read, not what it actually read.
+- **[CP-Process-Spine](governance/proposals/CP-Process-Spine.md)** — `SourcingEvent` has no link
+  back to `Need`, the one break in an otherwise fully linked spine. One optional field. The only
+  item in the set that delivers value alone, and a candidate for an earlier v0.x minor.
+- **[CP-Amendments-Round-2](governance/proposals/CP-Amendments-Round-2.md)** — recorded as a
+  reviewable amendment rather than folded silently into what it touches, and **applied** to both.
+  §A1 adds same-tenant event chaining to CP-Tenancy; §A2 dissolves gate `C-3` in
+  CP-Codelist-Enforcement.
+
+Two gates **dissolved** rather than resolved, which is why the train's gate count fell from
+twenty-four to twenty-two:
+
+- **Event chain partitioning.** The question — is the chain partitioned by tenant, or one chain
+  with tenant recorded per event — is well-formed, and the model answers it in neither of the
+  terms offered. The chain is **per subject**: there are as many chains as there are subjects.
+  There is nothing to partition, so isolation becomes a conformance rule over the existing
+  structure. What that does *not* give you is stated too: **there is no total order within a
+  tenant**, and any tenant-level ordering is a projection an implementation constructs.
+- **`C-3` retirement semantics.** A closed vocabulary over an append-only stream cannot retire a
+  value, because retirement means "no longer valid" and every historical event asserts otherwise.
+  **Codes are never retired.** The `discouraged` marker becomes guidance in the non-normative
+  disposition file; the fourth CSV `Status` column is declined with its reasoning, because it is
+  the obvious answer and will be re-proposed otherwise.
+
+
 ## [0.13.0] — 2026-08-19 — Working Draft
 
 ### Added — extension composition, part 1: namespaced private fields

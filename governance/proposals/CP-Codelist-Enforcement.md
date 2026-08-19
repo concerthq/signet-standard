@@ -1,6 +1,7 @@
 # CP-Codelist-Enforcement
 
-**Status:** Draft — not yet balloted. **Gates open** (§7).
+**Status:** Draft — not yet balloted. **Gates open** (§7); `C-3` dissolved (§8).
+**Amended by:** CP-Amendments-Round-2 §A2
 **Affects:** `codelists/`, `conformance/runner/`, `conformance/fixtures/invalid/`,
 `conformance/suite/document-conformance.json`, `conformance/levels.md`,
 `wiki/Codelists.md`, `wiki/Validation-and-Conformance.md`
@@ -8,7 +9,7 @@
 **Breaking:** No for documents already conforming; yes for documents carrying a value outside a
 closed list (§5)
 **Depends on:** none
-**Blocks:** CP-Tenancy (hard dependency)
+**Blocks:** CP-Tenancy (hard dependency), CP-EventType-Closure (supplies the mechanism)
 
 ---
 
@@ -61,7 +62,7 @@ JSON Pointers into instances where its values appear.
   "regulatoryRegime": {
     "disposition": "closed",
     "file": "codelists/regulatoryRegime.csv",
-    "appliesTo": [
+    "valueLocations": [
       { "object": "*", "pointer": "/tenancy/markets/*/regulatoryRegime" },
       { "object": "SourcingEvent", "pointer": "/lots/*/market/regulatoryRegime" }
     ]
@@ -69,7 +70,7 @@ JSON Pointers into instances where its values appear.
   "procedure": {
     "disposition": "open",
     "file": "codelists/procedure.csv",
-    "appliesTo": [
+    "valueLocations": [
       { "object": "SourcingEvent", "pointer": "/procedure" }
     ]
   }
@@ -78,6 +79,40 @@ JSON Pointers into instances where its values appear.
 
 JSON Pointer per RFC 6901, consistent with the field-level attribution mechanism already
 adopted in CP-decision-subject-binding.
+
+The key is `valueLocations`, not `appliesTo`. CP-Policy-Applicability introduces `appliesTo`
+as a **normative** field on `Policy` meaning "where this policy is required," and this sidecar
+key means "where in an instance this codelist's values appear." The normative field is
+permanent and the sidecar key is not, so the sidecar yields the name
+(CP-Amendments-Round-2 §A2.5).
+
+#### Discouraging a value without retiring it
+
+*Added by CP-Amendments-Round-2 §A2.* **Codes are never retired.** Guidance that a value is
+no longer preferred lives in this non-normative sidecar, never in the normative CSV:
+
+```json
+"eventType": {
+  "disposition": "closed",
+  "file": "codelists/eventType.csv",
+  "discouraged": {
+    "award.decided": {
+      "since": "1.0.0",
+      "prefer": "award.created",
+      "note": "Superseded by award.created; existing events remain valid."
+    }
+  }
+}
+```
+
+- The CSV keeps its three columns and the CI header lint is untouched. **No existing codelist
+  file changes.**
+- A `discouraged` value **validates**. The harness reports it as an informational note and
+  never as a pass/fail input, preserving CN-1.
+- **Removal is a CDM major, and it is the only breaking path.** A code leaves a CSV only at a
+  major version; instances at earlier versions remain conformant against their declared
+  version, which the version-stable URIs already guarantee, and migration is a
+  re-certification concern `certification.md` already covers.
 
 ### 2.2 Enforce in the harness, not the schema
 
@@ -120,6 +155,7 @@ That may be right. It is not something to decide inside a CP about tenant modell
 | `tenancy-bad-regime.json` | negative | `regulatoryRegime` value absent from the CSV | be rejected |
 | `tenancy-good-regime.json` | positive | every value in the CSV validates | validate |
 | `sourcing-open-procedure.json` | positive | a `procedure` value **not** in `procedure.csv` | **validate** — proving open lists stay open |
+| `event-discouraged-code.json` | positive | a value marked `discouraged` in the sidecar | **validate**, and be reported as an informational note |
 
 The third fixture is the one that keeps the scope boundary honest. Without it, a later edit
 could quietly close `procedure` and nothing would fail.
@@ -135,6 +171,11 @@ normative change and the suite version bumps with it.
 The harness report gains a per-codelist result, so a report can distinguish a schema failure
 from a codelist failure. `conformance/report-schema.json` is extended accordingly (CN-4: the
 result must remain reproducible and publishable).
+
+It also gains an **informational** `discouraged` result type (CP-Amendments-Round-2 §A2). It
+records that an instance carried a discouraged value and what is preferred instead. It decides
+nothing: it is never an input to pass or fail, because a discouraged value is valid. A result
+type that could fail a candidate on guidance would make guidance normative by the back door.
 
 ---
 
@@ -164,6 +205,17 @@ suite report that does not check the thing the specification claims.
 each list warrants its own analysis. Bundling them here would also make a tenancy release
 responsible for a breaking change to unrelated vocabularies.
 
+**E — A fourth `Status` column on every codelist CSV** (`active` / `deprecated` /
+`withdrawn`), as originally proposed under gate C-3. **Declined** (CP-Amendments-Round-2 §A2.2)
+— recorded with its reasoning because it is the obvious answer and will be re-proposed
+otherwise. It breaks every codelist file and the CI header lint, for **all** lists, to solve a
+problem that exists only for closed ones, and it embeds a lifecycle in a format with no version
+axis. More fundamentally, retirement has no coherent meaning here: a closed vocabulary over an
+append-only stream cannot retire a value, because retirement means "no longer valid" and every
+historical event asserts otherwise. Any `deprecated` marker immediately needs a rule saying it
+does not apply retroactively — at which point the marker is not doing lifecycle work, it is
+doing guidance work, and guidance belongs in the non-normative sidecar.
+
 **D — Enforce via JSON Schema `$data` references to the CSV.** **Declined:** `$data` is an Ajv
 extension, not part of any JSON Schema draft. Depending on it would make the normative model
 validator-specific, which contradicts CN-2 — every implementer must be assessable against the
@@ -183,13 +235,19 @@ structural, low implementer exposure) before `procedure`, `eventType`, `document
 certification must cite three versions (CDM, suite, codelist) rather than two. Confirm, and
 update `certification.md` accordingly.
 
-⛔ **C-3 — Deprecation semantics.** A closed codelist needs a way to retire a value without
-invalidating historical instances. Proposal: add a `Status` column
-(`active` / `deprecated` / `withdrawn`) with deprecated values validating but flagged in the
-report. Requires the codelist CSV header lint to change from
-`Code,Title,Description` to a four-column form — itself a breaking change to every CSV.
-
 ⛔ **C-4 — Extension-defined codelists.** `Extensions.md` permits extensions to add codelist
 values. Under harness enforcement, does an extension's codelist file participate in the C-DOC
 check, or only in the extension's separate assessment? Interacts directly with
 CP-Extension-Composition.
+
+---
+
+## 8. Resolved gates
+
+**C-3 — Deprecation semantics. Dissolved, not resolved** (CP-Amendments-Round-2 §A2). The gate
+asked how a closed codelist retires a value without invalidating historical instances, and
+proposed a fourth CSV `Status` column. Retirement has no coherent meaning over an append-only
+stream, so there is no lifecycle to model: **codes are never retired.** The marker becomes
+guidance and moves to the non-normative disposition file (§2.1); the fourth column is declined
+with its reasoning in §6, alternative E. Removal remains possible only at a CDM major, which is
+the single breaking path. Do not reopen without new argument.

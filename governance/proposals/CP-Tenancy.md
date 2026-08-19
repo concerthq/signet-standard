@@ -1,12 +1,14 @@
 # CP-Tenancy
 
 **Status:** Draft — not yet balloted. **Gates open** (§9); `T-4` resolved (§10).
+**Amended by:** CP-Amendments-Round-2 §A1
 **Affects:** `schema/definitions.schema.json`, the 18 root object schemas,
 `schema/sourcing-event.schema.json` (inline `Lot`), `codelists/partyRole.csv`,
 `codelists/regulatoryRegime.csv` (new), `examples/`, `conformance/`
 **Target:** the v1.0 train
 **Breaking:** Yes — `tenancy` is required at v1.0 (§7)
 **Depends on:** CP-Codelist-Enforcement (must land in or before the same release; see §8)
+**Blocks:** CP-Mandate-Scope (`tenant` identity), CP-Policy-Applicability (`Policy.tenancy.tenant`)
 **Independent of:** CP-Extension-Composition — `tenancy` is core, so it sits inside
 `properties` and satisfies `additionalProperties: false` by construction
 
@@ -266,6 +268,39 @@ chain identifier and a defined merge semantic, and neither exists. This is a sta
 of the design, not a question left open: multi-node operation is deferred as a roadmap item
 under the resolution recorded in §10, T-4.
 
+### 4.5 Same-tenant event chaining
+
+*Added by CP-Amendments-Round-2 §A1.*
+
+The chain is **per subject**. From the adapter contract, `createObject` emits an Event that
+hash-chains to any prior event for the subject, and `applyChange` emits one whose
+`previousEventHash` links to the subject's most recent event. There is no global chain and no
+tenant chain — there are as many chains as there are subjects. An implementation question
+asking whether the chain is partitioned by tenant or is one chain with tenant recorded per
+event is well-formed, and the model answers it in neither of the terms offered.
+
+Tenant partitioning is therefore **emergent, not enforced**. A subject belongs to one tenant,
+so in practice chains do not cross tenants; nothing prevents it. `Event.tenancy.tenant` at
+1..1 makes a cross-tenant link *detectable*, and detectable is not prevented. A multi-tenant
+deployment needs an isolation guarantee it can assert, not one it can inspect for.
+
+> **An Event's `previousEventHash` MUST reference an Event carrying the same
+> `tenancy.tenant`.**
+
+This is added to the **C-EVT** requirement. It costs one check in
+`conformance/runner/lib.js` alongside the existing chain verification, one negative fixture
+(`event-cross-tenant-chain.json`, which MUST be rejected), and one planted cross-tenant link
+in the broken adapter so the suite demonstrably discriminates on this rule as it does on the
+others. Emergent isolation becomes a testable guarantee, which is the property a multi-tenant
+deployment has to assert to its own auditors.
+
+**What it does not provide.** There is **no total order within a tenant.** A tenant-level
+sealed log — one chain covering everything the tenant did — is a different design from the one
+that exists and is not proposed here. Implementations should assume **one authoritative chain
+per subject**; any tenant-level ordering is a projection they construct, not a guarantee the
+standard makes. This must be stated in `wiki/Trust-Layer.md` when this proposal is delivered,
+so it is not inferred from the isolation rule.
+
 ---
 
 ## 5. Worked examples
@@ -492,6 +527,12 @@ transpositions, or does each member state need its own code?
 ---
 
 ## 10. Resolved gates
+
+**Event chain partitioning — dissolved, not resolved.** The question assumed the chain is
+either tenant-partitioned or global. It is neither: it is per subject. There is nothing to
+partition, so isolation becomes a conformance rule over the existing structure (§4.5).
+Tenant-partitioned chains and a single global chain are both declined; recorded in
+CP-Amendments-Round-2 §A3 so neither is re-proposed without new argument.
 
 **T-4 — Cross-node event chaining. Resolved: deferred.** A network of SIGNETs is a roadmap
 item, not a v1.0 capability. `Event.tenancy.marketplaces` records the emitting node as
