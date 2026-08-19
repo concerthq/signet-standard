@@ -6,6 +6,42 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Added — CP-StateModel, registered with a verification record
+
+The model publishes state *vocabularies* for some objects and *transitions* for none, so two
+independently conformant implementations can disagree about whether a change was permitted and
+both stay conformant. [CP-StateModel](governance/proposals/CP-StateModel.md) proposes a canonical
+state model and a transition registry to close that.
+
+It is registered, not adopted — and it is **not adoptable as written**. It was drafted against a
+v0.5.0 baseline and carries seven items requiring confirmation before submission. All seven were
+checked against v0.14.0 and recorded in a registrar's note at §15, appended without altering the
+author's text:
+
+- **`Policy.appliesTo` does not exist**, so defect D3 is not a current defect. The field is
+  proposed by CP-Policy-Applicability, which is itself unadopted.
+- **The proposal reopens a closed position.** It proposes stored state fields; the register
+  records status fields on `Consent` as rejected, because specification §1.7 defines current state
+  as a projection over event history, and a stored field creates a second source of truth with no
+  rule for which governs. It also runs against CP-Grant-lifecycle **GRT-1**: withdrawal is an
+  appended event and the object is not mutated in place. The proposal cites neither, because it
+  does not know they exist. This is the first thing for the Committee to settle — it decides
+  whether the proposal corrects the model or changes its state philosophy.
+- **Nine objects carry a state field, not six**, and the model has 29 schemas rather than the
+  "roughly twenty-one" the proposal counts. `Auction`, `Bid`, `HedgeProposal` and
+  `ExposurePosition` all postdate the baseline, and `Bid.status` already contains `superseded`,
+  which interacts with the proposal's own supersession rule.
+- **`criteria` is a field of `Evaluation`, not `Policy`**, and `criterionRef` does not exist.
+- **COV-011, the versioning proposal it may not be adopted without, is not in this repository.**
+- **Phase A targets v0.13.0, which has shipped.**
+
+What survives verification is the core argument: defects **D1** and **D2** are real and confirmed
+against v0.14.0 — objects carry asserted lifecycles with nowhere to record state, and the event
+codelist contains entries corresponding to no modelled transition. The generalisation test, the
+`basis` field, and the derived-state discipline are sound. The problems are of premise and
+dependency, not of design.
+
+
 ### Found — one of twelve normative changes carries an approving review
 
 An audit of every commit since v0.1.0 touching a Tier 2 path, at
