@@ -11,6 +11,27 @@ until balloted**. Nothing here has been balloted, because no Standards Committee
 | [CP-Mandate-enforcement](CP-Mandate-enforcement.md) | Mandate limits are cited, never enforced (`E-MDT`) | Agent adapter only | No | Draft; checks implemented, non-gating |
 | [CP-Consent-revocation](CP-Consent-revocation.md) | Consent terms have no tested consequence (`E-CNS`) | Consent adapter only | No | Draft; checks implemented, non-gating |
 | [CP-Credential-semantics](CP-Credential-semantics.md) | `Credential` is underdetermined: pointer or embedding | Likely no | No | Draft |
+| [CP-Extension-Composition](CP-Extension-Composition.md) | `additionalProperties: false` makes the documented extension path unexecutable | Part 1 no; Part 2 yes | No | Draft; Part 1 proposed for the next v0.x minor |
+| [CP-Tenancy](CP-Tenancy.md) | Tenant, market and marketplace are absent from the model and carried implicitly by identifiers | **Yes** | No — but v1.0 or never | Draft; gates open |
+| [CP-Codelist-Enforcement](CP-Codelist-Enforcement.md) | Closed codelists are prose — no instance value is validated against one | For documents carrying a value outside a closed list | **If CP-Tenancy lands** | Draft; gates open |
+
+## Delivery and dependencies
+
+| CP | Target release | Affects | Depends on | Blocks |
+|----|----------------|---------|------------|--------|
+| CP-Grant-lifecycle | CDM v0.2 | `codelists/eventType.csv`, `docs/specification.md`, `conformance/` | none | CP-Consent-revocation, CP-Mandate-enforcement |
+| CP-Mandate-enforcement | suite v0.2 | `conformance/`, `codelists/eventTypeCore.csv` | CP-Grant-lifecycle | `E-MDT` becoming earnable |
+| CP-Consent-revocation | CDM v0.2 / suite v0.2 | `schema/consent.schema.json` (description), `conformance/` | CP-Grant-lifecycle | `E-CNS` becoming earnable |
+| CP-Credential-semantics | CDM v0.2 | `schema/definitions.schema.json`, `docs/specification.md` §4.7 | none | mark grammar R4 |
+| CP-Extension-Composition | Part 1 — next v0.x minor; Part 2 — v1.0 train | the 18 root object schemas, `schema/obligation.schema.json`, `schema/definitions.schema.json`, `conformance/`, `wiki/Extensions.md` | none | any implementer field that is not core |
+| CP-Tenancy | v1.0 train | `schema/definitions.schema.json`, the 18 root object schemas, `codelists/`, `examples/`, `conformance/` | CP-Codelist-Enforcement | multi-tenant, multi-market deployment |
+| CP-Codelist-Enforcement | in or before the v1.0 train | `codelists/`, `conformance/` | none | CP-Tenancy |
+
+**The one hard dependency in this set: CP-Codelist-Enforcement MUST land in or before the v1.0
+train.** CP-Tenancy introduces `regulatoryRegime` and declares it closed. Without codelist
+enforcement, v1.0 ships a codelist that is *modelled as closed and tested as open* — inside the
+release carrying the first certifications. That is a claim-triad failure of exactly the kind the
+conformance suite exists to prevent. It is a dependency, not a scheduling preference.
 
 ## Sequencing
 
@@ -24,10 +45,12 @@ CP-Grant-lifecycle  ── touches the standard ──> MUST land before v1.0
                                         mark grammar R6 ──> first certification
 ```
 
-**CP-Grant-lifecycle is the only item that must clear before v1.0.** Closing a subset of `eventType`
+**CP-Grant-lifecycle must clear before v1.0 unconditionally.** Closing a subset of `eventType`
 is a governance change, materially cheaper before publication under a stable URI and DOI than
 afterwards. It is non-breaking and requires no `schema/` change — `Event.subject` already carries
-the grant identifier.
+the grant identifier. It is the only item that gates v1.0 on its own account: CP-Codelist-Enforcement
+gates v1.0 conditionally — only if CP-Tenancy rides the same train — and CP-Tenancy gates nothing,
+being breaking and therefore v1.0 or never.
 
 **Neither endorsement CP gates v1.0.** Both create endorsements rather than altering Core or Full,
 so neither changes what v1.0 means. Both must land before the **first certification**, which is a
@@ -38,6 +61,18 @@ CP-Grant-lifecycle, which both cite; they can ballot in either order.
 
 **CP-Credential-semantics blocks mark grammar R4** (selective disclosure for person marks) and
 nothing else. It is a prerequisite, not a dependency of the endorsements.
+
+**The v1.0 train opens exactly one break window, and three items must ride it.** CP-Tenancy spends
+the window by making `tenancy` required; CP-Extension-Composition Part 2 (the 2020-12 migration)
+and the `$id` rebase from `v0.1/` to `v1.0/` have to ride the same one. Delivering any of them in
+a v0.x minor produces churn without the licence to break. **CP-Extension-Composition Part 1 is the
+exception**: it is purely permissive, breaks nothing, and is deliberately scoped to a v0.x minor
+ahead of the train, because until it lands an implementer cannot carry a local field at all
+without failing document conformance.
+
+**Part 1 is not a partial delivery of tenancy.** A namespaced private field is permitted by the
+core schema and constrained by nothing — not modelled, not assessed by core conformance, and never
+promoted to core except through a proposal of its own.
 
 ## The two findings behind this set
 
