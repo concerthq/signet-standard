@@ -6,6 +6,23 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Found — one of twelve normative changes carries an approving review
+
+An audit of every commit since v0.1.0 touching a Tier 2 path, at
+`governance/reviews/2026-08-normative-approval-audit.md`. Twelve commits qualify. One carries
+an approving review; two carry a written approval record of any kind; four reached `main` as
+direct commits with no pull request; **none** had a stated comment period, which the
+specification and `CONTRIBUTING.md` have claimed for normative changes since v0.1.0.
+
+Nothing merged is thereby wrong — every commit passed CI, and the commodity-risk extension was
+reviewed twice on its substance. The gap is in *evidence of process*, not in care. But it means
+v1.0 cannot currently claim its normative content went through the process the specification
+describes, which is the same shape as the two conformance findings behind the endorsement
+proposals. Recorded before the fact rather than after someone else establishes it, and
+deliberately **not** relabelled: the audit recommends one resolution acknowledging the eleven as
+predating the written rule, not eleven back-dated approvals.
+
+
 ### Added — `GOVERNANCE.md`: the review rule, written down
 
 The rule was being followed by habit. Writing it down now makes it a choice; writing it after
