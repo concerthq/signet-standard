@@ -1,12 +1,12 @@
 # Default owners for everything in this repository.
 # The normative core changes only through the Concert Standards Committee
 # revision process (see README → Versioning & governance).
-*                       @concertfoundation
+*                       @concertfoundation @concertcustodian
 
 # Normative artifacts — the schema is the source of truth.
-/schema/                @concertfoundation
-/codelists/             @concertfoundation
-/.github/workflows/     @concertfoundation
+/schema/                @concertfoundation @concertcustodian
+/codelists/             @concertfoundation @concertcustodian
+/.github/workflows/     @concertfoundation @concertcustodian
 
 # Closed codelist subsets and the registers that govern the marks. These are not
 # ordinary content: a code in eventTypeCore.csv carries a fixed meaning that MUST NOT
@@ -15,7 +15,7 @@
 # protection rather than by a reviewer noticing (CP-Grant-lifecycle R-G1).
 # The open/closed split is additionally asserted in CI by
 # conformance/rules/check-codelists.js.
-/codelists/eventTypeCore.csv        @concertfoundation
-/governance/endorsement-register.md @concertfoundation
-/governance/role-register.md        @concertfoundation
-/governance/mark-grammar.md         @concertfoundation
+/codelists/eventTypeCore.csv        @concertfoundation @concertcustodian
+/governance/endorsement-register.md @concertfoundation @concertcustodian
+/governance/role-register.md        @concertfoundation @concertcustodian
+/governance/mark-grammar.md         @concertfoundation @concertcustodian
