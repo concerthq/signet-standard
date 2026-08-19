@@ -6,6 +6,8 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+## [0.14.0] — 2026-08-20 — Working Draft
+
 ### Added — the v1.0 train, specified and registered (not started)
 
 Four further proposals from a second round of multi-market, multi-tenant implementation
