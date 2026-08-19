@@ -6,11 +6,15 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+## [0.13.0] — 2026-08-19 — Working Draft
+
 ### Added — extension composition, part 1: namespaced private fields
 
-Proposed under [CP-Extension-Composition](governance/proposals/CP-Extension-Composition.md),
-**held for Standards Committee approval** — `schema/` and `conformance/suite/` are normative
-and this lands as a change proposal rather than a direct merge, non-breaking though it is.
+Proposed under [CP-Extension-Composition](governance/proposals/CP-Extension-Composition.md) and
+**landed ahead of ballot** under the bootstrap clause: `schema/` and `conformance/suite/` are
+normative, so it went through the change-proposal path rather than a direct merge, non-breaking
+though it is. Landing it does not ratify it — the proposal remains a draft until balloted, and
+the Standards Committee may amend or reverse it.
 
 The Extensions page has always told implementers to add structure "under their own namespace."
 Against the published schemas that instruction was unexecutable: every object schema sets
