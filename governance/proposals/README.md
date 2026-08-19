@@ -14,6 +14,11 @@ until balloted**. Nothing here has been balloted, because no Standards Committee
 | [CP-Extension-Composition](CP-Extension-Composition.md) | `additionalProperties: false` makes the documented extension path unexecutable | Part 1 no; Part 2 yes | No | Draft; Part 1 proposed for the next v0.x minor |
 | [CP-Tenancy](CP-Tenancy.md) | Tenant, market and marketplace are absent from the model and carried implicitly by identifiers | **Yes** | No — but v1.0 or never | Draft; gates open |
 | [CP-Codelist-Enforcement](CP-Codelist-Enforcement.md) | Closed codelists are prose — no instance value is validated against one | For documents carrying a value outside a closed list | **If CP-Tenancy lands** | Draft; gates open |
+| [CP-EventType-Closure](CP-EventType-Closure.md) | `eventType` has 8 values for 18 objects and stops at `contract.signed`; the gap is filled by implementations minting codes that pass conformance | **Yes** | No — v1.0 or never | Draft; gates open |
+| [CP-Policy-Applicability](CP-Policy-Applicability.md) | Every gate is opt-in at instance level — a Policy that is never cited is never applied | Conformance only (`F-GATE`) | No | Draft; gates open |
+| [CP-Mandate-Scope](CP-Mandate-Scope.md) | `Mandate.scope` is required and unconstrained: `{}` satisfies it | **Yes** | No — v1.0 or never | Draft; gates open |
+| [CP-Process-Spine](CP-Process-Spine.md) | `SourcingEvent` has no link back to `Need` — the one break in the spine | No | No | Draft; gates open |
+| [CP-Amendments-Round-2](CP-Amendments-Round-2.md) | Revises CP-Tenancy and CP-Codelist-Enforcement; two gates dissolved | Inherited | No | Draft; **applied** to both |
 
 ## Delivery and dependencies
 
@@ -25,7 +30,12 @@ until balloted**. Nothing here has been balloted, because no Standards Committee
 | CP-Credential-semantics | CDM v0.2 | `schema/definitions.schema.json`, `docs/specification.md` §4.7 | none | mark grammar R4 |
 | CP-Extension-Composition | Part 1 — next v0.x minor; Part 2 — v1.0 train | the 18 root object schemas, `schema/obligation.schema.json`, `schema/definitions.schema.json`, `conformance/`, `wiki/Extensions.md` | none | any implementer field that is not core |
 | CP-Tenancy | v1.0 train | `schema/definitions.schema.json`, the 18 root object schemas, `codelists/`, `examples/`, `conformance/` | CP-Codelist-Enforcement | multi-tenant, multi-market deployment |
-| CP-Codelist-Enforcement | in or before the v1.0 train | `codelists/`, `conformance/` | none | CP-Tenancy |
+| CP-Codelist-Enforcement | in or before the v1.0 train | `codelists/`, `conformance/` | none | CP-Tenancy, CP-EventType-Closure |
+| CP-EventType-Closure | v1.0 train | `codelists/eventType.csv`, `codelists/codelists.json`, `conformance/`, `tools/` | CP-Codelist-Enforcement, CP-Extension-Composition Part 1 | CP-Policy-Applicability |
+| CP-Policy-Applicability | v1.0 train | `schema/policy.schema.json`, `conformance/`, `docs/specification.md` | CP-EventType-Closure, CP-Tenancy | none |
+| CP-Mandate-Scope | v1.0 train | `schema/mandate.schema.json`, `conformance/`, `agent/mandate.json` | CP-Tenancy | none |
+| CP-Process-Spine | v1.0 train, or earlier | `schema/sourcing-event.schema.json`, `examples/` | none | none |
+| CP-Amendments-Round-2 | with what it amends | CP-Tenancy §4.5, CP-Codelist-Enforcement §2.1/§3/§4/§6/§8 | none | drafting either of those two |
 
 **The one hard dependency in this set: CP-Codelist-Enforcement MUST land in or before the v1.0
 train.** CP-Tenancy introduces `regulatoryRegime` and declares it closed. Without codelist
@@ -74,6 +84,76 @@ without failing document conformance.
 core schema and constrained by nothing — not modelled, not assessed by core conformance, and never
 promoted to core except through a proposal of its own.
 
+## The v1.0 train
+
+Seven proposals ride the single break window, in this shape:
+
+```
+CP-Codelist-Enforcement
+  └─▶ CP-EventType-Closure
+        └─▶ CP-Policy-Applicability
+
+CP-Tenancy
+  └─▶ CP-Mandate-Scope
+
+CP-Extension-Composition Part 2     (independent; supplies the prefix grammar to EventType Closure)
+CP-Process-Spine                    (independent)
+$id rebase v0.1 → v1.0              (independent; not yet scoped)
+```
+
+**Twenty-two gates are open across the seven** — down from twenty-four, because
+CP-Amendments-Round-2 dissolved two rather than resolving them (event chain partitioning, and
+`C-3` retirement semantics). Four decide the *shape* of the work rather than its detail and want
+Committee attention ahead of the rest:
+
+| Gate | Proposal | Why it comes first |
+|---|---|---|
+| `ET-2` | EventType Closure | Whether `Evaluation.result` is a lifecycle enum changes the derived list, and therefore the generator |
+| `PA-2` | Policy Applicability | Transitions with no `Decision` may make `F-GATE` untestable for a whole class of events |
+| `MS-3` | Mandate Scope | Declared-vs-actual reads is the honest limit of `F-SCOPE`; the answer decides what the specification may claim |
+| `C-1` | Codelist Enforcement | Disposition of the seven existing codelists — `eventType` is answered by EventType Closure, the other six each need their own migration analysis |
+
+**CP-Codelist-Enforcement is the critical path.** It gates EventType Closure, which gates Policy
+Applicability. It is also the **only non-breaking proposal in the train**, so it could land early
+in a v0.x minor to de-risk the sequence. That is worth putting to the Committee rather than
+assuming the train.
+
+**CP-Process-Spine is the other early candidate.** It is non-breaking, independently valuable, and
+the only item in the set that delivers something on its own — one optional `realisesNeed` field
+closing the single break in the process spine. If the train slips, it should not slip with it.
+
+### Two couplings that decide scope rather than order
+
+**EventType Closure must land with Policy Applicability, or Policy Applicability must be
+downgraded.** `appliesTo.transitions` referencing an unenforced vocabulary means a mistyped
+transition produces a gate that never fires — on a conformant system, with no error. If closure is
+declined, Policy Applicability must be documented as best-effort and the `F-GATE` requirement
+dropped.
+
+**Codelist Enforcement must land with Tenancy, or Tenancy ships a false claim.** Recorded above.
+
+### What the train must not become
+
+The proposals yield a *required set*, not a workflow. No ordering between gates, no conditional
+branching, no approval routing beyond `Mandate.approvalThresholds`. The moment the standard
+sequences gates it specifies an execution engine rather than stewarding a vocabulary. This
+boundary will be pushed against, and it is the one to hold.
+
+Two further limits are stated in the proposals themselves rather than left for an assessor to
+find: `eventType.csv` is **generated** from the lifecycle enums and CI-checked for drift, never
+hand-edited; and `F-SCOPE` can test what an agent **declares** it read (`Decision.inputs`), not
+what it actually read. Claiming otherwise would be the same class of overclaim as describing node
+attribution as federation.
+
+### Not yet scoped
+
+- **The `$id` rebase** from `https://concert.foundation/signet/v0.1/` to `v1.0/`, touching every
+  schema file and every `$ref`. Mechanical, but it collides with the stable-URI publication
+  blocker and the DOI sequencing. It rides the same window and may warrant its own proposal.
+- **Settlement.** The process spine ends at `Invoice` with no settlement or payment primitive.
+  Recorded here rather than silently omitted: whether v1.0 ships without one is a decision, and it
+  has not been taken.
+
 ## The two findings behind this set
 
 Both are gaps between what is claimed and what is tested, and both were found by reading the JSON
@@ -106,6 +186,20 @@ Recorded because they are attractive ideas that will be re-proposed in good fait
   makes it harder to detect by looking like evidence.
 - **Status fields on `Consent` — rejected.** CP-Grant-lifecycle §8 A. Duplicates state that design
   principle 1.7 defines as an event projection, with no rule for which governs on disagreement.
+- **A fourth `Status` column on codelist CSVs — declined.** CP-Amendments-Round-2 §A2.2. It breaks
+  every codelist file and the header lint, for all lists, to solve a problem that exists only for
+  closed ones. Underneath: retirement has no coherent meaning over an append-only stream. **Codes
+  are never retired**; guidance lives in the non-normative sidecar and removal is a CDM major.
+- **Tenant-partitioned or global event chains — declined.** CP-Amendments-Round-2 §A1. The chain is
+  **per subject**; there are as many chains as there are subjects. Isolation becomes a conformance
+  rule over the existing structure rather than a new partitioning. Note what this does not give
+  you: **there is no total order within a tenant** — any tenant-level ordering is a projection an
+  implementation constructs, not a guarantee the standard makes.
+- **A `TransitionManifest` root object — declined.** CP-Policy-Applicability. There is no manifest
+  to scope; the required set is derived from tenant-scoped policies.
+- **Significance-based curation of `eventType` — declined.** CP-EventType-Closure. The vocabulary
+  is **derived** from the existing lifecycle status enums and CI-checked for drift. A hand-curated
+  list diverges from the model the first time anyone adds a status value, silently.
 
 ## Writing one
 
