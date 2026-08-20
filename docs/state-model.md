@@ -56,6 +56,28 @@ that recipient unable to determine state at all. The field is an assertion at th
 not a cache — and S-2 is what makes it accountable, by anchoring it to an instant and to an
 identified asserting party through `Provenance`.
 
+### 2a. What CDM `status` covers (normative)
+
+**S-4.** A core state vocabulary describes the **market-facing lifecycle** of an object: what a
+counterparty can observe and must be able to interpret. It does not describe a party's internal
+governance — assembly, review, return for rework, internal approval against an authority
+threshold.
+
+This is not a new decision. It follows from the basis rule at §6: every core edge must be
+justified from OCDS, the Procurement Act procedures, UBL / EN 16931 or ePO, and **none of those
+instruments models a buyer's internal review**. An internal-governance edge cannot satisfy B-1,
+so core status is market-facing by construction. §2a states out loud what the basis rule already
+entails.
+
+Internal workflow belongs in a namespaced profile, with each profile state declaring the core
+state it projects onto (§7). A buyer whose internal vocabulary runs
+`draft → assembled → in_review → returned → approved → issued` projects the first five onto
+`planned` and the last onto `active`. Both models are correct; they describe different things.
+
+The corollary is worth stating because implementers reach for it: **an implementation MUST NOT
+extend a core state vocabulary to carry internal workflow.** Core vocabularies are closed. The
+profile mechanism is the supported route and it is not a workaround.
+
 ---
 
 ## 3. Which objects have a lifecycle
@@ -94,6 +116,19 @@ stream will still accept.
 disjoint. Given a current state and an incoming event, exactly one entry applies. CI enforces
 this; without it, projection is not a function.
 
+### 4a. Which kind is which
+
+The test is what the object itself looks like afterwards.
+
+| Question | Kind |
+|---|---|
+| Does something exist that did not exist before? | `creation` |
+| Does **this object's own state** differ afterwards? | `transition` |
+| Is a fact recorded *about* the object — including its relation to another object — with its own state unchanged? | `annotation` |
+
+A relation is never a transition, because the object it relates to is not this object. A fact
+that changes nothing about this object is never a transition either.
+
 **Terminal classification.** Core imposes no common terminal vocabulary — `waived`,
 `offboarded`, `cancelled` and `withdrawn` carry distinctions OCDS and the domain already make.
 It imposes a common classification, so a consumer can ask "does this object have an abandonment
@@ -103,7 +138,8 @@ path" across every object type without core inventing names.
 
 ## 5. Relations and outcomes are not states
 
-**R-1.** A **relation** to another object MUST NOT be a state value. It is expressed as an
+**R-1.** A **relation** to another object MUST NOT be a state value. Since the registry is the
+record (§11), this is linted where states are *authored* rather than where they are generated. It is expressed as an
 `annotation` entry whose event payload carries the related identifier.
 
 **R-2.** An **outcome** of a Decision MAY be a state value, provided the Decision is the
@@ -114,8 +150,39 @@ The distinction is projectability. `Bid.superseded` cannot be projected: you can
 without knowing superseded *by what*, and the state does not carry it. `Submission.admissible`
 can: an admissibility Decision produces `submission.admitted`, and the state follows.
 
+**R-3.** A condition computable from other objects is a **derived predicate**, not a state and
+not an annotation. It is not stored and emits no event.
+
+R-3 is the sharper case and it is easy to miss. An `Evaluation` is "consumed" when an `Award`
+references it — that is a fact about the graph, computable at read time, and modelling it as a
+state creates a value that must be maintained and can drift. Likewise a `Policy` is "current"
+when nothing supersedes it. Neither belongs in a vocabulary.
+
+The three-way test: can it be derived from **this object's own event stream**? Then it is a state
+(R-2). From **another object**? Then it is a relation (R-1) or a derived predicate (R-3), and the
+difference is whether the fact needs to be *recorded at a moment* — an annotation — or merely
+*computed* — a predicate.
+
 R-1 removes exactly one value from one schema. R-2 preserves `admissible`, `inadmissible`,
-`winning`, `rejected`, `approved` and `qualified` where they stand.
+`winning`, `rejected`, `approved` and `qualified` where they stand. R-3 removes candidates before
+they are proposed.
+
+### 5a. Controlled reopen
+
+An object returning to an earlier state under recorded authority is a **transition**: the
+object's own state genuinely differs afterwards, so §4a places it there rather than with
+annotations.
+
+Two constraints follow from the model rather than from policy.
+
+**A terminal state cannot be reopened.** `terminal: true` asserts that no transition leaves the
+state. If an object can be reopened, the state it is reopened from is not terminal, and the
+registry must say so. Reopen and terminality are alternatives, not layers.
+
+**A reopen edge declares `decisionType`.** Where an edge requires recorded authority, the
+authority must be evidenced by a Decision rather than asserted by the fact of the transition.
+CI fails an edge marked `requiresAuthority` that names no `decisionType`, so the requirement
+cannot be documented and left unenforced.
 
 ---
 
@@ -128,6 +195,22 @@ instrument. An extension entry may additionally cite its own published extension
 
 **B-2.** An entry justifiable only from one implementer's workflow goes into a **profile**, not
 into core.
+
+**B-3.** Externality is not generality, and B-1 alone conflates them. Each basis carries a scope:
+
+| Scope | Meaning | Justifies |
+|---|---|---|
+| `general` | Holds across the jurisdictions core claims to serve — OCDS, UBL 2.3 / EN 16931, ePO, UNTDED/ISO 7372 | a **core** entry |
+| `jurisdictional` | Binds in one jurisdiction or one sector — a national procurement act, a sector security regulation | a **profile** entry; a core entry only where a corroborating general source is also named |
+| `implementer` | An operating instruction or internal workflow | a **profile** entry only. Never core |
+
+A national instrument is a real external source and still not a general one. An edge whose only
+basis is one country's telecommunications security regulation is properly a jurisdiction profile,
+not core — the standard would otherwise oblige every implementer in every market to carry it.
+
+CI warns on a core entry resting on a jurisdictional basis with no corroborating general source,
+and fails one resting on an implementer basis. When B-3 was first run, it flagged two core edges
+in this repository's own registry; both were corroborated rather than the check being relaxed.
 
 This is the neutrality control, and it is deliberately a CI check rather than a review step.
 It runs on every push, it is auditable after the fact, and it does not depend on anyone
@@ -188,3 +271,43 @@ non-breaking additions land, the design is marked revisable, and ratification fo
 does not ratify. The registry is versioned independently of the CDM and expected to change as
 the model is implemented; entry `id`s are stable once published, so `Policy` applicability or
 any later mechanism referencing a transition has something durable to point at.
+
+---
+
+## 11. Derived artefacts
+
+**D-1.** Where two records of one relationship exist, one is authoritative and the other is
+generated from it. A second hand-maintained copy is a defect, not redundancy.
+
+This is why `sourcingEvent.published` could name a state the enum does not contain: the event
+vocabulary and the state vocabulary were two hand-maintained records of one relationship, and
+they drifted. It is also why closed codelists were enforced by nothing — the CSV and the schema
+were two records, and only one of them was ever checked.
+
+**D-2.** SIGNET has exactly two generation sources for a schema enum, and a schema location MUST
+NOT be a target of both:
+
+| Vocabulary | Record | Generated |
+|---|---|---|
+| Closed codelist | `codelists/<name>.csv` | the bound schema enum, via `codelists/bindings.json` |
+| Lifecycle state | `state-model/state-model.json` | `<schema>/properties/<stateField>` |
+
+Both are enforced. `check-codelist-binding.js` regenerates from the CSV;
+`check-state-model.js --write` regenerates from the registry; both fail on drift when run without
+`--write`. CI check C15 fails if any location is claimed by both.
+
+Generation applies only where the registry actually declares states. An object declared
+lifecycle-bearing but **not yet modelled** keeps the vocabulary it has — an unmodelled object's
+enum is not ours to overwrite, and silently emptying it would be a worse defect than the drift.
+
+**Consequence, stated because it changes the artifact's status.** Once a normative schema enum is
+generated from the registry, the registry is no longer informative. It is the normative record for
+every lifecycle vocabulary it declares. `state-model/state-model.json` is protected accordingly
+(`CODEOWNERS`), and a change to a declared state is a Tier 2 act whether it is made in the schema
+or in the registry. See `governance/IAR-0004`.
+
+An implementer reports the same failure mode measured at scale: in a legacy estate, 58 of 68
+policy gates carried a declared transition label that disagreed with the state the rule actually
+tested. Sixteen agreed. The pattern is contributed and adopted here on that evidence.
+
+---

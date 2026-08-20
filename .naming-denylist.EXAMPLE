@@ -1,0 +1,17 @@
+# EXAMPLE ONLY — placeholders. Copy to `.naming-denylist` and replace with real terms.
+#
+# `.naming-denylist` is gitignored and holds plaintext for local runs.
+# CI uses SIGNET_NAMING_SALT plus the digests in conformance/rules/naming-denylist.json.
+#
+# One term per line, lower case. Unigrams and bigrams are both matched, so
+# "firstname surname" and "surname" are separate entries.
+#
+# Add each real term to the committed manifest with:
+#   SIGNET_NAMING_SALT=… node conformance/rules/check-naming.js . --add "<term>"
+# The term itself is never written to the repository.
+
+acme-corporation
+acme corp
+example-implementer
+firstname surname
+surname

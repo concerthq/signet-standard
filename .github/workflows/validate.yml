@@ -89,3 +89,20 @@ jobs:
 
       - name: State model — registry integrity, surface authority, and the basis rule
         run: node conformance/rules/check-state-model.js .
+
+  # Concert names no individual and no commercial implementer. The deny-list is stored as
+  # salted digests, never as terms, so CI needs the salt to compute them. The secret name is
+  # referenced here; the value is held in repository secrets and never in the repository.
+  naming:
+    runs-on: ubuntu-latest
+    env:
+      SIGNET_NAMING_SALT: ${{ secrets.SIGNET_NAMING_SALT }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Naming check — no named individuals, no commercial implementers
+        run: node conformance/rules/check-naming.js .
