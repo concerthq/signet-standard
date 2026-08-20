@@ -24,7 +24,8 @@
     {
       "codelist": "documentType.csv",
       "schema": "schema/definitions.schema.json",
-      "pointer": "/definitions/Document/properties/type"
+      "pointer": "/definitions/Document/properties/documentType",
+      "note": "Property is `documentType`, not `type`. The earlier pointer did not resolve and --write silently skipped it, leaving the property unenforced \u2014 which is why an unresolved pointer is a hard failure rather than a warning."
     },
     {
       "codelist": "positionStatus.csv",

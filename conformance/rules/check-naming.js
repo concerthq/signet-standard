@@ -74,10 +74,14 @@ if (!SALT && !localList.length)
 // ---------------------------------------------------------------- checks
 const fail = [];
 const warn = [];
+let denyHits = 0;   // deny-list matches across the whole run — zero is suspicious, see below
 
 // Structural patterns, safe to publish because they name no one.
 const EMAIL = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
-const CORPORATE = /\b[A-Z][A-Za-z&.\-]*\s+(Ltd|Limited|plc|PLC|GmbH|Inc\.?|LLC|S\.A\.|N\.V\.|AG|Pty|Group)\b/g;
+// Suffixes that are not also ordinary English. `Group` and `AG` were removed after
+// "Working Group" and "the AG process" produced failures on a clean tree — a check that
+// cries wolf is disabled by its readers within a week.
+const CORPORATE = /\b[A-Z][A-Za-z&.\-]*\s+(Ltd\.?|Limited|plc|PLC|GmbH|Inc\.?|LLC|LLP|S\.A\.|N\.V\.|A\/S|Pty)\b/g;
 const SIGNED_BY = /(?:^|\n)\s*(?:signed(?:\s+by)?|contact|from|prepared by|author)\s*[:\-–]\s*([A-Z][a-z]+(?:\s+[A-Z][a-z'’-]+){1,2})/gi;
 
 const emailAllow = new Set((manifest.allowEmails || []).map((e) => e.toLowerCase()));
@@ -107,6 +111,7 @@ function checkFile(abs, rel) {
     if (allow.has(tok)) continue;
     if ((SALT && denied.has(digest(tok))) || localList.includes(tok)) {
       const i = text.toLowerCase().indexOf(tok.split(' ')[0]);
+      denyHits++;
       fail.push(`${rel}:${lineOf(i < 0 ? 0 : i)} — a deny-listed name appears in Concert's voice`);
       break; // one report per file; do not enumerate hits and re-disclose by counting
     }
@@ -144,6 +149,16 @@ for (const f of scanRoot) { const abs = p(f); if (fs.existsSync(abs)) checkFile(
 
 // ---------------------------------------------------------------- report
 console.log('\nSIGNET naming check\n');
+
+// A hashed deny-list is safe to publish and silently unverifiable: a wrong salt produces a
+// passing run identical to a clean tree. State the posture explicitly on every run.
+if (denied.size && !SALT) {
+  console.log(`  ! ${denied.size} digest(s) present but SIGNET_NAMING_SALT is unset — name detection is OFF; structural checks only.`);
+} else if (denied.size && SALT) {
+  console.log(`  · ${denied.size} digest(s) active, salt present.`);
+} else if (!denied.size && !localList.length) {
+  console.log('  ! no digests and no local list — name detection is OFF; structural checks only.');
+}
 for (const v of verbatim) console.log(`  · excluded (verbatim): ${v.path} — ${v.reason}`);
 if (warn.length) { console.log('\nWarnings:'); warn.forEach((w) => console.log('  !', w)); }
 if (fail.length) {
@@ -153,4 +168,6 @@ if (fail.length) {
   process.exit(1);
 }
 console.log('\nPass.\n');
+if (denied.size && SALT && denyHits === 0)
+  console.log('  note: no deny-list match anywhere in this run. Expected on a clean tree — but it is\n  also what a salt mismatch looks like. Verify with a deliberate failure before trusting it.\n');
 process.exit(0);
