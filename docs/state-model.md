@@ -235,6 +235,10 @@ problem, it relocates it, by driving implementers to overload core states with l
 where no check can detect it. `coreEquivalent` is the outward projection discipline SIGNET
 already applies to OCDS and UBL, turned inward.
 
+A worked example — profile states with `coreEquivalent`, profile transitions, the edge that
+crosses into core, and a pre-ship checklist — is at
+[`docs/profile-authoring.md`](profile-authoring.md).
+
 ---
 
 ## 8. Coverage, stated plainly
