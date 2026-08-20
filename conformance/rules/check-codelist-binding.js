@@ -66,11 +66,19 @@ for (const b of bindings.closed) {
 for (const d of bindings.deferred || [])
   notes.push(`${d.codelist}: binding deferred pending ${d.defect} — declared closed, not enforced in schema`);
 
-// A retired codelist must actually be gone. A file left behind after a deletion decision
-// is the same defect the decision closed.
+// A retired codelist is either DELETED or RETIRED-BUT-RESOLVABLE, and the two fail in opposite
+// directions. Deleted: a file left behind after a deletion decision is the same defect the
+// decision closed. Resolvable: the file is published in the $id namespace, so its absence is a
+// 404 to anyone who resolved it. Retirement says nothing is maintained here; it does not say the
+// URL may stop answering. See governance/defects.md D-24.
 for (const r of bindings.retired || []) {
-  if (fs.existsSync(p('codelists', r.codelist)))
+  const present = fs.existsSync(p('codelists', r.codelist));
+  if (r.resolvable) {
+    if (!present) fail.push(`${r.codelist}: retired but declared resolvable, and absent from codelists/ — a published URL in the $id namespace stops answering`);
+    else notes.push(`${r.codelist}: retired by ${r.defect}, retained for resolvability — not a source of truth, bound to no schema`);
+  } else if (present) {
     fail.push(`${r.codelist}: retired by ${r.defect} but still present in codelists/`);
+  }
 }
 
 if (WRITE) { console.log('\nRegenerated:'); fixed.forEach((f) => console.log('  ✎', f)); }

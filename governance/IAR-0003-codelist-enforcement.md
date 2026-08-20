@@ -91,6 +91,21 @@ changing a normative surface. It is recorded here rather than landed silently be
 from `codelists/` should be visible, and because this record is already under a comment period in
 which it can be contested.
 
+> **Correction, 2026-08-20.** The claim that this file had no consumer was false.
+> `concert-website` fetched it in two places — `scripts/generate-standard.mjs` names it in
+> `CODELISTS` and `CLOSED`, and a `next.config.mjs` rewrite served it at
+> `concert.foundation/signet/v0.1/codelists/submissionStatus.csv`, a published URL in the `$id`
+> namespace. Deleting the file returned 404 to any implementer who had resolved it, and failed the
+> site build cold.
+>
+> No artifact in this repository recorded that consumer, so the claim was **unfalsifiable from
+> inside the repository at the time it was written**. That is the defect, recorded as D-24 and
+> D-27: the standard declares no public interface, so no check can determine whether a deletion is
+> breaking.
+>
+> The file is restored, retired, and bound to no schema. D-13’s reasoning is unchanged — it is not
+> a source of truth. Resolvability and maintenance are different obligations.
+
 `bindings.json` records the deletion under `retired`, and the binding check fails if the file
 reappears — a file left behind after a deletion decision is the same defect the decision closed.
 

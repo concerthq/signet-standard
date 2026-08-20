@@ -62,7 +62,9 @@
       "codelist": "submissionStatus.csv",
       "defect": "D-13",
       "decision": "Deleted. Submission.status carries the vocabulary inline, as every other lifecycle-bearing object does; the CSV was referenced by no schema and marked closed nowhere. Keeping both would be the second hand-maintained record that docs/state-model.md §11 defines as a defect.",
-      "date": "2026-08-20"
+      "date": "2026-08-20",
+      "resolvable": true,
+      "resolvableReason": "RETIRED — not a source of truth, not bound to any schema, do not consume. The Submission lifecycle vocabulary is carried inline on schema/submission.schema.json /properties/status, generated from state-model/state-model.json under IAR-0004. This file is retained solely because concert.foundation/signet/v0.1/codelists/submissionStatus.csv is a published URL in the $id namespace; deleting it returned 404 to anyone who had resolved it. Retired but resolvable. See governance/defects.md D-13 and D-24."
     }
   ]
 }
