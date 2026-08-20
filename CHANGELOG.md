@@ -6,39 +6,6 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
-### Changed — the process claim reconciled with the record
-
-`docs/specification.md` §12.2 and `wiki/Governance-and-Versioning.md` had said since v0.1.0 that
-the core model changes "through the formal revision process governed by the Standards Committee,
-with a published comment period." Two things were wrong with that. No Standards Committee is
-constituted. And of the twelve normative changes made between v0.1.0 and 20 August 2026, **none
-carried a comment period**.
-
-Both now state the rule that actually applies — a recorded resolution, a stated comment period of
-at least fourteen calendar days, and an approving review, every change by pull request — say that
-it took effect on 20 August 2026, say that no Committee is constituted, and point at the audit for
-what preceded it.
-
-- **`governance/IR-2026-08-prior-normative-changes.md`** — an interim resolution covering the
-  eleven normative changes that carry no approval record. They **stand**; they are recorded as
-  predating the written rule rather than as having satisfied it; and it is **one** resolution
-  rather than eleven back-dated approvals, which would be a fabrication of evidence. It is not an
-  assessment of merit: every one passed CI, and the commodity-risk extension was reviewed twice on
-  the record.
-- **Both commodity-risk review memos** gain a note recording the arrangement under which they were
-  taken. They are titled as Standards Committee reviews and no Committee existed; their closing
-  line, "Recorded *for* the Standards Committee," is accurate, but the titles read otherwise. The
-  titles are left as written rather than changed after the fact.
-- **`governance/README.md`** now indexes the interim approval record, the interim resolution, the
-  withdrawal, and the drafted site corrections, so the bootstrap-clause table is the single index
-  it claims to be.
-
-Closed out, and outside this repository: `concert.foundation/governance` no longer presents the
-Standards Committee as a currently operating body. The drafted correction at
-`governance/site-alignment/` was superseded before it was applied — the live page already said what
-it proposed. The outcome is recorded at `governance/site-alignment/OUTCOME.md`. Three claims the
-draft did not examine are addressed in `concerthq/concert-website`.
-
 ## [0.16.0] — 2026-08-20 — Working Draft
 
 ### Changed — implementer review of v0.15.0, and three defects it found in four-day-old artifacts
@@ -77,6 +44,39 @@ state* differ? Transition. Is a fact recorded *about* it? Annotation.
 the other. `sourcingEvent.published` drifted for this reason and so did the closed codelists.
 Contributed by an implementer who measured it: 58 of 68 policy gates carried a transition label
 disagreeing with the state the rule tested.
+
+### Changed — the process claim reconciled with the record
+
+`docs/specification.md` §12.2 and `wiki/Governance-and-Versioning.md` had said since v0.1.0 that
+the core model changes "through the formal revision process governed by the Standards Committee,
+with a published comment period." Two things were wrong with that. No Standards Committee is
+constituted. And of the twelve normative changes made between v0.1.0 and 20 August 2026, **none
+carried a comment period**.
+
+Both now state the rule that actually applies — a recorded resolution, a stated comment period of
+at least fourteen calendar days, and an approving review, every change by pull request — say that
+it took effect on 20 August 2026, say that no Committee is constituted, and point at the audit for
+what preceded it.
+
+- **`governance/IR-2026-08-prior-normative-changes.md`** — an interim resolution covering the
+  eleven normative changes that carry no approval record. They **stand**; they are recorded as
+  predating the written rule rather than as having satisfied it; and it is **one** resolution
+  rather than eleven back-dated approvals, which would be a fabrication of evidence. It is not an
+  assessment of merit: every one passed CI, and the commodity-risk extension was reviewed twice on
+  the record.
+- **Both commodity-risk review memos** gain a note recording the arrangement under which they were
+  taken. They are titled as Standards Committee reviews and no Committee existed; their closing
+  line, "Recorded *for* the Standards Committee," is accurate, but the titles read otherwise. The
+  titles are left as written rather than changed after the fact.
+- **`governance/README.md`** now indexes the interim approval record, the interim resolution, the
+  withdrawal, and the drafted site corrections, so the bootstrap-clause table is the single index
+  it claims to be.
+
+Closed out, and outside this repository: `concert.foundation/governance` no longer presents the
+Standards Committee as a currently operating body. The drafted correction at
+`governance/site-alignment/` was superseded before it was applied — the live page already said what
+it proposed. The outcome is recorded at `governance/site-alignment/OUTCOME.md`. Three claims the
+draft did not examine are addressed in `concerthq/concert-website`.
 
 ### Fixed
 
