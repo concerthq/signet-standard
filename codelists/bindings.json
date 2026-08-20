@@ -1,0 +1,68 @@
+{
+  "$comment": "Binds each CLOSED codelist to the schema location whose enum it governs. The CSV is the single record; the enum is generated from it. Where two records of one relationship exist, keep one and generate the other. See docs/state-model.md §11.",
+  "closed": [
+    {
+      "codelist": "procedure.csv",
+      "schema": "schema/sourcing-event.schema.json",
+      "pointer": "/properties/procedure"
+    },
+    {
+      "codelist": "decisionType.csv",
+      "schema": "schema/decision.schema.json",
+      "pointer": "/properties/decisionType"
+    },
+    {
+      "codelist": "partyRole.csv",
+      "schema": "schema/party.schema.json",
+      "pointer": "/properties/roles/items"
+    },
+    {
+      "codelist": "documentType.csv",
+      "schema": "schema/definitions.schema.json",
+      "pointer": "/definitions/Document/properties/documentType",
+      "note": "Property is `documentType`, not `type`. The earlier pointer did not resolve and --write silently skipped it, leaving the property unenforced — which is why an unresolved pointer is a hard failure rather than a warning."
+    },
+    {
+      "codelist": "positionStatus.csv",
+      "schema": "schema/exposure-position.schema.json",
+      "pointer": "/properties/positionStatus"
+    },
+    {
+      "codelist": "eventTypeCore.csv",
+      "schema": null,
+      "pointer": null,
+      "note": "No single property binds it; Event.eventType admits open values too. Enforced by check-codelists.js, not by enum injection."
+    }
+  ],
+  "open": [
+    {
+      "codelist": "eventType.csv",
+      "note": "Extension space. Values may be added by PR."
+    },
+    {
+      "codelist": "credentialType.csv",
+      "note": "Extension space."
+    },
+    {
+      "codelist": "auctionType.csv",
+      "note": "Auction extension; enum already present in schema."
+    }
+  ],
+  "deferred": [
+    {
+      "codelist": "identifierScheme.csv",
+      "schema": "schema/definitions.schema.json",
+      "pointer": "/definitions/Identifier/properties/scheme",
+      "defect": "D-20",
+      "reason": "Enforcing this enum makes the specification unsatisfiable: docs/specification.md:409 documents Decision.inputs as holding credentials, and no scheme code names one. Deferred pending D-20, which is a CDM question outside the scope of IAR-0003. Recorded here rather than omitted so the gap is visible."
+    }
+  ],
+  "retired": [
+    {
+      "codelist": "submissionStatus.csv",
+      "defect": "D-13",
+      "decision": "Deleted. Submission.status carries the vocabulary inline, as every other lifecycle-bearing object does; the CSV was referenced by no schema and marked closed nowhere. Keeping both would be the second hand-maintained record that docs/state-model.md §11 defines as a defect.",
+      "date": "2026-08-20"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "$comment": "Salted SHA-256 digests only. Terms are NEVER written here â€” a published list of names that must not appear is the disclosure it exists to prevent. Add with: SIGNET_NAMING_SALT=â€¦ node conformance/rules/check-naming.js --add \"TERM\". The salt is held in CI, not in the repository.",
+  "digests": [
+    "02e9845871c2d881e849085b86034ad8",
+    "0bfb36965dca8847d184c2438447eba1",
+    "1768f2bfcd8d6ff1516e88a6d9f20ba0",
+    "2bdc686a05a7ede076ad92a97cf9cc0f",
+    "4d1c8f04dad76a62fbf94c4aa37997e7",
+    "53c456217a77ba01a314292711b93051",
+    "915ca49594b9e9b9c4ba5eca7907e528",
+    "ac34a3b7787e1a84394dad7d5f0d4f2a"
+  ],
+  "allow": [
+    "concert",
+    "concert foundation",
+    "signet",
+    "score",
+    "anthropic",
+    "openpeppol",
+    "peppol",
+    "ocds",
+    "ubl",
+    "epo",
+    "gs1",
+    "gleif",
+    "iso",
+    "w3c",
+    "oasis",
+    "open contracting",
+    "european commission",
+    "cabinet office"
+  ],
+  "allowEmails": [
+    "hello@concert.foundation"
+  ],
+  "scan": [
+    "docs",
+    "governance",
+    "codelists",
+    "schema",
+    "conformance",
+    "state-model"
+  ],
+  "scanRootFiles": [
+    "README.md",
+    "CHANGELOG.md",
+    "GOVERNANCE.md"
+  ],
+  "verbatim": [
+    {
+      "path": "governance/enquiries",
+      "reason": "Third-party documents published unedited. Not Concert's voice; de-naming a document its author signed would be concealment rather than policy. The exclusion is recorded here so it is itself auditable."
+    }
+  ]
+}
