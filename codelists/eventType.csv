@@ -8,3 +8,24 @@ contract.signed,Contract signed,A contract was executed.
 mandate.refused,Mandate refused,An agent action was refused because it fell outside the mandate relied on.
 obligation.discharged,Obligation discharged,An obligation reached `met`, discharged by a settling artefact (Order/Invoice/Document).
 bid.placed,Bid placed,A bid was placed or revised in an Auction; the ordered bid.placed stream is the hash-chained auction record.
+sourcingEvent.planned,Sourcing event planned,A sourcing event was created in the planning stage.
+sourcingEvent.closed,Sourcing event closed,The submission window closed and evaluation began.
+sourcingEvent.completed,Sourcing event completed,A sourcing event reached its intended end.
+sourcingEvent.cancelled,Sourcing event cancelled,A sourcing event was cancelled before completion.
+sourcingEvent.withdrawn,Sourcing event withdrawn,A sourcing event was withdrawn by the procuring party.
+submission.created,Submission created,A submission was created in draft.
+submission.admitted,Submission admitted,A submission was ruled admissible by an admissibility Decision.
+submission.excluded,Submission excluded,A submission was ruled inadmissible by an admissibility Decision.
+submission.withdrawn,Submission withdrawn,A submission was withdrawn by the supplier.
+obligation.created,Obligation created,An obligation was created pending fulfilment.
+obligation.breached,Obligation breached,An obligation was not fulfilled as required.
+obligation.waived,Obligation waived,An obligation was waived by the party entitled to enforce it.
+auction.scheduled,Auction scheduled,An auction was created and scheduled.
+auction.opened,Auction opened,An auction opened for participation.
+auction.started,Auction started,Bidding began.
+auction.closed,Auction closed,An auction closed under its deterministic rules.
+auction.cancelled,Auction cancelled,An auction was cancelled before close.
+bid.withdrawn,Bid withdrawn,A bid was withdrawn by the bidder.
+bid.won,Bid won,A bid was determined the winning bid at close.
+bid.rejected,Bid rejected,A bid was rejected as invalid.
+bid.superseded,Bid superseded,A standing bid was superseded by a later bid from the same bidder; the payload carries supersededBy.
