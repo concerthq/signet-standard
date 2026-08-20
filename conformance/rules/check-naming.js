@@ -2,9 +2,9 @@
 /**
  * check-naming.js — no named individuals, no commercial implementers, in Concert's voice.
  *
- * The rule has existed since v0.13.0 and is enforced by nothing. IAR-0002 shipped in v0.15.0
- * naming a deploying implementer; it passed drafting, review and merge. A rule that depends on
- * a reader noticing is not a control.
+ * The rule has existed since v0.13.0 and was enforced by nothing. No breach is asserted: no
+ * instance is identified in the repository, and the defect is the absent control itself.
+ * A rule that depends on a reader noticing is not a control. See governance/defects.md D-19.
  *
  * THE DENY-LIST PROBLEM. A published file listing the names that must not appear is itself the
  * disclosure it exists to prevent. So the repository stores SALTED HASHES, never terms:

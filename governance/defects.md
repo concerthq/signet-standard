@@ -32,7 +32,7 @@ index.
 
 | D-18 | State vocabularies exist twice — as a schema `enum` and as registry `states` — and CI asserts agreement rather than generating one from the other. `docs/state-model.md` §11 D-1 defines a second hand-maintained copy as a defect, so the rule was violated by the artifact that states it | `state-model/state-model.json`, `schema/*.schema.json` | **Closed** — enum generated from the registry; registry promoted to normative (IAR-0004) |
 
-| D-19 | The rule that Concert names no individual and no commercial implementer has existed since v0.13.0 and was enforced by nothing. `governance/IAR-0002-state-model.md` shipped in v0.15.0 naming a deploying implementer, having passed drafting, review and merge | `governance/IAR-0002-state-model.md` §"Not included" | **Closed** — text corrected; `check-naming.js` added, and it catches the shipped instance |
+| D-19 | The rule that Concert names no individual and no commercial implementer has existed since v0.13.0 and is enforced by nothing. The defect is the absent control. No instance of a breach is currently identified in the repository | absence — no check enforced the rule | **Closed** — `conformance/rules/check-naming.js` added and run in CI; the enforcement gap is closed. No breach is asserted |
 
 ## Provenance of D-9 to D-13
 
