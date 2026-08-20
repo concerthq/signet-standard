@@ -34,6 +34,8 @@ index.
 
 | D-19 | The rule that Concert names no individual and no commercial implementer has existed since v0.13.0 and is enforced by nothing. The defect is the absent control. No instance of a breach is currently identified in the repository | absence — no check enforced the rule | **Closed** — `conformance/rules/check-naming.js` added and run in CI; the enforcement gap is closed. No breach is asserted |
 
+| D-20 | `onboarding/onboarding-runtime.js` emits `scheme: "uri"` on `Decision.inputs` and `Provenance.derivedFrom` — a value absent from the closed `identifierScheme` codelist. Present since v0.6.1. It appears in no committed fixture and passed every check in force, because the bound schema property was typed `"string"` with the CSV named only in a description. Found by enum generation under IAR-0003 | `onboarding/onboarding-runtime.js:89,93` | Open — the ten emitted values are `urn:cred:` URNs identifying Verifiable Credentials, and no code in `codelists/identifierScheme.csv` names that namespace. `run-onboarding.js` exits 1 on the IAR-0003 and IAR-0004 branches |
+
 ## Provenance of D-9 to D-13
 
 Raised by implementer enquiry, verified against v0.15.0 before recording. Recording a defect is
