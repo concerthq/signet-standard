@@ -292,9 +292,15 @@ NOT be a target of both:
 | Closed codelist | `codelists/<name>.csv` | the bound schema enum, via `codelists/bindings.json` |
 | Lifecycle state | `state-model/state-model.json` | `<schema>/properties/<stateField>` |
 
-Both are enforced. `check-codelist-binding.js` regenerates from the CSV;
+Both are checked. `check-codelist-binding.js` regenerates from the CSV;
 `check-state-model.js --write` regenerates from the registry; both fail on drift when run without
 `--write`. CI check C15 fails if any location is claimed by both.
+
+*Only the lifecycle row is in force. The closed-codelist row describes the arrangement, not the
+state of the tree: the bound enums have not been generated, so on `main` the bound properties are
+`"type": "string"` and any string validates. That is a Tier 2 act under `governance/IAR-0003`,
+which has not landed. This paragraph read "Both are enforced" and was corrected on 2026-08-21;
+see `governance/defects.md` D-14 and D-30.*
 
 Generation applies only where the registry actually declares states. An object declared
 lifecycle-bearing but **not yet modelled** keeps the vocabulary it has — an unmodelled object's

@@ -96,6 +96,18 @@ jobs:
       - name: Public interface — every declared path exists
         run: node conformance/rules/check-public-interface.js .
 
+      # Closed codelists must be enforced in schema, not merely cited in a description.
+      #
+      # This step FAILS on main today, and that is the accurate state: the binding manifest and
+      # this checker landed at v0.16.0, the generated enums did not, and four bound properties are
+      # still "type": "string" so any string validates. Generating the enums alters schema/ and is
+      # a Tier 2 act under governance/IAR-0003, which has not landed. (D-14, D-30)
+      #
+      # No continue-on-error. A check that exists and does not run is how a rule stays unenforced
+      # while appearing enforced — the failure is the point.
+      - name: Closed codelist bindings — enforced in schema, not merely cited
+        run: node conformance/rules/check-codelist-binding.js .
+
   # Concert names no individual and no commercial implementer. The deny-list is stored as
   # salted digests, never as terms, so CI needs the salt to compute them. The secret name is
   # referenced here; the value is held in repository secrets and never in the repository.

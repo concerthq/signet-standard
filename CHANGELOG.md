@@ -84,10 +84,23 @@ draft did not examine are addressed in `concerthq/concert-website`.
   statelessness by omission is a defect. The registry reproduced that defect in the artifact that
   defines it. `Evaluation` is now declared a terminal record. New check **C12** fails any schema
   file without a declaration. (D-15)
-- **Closed codelists enforced.** Five were `"type": "string"` with the CSV named only in a
-  description; `{"procedure": "banana"}` validated. `codelists/bindings.json` binds each closed
-  codelist to the schema location whose enum it governs and `check-codelist-binding.js`
-  regenerates the enum from the CSV. Tier 2, landed under `governance/IAR-0003`. (D-14)
+- **Closed codelists bound. Not enforced — see the correction below.** Five were
+  `"type": "string"` with the CSV named only in a description; `{"procedure": "banana"}` validated.
+  `codelists/bindings.json` binds each closed codelist to the schema location whose enum it governs,
+  and `check-codelist-binding.js` asserts that the CSV and the enum agree and, with `--write`,
+  generates the enum from the CSV. **Those two artifacts are what landed here.** (D-14)
+
+  *Corrected 2026-08-21. This bullet was headed "**Closed codelists enforced**" and ended "Tier 2,
+  landed under `governance/IAR-0003`." Both statements were wrong. The binding manifest and the
+  checker landed at v0.16.0; the generated enums did not. Generating them alters `schema/`, which
+  is normative, so it is a Tier 2 act under `governance/IAR-0003` — and that record's pull request
+  has never been opened, so its comment period has never started. On `main` at v0.16.0, five closed
+  codelists carry no `enum` at the bound property and any string validates against it:
+  `{"procedure": "banana"}` is accepted today, in the present tense, exactly as this bullet says it
+  once was. `check-codelist-binding.js` fails on four of the five and records the fifth,
+  `identifierScheme`, as a binding deferred pending D-20. It was not wired into
+  `validate.yml`, so nothing surfaced the gap. The tag is not amended — the correction is recorded
+  here, in the entry that made the claim, and as D-30. D-14 is reopened.*
 - **`codelists/submissionStatus.csv` deleted.** It duplicated the vocabulary carried inline on
   `Submission.status` and was referenced by no schema. The inline enum is the single record, as
   for every other lifecycle-bearing object. The binding check fails if the file reappears. (D-13)

@@ -9,6 +9,15 @@
 | **Closes** | D-14 |
 | **Ratifies** | Nothing. Landing is not ratification. |
 
+> **Status as at 2026-08-21 — not landed.** This record's pull request has never been opened, so
+> its comment period has never started and the change it approves is not in the tree. `schema/`
+> carries no generated enum at any bound property: `procedure`, `decisionType`, `partyRole` and
+> `documentType` fail `check-codelist-binding.js`, and `identifierScheme` is a recorded deferral
+> pending D-20. **D-14 is therefore not closed**, and the "Closes" field above states what this
+> record would close on landing, not what it has closed. The v0.16.0 CHANGELOG entry said this
+> enforcement had landed; that claim is corrected in the entry and recorded as D-30. The record
+> below is unaltered — it states what was decided, and is not rewritten after the fact.
+
 ## The defect
 
 Five closed codelists were bound to schema properties typed `"string"` with the CSV named only in
