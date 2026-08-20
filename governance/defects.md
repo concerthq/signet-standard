@@ -38,6 +38,14 @@ index.
 
 | D-21 | Nothing checks that the schema can express what the prose requires. `docs/` and `wiki/` state field contents that the corresponding schema may forbid, and no check compares them. D-20 is one instance and was invisible for ten releases | absence — no check compares documented field contents against schema constraints | Open |
 
+| D-24 | Deleting `codelists/submissionStatus.csv` under IAR-0003 made `concert.foundation/signet/v0.1/codelists/submissionStatus.csv` return 404 — a published `$id`-space URL, proxied from `main` with no cache and no fallback. IAR-0003 asserted the file had no consumer; two existed in `concert-website` and neither was recorded here, so the claim was unfalsifiable from inside this repository | `governance/IAR-0003-codelist-enforcement.md:89`, `codelists/submissionStatus.csv` | **Closed** — restored retired-but-resolvable; IAR-0003 corrected |
+
+| D-27 | The repository declares no public interface. Roughly eighty paths are consumed by an external build and five proxied at published `$id` URLs, with no manifest and no check that a declared path resolves. A claim that a file has no consumer is therefore not testable from inside this repository | absence — no manifest, no check | Open |
+
+| D-28 | `codelists/*.csv` admits no comment or metadata line: the workflow lint and `readCodes()` both treat line 1 as the header, so the format cannot record that a file is retired, deprecated or non-authoritative. Disposition is carried only in `codelists/bindings.json`, which a direct consumer of the CSV never sees | `.github/workflows/validate.yml` CSV header lint, `conformance/rules/check-codelists.js` | Open |
+
+| D-29 | `governance/IAR-0005` was merged before its stated fourteen-day comment period elapsed, to restore a published `$id`-space URL returning 404. `GOVERNANCE.md` requires the period before merge for every Tier 2 change and names no urgency exception; the `WITHDRAWAL-2026-08.md` carve-out is an exception to the proposal moratorium and itself requires a stated period. So this is a departure, not an exemption. Recorded per `GOVERNANCE.md:67`. The underlying gap: the process has no route for an urgent correction, so every one becomes a recorded departure | `governance/IAR-0005-published-url-restoration.md`, `GOVERNANCE.md` | Open — closes when `GOVERNANCE.md` gains a carve-out for a defect actively causing harm, adopted under its own Tier 2 route |
+
 ## Provenance of D-9 to D-13
 
 Raised by implementer enquiry, verified against v0.15.0 before recording. Recording a defect is
