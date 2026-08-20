@@ -1,0 +1,163 @@
+{
+  "$comment": "SIGNET transition registry. Non-normative at publication; the states it references are normative in schema/. See docs/state-model.md. Generated codes are checked against codelists/ by conformance/rules/check-state-model.js.",
+  "version": "0.1.0",
+  "basisSources": {
+    "ocds-tender": "OCDS 1.1 tender.status codelist",
+    "ocds-bid": "OCDS 1.1 bid statistics / bid extension status codelist",
+    "ocds-milestone": "OCDS 1.1 milestone.status codelist",
+    "ocds-stage": "OCDS 1.1 release stage model (planning / tender / award / contract / implementation)",
+    "pa2023": "UK Procurement Act 2023 — competitive flexible procedure and exclusion grounds",
+    "en16931": "EN 16931 semantic model / UBL 2.3 document lifecycles",
+    "epo": "EU eProcurement Ontology",
+    "ext-auction": "docs/extensions/auction.md — normative operator-independent close",
+    "inherited": "Present in schema/ before this registry; no external source identified. Flagged for review; MUST NOT be used for new core entries."
+  },
+  "objects": [
+    {
+      "object": "SourcingEvent",
+      "schema": "schema/sourcing-event.schema.json",
+      "layer": "core",
+      "lifecycle": true,
+      "stateField": "status",
+      "states": {
+        "planned":    { "terminal": false, "appendable": "any" },
+        "active":     { "terminal": false, "appendable": "any" },
+        "evaluating": { "terminal": false, "appendable": "any" },
+        "complete":   { "terminal": true,  "appendable": "annotation", "class": "completion" },
+        "cancelled":  { "terminal": true,  "appendable": "annotation", "class": "abandonment" },
+        "withdrawn":  { "terminal": true,  "appendable": "annotation", "class": "abandonment" }
+      },
+      "entries": [
+        { "kind": "creation",   "id": "sourcingEvent.create",           "to": "planned",    "eventType": "sourcingEvent.planned",   "basis": "ocds-stage" },
+        { "kind": "transition", "id": "sourcingEvent.publish",          "from": ["planned"], "to": "active",     "eventType": "sourcingEvent.published", "basis": "ocds-tender" },
+        { "kind": "transition", "id": "sourcingEvent.closeSubmissions", "from": ["active"], "to": "evaluating", "eventType": "sourcingEvent.closed",    "basis": "pa2023" },
+        { "kind": "transition", "id": "sourcingEvent.complete",         "from": ["evaluating"], "to": "complete", "eventType": "sourcingEvent.completed", "basis": "ocds-tender" },
+        { "kind": "transition", "id": "sourcingEvent.cancel",           "from": ["planned", "active", "evaluating"], "to": "cancelled", "eventType": "sourcingEvent.cancelled", "basis": "ocds-tender" },
+        { "kind": "transition", "id": "sourcingEvent.withdraw",         "from": ["planned", "active"], "to": "withdrawn", "eventType": "sourcingEvent.withdrawn", "basis": "ocds-tender" }
+      ]
+    },
+    {
+      "object": "Submission",
+      "schema": "schema/submission.schema.json",
+      "layer": "core",
+      "lifecycle": true,
+      "stateField": "status",
+      "states": {
+        "draft":        { "terminal": false, "appendable": "any" },
+        "submitted":    { "terminal": false, "appendable": "any" },
+        "admissible":   { "terminal": false, "appendable": "any" },
+        "inadmissible": { "terminal": true,  "appendable": "annotation", "class": "abandonment" },
+        "withdrawn":    { "terminal": true,  "appendable": "annotation", "class": "abandonment" }
+      },
+      "entries": [
+        { "kind": "creation",   "id": "submission.create",   "to": "draft", "eventType": "submission.created", "basis": "ocds-bid" },
+        { "kind": "transition", "id": "submission.lodge",    "from": ["draft"], "to": "submitted", "eventType": "submission.lodged", "basis": "ocds-bid" },
+        { "kind": "transition", "id": "submission.admit",    "from": ["submitted"], "to": "admissible", "eventType": "submission.admitted", "basis": "ocds-bid", "decisionType": "admissibility" },
+        { "kind": "transition", "id": "submission.exclude",  "from": ["submitted"], "to": "inadmissible", "eventType": "submission.excluded", "basis": "pa2023", "decisionType": "admissibility" },
+        { "kind": "transition", "id": "submission.withdraw", "from": ["draft", "submitted", "admissible"], "to": "withdrawn", "eventType": "submission.withdrawn", "basis": "ocds-bid" }
+      ]
+    },
+    {
+      "object": "Obligation",
+      "schema": "schema/obligation.schema.json",
+      "layer": "core",
+      "lifecycle": true,
+      "stateField": "status",
+      "states": {
+        "pending":  { "terminal": false, "appendable": "any" },
+        "breached": { "terminal": false, "appendable": "any" },
+        "met":      { "terminal": true,  "appendable": "annotation", "class": "completion" },
+        "waived":   { "terminal": true,  "appendable": "annotation", "class": "abandonment" }
+      },
+      "entries": [
+        { "kind": "creation",   "id": "obligation.create", "to": "pending", "eventType": "obligation.created", "basis": "ocds-milestone" },
+        { "kind": "transition", "id": "obligation.discharge", "from": ["pending", "breached"], "to": "met", "eventType": "obligation.discharged", "basis": "ocds-milestone" },
+        { "kind": "transition", "id": "obligation.breach", "from": ["pending"], "to": "breached", "eventType": "obligation.breached", "basis": "ocds-milestone" },
+        { "kind": "transition", "id": "obligation.waive", "from": ["pending", "breached"], "to": "waived", "eventType": "obligation.waived", "basis": "inherited" }
+      ]
+    },
+    {
+      "object": "Auction",
+      "schema": "schema/auction.schema.json",
+      "layer": "extension",
+      "extension": "auction",
+      "lifecycle": true,
+      "stateField": "status",
+      "states": {
+        "scheduled":   { "terminal": false, "appendable": "any" },
+        "open":        { "terminal": false, "appendable": "any" },
+        "in_progress": { "terminal": false, "appendable": "any" },
+        "closed":      { "terminal": true,  "appendable": "annotation", "class": "completion" },
+        "cancelled":   { "terminal": true,  "appendable": "annotation", "class": "abandonment" }
+      },
+      "entries": [
+        { "kind": "creation",   "id": "auction.create", "to": "scheduled", "eventType": "auction.scheduled", "basis": "ext-auction" },
+        { "kind": "transition", "id": "auction.open",   "from": ["scheduled"], "to": "open", "eventType": "auction.opened", "basis": "ext-auction" },
+        { "kind": "transition", "id": "auction.start",  "from": ["open"], "to": "in_progress", "eventType": "auction.started", "basis": "ext-auction" },
+        { "kind": "transition", "id": "auction.close",  "from": ["open", "in_progress"], "to": "closed", "eventType": "auction.closed", "basis": "ext-auction" },
+        { "kind": "transition", "id": "auction.cancel", "from": ["scheduled", "open", "in_progress"], "to": "cancelled", "eventType": "auction.cancelled", "basis": "ext-auction" }
+      ]
+    },
+    {
+      "object": "Bid",
+      "schema": "schema/bid.schema.json",
+      "layer": "extension",
+      "extension": "auction",
+      "lifecycle": true,
+      "stateField": "status",
+      "$comment": "`superseded` removed from the state vocabulary — it is a relation to another Bid, not a state of this one, and is unprojectable. Expressed as the bid.superseded annotation entry below. See docs/state-model.md §5.",
+      "states": {
+        "active":    { "terminal": false, "appendable": "any" },
+        "withdrawn": { "terminal": true,  "appendable": "annotation", "class": "abandonment" },
+        "winning":   { "terminal": true,  "appendable": "annotation", "class": "completion" },
+        "rejected":  { "terminal": true,  "appendable": "annotation", "class": "abandonment" }
+      },
+      "entries": [
+        { "kind": "creation",   "id": "bid.place",    "to": "active", "eventType": "bid.placed", "basis": "ext-auction" },
+        { "kind": "transition", "id": "bid.withdraw", "from": ["active"], "to": "withdrawn", "eventType": "bid.withdrawn", "basis": "ext-auction" },
+        { "kind": "transition", "id": "bid.win",      "from": ["active"], "to": "winning", "eventType": "bid.won", "basis": "ext-auction", "decisionType": "award" },
+        { "kind": "transition", "id": "bid.reject",   "from": ["active"], "to": "rejected", "eventType": "bid.rejected", "basis": "ext-auction" },
+        { "kind": "annotation", "id": "bid.supersede", "permittedIn": ["active"], "eventType": "bid.superseded", "carries": "supersededBy", "basis": "ext-auction" }
+      ]
+    },
+    {
+      "object": "ExposurePosition",
+      "schema": "schema/exposure-position.schema.json",
+      "layer": "extension",
+      "extension": "commodity-risk",
+      "lifecycle": false,
+      "stateField": "positionStatus",
+      "rationale": "hedged | floating | markToMarket classifies what a position IS, not a stage it passes through. It fails the lifecycle test in docs/state-model.md §3: no party's permitted actions depend on it as a stage, and reconciliation arithmetic depends on it as a category. Declared non-lifecycle, not unmodelled."
+    },
+    {
+      "object": "OnboardingCase",
+      "schema": "schema/onboarding-case.schema.json",
+      "layer": "extension",
+      "extension": "onboarding",
+      "lifecycle": true,
+      "stateField": "status",
+      "modelled": false,
+      "rationale": "Lifecycle-bearing and not yet modelled. Edges require a basis from the extension's own spec and from the qualification lifecycle it feeds; to be supplied with the onboarding extension rather than inferred here."
+    },
+    {
+      "object": "SupplierQualification",
+      "schema": "schema/supplier-qualification.schema.json",
+      "layer": "extension",
+      "extension": "onboarding",
+      "lifecycle": true,
+      "stateField": "status",
+      "modelled": false,
+      "rationale": "As OnboardingCase. `conditional` is a first-class qualification state with value caps and category restrictions; its edges interact with the conditions array and need the extension maintainer's basis."
+    },
+    {
+      "object": "HedgeProposal",
+      "schema": "schema/hedge-proposal.schema.json",
+      "layer": "extension",
+      "extension": "commodity-risk",
+      "lifecycle": true,
+      "stateField": "status",
+      "modelled": false,
+      "rationale": "Lifecycle-bearing and not yet modelled. `approved` / `rejected` are outcome-valued and admissible under docs/state-model.md §5, but their edges depend on the escalation-first rule ordering the extension already specifies."
+    }
+  ]
+}

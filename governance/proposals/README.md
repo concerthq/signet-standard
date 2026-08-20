@@ -5,19 +5,26 @@ closes it, records what was rejected and why, and resolves its own open gates. A
 until balloted**. Nothing here has been balloted, because no Standards Committee is constituted
 (see the [bootstrap clause](../README.md#the-bootstrap-clause)).
 
+> **The seven proposals of the v1.0 train are parked, not rejected.** See
+> [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md). Their **findings** are kept as a defect
+> register; their **remedies** are parked. **No further proposals are registered until the
+> Standards Committee is constituted**, with one carve-out: a defect actively causing harm
+> may be corrected under the bootstrap clause, with an interim approval record, a stated
+> comment period, and the smallest Tier 2 surface that fixes it.
+
 | CP | Problem it closes | Breaking | Gates v1.0? | Status |
 |----|-------------------|----------|-------------|--------|
 | [CP-Grant-lifecycle](CP-Grant-lifecycle.md) | Withdrawal of a grant has no interoperable representation | No | **Yes** | Draft; mechanism landed ahead of ballot |
 | [CP-Mandate-enforcement](CP-Mandate-enforcement.md) | Mandate limits are cited, never enforced (`E-MDT`) | Agent adapter only | No | Draft; checks implemented, non-gating |
 | [CP-Consent-revocation](CP-Consent-revocation.md) | Consent terms have no tested consequence (`E-CNS`) | Consent adapter only | No | Draft; checks implemented, non-gating |
 | [CP-Credential-semantics](CP-Credential-semantics.md) | `Credential` is underdetermined: pointer or embedding | Likely no | No | Draft |
-| [CP-Extension-Composition](CP-Extension-Composition.md) | `additionalProperties: false` makes the documented extension path unexecutable | Part 1 no; Part 2 yes | No | Draft; Part 1 proposed for the next v0.x minor |
-| [CP-Tenancy](CP-Tenancy.md) | Tenant, market and marketplace are absent from the model and carried implicitly by identifiers | **Yes** | No — but v1.0 or never | Draft; gates open |
-| [CP-Codelist-Enforcement](CP-Codelist-Enforcement.md) | Closed codelists are prose — no instance value is validated against one | For documents carrying a value outside a closed list | **If CP-Tenancy lands** | Draft; gates open |
-| [CP-EventType-Closure](CP-EventType-Closure.md) | `eventType` has 8 values for 18 objects and stops at `contract.signed`; the gap is filled by implementations minting codes that pass conformance | **Yes** | No — v1.0 or never | Draft; gates open |
-| [CP-Policy-Applicability](CP-Policy-Applicability.md) | Every gate is opt-in at instance level — a Policy that is never cited is never applied | Conformance only (`F-GATE`) | No | Draft; gates open |
-| [CP-Mandate-Scope](CP-Mandate-Scope.md) | `Mandate.scope` is required and unconstrained: `{}` satisfies it | **Yes** | No — v1.0 or never | Draft; gates open |
-| [CP-Process-Spine](CP-Process-Spine.md) | `SourcingEvent` has no link back to `Need` — the one break in the spine | No | No | Draft; gates open |
+| [CP-Extension-Composition](CP-Extension-Composition.md) | `additionalProperties: false` makes the documented extension path unexecutable | Part 1 no; Part 2 yes | No | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
+| [CP-Tenancy](CP-Tenancy.md) | Tenant, market and marketplace are absent from the model and carried implicitly by identifiers | **Yes** | No — but v1.0 or never | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
+| [CP-Codelist-Enforcement](CP-Codelist-Enforcement.md) | Closed codelists are prose — no instance value is validated against one | For documents carrying a value outside a closed list | **If CP-Tenancy lands** | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
+| [CP-EventType-Closure](CP-EventType-Closure.md) | `eventType` has 8 values for 18 objects and stops at `contract.signed`; the gap is filled by implementations minting codes that pass conformance | **Yes** | No — v1.0 or never | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
+| [CP-Policy-Applicability](CP-Policy-Applicability.md) | Every gate is opt-in at instance level — a Policy that is never cited is never applied | Conformance only (`F-GATE`) | No | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
+| [CP-Mandate-Scope](CP-Mandate-Scope.md) | `Mandate.scope` is required and unconstrained: `{}` satisfies it | **Yes** | No — v1.0 or never | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
+| [CP-Process-Spine](CP-Process-Spine.md) | `SourcingEvent` has no link back to `Need` — the one break in the spine | No | No | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
 | [CP-Amendments-Round-2](CP-Amendments-Round-2.md) | Revises CP-Tenancy and CP-Codelist-Enforcement; two gates dissolved | Inherited | No | Draft; **applied** to both |
 
 ## Delivery and dependencies

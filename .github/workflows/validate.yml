@@ -86,3 +86,6 @@ jobs:
 
       - name: Extension conformance rules (onboarding, auction, identity)
         run: npm run conformance:extensions
+
+      - name: State model — registry integrity, surface authority, and the basis rule
+        run: node conformance/rules/check-state-model.js .

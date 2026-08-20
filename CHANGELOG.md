@@ -6,6 +6,61 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Added — the state model: surface authority, a transition registry, and the basis rule
+
+Design principle §1.7 and `conformance/levels.md` GRT-1 both say the event stream is
+authoritative. Neither was executable: projecting a stream into a state needs a mapping from
+events to state changes, and no artifact published one. `Mandate` asserted a lifecycle it could
+record on no surface; `sourcingEvent.published` named a state the enum does not contain; nine
+objects carried a state field and one rule governed none of them.
+
+- **Surface authority stated generally** (`docs/state-model.md` §2). Current state is the
+  projection of the event stream. A stored state value is the serialising party's assertion as
+  at `provenance.generatedAt` and MUST equal the projection at that instant; between parties
+  holding the stream, the projection governs. This generalises GRT-1 from grant-type objects to
+  all objects, and supplies the rule whose absence was the stated reason status fields on
+  `Consent` were rejected. **No field is added to any object** — that rejection is closed out,
+  not reopened.
+- **Transition registry** (`state-model/state-model.json`). Three entry kinds — creation,
+  transition, annotation. Every state declares `terminal`, `appendable`, and a terminal `class`
+  of completion / abandonment / revocation. Event codes may serve several entries provided
+  their source sets are disjoint, which is what makes projection a function.
+- **Relations are not states; outcomes may be** (§5). `Bid.superseded` is a relation and cannot
+  be projected — removed from the enum and expressed as a `bid.superseded` annotation event
+  carrying `supersededBy`. `admissible`, `winning`, `approved` and `qualified` are outcomes of
+  Decisions, are projectable, and stand unchanged.
+- **The basis rule as a CI check** (`conformance/rules/check-state-model.js`). Every core entry
+  must name an external justification — OCDS status codelists, the Procurement Act 2023
+  procedures, UBL/EN 16931 lifecycles, ePO, or a named instrument. An edge justifiable only from
+  one implementer's workflow goes to a profile. This is the neutrality control, deliberately
+  automated rather than left to review: it runs on every push and is auditable after the fact.
+- **21 open codelist values** added to `codelists/eventType.csv`. `eventTypeCore.csv` is
+  untouched.
+- **A reachability defect fixed without a schema change.** A `Submission` ruled `admissible`
+  could not reach `withdrawn` under any reading of the enum. The registry permits the edge.
+
+Coverage is reported, not assumed: **five of eight** lifecycle-bearing objects are modelled.
+`OnboardingCase`, `SupplierQualification` and `HedgeProposal` are declared lifecycle-bearing and
+not yet modelled — their edges need a basis from the extension maintainers.
+`ExposurePosition.positionStatus` is declared **non-lifecycle**: it classifies what a position
+is, and reconciliation depends on it as a category.
+
+No conformance requirement is added. This is **modelled and specified, not certified**. An
+`F-STATE` requirement belongs at Full and is deferred.
+
+Four of the five artifacts are Tier 1. The one Tier 2 item — removing `superseded` from
+`Bid.status` — lands under the bootstrap clause per `governance/IAR-0002-state-model.md`, with a
+stated fourteen-day comment period. Landing does not ratify.
+
+### Changed — the v1.0 proposal train withdrawn; its findings kept
+
+The seven registered proposals are parked, not rejected, per
+`governance/WITHDRAWAL-2026-08.md`. Registration is Tier 1 and adoption is Tier 2, so a queue
+that costs one review to grow and a Committee to clear will grow without bound. Eight defects
+are extracted and recorded as facts about current artifacts; five are addressed by the change
+above, three stand open. No further proposals are registered until the Committee is constituted,
+except to correct a defect actively causing harm.
+
 ### Found — one of twelve normative changes carries an approving review
 
 An audit of every commit since v0.1.0 touching a Tier 2 path, at

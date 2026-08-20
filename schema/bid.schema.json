@@ -54,7 +54,6 @@
       "type": "string",
       "enum": [
         "active",
-        "superseded",
         "withdrawn",
         "winning",
         "rejected"
