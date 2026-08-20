@@ -56,6 +56,8 @@ index.
 
 | D-30 | The v0.16.0 CHANGELOG claimed closed-codelist enforcement landed. The manifest and checker landed; the generated enums are on the unopened IAR-0003 branch, so five closed codelists remain unenforced in schema and `{"procedure": "banana"}` validates on `main`. `check-codelist-binding.js` was not wired into `validate.yml`, so nothing surfaced the gap. A released record asserted an enforcement not in force. The same claim stood in `governance/defects.md` D-14, `governance/IAR-0003-codelist-enforcement.md` and `docs/state-model.md` | `CHANGELOG.md` v0.16.0, `codelists/bindings.json`, `.github/workflows/validate.yml` | Open — closes when IAR-0003 lands and the enums are generated |
 
+| D-31 | The v0.16.0 CHANGELOG states that promoting `state-model/state-model.json` to normative means the file gains `CODEOWNERS` protection. The generated lifecycle enums did land on `main`; the ownership entry did not. `/state-model/state-model.json` is absent from `.github/CODEOWNERS` on `main`, and present only on `v0.16-iar-0004-registry-normative`, which has not merged. A normative artifact is unprotected while a released entry says it is protected | `.github/CODEOWNERS`, `CHANGELOG.md` v0.16.0, `state-model/state-model.json` | Open — closes when the CODEOWNERS entry lands with IAR-0004 |
+
 ## Provenance of D-9 to D-13
 
 Raised by implementer enquiry, verified against v0.15.0 before recording. Recording a defect is
