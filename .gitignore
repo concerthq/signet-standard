@@ -17,3 +17,7 @@ conformance/reports/*-report.json
 !conformance/reports/broken-adapter-report.json
 !conformance/reports/reference-adapter-endorsement-report.json
 !conformance/reports/broken-adapter-endorsement-report.json
+
+# local plaintext naming deny-list — never committed
+.naming-denylist
+**/.naming-denylist
