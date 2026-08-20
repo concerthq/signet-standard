@@ -25,14 +25,6 @@
             "vat",
             "companies-house",
             "peppol"
-          ],
-          "enum": [
-            "did",
-            "gleif:lei",
-            "gs1:gln",
-            "vat",
-            "companies-house",
-            "peppol"
           ]
         },
         "id": {
