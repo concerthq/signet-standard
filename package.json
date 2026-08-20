@@ -1,7 +1,7 @@
 {
   "name": "signet-standard",
   "version": "0.16.0",
-  "description": "SIGNET Canonical Data Model \u2014 the normative open standard for governed procurement networks. Stewarded by Concert Foundation.",
+  "description": "SIGNET Canonical Data Model — the normative open standard for governed procurement networks. Stewarded by Concert Foundation.",
   "license": "CC0-1.0",
   "homepage": "https://concert.foundation/standard",
   "repository": {
@@ -19,6 +19,7 @@
     "conformance:codelists": "node conformance/rules/check-codelists.js",
     "lint:marks": "node tools/lint-mark-strings.js",
     "conformance:state-model": "node conformance/rules/check-state-model.js .",
+    "conformance:public-interface": "node conformance/rules/check-public-interface.js .",
     "conformance:commodity-risk": "node conformance/rules/check-commodity-risk.js",
     "conformance:extensions": "node conformance/rules/check-onboarding.js && node conformance/rules/check-auction.js && node conformance/rules/check-identity.js",
     "test:projection-skip": "node tools/test-projection-skip.js",

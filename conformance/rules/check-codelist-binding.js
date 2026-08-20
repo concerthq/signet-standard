@@ -82,7 +82,9 @@ for (const r of bindings.retired || []) {
 }
 
 if (WRITE) { console.log('\nRegenerated:'); fixed.forEach((f) => console.log('  ✎', f)); }
-if (notes.length) { console.log('\nDeferred:'); notes.forEach((n) => console.log('  ·', n)); }
+// `notes` carries both deferred bindings and retired-but-resolvable files; "Deferred" named
+// only the first, so a retained published URL read as a postponed binding.
+if (notes.length) { console.log('\nNotes:'); notes.forEach((n) => console.log('  ·', n)); }
 if (fail.length) {
   console.log('\nFailures:');
   fail.forEach((f) => console.log('  ✗', f));
