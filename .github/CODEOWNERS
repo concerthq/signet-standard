@@ -16,6 +16,7 @@
 # The open/closed split is additionally asserted in CI by
 # conformance/rules/check-codelists.js.
 /codelists/eventTypeCore.csv        @concertfoundation @concertcustodian
+/state-model/state-model.json        @concertfoundation @concertcustodian
 /governance/endorsement-register.md @concertfoundation @concertcustodian
 /governance/role-register.md        @concertfoundation @concertcustodian
 /governance/mark-grammar.md         @concertfoundation @concertcustodian

@@ -15,12 +15,14 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = process.argv[2] || process.cwd();
+const ROOT = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : process.cwd();
+const WRITE = process.argv.includes('--write');
 const p = (...a) => path.join(ROOT, ...a);
 
 const fail = [];
 const warn = [];
 const note = [];
+const written = [];
 const E = (code, msg) => fail.push(`[${code}] ${msg}`);
 const W = (code, msg) => warn.push(`[${code}] ${msg}`);
 
@@ -93,22 +95,32 @@ for (const o of model.objects) {
   const declared = Object.keys(o.states || {});
   const schemaEnum = statesFromSchema(o.schema, o.stateField);
 
-  // C1 — every registry state exists in the schema enum.
-  if (schemaEnum) {
-    for (const st of declared) {
-      if (!schemaEnum.includes(st)) E('C1', `${tag}.${st} is not in ${o.schema} ${o.stateField} enum`);
-    }
-    // C2 — every schema enum value is either a registry state or a known relation value.
-    for (const st of schemaEnum) {
-      if (declared.includes(st)) continue;
-      if (RELATION_VALUED.includes(st)) {
-        E('C2', `${tag}.${st} is a relation, not a state — remove from the schema enum and express as an annotation entry (§5)`);
+  // C1 — R-1 lint, applied to the REGISTRY. The registry is the record, so a relation-valued
+  // name must be caught where it is authored, not where it is generated.
+  for (const st of declared)
+    if (RELATION_VALUED.includes(st))
+      E('C1', `${tag}.${st} is a relation, not a state — express as an annotation entry (§5 R-1)`);
+
+  // C2 — GENERATION. schema enum ← registry states. Drift is a failure, not a negotiation.
+  // Only where the registry actually declares states: an unmodelled object's vocabulary is
+  // not ours to overwrite.
+  if (schemaEnum === null) {
+    W('C2', `${tag}: could not read ${o.stateField} from ${o.schema}`);
+  } else {
+    const same = schemaEnum.length === declared.length && schemaEnum.every((v, i) => v === declared[i]);
+    if (!same) {
+      if (WRITE) {
+        const file = p(o.schema);
+        const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
+        doc.properties[o.stateField].enum = declared.slice();
+        fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n');
+        written.push(`${o.schema} /properties/${o.stateField} ← registry (${declared.length} states)`);
       } else {
-        E('C2', `${tag}.${st} is in the schema enum but absent from the registry`);
+        const missing = declared.filter((x) => !schemaEnum.includes(x));
+        const extra = schemaEnum.filter((x) => !declared.includes(x));
+        E('C2', `${tag}: ${o.schema} ${o.stateField} has drifted from the registry — missing [${missing}] extra [${extra}]${!missing.length && !extra.length ? ' (order differs)' : ''}`);
       }
     }
-  } else {
-    W('C1', `${tag}: could not read ${o.stateField} enum from ${o.schema}`);
   }
 
   // C3 — state property hygiene.
@@ -171,6 +183,31 @@ for (const o of model.objects) {
     if (!allCodes.has(e.eventType)) E('C8', `${e.id}: eventType "${e.eventType}" is in no codelist`);
   }
 
+  // C11 — terminal reachability. Every lifecycle-bearing object must have at least one
+  // terminal state, and every non-terminal state must be able to reach one. Distinct from
+  // C9: C9 asks whether a state can be entered, C11 whether an object can end.
+  const terminals = declared.filter((st) => o.states[st].terminal);
+  if (terminals.length === 0) {
+    E('C11', `${tag}: no terminal state — the object can never end`);
+  } else {
+    const canEnd = new Set(terminals);
+    let g2 = true;
+    while (g2) {
+      g2 = false;
+      for (const t of transitions)
+        if (canEnd.has(t.to))
+          for (const f of t.from || [])
+            if (!canEnd.has(f)) { canEnd.add(f); g2 = true; }
+    }
+    for (const st of declared)
+      if (!canEnd.has(st)) E('C11', `${tag}.${st} cannot reach any terminal state`);
+  }
+
+  // C13 — an edge requiring recorded authority must name how it is evidenced.
+  for (const t of transitions)
+    if (t.requiresAuthority && !t.decisionType)
+      E('C13', `${t.id}: requiresAuthority with no decisionType — the authority is asserted, not recorded`);
+
   // C9 — reachability from creation.
   const reach = new Set([creations[0] && creations[0].to].filter(Boolean));
   let grew = true;
@@ -185,6 +222,50 @@ for (const o of model.objects) {
   for (const st of declared) if (!reach.has(st)) E('C9', `${tag}.${st} is unreachable from creation`);
 }
 
+// C12 — REGISTRY COMPLETENESS. docs/state-model.md L-2: every object is declared
+// lifecycle-bearing or not. Statelessness by omission is a defect; statelessness by
+// declaration is a decision with a rationale.
+try {
+  const schemaDir = p('schema');
+  const onDisk = fs.readdirSync(schemaDir).filter((f) => f.endsWith('.schema.json'));
+  const inRegistry = new Set(model.objects.map((o) => path.basename(o.schema)));
+  for (const f of onDisk)
+    if (!inRegistry.has(f)) E('C12', `schema/${f} has no declaration in the registry`);
+  for (const o of model.objects)
+    if (!onDisk.includes(path.basename(o.schema))) W('C12', `${o.object}: declared against ${o.schema}, which is not present`);
+} catch (e) {
+  W('C12', `could not enumerate schema/: ${e.message}`);
+}
+
+// C14 — BASIS SCOPE (B-3). Externality is not generality. A jurisdictional or sector
+// instrument justifies a profile entry; a core entry needs a source holding across the
+// jurisdictions core claims to serve.
+const SCOPE = model.basisScope || {};
+for (const o of model.objects) {
+  if (o.layer !== 'core') continue;
+  for (const e of o.entries || []) {
+    if (e.basisScope === 'jurisdictional' && !e.corroboratingBasis)
+      W('C14', `${e.id}: core entry on a jurisdictional basis ("${e.basis}") with no corroborating general source`);
+    if (e.basisScope === 'implementer')
+      E('C14', `${e.id}: core entry on an implementer basis — must move to a profile`);
+  }
+}
+
+// C15 — no schema location may be generated from two records. State vocabularies come from
+// the registry; closed codelists come from their CSV. An overlap would reintroduce the very
+// defect generation exists to remove.
+try {
+  const bindings = JSON.parse(fs.readFileSync(p('codelists', 'bindings.json'), 'utf8'));
+  const csvTargets = new Set((bindings.closed || []).filter((b) => b.schema).map((b) => `${b.schema}${b.pointer}`));
+  for (const o of model.objects) {
+    if (!o.lifecycle || o.modelled === false || !o.stateField) continue;
+    const t = `${o.schema}/properties/${o.stateField}`;
+    if (csvTargets.has(t)) E('C15', `${t} is generated from both the registry and a closed codelist`);
+  }
+} catch (e) {
+  W('C15', `could not read codelists/bindings.json: ${e.message}`);
+}
+
 // C10 — no orphan core event codes: every closed core code is registry-known or grant-lifecycle.
 const registryCodes = new Set();
 for (const o of model.objects) for (const e of o.entries || []) registryCodes.add(e.eventType);
@@ -196,6 +277,7 @@ for (const c of coreCodes) {
 
 // ---------------------------------------------------------------- report
 console.log(`\nSIGNET state-model check — ${modelled}/${lifecycleCount} lifecycle-bearing objects modelled\n`);
+if (WRITE && written.length) { console.log('Generated:'); written.forEach((w) => console.log('  ✎', w)); console.log(''); }
 for (const n of note) console.log('  ·', n);
 if (warn.length) {
   console.log('\nWarnings:');

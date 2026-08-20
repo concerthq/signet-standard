@@ -64,9 +64,9 @@
       "enum": [
         "draft",
         "submitted",
-        "withdrawn",
         "admissible",
-        "inadmissible"
+        "inadmissible",
+        "withdrawn"
       ]
     }
   }
