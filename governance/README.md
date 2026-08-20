@@ -21,7 +21,7 @@ Everything here is CC0-1.0.
 | [IAR-0002-state-model.md](IAR-0002-state-model.md) | Interim approval record — state model and the `Bid` correction | In force; comment period waived, departure recorded |
 | [IR-2026-08-prior-normative-changes.md](IR-2026-08-prior-normative-changes.md) | Interim resolution — the eleven normative changes predating the written rule | In force |
 | [WITHDRAWAL-2026-08.md](WITHDRAWAL-2026-08.md) | The v1.0 proposal train withdrawn to a parked state; eight defects kept | In force |
-| [site-alignment/](site-alignment/) | Drafted corrections for published copy outside this repository | Drafted, **not applied** |
+| [site-alignment/](site-alignment/) | Drafted corrections for published copy outside this repository | Superseded, **not applied** — see [OUTCOME.md](site-alignment/OUTCOME.md) |
 
 ## Status vocabulary
 

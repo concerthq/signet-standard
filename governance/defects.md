@@ -38,6 +38,10 @@ index.
 
 | D-21 | Nothing checks that the schema can express what the prose requires. `docs/` and `wiki/` state field contents that the corresponding schema may forbid, and no check compares them. D-20 is one instance and was invisible for ten releases | absence — no check compares documented field contents against schema constraints | Open |
 
+| D-22 | A drafted governance correction was superseded by other means and never closed out. Two records continued to describe it as unapplied. Nothing checks that a drafted correction is either applied or closed | `governance/site-alignment/`, `CHANGELOG.md`, `governance/README.md` | **Closed** — `OUTCOME.md` recorded; records corrected |
+
+| D-23 | The committed Pages artifact `_site/index.html` states version 0.10.0, five releases behind `package.json`. `pages.yml` rebuilds only when `docs/specification.md`, `tools/build-pages.js` or the workflow changes, so a release alone does not regenerate it. A derived artifact that nothing regenerates on the event that invalidates it | `_site/index.html`, `.github/workflows/pages.yml` | Open |
+
 | D-24 | Deleting `codelists/submissionStatus.csv` under IAR-0003 made `concert.foundation/signet/v0.1/codelists/submissionStatus.csv` return 404 — a published `$id`-space URL, proxied from `main` with no cache and no fallback. IAR-0003 asserted the file had no consumer; two existed in `concert-website` and neither was recorded here, so the claim was unfalsifiable from inside this repository | `governance/IAR-0003-codelist-enforcement.md:89`, `codelists/submissionStatus.csv` | **Closed** — restored retired-but-resolvable; IAR-0003 corrected |
 
 | D-27 | The repository declares no public interface. Roughly eighty paths are consumed by an external build and five proxied at published `$id` URLs, with no manifest and no check that a declared path resolves. A claim that a file has no consumer is therefore not testable from inside this repository | absence — no manifest, no check | Open |

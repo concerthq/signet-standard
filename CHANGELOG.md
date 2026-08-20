@@ -33,9 +33,11 @@ what preceded it.
   withdrawal, and the drafted site corrections, so the bootstrap-clause table is the single index
   it claims to be.
 
-Still outstanding, and outside this repository: `concert.foundation/governance` presents the
-Standards Committee as a currently operating body with a membership composition. The drafted
-correction is at `governance/site-alignment/`, unapplied.
+Closed out, and outside this repository: `concert.foundation/governance` no longer presents the
+Standards Committee as a currently operating body. The drafted correction at
+`governance/site-alignment/` was superseded before it was applied — the live page already said what
+it proposed. The outcome is recorded at `governance/site-alignment/OUTCOME.md`. Three claims the
+draft did not examine are addressed in `concerthq/concert-website`.
 
 ## [0.15.0] — 2026-08-20 — Working Draft
 
@@ -157,6 +159,9 @@ interim resolutions are in force precisely because none is. A draft correction f
 recorded at `governance/site-alignment/`, **not applied** — the page is outside this
 repository. This is the same class of defect the claim triad exists to catch: a body that is
 designed being described as one that is operating.
+
+*Superseded. The drafted correction was overtaken before it was applied; the live page already
+stated what it proposed. Recorded at [`governance/site-alignment/OUTCOME.md`](governance/site-alignment/OUTCOME.md).*
 
 
 ## [0.14.0] — 2026-08-20 — Working Draft
