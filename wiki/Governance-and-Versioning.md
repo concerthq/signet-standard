@@ -25,8 +25,13 @@ The single most important governance distinction:
 
 | Tier | What | How it changes |
 |------|------|----------------|
-| **Normative** | `schema/`, **closed** codelists, and `conformance/levels.md` + the conformance `suite/` + `report-schema.json` | Only through the **Standards Committee revision process**, with a published comment period. |
-| **Non-normative** | `docs/`, `examples/`, **open** codelist values, mapping notes, the conformance `adapter/` reference code, this wiki | May be updated **freely** by pull request. |
+| **Normative** | `schema/`, **closed** codelists, and `conformance/levels.md` + the conformance `suite/` + `report-schema.json` | A **recorded resolution**, a stated **comment period of at least 14 calendar days**, and one approving review. |
+| **Non-normative** | `docs/`, `examples/`, **open** codelist values, mapping notes, the conformance `adapter/` reference code, this wiki | One approving review, no comment period. |
+
+Every change of either class arrives **by pull request**; direct commits to `main` are not a
+permitted route. **No Standards Committee is constituted** — until one is, decisions that would
+fall to it are taken under the [bootstrap clause](https://github.com/concerthq/signet-standard/blob/main/governance/README.md#the-bootstrap-clause)
+and recorded as interim resolutions.
 
 > **The schema takes precedence** over the prose if they ever conflict. See
 > [Validation & Conformance → Precedence](Validation-and-Conformance#precedence).
@@ -77,9 +82,18 @@ level definitions are illustrative of the model's shape and not yet frozen.
 
 ## Change control
 
-> As a normative artifact, the **core model changes only through the formal revision process
-> governed by the Standards Committee, with a published comment period.** Non-normative
-> material may be updated freely (specification §12.2).
+> As a normative artifact, the **core model changes only through the formal revision process**,
+> which requires a recorded resolution, a stated comment period of at least fourteen calendar
+> days, and an approving review. Non-normative material may be updated under a single approving
+> review with no comment period (specification §12.2).
+
+**This took effect on 20 August 2026.** Changes merged before that date followed prior practice,
+which had no written rule: of the twelve normative changes made between v0.1.0 and that date, one
+carries an approving review and **none carried a comment period**. That is recorded in
+[the approval audit](https://github.com/concerthq/signet-standard/blob/main/governance/reviews/2026-08-normative-approval-audit.md)
+rather than left for a reader to discover from the commit history. Nothing merged is thereby
+wrong — every change passed CI — but the repository could not, before that date, show the process
+its own specification described.
 
 To propose a change, see [Contributing](Contributing). For adding (rather than changing)
 structure, see [Extensions](Extensions).

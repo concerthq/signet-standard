@@ -1,5 +1,14 @@
 # Concert Foundation — Standards Committee Record of Resubmission Review
 
+> **Note added 20 August 2026.** No Standards Committee was constituted when this decision was
+> taken, and none is constituted now. The review was carried out under the bootstrap clause in
+> [`governance/README.md`](../README.md#the-bootstrap-clause), and its outcome has the standing
+> of an **interim resolution**: in force, reasoned in writing, and ratifiable, amendable or
+> reversible by the Committee once it exists. The closing line "Recorded for the Standards
+> Committee" is accurate — it was recorded *for* the Committee to consider, not *by* it. This
+> note is added because the title reads as though a constituted body performed the review. The
+> title is left as written rather than changed after the fact.
+
 **Subject:** `commodity-risk` extension v0.1 — resubmission review and merge
 **Reference:** first review, `governance/reviews/2026-07-commodity-risk.md`
 **Date:** 5 July 2026 · **Outcome:** **Merged as Working Draft**

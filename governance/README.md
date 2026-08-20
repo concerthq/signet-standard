@@ -18,6 +18,10 @@ Everything here is CC0-1.0.
 | [person-assessment.md](person-assessment.md) | Non-normative | Working Draft |
 | [proposals/](proposals/) | Change proposals against the CDM, the suite, and the codelists | See the [proposals index](proposals/README.md) |
 | [reviews/](reviews/) | Point-in-time reviews of merged work | — |
+| [IAR-0002-state-model.md](IAR-0002-state-model.md) | Interim approval record — state model and the `Bid` correction | In force; comment period waived, departure recorded |
+| [IR-2026-08-prior-normative-changes.md](IR-2026-08-prior-normative-changes.md) | Interim resolution — the eleven normative changes predating the written rule | In force |
+| [WITHDRAWAL-2026-08.md](WITHDRAWAL-2026-08.md) | The v1.0 proposal train withdrawn to a parked state; eight defects kept | In force |
+| [site-alignment/](site-alignment/) | Drafted corrections for published copy outside this repository | Drafted, **not applied** |
 
 ## Status vocabulary
 
@@ -47,6 +51,8 @@ Twenty interim resolutions are currently in force, across four documents:
 | [proposals/CP-Consent-revocation.md](proposals/CP-Consent-revocation.md) §9 | R-G1–R-G2 — `purpose`, scope limit |
 | [proposals/CP-Grant-lifecycle.md](proposals/CP-Grant-lifecycle.md) §9 | R-G1–R-G3 — closure mechanism, `*.expired` dropped, defined term normative |
 | [role-competency-framework.md](role-competency-framework.md) §8 | R-G1–R-G4 — issuance split, close F1/F2, role rename, normative status split |
+| [IR-2026-08-prior-normative-changes.md](IR-2026-08-prior-normative-changes.md) | R1–R5 — the eleven prior normative changes stand, recorded as predating the rule rather than as having satisfied it |
+| [IAR-0002-state-model.md](IAR-0002-state-model.md) | The `Bid.status` correction, and the recorded waiver of its comment period |
 
 ## The claim triad
 

@@ -1,5 +1,14 @@
 # Concert Foundation — Standards Committee Review Memo
 
+> **Note added 20 August 2026.** No Standards Committee was constituted when this review was
+> taken, and none is constituted now. The review was carried out under the bootstrap clause in
+> [`governance/README.md`](../README.md#the-bootstrap-clause), and its outcome has the standing
+> of an **interim resolution**: in force, reasoned in writing, and ratifiable, amendable or
+> reversible by the Committee once it exists. The closing line "Recorded for the Standards
+> Committee" is accurate — it was recorded *for* the Committee to consider, not *by* it. This
+> note is added because the title reads as though a constituted body performed the review. The
+> title is left as written rather than changed after the fact.
+
 **Subject:** Extension proposal `energy-hedging` v0.1 (submitted) → accepted in
 principle as **`commodity-risk`**
 **Status:** Accepted in principle, subject to required changes · Working Draft track
