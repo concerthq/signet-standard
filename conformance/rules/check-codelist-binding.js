@@ -21,6 +21,7 @@ const p = (...a) => path.join(ROOT, ...a);
 
 const fail = [];
 const fixed = [];
+const notes = [];
 
 const bindings = JSON.parse(fs.readFileSync(p('codelists', 'bindings.json'), 'utf8'));
 
@@ -59,6 +60,12 @@ for (const b of bindings.closed) {
   }
 }
 
+// A deferred binding is declared and deliberately not enforced. It is neither generated nor
+// failed on, only reported — so a codelist that is closed on paper and unenforced in schema
+// stays visible rather than reading as an omission.
+for (const d of bindings.deferred || [])
+  notes.push(`${d.codelist}: binding deferred pending ${d.defect} — declared closed, not enforced in schema`);
+
 // A retired codelist must actually be gone. A file left behind after a deletion decision
 // is the same defect the decision closed.
 for (const r of bindings.retired || []) {
@@ -67,6 +74,7 @@ for (const r of bindings.retired || []) {
 }
 
 if (WRITE) { console.log('\nRegenerated:'); fixed.forEach((f) => console.log('  ✎', f)); }
+if (notes.length) { console.log('\nDeferred:'); notes.forEach((n) => console.log('  ·', n)); }
 if (fail.length) {
   console.log('\nFailures:');
   fail.forEach((f) => console.log('  ✗', f));

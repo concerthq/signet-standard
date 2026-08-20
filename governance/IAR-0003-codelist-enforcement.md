@@ -45,6 +45,31 @@ rather than creating a new one. No implementation has been certified.
 **Migration.** Run `--write`, then validate the existing corpus. Any document that now fails was
 already violating the standard.
 
+## Descoped after drafting: `identifierScheme` deferred (D-20)
+
+This record was drafted to enforce six closed codelists. It delivers **five**:
+`procedure`, `decisionType`, `partyRole`, `documentType` and `positionStatus`.
+`identifierScheme` is **deferred**, and this record is narrower than drafted as a result.
+
+Generating the enum on `Identifier.scheme` closes the property to six codes — `did`,
+`gleif:lei`, `gs1:gln`, `vat`, `companies-house`, `peppol` — every one of which names a legal
+entity, a location or a network participant. `docs/specification.md` §6.4 documents
+`Decision.inputs` as holding *"The objects considered (submissions, credentials, policies)"*,
+and `Provenance.derivedFrom` as holding source objects. There is no code under which a
+credential can be named. Enforcing the enum therefore makes a documented specification
+requirement unsatisfiable: a conformant document could not record what §6.4 says a `Decision`
+records.
+
+That is a CDM question — whether `Identifier` is the right type for a non-entity reference, or
+whether the codelist is missing a namespace, or whether the prose overreaches. It is recorded as
+**D-20** and is outside the scope of this record, which corrects an enforcement defect and
+decides no modelling question. Resolving it needs its own record and its own comment period.
+
+The binding is kept in `codelists/bindings.json` under `deferred`, with the defect id and the
+reason, and `check-codelist-binding.js` reports it on every run. It is recorded rather than
+omitted so that a codelist closed on paper and unenforced in schema stays visible instead of
+reading as an oversight.
+
 ## Not included
 
 `eventTypeCore.csv` is not enum-injected. No single property binds it — `Event.eventType` admits
