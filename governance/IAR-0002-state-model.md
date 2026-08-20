@@ -63,6 +63,28 @@ appended event records that its provenance is retrospective rather than fabricat
 GOVERNANCE.md Tier 2, recorded in the pull request. The comment period runs even though the
 resolution is interim; the bootstrap clause substitutes for the Committee, not for the period.
 
+**Comment period waived — recorded departure.** The period opened on 20 August 2026 in pull
+request #29 and would have closed on 3 September 2026. The change was merged on **20 August
+2026**, on day zero, by explicit decision of the repository owner, who was advised of the
+period and elected to proceed.
+
+This is a **departure from GOVERNANCE.md Tier 2**, not an interpretation of it. The rule
+requires a stated comment period of at least fourteen calendar days and requires the dates and
+any comments received to be recorded before merge. The dates are recorded here; no comments
+were received, because there was no interval in which to receive any.
+
+It is written down for the same reason
+[`governance/reviews/2026-08-normative-approval-audit.md`](reviews/2026-08-normative-approval-audit.md)
+was written down. That audit found that eleven of twelve prior normative changes carried no
+approval record and that none carried a comment period, and it observed that the discrepancy
+between what the repository claims about itself and what it can show is better found here than
+elsewhere. An undocumented early merge of the first Tier 2 change under the new rule would
+reproduce exactly that discrepancy, one week after the rule was published.
+
+The change itself stands on its merits and is unaffected by this note. What is affected is any
+claim that it followed the process in full; it did not, and the Standards Committee should read
+it on that basis.
+
 ## What is deliberately not included
 
 - **No new field on any object.** The remedy for `Mandate`'s unrecordable lifecycle is the

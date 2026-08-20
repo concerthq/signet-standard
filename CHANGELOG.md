@@ -6,6 +6,8 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+## [0.15.0] — 2026-08-20 — Working Draft
+
 ### Added — the state model: surface authority, a transition registry, and the basis rule
 
 Design principle §1.7 and `conformance/levels.md` GRT-1 both say the event stream is
@@ -49,8 +51,16 @@ No conformance requirement is added. This is **modelled and specified, not certi
 `F-STATE` requirement belongs at Full and is deferred.
 
 Four of the five artifacts are Tier 1. The one Tier 2 item — removing `superseded` from
-`Bid.status` — lands under the bootstrap clause per `governance/IAR-0002-state-model.md`, with a
-stated fourteen-day comment period. Landing does not ratify.
+`Bid.status` — lands under the bootstrap clause per `governance/IAR-0002-state-model.md`.
+Landing does not ratify.
+
+**The fourteen-day comment period was waived.** It opened on 20 August 2026 and would have
+closed on 3 September; the change was merged on 20 August by explicit decision of the repository
+owner. This is a recorded **departure** from GOVERNANCE.md Tier 2, not an interpretation of it,
+and it is written into `governance/IAR-0002-state-model.md` rather than left to be inferred from
+the merge dates. No comments were received, because there was no interval in which to receive
+any. The change stands on its merits; what does not stand is any claim that it followed the
+process in full.
 
 ### Changed — the v1.0 proposal train withdrawn; its findings kept
 
