@@ -32,7 +32,14 @@
     },
     "decisionType": {
       "type": "string",
-      "description": "See codelists/decisionType.csv."
+      "description": "See codelists/decisionType.csv.",
+      "enum": [
+        "admissibility",
+        "evaluation",
+        "award",
+        "negotiationMove",
+        "qualification"
+      ]
     },
     "madeBy": {
       "$ref": "definitions.schema.json#/definitions/Identifier"

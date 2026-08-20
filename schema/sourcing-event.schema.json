@@ -37,7 +37,14 @@
     },
     "procedure": {
       "type": "string",
-      "description": "See codelists/procedure.csv."
+      "description": "See codelists/procedure.csv.",
+      "enum": [
+        "open",
+        "restricted",
+        "competitiveFlexible",
+        "directAward",
+        "frameworkCallOff"
+      ]
     },
     "status": {
       "type": "string",

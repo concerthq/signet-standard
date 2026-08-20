@@ -25,6 +25,14 @@
             "vat",
             "companies-house",
             "peppol"
+          ],
+          "enum": [
+            "did",
+            "gleif:lei",
+            "gs1:gln",
+            "vat",
+            "companies-house",
+            "peppol"
           ]
         },
         "id": {
@@ -222,7 +230,14 @@
         },
         "documentType": {
           "type": "string",
-          "description": "Coded type. See codelists/documentType.csv."
+          "description": "Coded type. See codelists/documentType.csv.",
+          "enum": [
+            "tenderNotice",
+            "evaluationCriteria",
+            "specification",
+            "signedContract",
+            "evidence"
+          ]
         },
         "title": {
           "type": "string"
