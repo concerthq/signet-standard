@@ -31,6 +31,13 @@ The single most important governance distinction:
 > **The schema takes precedence** over the prose if they ever conflict. See
 > [Validation & Conformance → Precedence](Validation-and-Conformance#precedence).
 
+**How a change in either tier is actually reviewed and adopted** — the two review tiers, the
+approval each requires, the comment period on normative changes, and the interim arrangement
+standing in for a Standards Committee that is **not yet constituted** — is recorded in
+[`GOVERNANCE.md`](https://github.com/concerthq/signet-standard/blob/main/GOVERNANCE.md) at the
+repository root. This page defines the tiers; that document says what happens to a change in
+each of them.
+
 ## Semantic versioning
 
 The CDM uses [Semantic Versioning](https://semver.org/):
