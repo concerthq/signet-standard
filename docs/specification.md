@@ -567,7 +567,7 @@ The CDM is extensible without forking, following the OCDS extension pattern.
 
 **12.1** The CDM uses semantic versioning. The major version changes only on a breaking change to the core model; minor versions add backward-compatible structure; patch versions clarify without changing meaning.
 
-**12.2** As a normative artifact, the core model changes only through the formal revision process governed by the Standards Committee, with a published comment period. Non-normative material (examples, guidance, mapping notes) MAY be updated freely, consistent with the normative/non-normative distinction in the governance model.
+**12.2** As a normative artifact, the core model changes only through the formal revision process, which requires a recorded resolution, a stated comment period of at least fourteen calendar days, and an approving review. Non-normative material (examples, guidance, mapping notes) MAY be updated under a single approving review with no comment period, consistent with the normative/non-normative distinction in the governance model. The process is recorded in `GOVERNANCE.md` and took effect on 20 August 2026; changes merged before that date followed prior practice, and `governance/reviews/2026-08-normative-approval-audit.md` records what that practice was. **No Standards Committee is constituted**: until one is, decisions that would fall to it are taken under the bootstrap clause in `governance/README.md` and recorded as interim resolutions.
 
 **12.3** Every published version is permanently retrievable at a version-stable URI. Implementations declare the CDM version they target.
 
