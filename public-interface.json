@@ -1,0 +1,567 @@
+{
+  "$comment": "The public interface of this repository: what something outside it depends on, and how.\n\nIAR-0003 stated that codelists/submissionStatus.csv had no consumer. Two existed in\nconcert-website and neither was recorded here, so the claim was unfalsifiable from inside\nthis repository. That is the defect this file closes (D-27). A claim that a path has no\nconsumer is now testable: it is absent from this manifest, or it is not true.\n\npublished — served at https://concert.foundation/signet/v0.1/ through the five rewrites in\nconcert-website next.config.mjs. Deleting or renaming one breaks a resolvable $id URL. That\nis what happened when submissionStatus.csv was deleted: HTTP 404 on a published URL.\n\nconsumed — fetched by the site build but not published at a stable URL. Deleting one breaks\nthe build; it does not break a published URL.\n\nSCOPE NOTE — the conformance rewrite is /signet/v0.1/conformance/:file(.*), so it serves the\nWHOLE conformance/ subtree, CI scripts included: /signet/v0.1/conformance/rules/check-naming.js\nreturns 200 today. Only the published artifacts are declared here. The rewrite is broader than\nthe interface, and this file declares the interface, not the rewrite. Narrowing the rewrite is\na change to concert-website and is not made here.",
+  "idBase": "https://concert.foundation/signet/v0.1",
+  "source": "Enumerated from concert-website at the v0.16.0 pin: every build-time fetch in scripts/generate-standard.mjs, classified against the five rewrites in next.config.mjs.",
+  "entries": [
+    {
+      "path": "schema/context.jsonld",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/context.jsonld (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/approval.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/approval.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/auction.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/auction.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/award.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/award.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/bid.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/bid.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/catalogue.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/catalogue.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/consent.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/consent.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/contract.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/contract.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/coverage-assessment.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/coverage-assessment.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/coverage-policy.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/coverage-policy.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/decision.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/decision.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/definitions.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/definitions.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/evaluation.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/evaluation.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/event.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/event.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/exposure-position.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/exposure-position.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/hedge-proposal.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/hedge-proposal.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/invoice.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/invoice.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/mandate.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/mandate.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/need.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/need.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/obligation.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/obligation.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/onboarding-case.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/onboarding-case.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/order.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/order.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/party.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/party.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/policy.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/policy.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/price-mark.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/price-mark.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/scenario.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/scenario.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/sourcing-event.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/sourcing-event.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/submission.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/submission.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/supplier-qualification.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/supplier-qualification.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "schema/synthetic-agent.schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/synthetic-agent.schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/auctionType.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/auctionType.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/commodity.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/commodity.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/credentialType.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/credentialType.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/decisionType.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/decisionType.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/deliveryBasis.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/deliveryBasis.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/documentType.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/documentType.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/eventType.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/eventType.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/eventTypeCore.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/eventTypeCore.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/executionRoute.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/executionRoute.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/identifierScheme.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/identifierScheme.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/instrument.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/instrument.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/invoiceTypeCode.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/invoiceTypeCode.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/markType.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/markType.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/partyRole.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/partyRole.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/policyEvaluationStatus.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/policyEvaluationStatus.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/policyType.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/policyType.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/portfolioScope.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/portfolioScope.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/positionStatus.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/positionStatus.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/procedure.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/procedure.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/proposalTrigger.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/proposalTrigger.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/shockBand.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/shockBand.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/submissionStatus.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/submissionStatus.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "codelists/vatCategory.csv",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/codelists/vatCategory.csv (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/approval.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/approval.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/auction-reverse.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/auction-reverse.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/award-decision.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/award-decision.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/bid-reverse.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/bid-reverse.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/assessment-below.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/assessment-below.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/assessment-within.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/assessment-within.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/coverage-policy.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/coverage-policy.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/hedge-proposal.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/hedge-proposal.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/position-floating-t2.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/position-floating-t2.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/position-floating.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/position-floating.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/position-hedged.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/position-hedged.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/position-mtm.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/position-mtm.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/position-tranche.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/position-tranche.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/price-mark.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/price-mark.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/commodity-risk/scenario.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/commodity-risk/scenario.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/contract.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/contract.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/invoice.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/invoice.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/invoice.settles.fixture.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/invoice.settles.fixture.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/invoice.ubl.xml",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/invoice.ubl.xml (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/need.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/need.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/obligation.discharged.fixture.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/obligation.discharged.fixture.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/obligation.pending.fixture.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/obligation.pending.fixture.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/onboarding-conditional.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/onboarding-conditional.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/policy-evaluation.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/policy-evaluation.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/sourcing-event.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/sourcing-event.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "examples/supplier-qualification-conditional.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/examples/supplier-qualification-conditional.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "conformance/report-schema.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/report-schema.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "conformance/levels.md",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/levels.md (next.config.mjs rewrite)"
+    },
+    {
+      "path": "conformance/certification.md",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/certification.md (next.config.mjs rewrite)"
+    },
+    {
+      "path": "conformance/reports/reference-adapter-report.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/reports/reference-adapter-report.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "conformance/reports/broken-adapter-report.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/reports/broken-adapter-report.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "conformance/runner/lib.js",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/runner/lib.js (next.config.mjs rewrite)"
+    },
+    {
+      "path": "conformance/suite/document-conformance.json",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/suite/document-conformance.json (next.config.mjs rewrite)"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "CLA-CORPORATE.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "CLA.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "agent/agent-card.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "agent/agent-runtime.js",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "agent/assessment-inputs.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "agent/mandate.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "agent/reasoner.js",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "agent/submissions/submission-a.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "agent/submissions/submission-b.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "auction/auction-runtime.js",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "auction/auction.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "auction/bidders.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "auction/reasoner.js",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "docs/extensions/README.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "docs/specification.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "governance/endorsement-register.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "governance/mark-grammar.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "governance/role-register.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "onboarding/agent-card.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "onboarding/mandate.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "onboarding/onboarding-runtime.js",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "onboarding/policy-onboarding.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "onboarding/presented-credentials.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "onboarding/reasoner.js",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
+      "path": "package.json",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    }
+  ]
+}
