@@ -6,6 +6,45 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+## [0.16.0] — 2026-08-20 — Working Draft
+
+### Changed — implementer review of v0.15.0, and three defects it found in four-day-old artifacts
+
+A twenty-one question enquiry from a deploying implementer, answered at
+`governance/RESPONSE-2026-08-implementer-enquiry.md`. Corrections landed before the response was written,
+so the response describes the repository rather than promising it.
+
+**`docs/state-model.md` §2a — CDM `status` is market-facing (normative).** A core state vocabulary
+describes what a counterparty can observe, not a party's internal governance. This is not a new
+decision: every core edge must be justified from OCDS, the Procurement Act procedures, UBL /
+EN 16931 or ePO, and none of those models a buyer's internal review, so an internal-governance
+edge could never satisfy B-1. Core status has been market-facing by construction since the basis
+rule landed. Internal workflow goes to a namespaced profile with a declared `coreEquivalent`;
+extending a core vocabulary to carry it is forbidden.
+
+**§6 B-3 — externality is not generality.** B-1 asked only whether a basis was external to the
+implementer. A national procurement act or a sector security regulation passes that and still
+should not oblige every implementer in every market. Each basis now carries a scope — `general`,
+`jurisdictional`, `implementer` — and only `general` justifies a core entry alone. When the check
+was first run it flagged **two core edges in this repository's own registry**; both were
+corroborated against a general source rather than the check being relaxed. (D-16)
+
+**§5 R-3 — derived predicates.** A condition computable from *another* object is neither a state
+nor an annotation. An `Evaluation` is "consumed" when an `Award` references it; that is a fact
+about the graph, and storing it creates a value that can drift.
+
+**§5a — controlled reopen.** A transition, not an annotation. A `terminal: true` state cannot be
+reopened; an edge marked `requiresAuthority` must name a `decisionType`, so the requirement cannot
+be documented and left unenforced.
+
+**§4a — entry-kind test.** Does something exist that did not? Creation. Does *this object's own
+state* differ? Transition. Is a fact recorded *about* it? Annotation.
+
+**§11 — derived artefacts.** Where two records of one relationship exist, keep one and generate
+the other. `sourcingEvent.published` drifted for this reason and so did the closed codelists.
+Contributed by an implementer who measured it: 58 of 68 policy gates carried a transition label
+disagreeing with the state the rule tested.
+
 ### Changed — the process claim reconciled with the record
 
 `docs/specification.md` §12.2 and `wiki/Governance-and-Versioning.md` had said since v0.1.0 that
@@ -38,6 +77,100 @@ Standards Committee as a currently operating body. The drafted correction at
 `governance/site-alignment/` was superseded before it was applied — the live page already said what
 it proposed. The outcome is recorded at `governance/site-alignment/OUTCOME.md`. Three claims the
 draft did not examine are addressed in `concerthq/concert-website`.
+
+### Fixed
+
+- **Registry completed to all 29 objects, up from 9.** §L-2 has said since v0.15.0 that
+  statelessness by omission is a defect. The registry reproduced that defect in the artifact that
+  defines it. `Evaluation` is now declared a terminal record. New check **C12** fails any schema
+  file without a declaration. (D-15)
+- **Closed codelists enforced.** Five were `"type": "string"` with the CSV named only in a
+  description; `{"procedure": "banana"}` validated. `codelists/bindings.json` binds each closed
+  codelist to the schema location whose enum it governs and `check-codelist-binding.js`
+  regenerates the enum from the CSV. Tier 2, landed under `governance/IAR-0003`. (D-14)
+- **`codelists/submissionStatus.csv` deleted.** It duplicated the vocabulary carried inline on
+  `Submission.status` and was referenced by no schema. The inline enum is the single record, as
+  for every other lifecycle-bearing object. The binding check fails if the file reappears. (D-13)
+- **Terminal reachability.** Check **C11**, contributed: every lifecycle-bearing object must have
+  a terminal state and every state must be able to reach one. Distinct from C9, which asks only
+  whether a state can be entered — C11 catches an object that can never end.
+
+- **State vocabularies are now generated from the registry**, not merely checked against it. §11
+  said a second hand-maintained copy is a defect; state vocabularies were exactly that, so the
+  rule was violated by the artifact that states it. `check-state-model.js --write` generates the
+  schema enum from the declared states. This **promotes `state-model/state-model.json` from
+  informative to normative** for every lifecycle vocabulary it declares — a normative enum cannot
+  be derived from an informative source — so the file gains `CODEOWNERS` protection and a change
+  to a declared state is Tier 2 wherever it is made. Landed under `governance/IAR-0004`. Objects
+  declared lifecycle-bearing but not yet modelled keep their vocabularies. (D-18)
+
+- **`codelists/submissionStatus.csv` restored, retired but resolvable.** Deleting it under IAR-0003
+  made `concert.foundation/signet/v0.1/codelists/submissionStatus.csv` return **404** — a published
+  URL in the `$id` namespace, proxied from `main` with no cache and no fallback — and failed the
+  site build cold on a second consumer. IAR-0003 stated the file had no consumer; two existed in
+  `concert-website`, and **neither was recorded in this repository**, so the claim was
+  unfalsifiable from inside it. That is the defect, not the deletion. The file is restored
+  byte-identical to what was deleted, bound to no schema and absent from `closed`;
+  `codelists/bindings.json` carries the disposition and `check-codelist-binding.js` now
+  distinguishes **deleted** from **retired-but-resolvable**, failing in both directions.
+  Retirement says nothing is maintained here; it does not say the URL may stop answering.
+  Landed under `governance/IAR-0005`. (D-24)
+
+### Added
+
+- **`docs/absence-discipline.md`.** Empty, null and absent are three states and only absence fails
+  open: an undefined operand yields an undefined rule body and the rule does not fire. Every
+  negative fixture requires an absence twin. Contributed from a measurement of 259 references
+  across 68 gates, published de-named.
+- **`conformance/rules/check-naming.js`.** Concert names no individual and no commercial
+  implementer. That rule has existed since v0.13.0 and was enforced by nothing — the defect is the
+  absent control, and no instance of a breach is identified in the repository. The
+  deny-list is stored as **salted digests, never as terms** — a published list of names that must
+  not appear is the disclosure it exists to prevent — with the salt held in CI. Verbatim
+  third-party documents are excluded, with the reason recorded in the manifest so the exclusion
+  is auditable. (D-19)
+- **`governance/defects.md`.** Promoted out of `WITHDRAWAL-2026-08.md` so that record stops
+  accreting. Twenty-five entries at this release — twelve closed, twelve open, one in progress.
+- **`governance/REVERSAL-RISK.md`.** Each interim resolution gains a band and reasoning, answering
+  an implementer question about which of twenty unratified decisions carry reversal risk.
+  **Eighteen are unassigned, and unassigned reads as unassessed rather than low.**
+
+### Governance
+
+- **`governance/IAR-0005-published-url-restoration.md`** — Tier 2, under the bootstrap clause,
+  restoring the published URL above. **Its stated fourteen-day comment period did not run.** The
+  record was merged on the day it was opened, because the period would have extended a live 404 by
+  fourteen days.
+
+  That is recorded as a **departure, not an exemption**. `GOVERNANCE.md` requires the period before
+  merge for every Tier 2 change and names no exception for urgency, and the carve-out in
+  `governance/WITHDRAWAL-2026-08.md` is an exception to the proposal moratorium that itself
+  requires a stated period. The rule applied and was not observed, and `GOVERNANCE.md` names such a
+  merge a defect in this process. The stated period is left in the record verbatim and the
+  departure is recorded beside it, on the shape of `IAR-0002`. Comment remains open for fourteen
+  days from merge; the change will be reversed or amended on sustained objection. **What does not
+  stand is any claim that this record followed the process in full.** (D-29)
+
+- **Four defects recorded since the register was drafted.** **D-24** closed — the 404 above.
+  **D-27** open — the repository declares no public interface, so a claim that a file has no
+  consumer is not testable from inside it. **D-28** open — `codelists/*.csv` admits no comment
+  line, so the format cannot record that a file is retired. **D-29** open — it closes when
+  `GOVERNANCE.md` gains a carve-out for a defect actively causing harm, adopted under its own Tier
+  2 route. D-25 and D-26 are reserved for the site-pinning work and are not recorded here.
+
+### Note on interests
+
+The enquiry is signed by the same natural person who operates both stewardship identities — the
+most acute instance of the disclosed overlap to date. Accordingly the enquiry is published
+verbatim, the response carries the full comment period with no waiver, and no correction here
+rests on the enquiry's evidence: each is verifiable against `schema/`, `codelists/` and
+`conformance/` by a reader who has never seen it. Contributed patterns are adopted as evidence,
+published de-named, and are never `basis`.
+
+The bootstrap arrangement was scoped to let design proceed without a Committee. It was not scoped
+to absorb a public enquiry from the steward's own implementer alongside twenty unratified
+resolutions. The governance load, not the design load, is now the binding constraint.
+
 
 ## [0.15.0] — 2026-08-20 — Working Draft
 
