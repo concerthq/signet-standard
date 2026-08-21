@@ -60,11 +60,35 @@ for (const b of bindings.closed) {
   }
 }
 
-// A deferred binding is declared and deliberately not enforced. It is neither generated nor
-// failed on, only reported — so a codelist that is closed on paper and unenforced in schema
-// stays visible rather than reading as an omission.
-for (const d of bindings.deferred || [])
-  notes.push(`${d.codelist}: binding deferred pending ${d.defect} — declared closed, not enforced in schema`);
+// A deferred binding is declared and deliberately not enforced. It is not generated — so a
+// codelist that is closed on paper and unenforced in schema stays visible rather than reading as
+// an omission.
+//
+// It IS failed on in one direction: if the bound property carries an enum, the manifest defers the
+// binding and the schema enforces it. That is not a harmless disagreement — a deferral exists
+// because enforcing the vocabulary is known to break something, so an enum present against a
+// deferral re-creates the defect the deferral was recorded to prevent. Nothing detected this
+// before: --write generates only for closed entries and has no delete path, and deferred entries
+// were reported and never compared against the schema. (D-32)
+for (const d of bindings.deferred || []) {
+  let enforced = false;
+  if (d.schema && d.pointer) {
+    const file = p(d.schema);
+    if (fs.existsSync(file)) {
+      const node = resolve(JSON.parse(fs.readFileSync(file, "utf8")), d.pointer);
+      enforced = !!node && Array.isArray(node.enum);
+    }
+  }
+  if (enforced) {
+    fail.push(
+      `${d.codelist}: binding is DEFERRED pending ${d.defect} but ${d.schema}${d.pointer} carries an ` +
+      `enum — the manifest defers the binding and the schema enforces it. Remove the enum to hold ` +
+      `the deferral, or move the codelist back to closed under its own record.`,
+    );
+  } else {
+    notes.push(`${d.codelist}: binding deferred pending ${d.defect} — declared closed, not enforced in schema`);
+  }
+}
 
 // A retired codelist is either DELETED or RETIRED-BUT-RESOLVABLE, and the two fail in opposite
 // directions. Deleted: a file left behind after a deletion decision is the same defect the

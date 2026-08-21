@@ -58,6 +58,8 @@ index.
 
 | D-31 | The v0.16.0 CHANGELOG states that promoting `state-model/state-model.json` to normative means the file gains `CODEOWNERS` protection. The generated lifecycle enums did land on `main`; the ownership entry did not. `/state-model/state-model.json` is absent from `.github/CODEOWNERS` on `main`, and present only on `v0.16-iar-0004-registry-normative`, which has not merged. A normative artifact is unprotected while a released entry says it is protected | `.github/CODEOWNERS`, `CHANGELOG.md` v0.16.0, `state-model/state-model.json` | Open — closes when the CODEOWNERS entry lands with IAR-0004 |
 
+| D-32 | `check-codelist-binding.js` could not detect an enum present for a deferred binding. `--write` generated only for `closed` entries and had no delete path; without `--write`, deferred entries were reported as notes and never compared against the schema. A binding deferred in the manifest could therefore be enforced in schema with the check green. Found when rebasing IAR-0003, whose branch predates the deferral of `identifierScheme` — a mechanical rebase and regenerate would have landed an enforced `Identifier.scheme`, re-creating the unsatisfiability the deferral exists to prevent, with `validate` green. | `conformance/rules/check-codelist-binding.js`, `codelists/bindings.json` | **Closed** — the check now fails when a deferred binding's property carries an enum |
+
 ## Provenance of D-9 to D-13
 
 Raised by implementer enquiry, verified against v0.15.0 before recording. Recording a defect is
