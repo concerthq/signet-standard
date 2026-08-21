@@ -231,7 +231,8 @@ authority ceiling covers the decided value.
 
 Five further extensions close the remaining purchasing (P2P) and supplier-management (SRM)
 coverage gaps. Each has landed as a **prose spec only** under `docs/extensions/`, following the
-spec-first sequence commodity-risk established — the Standards Committee reviews the spec, then
+spec-first sequence commodity-risk established — the spec is reviewed under the bootstrap clause,
+no Standards Committee being constituted, then
 schemas, worked examples, and conformance rules follow **per-extension** as a later patch. None
 is in-tree under `schema/` yet, and no tag has been cut for them.
 

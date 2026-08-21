@@ -58,6 +58,8 @@ index.
 
 | D-31 | The v0.16.0 CHANGELOG states that promoting `state-model/state-model.json` to normative means the file gains `CODEOWNERS` protection. The generated lifecycle enums did land on `main`; the ownership entry did not. `/state-model/state-model.json` is absent from `.github/CODEOWNERS` on `main`, and present only on `v0.16-iar-0004-registry-normative`, which has not merged. A normative artifact is unprotected while a released entry says it is protected | `.github/CODEOWNERS`, `CHANGELOG.md` v0.16.0, `state-model/state-model.json` | Open — closes when the CODEOWNERS entry lands with IAR-0004 |
 
+| D-33 | The wiki is a third record of the schema and of the process rules, hand-maintained, and has drifted on both. `wiki/Process-Layer.md:350` documented `Bid.status` with `superseded`, removed from the schema at v0.15.0 under IAR-0002 and used in two implementer-facing documents as the example of what not to model as a state. `wiki/Codelists.md:9`, `wiki/Codelists.md:133`, `wiki/Contributing.md:29`, `wiki/Governance-and-Versioning.md:18` and `wiki/Extensions.md:234` asserted a Standards Committee revision process that the v0.16.0 reconciliation corrected elsewhere — `Governance-and-Versioning.md` contradicted itself fourteen lines apart — and the changelog recorded the sweep as complete. Nothing compares documented enums against schema enums, or documented process against `GOVERNANCE.md`. | `wiki/Process-Layer.md`, `wiki/Codelists.md`, `wiki/Contributing.md`, `wiki/Governance-and-Versioning.md`, `wiki/Extensions.md` | Open — the prose is corrected here; closes when a cross-reference check is in force |
+
 ## Provenance of D-9 to D-13
 
 Raised by implementer enquiry, verified against v0.15.0 before recording. Recording a defect is

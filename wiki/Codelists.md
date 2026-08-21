@@ -6,8 +6,10 @@ header on every push.
 
 Codelists are split into two tiers (see [Governance & Versioning](Governance-and-Versioning)):
 
-- **Closed lists** are *normative* — values change only through the Standards Committee
-  revision process.
+- **Closed lists** are *normative* — values change only by pull request, under the change-control
+  rules in [`GOVERNANCE.md`](https://github.com/concerthq/signet-standard/blob/main/GOVERNANCE.md). **No Standards Committee is
+  constituted** — until one is, decisions that would fall to it are taken under the
+  [bootstrap clause](https://github.com/concerthq/signet-standard/blob/main/governance/README.md#the-bootstrap-clause) and recorded as interim resolutions.
 - **Open lists** are *non-normative* — values may be added freely by pull request.
 
 | Codelist | Used by |
@@ -15,7 +17,7 @@ Codelists are split into two tiers (see [Governance & Versioning](Governance-and
 | [identifierScheme](#identifierscheme) | [Identifier.scheme](Foundation-Layer#identifier) |
 | [partyRole](#partyrole) | [Party.roles](Foundation-Layer#party) |
 | [procedure](#procedure) | [SourcingEvent.procedure](Process-Layer#sourcingevent) |
-| [submissionStatus](#submissionstatus) | [Submission.status](Process-Layer#submission) |
+| [submissionStatus](#submissionstatus) *(retired)* | [Submission.status](Process-Layer#submission) |
 | [auctionType](#auctiontype) | [Auction.auctionType](Process-Layer#auction) |
 | [decisionType](#decisiontype) | [Decision.decisionType](Agent-Layer#decision) |
 | [policyType](#policytype) | [Policy.policyType](Agent-Layer#policy) |
@@ -79,6 +81,11 @@ The lists below belong to the [commodity-risk extension](Extensions#working-draf
 
 ## submissionStatus
 
+> **Retired.** Bound to no schema and not a source of truth. The `Submission` lifecycle vocabulary
+> is carried inline on [`schema/submission.schema.json`](https://github.com/concerthq/signet-standard/blob/main/schema/submission.schema.json).
+> This file is retained only so that `concert.foundation/signet/v0.1/codelists/submissionStatus.csv`
+> keeps answering. See D-13 and D-24 in [`governance/defects.md`](https://github.com/concerthq/signet-standard/blob/main/governance/defects.md).
+
 | Code | Title | Description |
 |------|-------|-------------|
 | `draft` | Draft | Not yet submitted. |
@@ -130,7 +137,9 @@ the union of the two; CI asserts they never intersect.
 
 `codelists/eventTypeCore.csv`. Codes here MUST carry the meanings given, and MUST NOT be
 redefined, reused, or narrowed by implementations, extensions, or profiles. Admission is
-append-only and is a Standards Committee act. This is what makes withdrawal of a grant
+append-only and is a decision that would fall to a Standards Committee. **None is constituted** —
+until one is, such decisions are taken under the [bootstrap clause](https://github.com/concerthq/signet-standard/blob/main/governance/README.md#the-bootstrap-clause)
+and recorded as interim resolutions. This is what makes withdrawal of a grant
 interoperable: an open value has no fixed meaning, so no conformance rule can reference it.
 
 | Code | Title | Description |
