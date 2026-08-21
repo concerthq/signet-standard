@@ -235,6 +235,9 @@ problem, it relocates it, by driving implementers to overload core states with l
 where no check can detect it. `coreEquivalent` is the outward projection discipline SIGNET
 already applies to OCDS and UBL, turned inward.
 
+A worked example of a conformant profile — states, edges, event codes and private fields — is at
+`docs/profile-authoring.md`.
+
 ---
 
 ## 8. Coverage, stated plainly
