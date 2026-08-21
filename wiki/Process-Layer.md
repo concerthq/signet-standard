@@ -347,7 +347,11 @@ materialised *standing* bid.
 | `round` | integer | 0..1 | The round the bid was placed in. |
 | `value` | Value | 1 | The offered value. |
 | `submittedAt` | date-time | 1 | When the bid was submitted. |
-| `status` | string | 1 | `active`, `superseded`, `withdrawn`, `winning`, `rejected`. |
+| `status` | string | 1 | `active`, `withdrawn`, `winning`, `rejected`. |
+
+Supersession is not a state. It is recorded as a `bid.superseded` annotation event carrying
+`supersededBy` — a relation to another object cannot be projected from any event. See
+[`docs/state-model.md`](https://github.com/concerthq/signet-standard/blob/main/docs/state-model.md) §5 R-1.
 
 See the worked instance: [`examples/bid-reverse.json`](Worked-Examples#bid).
 

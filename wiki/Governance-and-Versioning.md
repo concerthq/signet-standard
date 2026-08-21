@@ -14,8 +14,9 @@ how the standard is versioned, what counts as normative, and how changes are con
   is instead licensed **Apache-2.0**: it is executable code implementers run and embed, and
   Apache-2.0's express patent grant provides protection CC0 does not. Spec-under-CC0 /
   code-under-Apache is the established open-standard pattern.
-- Concert holds **no proprietary claim** over the model; it stewards its evolution through
-  the Standards Committee and the formal change-control process.
+- Concert holds **no proprietary claim** over the model; it stewards its evolution through the
+  formal change-control process in [`GOVERNANCE.md`](https://github.com/concerthq/signet-standard/blob/main/GOVERNANCE.md).
+  **No Standards Committee is constituted** — see below.
 - **No contributor, and no commercial operator (including Score Networks), gains a
   preferential position.**
 

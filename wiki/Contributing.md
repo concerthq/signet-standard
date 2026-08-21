@@ -26,9 +26,12 @@ model). See https://concert.foundation/governance/cla.
 This determines how your change is reviewed (see
 [Governance & Versioning](Governance-and-Versioning)):
 
-- **Normative** (`schema/`, closed codelists): changes go through the Standards Committee
-  revision process with a published comment period. **The schema takes precedence** over
-  prose if they ever conflict.
+- **Normative** (`schema/`, closed codelists): changes arrive **by pull request** under
+  [`GOVERNANCE.md`](https://github.com/concerthq/signet-standard/blob/main/GOVERNANCE.md) — a recorded resolution, a stated comment
+  period of at least fourteen calendar days, and an approving review. **No Standards Committee is
+  constituted** — until one is, decisions that would fall to it are taken under the
+  [bootstrap clause](https://github.com/concerthq/signet-standard/blob/main/governance/README.md#the-bootstrap-clause) and recorded as interim resolutions.
+  **The schema takes precedence** over prose if they ever conflict.
 - **Non-normative** (`docs/`, `examples/`, open codelist values): may be updated freely by
   pull request.
 
