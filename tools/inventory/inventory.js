@@ -169,10 +169,18 @@ function sectionGenerated(args, config) {
 
 function sectionGit(files) {
   const head = git(['rev-parse', 'HEAD']).trim();
-  const porcelain = git(['status', '--porcelain']).trim();
-  const dirtyPaths = porcelain
-    ? porcelain.split(/\r?\n/).map((l) => l.slice(3).trim()).filter(Boolean).sort(cmp)
-    : [];
+  // Do not trim the whole output: the first status column is a space for an
+  // unstaged modification, and trimming it eats the first path's leading character.
+  const dirtyPaths = uniqSorted(git(['status', '--porcelain'])
+    .split(/\r?\n/)
+    .filter((l) => l.length > 3)
+    .map(function (l) {
+      const p = l.slice(3);
+      // A rename is "R  old -> new"; the new path is the one that exists.
+      const arrow = p.indexOf(' -> ');
+      return (arrow === -1 ? p : p.slice(arrow + 4)).replace(/^"|"$/g, '');
+    })
+    .filter(Boolean));
   const tagsRaw = git(['tag', '--sort=-v:refname'], { soft: true }) || '';
   const tags = tagsRaw.split(/\r?\n/).filter(Boolean);
   const describe = (git(['describe', '--tags', '--always'], { soft: true, quiet: true }) || '').trim();
@@ -1088,6 +1096,12 @@ function selfTest(opts) {
   });
   if (!badBlob.length) pass.push('gitBlob: agrees with git hash-object across ' + sample.length + ' sampled paths');
   else problems.push('gitBlob: disagrees with git hash-object for ' + badBlob.length + ' path(s) — first: ' + badBlob[0].path);
+
+  // 5b — every path reported dirty is one git actually names.
+  const statusLines = git(['status', '--porcelain']).split(/\r?\n/).filter(Boolean);
+  const badDirty = a.git.dirtyPaths.filter((p) => !statusLines.some((l) => l.indexOf(p) !== -1));
+  if (!badDirty.length) pass.push('dirtyPaths: ' + a.git.dirtyPaths.length + ' path(s), each one git names verbatim');
+  else problems.push('dirtyPaths: ' + badDirty.length + ' path(s) git does not name — first: ' + badDirty[0]);
 
   // 6 — every tracked JSON carrying a top-level $schema is discovered.
   const mentions = tracked.filter(function (f) {
