@@ -58,9 +58,18 @@ built from a file scan are inserted in sorted order; file arrays sort by path;
 term arrays sort. Two inventories at different commits diff cleanly with `diff`.
 
 Files are read as UTF-8, a leading BOM is stripped and recorded. Output is UTF-8
-without BOM, LF newlines, one trailing newline. Hashes are over raw bytes — BOM
-and CRLF included — so `sha256` matches the file on disk and `gitBlob` matches
-`git hash-object`.
+without BOM, LF newlines, one trailing newline.
+
+`sha256` and `blobRaw` are over the raw bytes on disk — BOM and CRLF included —
+so `sha256` matches `sha256sum` and `blobRaw` matches `git hash-object
+--no-filters`. `gitBlob` is what git has staged for the path, so it matches
+`git hash-object` and cross-checks against git itself.
+
+The two differ whenever line-ending normalisation is in force — `core.autocrlf`
+on a Windows checkout, or a `text=` attribute — because git then stores different
+bytes from those on disk. `normalised` says which paths those are, rather than
+leaving a hash that silently disagrees with git. For a path listed in
+`git.dirtyPaths`, `gitBlob` describes what is staged and `blobRaw` what is on disk.
 
 ## Output contract
 
@@ -71,7 +80,7 @@ sections are `[]` or `{}`, never absent.
 |---|---|
 | `generated` | Timestamp, tool version, Node version, the arguments as invoked, and the config |
 | `git` | HEAD, branch, describe, tags, dirty state with the dirty paths, tracked file count |
-| `manifest` | One entry per tracked file: bytes, `sha256`, `gitBlob`, kind, text/binary, BOM, EOL style, line count |
+| `manifest` | One entry per tracked file: bytes, `sha256`, `gitBlob`, `blobRaw`, `normalised`, kind, text/binary, BOM, EOL style, line count |
 | `package` | `name`, `version`, `scripts`, `devDependencies` from `package.json` |
 | `ci` | Per workflow, the `run:` lines verbatim, including `run: \|` block bodies, in file order |
 | `changelog` | One entry per `##` heading: version, verbatim heading, section headings, body, body hash |

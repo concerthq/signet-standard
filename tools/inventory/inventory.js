@@ -123,6 +123,22 @@ function trackedFiles() {
   return out.split('\0').filter(Boolean).sort(cmp);
 }
 
+/**
+ * The blob sha git has staged for each tracked path. On a checkout with
+ * core.autocrlf or a text= attribute in force, git stores line-ending-normalised
+ * content, so this differs from the hash of the bytes on disk. Both are recorded.
+ */
+function indexBlobs() {
+  const map = new Map();
+  const out = git(['ls-files', '-s', '-z']);
+  for (const rec of out.split('\0')) {
+    if (!rec) continue;
+    const m = /^\d+ ([0-9a-f]+) \d+\t([\s\S]*)$/.exec(rec);
+    if (m) map.set(m[2], m[1]);
+  }
+  return map;
+}
+
 const _fileCache = new Map();
 function readTracked(rel) {
   if (_fileCache.has(rel)) return _fileCache.get(rel);
@@ -187,15 +203,22 @@ function sectionGit(files) {
 }
 
 function sectionManifest(files) {
+  const staged = indexBlobs();
   return files.map(function (rel) {
     const buf = readTracked(rel);
     if (!buf) die('tracked file is unreadable: ' + rel);
     const bin = isBinary(buf);
+    const raw = gitBlobHash(buf);
+    const gitBlob = staged.has(rel) ? staged.get(rel) : raw;
     return {
       path: rel,
       bytes: buf.length,
       sha256: sha256(buf),
-      gitBlob: gitBlobHash(buf),
+      gitBlob: gitBlob,
+      blobRaw: raw,
+      // true when git stores different bytes from those on disk — line-ending
+      // normalisation is in force for this path.
+      normalised: gitBlob !== raw,
       kind: kindOf(rel),
       text: !bin,
       bom: hasBom(buf),
@@ -780,10 +803,27 @@ function sectionReferencedFields(texts, schemas) {
  * 3.12 grep
  * ------------------------------------------------------------------ */
 
-function sectionGrep(files, terms) {
+/**
+ * The extractor's own directory is the instrument, not the corpus. Its config
+ * lists the search terms and its example claims quote them, so leaving it in
+ * makes every term hit itself and makes "this term appears nowhere" unprovable.
+ * The exclusion is recorded in the output rather than applied silently.
+ */
+function grepExclusions(files, config) {
+  const patterns = config.grepExclude || ['tools/inventory/'];
+  return {
+    patterns: patterns,
+    paths: files.filter((f) => patterns.some((p) => f.indexOf(p) === 0)).sort(cmp),
+  };
+}
+
+function sectionGrep(files, terms, exclusions) {
+  const excluded = {};
+  for (const p of exclusions.paths) excluded[p] = true;
   const pairs = terms.map((t) => [t, []]);
   const index = new Map(pairs);
   for (const rel of files) {
+    if (excluded[rel]) continue;
     const t = textOf(rel);
     if (t === null) continue;
     const lines = splitLines(t);
@@ -794,7 +834,13 @@ function sectionGrep(files, terms) {
       }
     }
   }
-  return { terms: terms.slice(), scope: 'all tracked text files', hits: sortedMap(pairs) };
+  return {
+    terms: terms.slice(),
+    scope: 'all tracked text files, less excludedPaths',
+    excludePatterns: exclusions.patterns,
+    excludedPaths: exclusions.paths,
+    hits: sortedMap(pairs),
+  };
 }
 
 /* ------------------------------------------------------------------ *
@@ -831,7 +877,7 @@ function build(opts) {
     conformance: sectionConformance(files),
     texts: texts,
     referencedFields: sectionReferencedFields(texts, schemas),
-    grep: sectionGrep(files, terms),
+    grep: sectionGrep(files, terms, grepExclusions(files, config)),
   };
 }
 
@@ -1031,6 +1077,17 @@ function selfTest(opts) {
   else problems.push('manifest: ' + missing.length + ' tracked file(s) missing, ' + extra.length + ' untracked entr(ies) present'
     + (missing.length ? ' — first missing: ' + missing[0] : '')
     + (extra.length ? ' — first extra: ' + extra[0] : ''));
+
+  // 5 — gitBlob agrees with git, on a sample spread across the manifest.
+  const step = Math.max(1, Math.floor(a.manifest.length / 8));
+  const sample = a.manifest.filter((m, idx) => idx % step === 0).slice(0, 8);
+  const badBlob = sample.filter(function (m) {
+    if (a.git.dirtyPaths.indexOf(m.path) !== -1) return false;
+    const got = (git(['hash-object', '--', m.path], { soft: true, quiet: true }) || '').trim();
+    return got !== '' && got !== m.gitBlob;
+  });
+  if (!badBlob.length) pass.push('gitBlob: agrees with git hash-object across ' + sample.length + ' sampled paths');
+  else problems.push('gitBlob: disagrees with git hash-object for ' + badBlob.length + ' path(s) — first: ' + badBlob[0].path);
 
   // 6 — every tracked JSON carrying a top-level $schema is discovered.
   const mentions = tracked.filter(function (f) {
