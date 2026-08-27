@@ -1,0 +1,56 @@
+{
+  "claimsSchemaVersion": "1.0.0",
+  "pack": "inventory-extractor-example",
+  "baseline": "12b6d51beb80fb76f9f27f494255cb6b39ab102a",
+  "$comment": "A worked reference for the CLAIMS.json contract. Every claim names its evidence as a pointer into a freshly generated inventory. Verify with: node tools/inventory/inventory.js --verify tools/inventory/CLAIMS.example.json — baseline is the commit these claims were authored and verified against, and no claims file can name the sha of the commit that contains it, so verifying from any later commit correctly reports drift and needs --allow-drift. All eight claims hold either way.",
+  "claims": [
+    {
+      "id": "C-1",
+      "assertion": "Policy has no property appliesTo",
+      "evidence": "/schemas/files/[path=schema/policy.schema.json]/propertyPaths",
+      "expect": { "notContains": "appliesTo" }
+    },
+    {
+      "id": "C-2",
+      "assertion": "eventTypeCore.csv holds exactly four codes",
+      "evidence": "/codelists/files/[path=codelists/eventTypeCore.csv]/rowCount",
+      "expect": { "equals": 4 }
+    },
+    {
+      "id": "C-3",
+      "assertion": "eventTypeCore is closed, and the register says so rather than the tool guessing",
+      "evidence": "/codelists/files/[path=codelists/eventTypeCore.csv]/closureMarker/source",
+      "expect": { "matches": "^codelists/bindings\\.json:\\d+$" }
+    },
+    {
+      "id": "C-4",
+      "assertion": "the state model covers 29 objects",
+      "evidence": "/stateModel/objectCount",
+      "expect": { "equals": 29 }
+    },
+    {
+      "id": "C-5",
+      "assertion": "every state-model entry carries a basis",
+      "evidence": "/stateModel/transitionsWithoutBasis",
+      "expect": { "equals": 0 }
+    },
+    {
+      "id": "C-6",
+      "assertion": "criterionRef appears nowhere in tracked files",
+      "evidence": "/grep/hits/criterionRef",
+      "expect": { "count": 0 }
+    },
+    {
+      "id": "C-7",
+      "assertion": "Decision.decisionType is shipped, not merely proposed",
+      "evidence": "/schemas/files/[path=schema/decision.schema.json]/propertyPaths",
+      "expect": { "contains": "decisionType" }
+    },
+    {
+      "id": "C-8",
+      "assertion": "the closed-codelist binding checker is invoked by CI",
+      "evidence": "/ci/workflows/[path=.github/workflows/validate.yml]/runLines",
+      "expect": { "contains": "node conformance/rules/check-codelist-binding.js ." }
+    }
+  ]
+}

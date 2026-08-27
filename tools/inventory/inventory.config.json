@@ -1,0 +1,25 @@
+{
+  "grepTerms": [
+    "--admin",
+    "2020-12",
+    "F-STATE",
+    "GRT-1",
+    "Standards Committee",
+    "appliesTo",
+    "basis",
+    "bootstrap",
+    "comment period",
+    "criteria",
+    "criterionRef",
+    "decisionType",
+    "draft-07",
+    "interim",
+    "superseded",
+    "tenancy",
+    "tenant",
+    "unevaluatedProperties",
+    "waiver"
+  ],
+  "textDirectories": ["governance", "docs", "conformance", "handoffs", "wiki"],
+  "rootMarkdown": true
+}
