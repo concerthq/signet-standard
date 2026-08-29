@@ -35,7 +35,6 @@ forgotten.
 | IAR-0002 — `Bid.superseded` removed | `low` | Removes an unprojectable value. Reversal reinstates a state no event can produce. |
 | IAR-0003 — closed codelist enum generation | `low` | Makes the schema enforce what the codelist already declared. Reversal reinstates a suite that accepts invalid documents. |
 | IAR-0004 — registry normative for state vocabularies | `medium` | Generation is a design choice among defensible alternatives and the losing option is recorded. Reversal would return to asserted agreement between two hand-maintained records — recoverable, but it changes where a lifecycle vocabulary is authored, so an implementer generating from the registry would need to re-source. |
-| IAR-0003 as amended — generated constraint is `anyOf: [{enum}, {pattern}]` (D-39) | `low` | The second branch is purely permissive at schema level: it admits a prefixed value the bare `enum` would reject. Removing it narrows, and any instance relying on it was doing so under the stated extension rules. Reversal is a one-line generator change. |
 
 The remaining seventeen are unassigned pending review, which is itself the honest state: an
 unassigned record should be read as unassessed, not as low.

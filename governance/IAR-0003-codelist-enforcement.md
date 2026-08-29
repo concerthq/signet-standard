@@ -43,49 +43,6 @@ Affected: `procedure`, `decisionType`, `partyRole`, `identifierScheme`, `documen
 Per the derived-artefact rule (`docs/state-model.md` §11): **the CSV is the record, the enum is
 generated.** Two hand-maintained copies of one relationship is how this defect arose.
 
-The **shape** of that generated constraint is decided below (Amendment, D-39). It is not a bare
-`enum`.
-
----
-
-# Amendment — the shape of the generated constraint (D-39)
-
-**Folded into this record before its pull request opened**, per the constitution pack's Step 1
-ordering constraint. Sourced verbatim from `IAR-0003-amendment-generator-shape.md`; that file is
-not landed separately, and this section is the record.
-**Decides:** D-39. **Touches on landing:** `conformance/rules/check-codelist-binding.js` `--write`
-output, `codelists/bindings.json`, the bound properties in `schema/`.
-
-## The question
-
-`check-codelist-binding.js --write` regenerates the schema constraint from the CSV. A bare `enum` rejects every value not in the core list — including the prefixed extension values that CP-EventType-Closure §2.4 requires `eventType` to accept and that CP-Codelist-Enforcement leaves open for every other list as gate C-4. Whichever shape the generator emits **decides C-4 by default** for `procedure`, `decisionType`, `partyRole` and `documentType`. A decision taken by generator shape is the class of un-minuted decision this process exists to prevent.
-
-## Resolution
-
-1. The generator emits, at each bound property of a closed codelist:
-   ```json
-   "anyOf": [
-     { "enum": [ "…codes from the CSV…" ] },
-     { "type": "string", "pattern": "^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9.]*$" }
-   ]
-   ```
-   A value is a core code verbatim, or it carries a prefix per the CP-Extension-Composition Part 1 grammar. This resolves C-4 in the same direction §2.4 resolves it for `eventType`, as one mechanism rather than two.
-2. **The harness, not the schema, polices the prefix** (consistent with CP-Extension-Composition §2.3): `signet:` and `concert:` are refused; a prefix that names a published extension MUST resolve to that extension's codelist file for the bound list; any other prefix is a private value — permitted, unconstrained, never certifiable.
-3. **Reservation rule (D-37):** every prefix appearing in a core code of any closed codelist is reserved (today `gleif`, `gs1`, from `identifierScheme.csv`). An extension id MUST NOT equal a reserved prefix. Enforced in the same harness rule.
-4. `identifierScheme` remains a recorded deferral pending D-20 and is not bound by this amendment.
-5. The IAR-0003 fixtures gain the §2.4 quartet for one bound list: unprefixed-unknown rejected; prefixed-private validates; reserved-prefix refused by the harness; extension-prefixed resolves against the extension's codelist.
-
-## Declined alternative
-
-**Bare `enum`, extension values deferred to the v1.0 train.** Declined: it forecloses §2.4 for four lists inside a defect-correction whose stated purpose is enforcement, not vocabulary policy; it makes `decisionType: qualification` the last extension-contributed value any list can ever take before v1.0; and reopening it later means regenerating normative schema a second time for a decision that was available now. If the Committee prefers the bare enum, the generator change is one line — the reversal path is stated, which is what `REVERSAL-RISK.md` asks of an interim act.
-
-## Reversal risk
-
-`low` — the anyOf's second branch is purely permissive at schema level; removing it narrows, and any instance relying on it was doing so under the stated extension rules.
-
----
-
-
 ## Tier and breaking
 
 **Tier 2** — `schema/` is normative. This record is the route.
