@@ -20,6 +20,7 @@ the document; the URL stays stable).
 | `amendments` | `Amendment` — event-anchored contract deltas (variation / extension / renewal / novation / termination) with derived current state | **Working Draft (spec only; schemas to follow)** | [`amendments.md`](amendments.md) |
 | `frameworks` | `FrameworkAgreement` (Contract subtype), `CallOff` (direct award / mini-competition) with a conformance-checkable drawdown invariant (Σ call-offs ≤ ceiling) | **Working Draft (spec only; schemas to follow)** | [`frameworks.md`](frameworks.md) |
 | `negotiation` | `Negotiation`, `Offer` — a governed exchange of offers over named terms under **per-term Mandates**; the object model behind the existing `decisionType: negotiationMove` | **Working Draft (spec only; schemas to follow)** | [`negotiation.md`](negotiation.md) |
+| `requirements` | `Requirement`, `RequirementSet` — what was **asked**, as a versioned addressable object; selection-is-derivation, variance as a `Decision`-backed relation; relies on three core sockets (`Score.criterionRef`, `Obligation.provenance`, `Submission.responses`) | **Working Draft (spec; schemas to follow)** | [`requirements.md`](requirements.md) |
 
 ## Profiles
 
