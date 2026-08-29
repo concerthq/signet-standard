@@ -19,6 +19,34 @@ const ROOT = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv
 const WRITE = process.argv.includes('--write');
 const p = (...a) => path.join(ROOT, ...a);
 
+// CP-Extension-Composition Part 1 grammar, as cited by the IAR-0003 amendment (D-39).
+const PREFIX_PATTERN = '^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9.]*$';
+
+// The generated constraint is anyOf [ {enum}, {prefixed} ]. Read the enum branch wherever it
+// sits, so a legacy bare enum is recognised rather than silently regenerated.
+const enumOf = (node) => {
+  if (!node) return null;
+  if (Array.isArray(node.enum)) return node.enum;
+  if (Array.isArray(node.anyOf)) {
+    const branch = node.anyOf.find((b) => b && Array.isArray(b.enum));
+    if (branch) return branch.enum;
+  }
+  return null;
+};
+
+const hasPrefixBranch = (node) =>
+  !!node && Array.isArray(node.anyOf) && node.anyOf.some((b) => b && b.pattern === PREFIX_PATTERN);
+
+// Write the constraint, preserving every annotation already on the node.
+const setConstraint = (node, want) => {
+  delete node.enum;
+  node.anyOf = [
+    { enum: want },
+    { type: 'string', pattern: PREFIX_PATTERN,
+      $comment: 'Prefixed extension value (CP-Extension-Composition Part 1). The harness decides whether the prefix resolves to a published extension; the schema admits only the shape.' },
+  ];
+};
+
 const fail = [];
 const fixed = [];
 const notes = [];
@@ -47,16 +75,24 @@ for (const b of bindings.closed) {
   const node = resolve(doc, b.pointer);
   if (!node) { fail.push(`${b.codelist}: ${b.schema}${b.pointer} does not resolve`); continue; }
 
-  if (!Array.isArray(node.enum)) {
-    if (WRITE) { node.enum = want; fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n'); fixed.push(`${b.schema}${b.pointer} ← ${b.codelist} (${want.length} values)`); }
+  const have = enumOf(node);
+  if (have === null) {
+    if (WRITE) { setConstraint(node, want); fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n'); fixed.push(`${b.schema}${b.pointer} ← ${b.codelist} (${want.length} values + prefixed)`); }
     else fail.push(`${b.codelist} is CLOSED but ${b.schema}${b.pointer} has no enum — any string validates`);
     continue;
   }
-  const missing = want.filter((c) => !node.enum.includes(c));
-  const extra = node.enum.filter((c) => !want.includes(c));
+  const missing = want.filter((c) => !have.includes(c));
+  const extra = have.filter((c) => !want.includes(c));
   if (missing.length || extra.length) {
-    if (WRITE) { node.enum = want; fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n'); fixed.push(`${b.schema}${b.pointer} ← ${b.codelist}`); }
+    if (WRITE) { setConstraint(node, want); fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n'); fixed.push(`${b.schema}${b.pointer} ← ${b.codelist}`); }
     else fail.push(`${b.codelist} ≠ ${b.schema}${b.pointer} — missing [${missing}] extra [${extra}]`);
+    continue;
+  }
+  // The enum agrees. The shape must agree too, or 2.4 is foreclosed at this property while the
+  // record says it is not — the side-effect decision D-39 exists to prevent.
+  if (!hasPrefixBranch(node)) {
+    if (WRITE) { setConstraint(node, want); fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n'); fixed.push(`${b.schema}${b.pointer} ← ${b.codelist} (shape: bare enum → anyOf)`); }
+    else fail.push(`${b.codelist} at ${b.schema}${b.pointer} is a bare enum — it rejects every prefixed extension value, foreclosing CP-EventType-Closure 2.4 (D-39). Run --write.`);
   }
 }
 
@@ -76,7 +112,7 @@ for (const d of bindings.deferred || []) {
     const file = p(d.schema);
     if (fs.existsSync(file)) {
       const node = resolve(JSON.parse(fs.readFileSync(file, "utf8")), d.pointer);
-      enforced = !!node && Array.isArray(node.enum);
+      enforced = enumOf(node) !== null;
     }
   }
   if (enforced) {

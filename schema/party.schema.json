@@ -43,16 +43,25 @@
       "items": {
         "type": "string",
         "description": "See codelists/partyRole.csv.",
-        "enum": [
-          "buyer",
-          "supplier",
-          "procuringEntity",
-          "payer",
-          "payee",
-          "humanAgent",
-          "syntheticAgent",
-          "certifier",
-          "observer"
+        "anyOf": [
+          {
+            "enum": [
+              "buyer",
+              "supplier",
+              "procuringEntity",
+              "payer",
+              "payee",
+              "humanAgent",
+              "syntheticAgent",
+              "certifier",
+              "observer"
+            ]
+          },
+          {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9.]*$",
+            "$comment": "Prefixed extension value (CP-Extension-Composition Part 1). The harness decides whether the prefix resolves to a published extension; the schema admits only the shape."
+          }
         ]
       }
     },
