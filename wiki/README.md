@@ -34,19 +34,20 @@ to the wiki.
 
 ## Publishing to the GitHub Wiki
 
-The wiki is a separate git repository
-(`https://github.com/concerthq/signet-standard.wiki.git`). To publish, the wiki must be
-**enabled** in the repo's Settings → Features, and initialised once via the web UI (create
-any page). Then, from outside this repo:
+The wiki is a separate git repository (`….wiki.git`) with no pull requests and no CI, so it
+is treated as a **projection** of this directory, never an editing surface. Publish with:
 
 ```bash
-git clone https://github.com/concerthq/signet-standard.wiki.git
-cd signet-standard.wiki
-cp /path/to/signet-standard/wiki/*.md .
-git add .
-git commit -m "Add SIGNET project wiki"
-git push
+node tools/wiki-sync.js          # drift check, both directions; exit 1 on any
+node tools/wiki-sync.js --push   # project this directory → live wiki
 ```
+
+The check reports pages needing publish, content drift, and **live-only pages** — a page
+edited on the wiki directly is drift by definition and needs a human decision (port it here
+by pull request, or `--push --prune` to delete it). Every push commit records the source
+commit, so each live-wiki state traces to a reviewed tree state. This file itself is never
+published. The wiki must be enabled once in Settings → Features with any first page created,
+so the `.wiki.git` repository exists.
 
 GitHub uses the file name (minus `.md`) as the page slug, so the internal
 `[Text](Page-Name)` links in these files resolve correctly. `Home.md` is the landing page;
