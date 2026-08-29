@@ -48,6 +48,19 @@ Standards Committee that is **not yet constituted**, is in
 4. Extensions that add (rather than change) structure should be proposed as
    packages under `/extensions` — see the extension mechanism in the spec.
 
+## How to ask whether something is in scope
+
+A **scope enquiry** is neither a change proposal nor a defect: it asks the
+Foundation to determine a boundary, and it is the right route when the expected
+answer may be "no", or when the answer is needed before a proposal can sensibly
+be written. Open one with the
+[scope enquiry](.github/ISSUE_TEMPLATE/scope-enquiry.md) template.
+
+An enquiry may be answered: in scope (core), in scope (extension), in scope
+(companion standard), out of scope, or deferred pending a stated condition.
+Every answer is recorded with its reasoning, so the question cannot be re-raised
+without new argument.
+
 ## Running validation locally
 
 ```

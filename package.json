@@ -25,7 +25,8 @@
     "test:projection-skip": "node tools/test-projection-skip.js",
     "agent": "node agent/run-agent.js",
     "onboarding": "node onboarding/run-onboarding.js",
-    "auction": "node auction/run-auction.js"
+    "auction": "node auction/run-auction.js",
+    "conformance:dialect": "node conformance/rules/check-dialect-equivalence.js"
   },
   "devDependencies": {
     "ajv": "^8.12.0",

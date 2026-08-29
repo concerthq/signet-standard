@@ -96,6 +96,13 @@ jobs:
       - name: Public interface — every declared path exists
         run: node conformance/rules/check-public-interface.js .
 
+      # Draft-07 vs 2020-12 verdict equivalence across the corpus. Report-only until the v1.0
+      # train decides the migration; --gate after. Precedent: "checks implemented, non-gating"
+      # (CP-Mandate-enforcement). A reported difference is evidence for that decision, not a
+      # failure of this one.
+      - name: Dialect equivalence — Draft-07 and 2020-12 must agree (report only)
+        run: npm run conformance:dialect
+
       # Closed codelists must be enforced in schema, not merely cited in a description.
       #
       # This step FAILS on main today, and that is the accurate state: the binding manifest and
