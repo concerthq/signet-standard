@@ -19,9 +19,17 @@ Everything here is CC0-1.0.
 | [proposals/](proposals/) | Change proposals against the CDM, the suite, and the codelists | See the [proposals index](proposals/README.md) |
 | [reviews/](reviews/) | Point-in-time reviews of merged work | — |
 | [IAR-0002-state-model.md](IAR-0002-state-model.md) | Interim approval record — state model and the `Bid` correction | In force; comment period waived, departure recorded |
+| [IAR-0006-registration-window.md](IAR-0006-registration-window.md) | Pre-constitution registration window; expires on constitution |
 | [IR-2026-08-prior-normative-changes.md](IR-2026-08-prior-normative-changes.md) | Interim resolution — the eleven normative changes predating the written rule | In force |
 | [WITHDRAWAL-2026-08.md](WITHDRAWAL-2026-08.md) | The v1.0 proposal train withdrawn to a parked state; eight defects kept | In force |
 | [site-alignment/](site-alignment/) | Drafted corrections for published copy outside this repository | Superseded, **not applied** — see [OUTCOME.md](site-alignment/OUTCOME.md) |
+
+**Series gaps, recorded so a later reader does not infer a missing record.** The IAR series begins
+at 0002 — no IAR-0001 exists on any branch. The defect register on `main` runs to D-31: D-32 and
+D-33 are reserved by rows on branches that have not merged
+(`v0.16-iar-0003-codelist-enforcement` and `v0.16-iar-0004-registry-normative` carry D-32;
+`wiki/correct-drift` carries D-33), so D-34 onward are assigned across the gap and stay stable when
+those branches merge. Neither gap is an omission.
 
 ## Status vocabulary
 
