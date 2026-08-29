@@ -17,6 +17,22 @@
 > record would close on landing, not what it has closed. The v0.16.0 CHANGELOG entry said this
 > enforcement had landed; that claim is corrected in the entry and recorded as D-30. The record
 > below is unaltered — it states what was decided, and is not rewritten after the fact.
+>
+> **Correction, 2026-08-29 (D-43).** The first sentence of this status block is false, and was
+> false when written. This record's pull request **was** opened — #43, 2026-08-21T00:26Z, the same
+> day — and has since been approved. Its comment period therefore started on 2026-08-21 and did
+> not "never start". The sentence is left standing above rather than edited, per this record's own
+> rule; this note is the correction. The same claim appears at `CHANGELOG.md` line 97 and in the
+> premise of the amendment below. The structural cause — that no verification route in this
+> repository can see forge state, so the three assertions were authored from each other rather
+> than from the forge — is recorded as **D-43**.
+>
+> The rest of the status block was accurate when written and is superseded by this pull request
+> itself: the generated constraints **are** in the tree as of the amendment below, and
+> `check-codelist-binding.js` passes. `identifierScheme` remains a recorded deferral pending D-20.
+>
+> **The comment period restarts from this amendment's ready-for-review date.** A substantive
+> amendment landed mid-period and post-approval does not inherit the eight days already elapsed.
 
 ## The defect
 
@@ -42,6 +58,91 @@ Affected: `procedure`, `decisionType`, `partyRole`, `identifierScheme`, `documen
 
 Per the derived-artefact rule (`docs/state-model.md` §11): **the CSV is the record, the enum is
 generated.** Two hand-maintained copies of one relationship is how this defect arose.
+
+---
+
+# Amendment — the shape of the generated constraint (D-39)
+
+**Folded into this record on 2026-08-29, before it merged.** The constraint this amendment governs
+has not landed on `main`, C-4 has not been decided by side effect, and this pull request is
+unmerged — which is the fact the ordering constraint always rested on. The amendment's own stated
+premise, that this record's pull request had never been opened, is false and is corrected in the
+status block above (D-43); the reasoning below is unaffected by that correction, because it turns
+on what the generator emits, not on when the pull request opened.
+
+Sourced from the constitution pack's `IAR-0003-amendment-generator-shape.md`, which does not land
+separately — this section is the record. **Decides:** D-39. **Touches:**
+`conformance/rules/check-codelist-binding.js` `--write` output and the bound properties in
+`schema/`.
+
+## The question
+
+`check-codelist-binding.js --write` regenerates the schema constraint from the CSV. A bare `enum`
+rejects every value not in the core list — including the prefixed extension values that
+CP-EventType-Closure §2.4 requires `eventType` to accept and that CP-Codelist-Enforcement leaves
+open for every other list as gate C-4. Whichever shape the generator emits **decides C-4 by
+default** for `procedure`, `decisionType`, `partyRole` and `documentType`. A decision taken by
+generator shape is the class of un-minuted decision this process exists to prevent.
+
+## Resolution
+
+1. The generator emits, at each bound property of a closed codelist:
+   ```json
+   "anyOf": [
+     { "enum": [ "…codes from the CSV…" ] },
+     { "type": "string", "pattern": "^[a-z][a-z0-9-]*:[A-Za-z][A-Za-z0-9.]*$" }
+   ]
+   ```
+   A value is a core code verbatim, or it carries a prefix per the CP-Extension-Composition Part 1
+   grammar. This resolves C-4 in the same direction §2.4 resolves it for `eventType`, as one
+   mechanism rather than two.
+2. **The harness, not the schema, polices the prefix** (consistent with CP-Extension-Composition
+   §2.3): `signet:` and `concert:` are refused; a prefix that names a published extension MUST
+   resolve to that extension's codelist file for the bound list; any other prefix is a private
+   value — permitted, unconstrained, never certifiable.
+3. **Reservation rule (D-37):** every prefix appearing in a core code of any closed codelist is
+   reserved (today `gleif`, `gs1`, from `identifierScheme.csv`). An extension id MUST NOT equal a
+   reserved prefix. Enforced in the same harness rule.
+4. `identifierScheme` remains a recorded deferral pending D-20 and is not bound by this amendment.
+5. The IAR-0003 fixtures gain the §2.4 quartet for one bound list: unprefixed-unknown rejected;
+   prefixed-private validates; reserved-prefix refused by the harness; extension-prefixed resolves
+   against the extension's codelist.
+
+## Declined alternative
+
+**Bare `enum`, extension values deferred to the v1.0 train.** Declined: it forecloses §2.4 for four
+lists inside a defect-correction whose stated purpose is enforcement, not vocabulary policy; it
+makes `decisionType: qualification` the last extension-contributed value any list can ever take
+before v1.0; and reopening it later means regenerating normative schema a second time for a
+decision that was available now. If the Committee prefers the bare enum, the generator change is
+one line — the reversal path is stated, which is what `REVERSAL-RISK.md` asks of an interim act.
+
+## Reversal risk
+
+`low` — the anyOf's second branch is purely permissive at schema level; removing it narrows, and
+any instance relying on it was doing so under the stated extension rules.
+
+## What landed with this amendment
+
+`check-codelist-binding.js` now emits `anyOf: [{enum}, {pattern}]` at every bound property and
+**fails a bare enum**, so the shape cannot silently regress. Five properties were regenerated:
+`procedure`, `decisionType`, `partyRole`, `documentType`, `positionStatus`.
+
+Two of the §5 quartet ship as fixtures, both being facts the schema itself decides:
+`conformance/fixtures/invalid/decision-decisiontype-unknown.json` — an unprefixed unknown value is
+still rejected, because the `anyOf` widens the shape and not the vocabulary — and
+`conformance/fixtures/valid/decision-decisiontype-private-prefix.json`, a prefixed private value
+that validates where the bare enum rejected it.
+
+⛔ **Gate D39-1 — the other two of the quartet are not shippable yet.** "Reserved-prefix refused by
+the harness" and "extension-prefixed resolves against the extension's codelist" both require a
+harness rule that polices prefixes **in values**. The rule that exists — `findReservedProperties`,
+driving `reservedPrefixNegative` — inspects property *names*. Resolution against an extension's
+codelist also needs the layout that gate **E-4** decides, and no in-tree extension currently
+publishes a codelist for a bound core list. Recorded rather than faked: a fixture asserting a rule
+that does not run asserts nothing.
+
+---
 
 ## Tier and breaking
 

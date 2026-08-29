@@ -1,0 +1,78 @@
+{
+  "@context": "https://concert.foundation/signet/v0.1/context.jsonld",
+  "type": "Decision",
+  "id": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#decision-d39-private"
+  },
+  "decisionType": "example-org:internalReview",
+  "madeBy": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#agent-eval-3"
+  },
+  "underMandate": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#mandate-eval-3"
+  },
+  "inputs": [
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#submission-5521"
+    },
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#submission-5522"
+    }
+  ],
+  "policiesApplied": [
+    {
+      "scheme": "did",
+      "id": "did:web:buyer.example#policy-eval-mat"
+    }
+  ],
+  "rationale": "Most Advantageous Tender (price 0.2, quality 0.55, social 0.25). submission-5521 scored 0.859474, ahead of submission-5522 at 0.841500 (margin 0.017974). The dearer bid wins on materially higher quality, accepting a 5.56% price premium over the lower bid.",
+  "outcome": {
+    "awardedSubmission": "did:web:buyer.example#submission-5521",
+    "ranking": [
+      {
+        "submission": "did:web:buyer.example#submission-5521",
+        "total": 0.859474
+      },
+      {
+        "submission": "did:web:buyer.example#submission-5522",
+        "total": 0.8415
+      }
+    ]
+  },
+  "humanApproval": {
+    "scheme": "did",
+    "id": "did:web:buyer.example#approval-771"
+  },
+  "provenance": {
+    "generatedBy": {
+      "scheme": "did",
+      "id": "did:web:buyer.example#agent-eval-3"
+    },
+    "generatedAt": "2026-06-21T14:08:00Z",
+    "derivedFrom": [
+      {
+        "scheme": "did",
+        "id": "did:web:buyer.example#submission-5521"
+      },
+      {
+        "scheme": "did",
+        "id": "did:web:buyer.example#submission-5522"
+      }
+    ],
+    "usedPolicies": [
+      {
+        "scheme": "did",
+        "id": "did:web:buyer.example#policy-eval-mat"
+      }
+    ],
+    "signature": {
+      "type": "Ed25519Signature2020",
+      "value": "z58…"
+    }
+  }
+}
