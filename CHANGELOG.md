@@ -6,6 +6,26 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Added — repository inventory extractor (non-normative tooling)
+
+Added `tools/inventory/inventory.js`: a dependency-free repository inventory extractor producing
+`signet-inventory.json` (schema v2), a `CLAIMS.json` verifier for evidence-bound repository claims
+in handoff packs, and a CI self-test with the inventory uploaded as a workflow artifact. The
+inventory is generated, not committed.
+
+Scope is `git ls-files`. The extractor states what the tracked tree contains — manifest with
+per-file hashes, schemas with their full field universe, codelists with the register line that
+decided closure, the state model, conformance requirements and checkers, and the whole text of
+every tracked Markdown file — and classifies nothing as correct, stale or missing. Where a fact
+is derived, the line that decided it is recorded alongside.
+
+`referencedFields` splits every backticked `Object.field` in tracked prose into shipped, proposed
+and unresolved against the schemas. It is data, not a gate: making it a gate would fail builds on
+prose that is already merged, and belongs in its own change proposal.
+
+A claim in a `CLAIMS.json` with no evidence fails verification rather than warning. A marker that
+can be read past is not a control.
+
 ## [0.16.0] — 2026-08-20 — Working Draft
 
 ### Changed — implementer review of v0.15.0, and three defects it found in four-day-old artifacts

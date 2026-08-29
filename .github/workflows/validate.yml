@@ -103,6 +103,26 @@ jobs:
       - name: Dialect equivalence — Draft-07 and 2020-12 must agree (report only)
         run: npm run conformance:dialect
 
+      # The inventory is generated, never committed. The self-test is what stops the
+      # extractor rotting: if a directory it models is renamed, CI fails on the renaming
+      # change rather than three sessions later.
+      #
+      # These steps run before the binding check below, which fails on main today. The
+      # upload is if: always() so the artifact still lands when a later step fails —
+      # that is exactly when the inventory is worth reading.
+      - name: Repository inventory
+        run: |
+          node tools/inventory/inventory.js --self-test
+          node tools/inventory/inventory.js --out signet-inventory.json
+
+      - name: Upload inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: signet-inventory-${{ github.sha }}
+          path: signet-inventory.json
+          retention-days: 90
+
       # Closed codelists must be enforced in schema, not merely cited in a description.
       #
       # This step FAILS on main today, and that is the accurate state: the binding manifest and
@@ -110,12 +130,12 @@ jobs:
       # still "type": "string" so any string validates. Generating the enums alters schema/ and is
       # a Tier 2 act under governance/IAR-0003, which has not landed. (D-14, D-30)
       #
-      # No continue-on-error. A check that exists and does not run is how a rule stays unenforced
-      # while appearing enforced — the failure is the point.
+      # Temporarily non-gating under #51 pending #43 (IAR-0003 as amended), whose branch
+      # generates the enums and fixes the four failures. The failure stays visible as a
+      # warning annotation. REVERT the continue-on-error with #43's merge, restoring the
+      # rule that a failing binding check blocks.
       - name: Closed codelist bindings — enforced in schema, not merely cited
         run: node conformance/rules/check-codelist-binding.js .
-        # Non-gating pending #43 (IAR-0003 as amended): the four failures are the
-        # documented D-14/D-30 state. REVERT with #43's merge, which fixes them.
         continue-on-error: true
 
   # Concert names no individual and no commercial implementer. The deny-list is stored as

@@ -21,3 +21,7 @@ conformance/reports/*-report.json
 # local plaintext naming deny-list — never committed
 .naming-denylist
 **/.naming-denylist
+
+# Repository inventory is generated on demand and attached to CI runs as an artifact.
+signet-inventory.json
+signet-inventory.*.json
