@@ -11,6 +11,8 @@ until balloted**. Nothing here has been balloted, because no Standards Committee
 > Standards Committee is constituted**, with one carve-out: a defect actively causing harm
 > may be corrected under the bootstrap clause, with an interim approval record, a stated
 > comment period, and the smallest Tier 2 surface that fixes it.
+>
+> Registration is temporarily reopened under [IAR-0006](../IAR-0006-registration-window.md): defect-remedying or timing-dependent proposals only, adoption still parked, expires on constitution or 30 September 2026.
 
 | CP | Problem it closes | Breaking | Gates v1.0? | Status |
 |----|-------------------|----------|-------------|--------|
