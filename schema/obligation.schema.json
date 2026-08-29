@@ -34,8 +34,8 @@
       "type": "string",
       "enum": [
         "pending",
-        "met",
         "breached",
+        "met",
         "waived"
       ]
     },
