@@ -20,11 +20,13 @@ every requirement is checkable with the same public tooling anyone can re-run.
 
 A platform certified against this profile holds the ordinary implementation mark —
 `SIGNET Certified: Core (CDM v0.1, suite v0.1)` or `Full` — and its registry entry records
-that the `auction-platform` profile was assessed. The
+that the `auction-platform` profile was assessed, in the
+[certification register](../../conformance/certification-register.md), which is empty. The
 [mark grammar](../../governance/mark-grammar.md) has no profile production, so there is no
 such string as *"SIGNET Certified — Auction Platform"*: the profile names a subset of
 requirements, and the registry records what was assessed against it. Adding a profile
-production to the grammar is a question for the Standards Committee (mark grammar §11).
+production to the grammar is a question for the Standards Committee once constituted (mark
+grammar §11).
 
 Certification against this profile warrants that, against a stated CDM and suite version, the
 platform closes auctions **deterministically**, keeps a **tamper-evident** canonical record,

@@ -36,11 +36,18 @@ enforced.
 3. **Reproduce.** Concert re-runs the identical suite against the submitted
    adapter and confirms the report. The check is mechanical (CN-1).
 4. **Issue.** On a confirmed pass, Concert records the certification (implementer,
-   level, CDM version, suite version, date, report hash) in the public registry
-   and licenses the "SIGNET Certified" mark for that level and version.
+   level, CDM version, suite version, date, report hash) in the public registry —
+   [`certification-register.md`](certification-register.md) — and licenses the
+   "SIGNET Certified" mark for that level and version.
 5. **Publish.** The report is publishable; the registry entry is public.
 
 There is no committee judgement, interview, or discretionary gate at any step.
+
+**The register is empty.** No certification has been issued to anyone, including Score
+Networks, so no mark is licensed and no short form resolves today. It is empty as a
+statement of fact, not as a placeholder: this document specified a public registry from the
+moment it was written, and for as long as no artifact existed a mark string had nothing to
+resolve to (`governance/defects.md` D-44).
 
 ## 3. Marks and their use
 
@@ -54,7 +61,8 @@ In outline:
   ASCII, and the punctuation is fixed so the form can be linted in CI
   (`npm run lint:marks`).
 - **The registry record is the source of truth; the string is a projection.** No
-  mark string is authored by hand.
+  mark string is authored by hand. The registry is
+  [`certification-register.md`](certification-register.md).
 - **Short forms resolve or they are not licensed.** `SIGNET Certified: Full` is
   permitted only alongside a resolvable link to the registry entry; the bare
   badge only as a hyperlink. Print, slides, and spoken claims require the
@@ -72,6 +80,9 @@ Core"* need no permission. What requires a licence is the assertion that Concert
 assessed you. The qualifier `self-assessed` is mandatory in that construction.
 
 ## 3.1 Registry entries
+
+The registry is [`certification-register.md`](certification-register.md): closed,
+append-only, and currently empty.
 
 A registry entry records the implementer, the level, the CDM and suite versions,
 the date, the report hash, any endorsements held — and the **endorsement register

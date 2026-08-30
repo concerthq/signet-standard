@@ -63,23 +63,18 @@ invalidate existing certifications but may apply at renewal. See
 
 ### Release history
 
-From [CHANGELOG.md](https://github.com/concerthq/signet-standard/blob/main/CHANGELOG.md):
+[CHANGELOG.md](https://github.com/concerthq/signet-standard/blob/main/CHANGELOG.md) is the
+release record, and it is not summarised here. A table of releases on this page is a second
+hand-maintained copy of that file, and it drifted exactly as a second copy does: it stopped at
+`0.10.0` and stayed there for six releases. `governance/defects.md` D-33 keeps that finding —
+the stale value dated the last sweep of these pages — which is why the history of the drift is
+preserved in the register rather than in the artifact that was drifting.
 
-| Version | Highlights |
-|---------|-----------|
-| **0.10.0** (2026-07) | [Commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension) **technical artifacts**: six schemas (`ExposurePosition`, `CoveragePolicy` as a Policy subtype, `PriceMark`, `CoverageAssessment`, `Scenario`, `HedgeProposal`), ten codelists, an eleven-file full-loop worked example (`belowMinimum` → proposal → executed → `withinCorridor`, arithmetically reconciled), and the six conformance rules as an executable checker (`conformance/rules/check-commodity-risk.js`; three are cross-object checks beyond schema validation) — completing the extension accepted in principle in `governance/reviews/2026-07-commodity-risk.md`. Also lands the previously-undelivered onboarding extension spec at `docs/extensions/onboarding.md`. |
-| **0.9.0** (2026-07) | [Identity profile](Extensions#working-draft-the-identity-profile) (Working Draft): the `Approval` object makes `humanApproval` **resolvable and verifiable** (pseudonymous approver, role, `delegationOfAuthority` credential, provenance), with a normative **no-PII** rule for hash-anchored records; the agent demo emits the `Approval` and checks the approver's authority ceiling covers the award. Lands the [commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension) Working Draft spec + Standards Committee review record (first member-proposed extension). Plus a **documentation & demo alignment** pass: README refreshed (conformance harness, the three demonstrations, extensions & profiles with status), `agent/README.md` corrected to the current MAT weighting, and extension specs consolidated under `docs/extensions/<id>.md` with an index. |
-| **0.8.0** (2026-07) | [Auction extension](Extensions#example-the-auction-extension): process-layer `Auction` (a profile of the sourcing flow — reverse / english / dutch / sealed-bid / multi-criteria) and `Bid`; the auction rules and canonical bid record are normative and **operator-independent** (any conformant operator closing the same bids under the same rules reaches the same `Award`), the close reuses `Decision`/`Award`, eligibility ties to `SupplierQualification`, and the bid history is a hash-chained `Event` trail; reverse-auction worked example; modelled on Prozorro's neutral-core architecture. |
-| **0.7.0** (2026-06) | **Settlement linkage** — `Obligation.dischargedBy` and `Invoice.settles` make the commitment→discharge loop traversable as data; a projection-skip guard proves `settles` never leaks into the Peppol BIS / UBL projection (ViDA convertibility unchanged); `eventType: obligation.discharged`; three conformance-checked fixtures (including a *pending* obligation carrying neither new field, proving the additions are optional). The MAT evaluation policy was reweighted to **price 20 / quality 55 / social 25**, and the award scenario now demonstrates a justified price premium (the dearer, higher-quality bid wins). |
-| **0.6.0** (2026-06) | **Supplier onboarding extension**: process-layer `OnboardingCase` (buyer-internal workflow) and `SupplierQualification` (durable status with first-class `conditional` qualification, value caps, category restrictions); reuses Credential/Policy/Decision/Event/Consent; screening results carried as **attestations**, never performed by SIGNET; two worked examples. |
-| **0.5.0** (2026-06) | [Agent demonstration](Agent-Layer) (`agent/`): a runnable proof that a synthetic agent takes a **governed, accountable, conformant** action — reads a SourcingEvent, is bounded by a Mandate (its €12M value exceeds the €10M autonomous ceiling, so human approval is required), applies the published MAT evaluation Policy, and emits an Award Decision with rationale, inputs, policies applied, human approval, and provenance, plus a five-event hash-chained trail; the runner verifies the output is conformance-clean (every object validates, the chain holds, tampering is detected); CI runs the demo on every commit. |
-| **0.4.0** (2026-06) | [Conformance harness](Conformance-Harness) (`conformance/`): Core/Full levels, the public suite, a reference adapter (reaches Full) and a broken adapter (rejected), neutrality rules CN-1…CN-4; `signet-to-ubl.js` refactored to a pure `toUBL()`; CI runs the harness on every commit. |
-| **0.3.0** (2026-06) | Runnable `signet-to-ubl.js` transform → Peppol BIS Billing 3.0; `verify-ubl.py` reconciliation; CI now proves convertibility on every push; committed `invoice.ubl.xml`. |
-| **0.2.0** (2026-06) | Complete OCDS-aligned process layer (Need, Evaluation, Award, Contract, Order, Catalogue, Obligation, Invoice); EN 16931 building blocks (Unit, InvoiceLine, VatBreakdown); EN 16931-mapped Invoice (33 BTs/BGs); Draft-07 `allOf` fix preserving BT annotations on `$ref`. |
-| **0.1.0** (2026-06) | Foundation layer; initial process layer (SourcingEvent, Submission, Policy); agent layer (SyntheticAgent, Mandate, Decision); trust layer (Event, Consent); JSON-LD context; codelists; CI-validated examples. |
-
-The **specification** itself is at **v0.1 (Working Draft / Request for Comments)** — field-
-level definitions are illustrative of the model's shape and not yet frozen.
+The **specification** is at **CDM v0.1** — the version-stable namespace at
+`https://concert.foundation/signet/v0.1/`, which does not move with the repository release.
+Field-level definitions are normative and change only under the revision process below; what a
+conformance check validates against is the published JSON Schema in `schema/`. No release number
+is restated in this prose: `package.json` carries it, and `CHANGELOG.md` is the record.
 
 ## Change control
 

@@ -6,6 +6,117 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Fixed — the specification's self-description, and the registry it named but did not have
+
+**`docs/specification.md` was the second record to keep the corrected wording out.** The v0.16.0
+reconciliation replaced the claim that Concert "stewards its evolution through the Standards
+Committee" with the bootstrap-honest formulation, and landed it in §12.2 — which states plainly
+that **no Standards Committee is constituted** — while the same claim survived twenty-two lines
+from the top of the same file, in "About this document". One document, two statements of the same
+fact, corrected in one place and not the other. `governance/defects.md` D-33 records the wiki as
+the third record to drift on this claim; the pattern is not a missed line, it is that the
+repository holds the same governance fact in several hand-maintained places and nothing compares
+them.
+
+The status header was stale in a second way. It read **"Specification v0.1 (Working Draft)"** and
+**"Status: Request for Comments"**, and "About this document" said field-level definitions were
+"illustrative" and "not yet frozen" — against a repository with a machine-runnable conformance
+suite, four certifiable extensions, a normative state model and an interims register. The header
+now separates the two identities that were being conflated: **CDM v0.1** is the version-stable
+namespace at `https://concert.foundation/signet/v0.1/` and does not move with the repository
+release. The release number is deliberately **not** restated in the document. It has a single
+source in `package.json`, is rendered into the published page by `tools/build-pages.js`, and is
+pinned for the website by `standard-ref.mjs`; a fourth hand-maintained copy would be stale at the
+next release, which is the defect being fixed rather than a fix for it.
+
+Also corrected in the same class:
+
+- `docs/specification.md` "About this document" cited **§11** for change control. Change control
+  is **§12**; §11 is Extensions. The cross-reference had been wrong since the section was written.
+- `docs/extensions/README.md` stated that "Standards Committee decision records are published
+  under `governance/reviews/`". None of them is a Committee decision, because there is no
+  Committee; each is an interim resolution taken under the bootstrap clause.
+- `docs/extensions/README.md` named the Committee as the operative route for promoting an
+  extension toward the core, and `docs/profiles/auction-platform.md` referred a grammar question
+  to it. Both now say what is true today and what changes on constitution.
+
+### Fixed — the same class in the other hand-maintained records, and what the pattern shows
+
+`governance/README.md` stated "Twenty interim resolutions are currently in force, across four
+documents" **directly above a table of seven** — D-33's fourteen-lines-apart shape compressed to
+one line. The count is removed rather than corrected: the table is the record, and a number
+restated in prose drifts out of step with it the moment a resolution is adopted. This is the shape
+the site checker now forbids on `/governance`, so the two records fail the same way or not at all.
+
+`wiki/Home.md`, `wiki/FAQ.md` and `wiki/Governance-and-Versioning.md` carried the same "v0.1
+(Working Draft / Request for Comments)" / "not yet frozen" self-description that
+`docs/specification.md` carried, and two of them stated the repository at **v0.10.0**. All are
+corrected the same way as the specification header: the CDM-versus-release identities are
+separated, and the release number is **removed, not re-pinned**. A hand-typed release number in
+wiki prose is the drift mechanism itself, and six releases is the proof.
+
+**The asymmetry is the finding, and it is recorded as a dated note on D-33 rather than a new row.**
+The v0.16.0 reconciliation corrected the Standards Committee clause in *both* records —
+`docs/specification.md` §12.2 and `wiki/Governance-and-Versioning.md:17` each say plainly that no
+Committee is constituted. The **version** claim was corrected in *neither*, surviving
+simultaneously in the spec header and on three wiki surfaces. The sweep discipline therefore works
+**per topic, not per record**: a reconciliation fixes the clause it was called for wherever that
+clause appears and leaves every other stale clause in the same paragraph standing. D-33's closure
+condition is widened accordingly — the cross-reference check it waits on must compare **version and
+status claims**, not only enums and process, or the next reconciliation passes over them again.
+
+One further clause: `wiki/Home.md`, `wiki/FAQ.md` and the release-history table in
+`wiki/Governance-and-Versioning.md` were frozen at exactly **0.10.0**, and `_site/index.html`
+states the same 0.10.0 under D-23. Four surfaces at one value is not four independent lapses — it
+dates the last sweep and says the remedy is regeneration rather than editing. The release-history
+table was subsequently cut rather than backfilled; see below.
+
+### Changed — `wiki/` is scanned by the naming check, and the release table is cut
+
+**`conformance/rules/naming-denylist.json` adds `wiki` to its `scan` list.** The rule that Concert
+names no individual and no commercial implementer covered `docs`, `governance`, `codelists`,
+`schema`, `conformance` and `state-model`. It did not cover `wiki/` — which `tools/wiki-sync.js`
+projects to the public GitHub wiki, a Concert-voiced surface with no pull requests and no CI of its
+own. The rule applied to it on paper and no check ever read it. That is the D-19 shape exactly: the
+defect is the absent control, and no breach is asserted. `check-naming.js`'s fallback list is kept
+in step so the two copies cannot disagree; no rule logic changed.
+
+Structurally the newly-scanned files are clean. Salted digest detection needs
+`SIGNET_NAMING_SALT`, which is held in CI and not in the repository, so the first pass with name
+detection actually on runs in CI for this change — not locally, and not before now.
+
+**The release-history table in `wiki/Governance-and-Versioning.md` is cut**, replaced by a pointer
+to `CHANGELOG.md` as the single release record. A table of releases in a wiki page is a second
+hand-maintained copy of the changelog — the file class this workstream exists to remove — and it
+drifted as a second copy does, stopping at `0.10.0` for six releases. It is cut rather than
+backfilled: six release summaries is authoring, not a correction. The finding is not lost, because
+it never lived in the table — D-33's dated note records the stale value as evidence dating the last
+sweep of these pages, and the register keeps the history of the drift while the drifting artifact
+goes.
+
+### Added — the certification register
+
+`conformance/certification-register.md`: normative, closed, append-only, **zero entries**.
+
+`conformance/certification.md` has specified a public registry since it was written — §2 step 4
+issues into it, §3 makes the registry record the source of truth and licenses a short-form mark
+only against "a resolvable link to the registry entry", and §3.1 lists an entry's fields. The
+artifact did not exist, so §3's resolvability condition was unsatisfiable by construction and a
+published news post promised implementers a listing in a register that could not be read. That is
+the D-31 / D-40 family — a released or published record citing an artifact absent from the tree —
+and it is now recorded three times over, which is the argument for a check rather than for closer
+reading. Recorded as **D-44**.
+
+The register opens empty and says so in its own header: emptiness is the accurate state, not a
+gap in the file. No certification has been issued to anyone, including Score Networks. It is
+indexed from `governance/README.md`, linked from `certification.md` §2, §3 and §3.1, and declared
+`published` in `public-interface.json`, so `check-public-interface.js` fails if it is ever removed
+— the register cannot now go missing the way the artifact it replaces never arrived.
+
+`governance/README.md`'s series-gaps note is corrected with it: it stated the defect register ran
+to D-31 when it runs to D-44, and listed D-33 as reserved on an unmerged branch after that branch
+merged.
+
 ### Added — repository inventory extractor (non-normative tooling)
 
 Added `tools/inventory/inventory.js`: a dependency-free repository inventory extractor producing

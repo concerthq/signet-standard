@@ -3,8 +3,10 @@
 The SIGNET core stays lean; domain structure is added through **extensions and profiles**
 that follow the OCDS extension pattern: they **add** object types, fields, or codelist
 values, and **MUST NOT** redefine or remove core fields. Broadly-useful extensions may be
-promoted toward the core through the Standards Committee
-[change-control process](../../wiki/Governance-and-Versioning.md).
+promoted toward the core through the
+[change-control process](../../wiki/Governance-and-Versioning.md). No Standards Committee is
+constituted; until one is, a promotion decision is taken under the bootstrap clause in
+[`governance/README.md`](../../governance/README.md) and recorded as an interim resolution.
 
 Each spec is named for its extension/profile **id** (unversioned — the version lives inside
 the document; the URL stays stable).
@@ -42,7 +44,10 @@ and is named for its **id** (the filename), like extensions.
 
 ## Governance
 
-Standards Committee decision records are published under [`../../governance/reviews/`](../../governance/reviews/).
+Decision records for extensions are published under [`../../governance/reviews/`](../../governance/reviews/).
+None of them is a Standards Committee decision, because no Standards Committee is constituted:
+each was taken under the bootstrap clause in [`governance/README.md`](../../governance/README.md)
+and is an interim resolution, which the Committee may ratify, amend or reverse once it exists.
 The commodity-risk review is the first **member-proposed** extension, reviewed under the
 identical process, terms, and bar as any proposer — no preferential path for any member.
 
