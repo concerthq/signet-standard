@@ -1,10 +1,15 @@
 # SIGNET Canonical Data Model
 
-**Specification v0.1 (Working Draft)**
+**CDM version:** v0.1 — the version-stable identity of the model, published at
+`https://concert.foundation/signet/v0.1/` (§12.3). This is not the repository release
+number, and the two move independently.
+**Release:** carried in `package.json` and `CHANGELOG.md`, and rendered in the banner of the
+published page. This document does not restate it: a version restated by hand is a version
+that drifts, which is what happened to the line this one replaces.
 **Steward:** Concert Foundation
 **Tier:** Normative
 **Licence:** CC0 1.0 (public domain dedication)
-**Status:** Request for Comments
+**Status:** Published and in force. Changed only under the revision process in §12.2.
 
 ---
 
@@ -12,9 +17,9 @@
 
 This specification defines the SIGNET Canonical Data Model (CDM) — the common vocabulary for representing procurement and multi-party commerce across a SIGNET network. The CDM is the central normative artifact of the SIGNET standard. Every conforming implementation reads and writes data that is expressible in, and losslessly mappable to, this model.
 
-The CDM is deliberately published under CC0. The vocabulary is meant to be implemented everywhere, by anyone, without friction or attribution burden. Concert Foundation holds no proprietary claim over the model; it stewards its evolution through the Standards Committee and the formal change-control process described in §11.
+The CDM is deliberately published under CC0. The vocabulary is meant to be implemented everywhere, by anyone, without friction or attribution burden. Concert Foundation holds no proprietary claim over the model, and stewards it toward governance on the OpenPeppol AISBL pattern: a non-profit steward with multi-stakeholder representation and no single-party control. It is not there yet, and says so. The Standards Committee that will govern normative change is **not constituted**; until it is, changes that would fall to it are taken under the published bootstrap clause in `governance/README.md` — reasoned in writing, subject to a stated comment period, recorded as interim resolutions, and reversible by the Committee on the record. The change-control process itself is described in §12.
 
-This is a working draft for community review. Field-level definitions in §4–§7 are illustrative of the model's shape and depth; they are not yet frozen. Comments are invited at hello@concert.foundation.
+Field-level definitions in §4–§7 are normative and are changed only under §12.2. What a conformance check actually validates against is the published JSON Schema in `schema/`; this document and those schemas are maintained by hand against each other, and nothing checks that they agree. Where they disagree that is a defect in one of them, and `governance/defects.md` records both an instance (D-20) and the absent control (D-21). Comments are invited at hello@concert.foundation.
 
 ---
 
@@ -618,4 +623,4 @@ This single object records what was decided, which synthetic agent decided it, u
 
 ---
 
-*This is a working draft published for comment under CC0 1.0. © 2026 Concert Foundation — to the extent any rights subsist, they are dedicated to the public domain. SIGNET and "SIGNET Certified" are marks administered by Concert Foundation under the IP & Licensing Policy.*
+*Published under CC0 1.0. © 2026 Concert Foundation — to the extent any rights subsist, they are dedicated to the public domain. SIGNET and "SIGNET Certified" are marks administered by Concert Foundation under the IP & Licensing Policy.*

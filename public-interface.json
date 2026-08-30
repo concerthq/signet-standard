@@ -414,6 +414,12 @@
       "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/certification.md (next.config.mjs rewrite)"
     },
     {
+      "path": "conformance/certification-register.md",
+      "group": "published",
+      "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/certification-register.md (next.config.mjs rewrite)",
+      "note": "Declared published because certification.md §3 licenses a short-form mark only against a resolvable link to a registry entry, so the register must answer at a stable URL or that condition is unsatisfiable by construction. It resolves once concert-website’s pin advances past the tag carrying it; until then the rewrite returns 404 for this path. See governance/defects.md D-44 and D-25."
+    },
+    {
       "path": "conformance/reports/reference-adapter-report.json",
       "group": "published",
       "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/reports/reference-adapter-report.json (next.config.mjs rewrite)"

@@ -14,6 +14,7 @@ Everything here is CC0-1.0.
 | [mark-grammar.md](mark-grammar.md) | Normative for licensees (IP & Licensing Policy). Not a CDM artifact. | Interim resolution, in force pending ratification |
 | [endorsement-register.md](endorsement-register.md) | Normative. Closed, append-only. | v0.1 — two entries, both `proposed` |
 | [role-register.md](role-register.md) | Normative. Closed, append-only. | v0.1 — four entries, all `proposed` |
+| [../conformance/certification-register.md](../conformance/certification-register.md) | Normative. Closed, append-only. | v0.1 — **zero entries**; no certification has been issued |
 | [role-competency-framework.md](role-competency-framework.md) | Non-normative | Working Draft |
 | [person-assessment.md](person-assessment.md) | Non-normative | Working Draft |
 | [proposals/](proposals/) | Change proposals against the CDM, the suite, and the codelists | See the [proposals index](proposals/README.md) |
@@ -25,11 +26,13 @@ Everything here is CC0-1.0.
 | [site-alignment/](site-alignment/) | Drafted corrections for published copy outside this repository | Superseded, **not applied** — see [OUTCOME.md](site-alignment/OUTCOME.md) |
 
 **Series gaps, recorded so a later reader does not infer a missing record.** The IAR series begins
-at 0002 — no IAR-0001 exists on any branch. The defect register on `main` runs to D-31: D-32 and
-D-33 are reserved by rows on branches that have not merged
-(`v0.16-iar-0003-codelist-enforcement` and `v0.16-iar-0004-registry-normative` carry D-32;
-`wiki/correct-drift` carries D-33), so D-34 onward are assigned across the gap and stay stable when
-those branches merge. Neither gap is an omission.
+at 0002 — no IAR-0001 exists on any branch. The defect register on `main` runs to D-44 with one
+gap: **D-32** is reserved by rows on `v0.16-iar-0003-codelist-enforcement` and
+`v0.16-iar-0004-registry-normative`, which have not merged, so the number is taken and D-34 onward
+were assigned across it and stay stable when those branches merge. **D-33** was reserved the same
+way on `wiki/correct-drift`; that branch has since merged, so D-33 is present and sits out of
+sequence at the end of the table rather than in numeric position. Neither the gap nor the
+out-of-sequence row is an omission.
 
 ## Status vocabulary
 

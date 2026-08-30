@@ -6,6 +6,63 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Fixed — the specification's self-description, and the registry it named but did not have
+
+**`docs/specification.md` was the second record to keep the corrected wording out.** The v0.16.0
+reconciliation replaced the claim that Concert "stewards its evolution through the Standards
+Committee" with the bootstrap-honest formulation, and landed it in §12.2 — which states plainly
+that **no Standards Committee is constituted** — while the same claim survived twenty-two lines
+from the top of the same file, in "About this document". One document, two statements of the same
+fact, corrected in one place and not the other. `governance/defects.md` D-33 records the wiki as
+the third record to drift on this claim; the pattern is not a missed line, it is that the
+repository holds the same governance fact in several hand-maintained places and nothing compares
+them.
+
+The status header was stale in a second way. It read **"Specification v0.1 (Working Draft)"** and
+**"Status: Request for Comments"**, and "About this document" said field-level definitions were
+"illustrative" and "not yet frozen" — against a repository with a machine-runnable conformance
+suite, four certifiable extensions, a normative state model and an interims register. The header
+now separates the two identities that were being conflated: **CDM v0.1** is the version-stable
+namespace at `https://concert.foundation/signet/v0.1/` and does not move with the repository
+release. The release number is deliberately **not** restated in the document. It has a single
+source in `package.json`, is rendered into the published page by `tools/build-pages.js`, and is
+pinned for the website by `standard-ref.mjs`; a fourth hand-maintained copy would be stale at the
+next release, which is the defect being fixed rather than a fix for it.
+
+Also corrected in the same class:
+
+- `docs/specification.md` "About this document" cited **§11** for change control. Change control
+  is **§12**; §11 is Extensions. The cross-reference had been wrong since the section was written.
+- `docs/extensions/README.md` stated that "Standards Committee decision records are published
+  under `governance/reviews/`". None of them is a Committee decision, because there is no
+  Committee; each is an interim resolution taken under the bootstrap clause.
+- `docs/extensions/README.md` named the Committee as the operative route for promoting an
+  extension toward the core, and `docs/profiles/auction-platform.md` referred a grammar question
+  to it. Both now say what is true today and what changes on constitution.
+
+### Added — the certification register
+
+`conformance/certification-register.md`: normative, closed, append-only, **zero entries**.
+
+`conformance/certification.md` has specified a public registry since it was written — §2 step 4
+issues into it, §3 makes the registry record the source of truth and licenses a short-form mark
+only against "a resolvable link to the registry entry", and §3.1 lists an entry's fields. The
+artifact did not exist, so §3's resolvability condition was unsatisfiable by construction and a
+published news post promised implementers a listing in a register that could not be read. That is
+the D-31 / D-40 family — a released or published record citing an artifact absent from the tree —
+and it is now recorded three times over, which is the argument for a check rather than for closer
+reading. Recorded as **D-44**.
+
+The register opens empty and says so in its own header: emptiness is the accurate state, not a
+gap in the file. No certification has been issued to anyone, including Score Networks. It is
+indexed from `governance/README.md`, linked from `certification.md` §2, §3 and §3.1, and declared
+`published` in `public-interface.json`, so `check-public-interface.js` fails if it is ever removed
+— the register cannot now go missing the way the artifact it replaces never arrived.
+
+`governance/README.md`'s series-gaps note is corrected with it: it stated the defect register ran
+to D-31 when it runs to D-44, and listed D-33 as reserved on an unmerged branch after that branch
+merged.
+
 ### Added — repository inventory extractor (non-normative tooling)
 
 Added `tools/inventory/inventory.js`: a dependency-free repository inventory extractor producing
