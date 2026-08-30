@@ -33,13 +33,15 @@
   "allowEmails": [
     "hello@concert.foundation"
   ],
+  "$comment_scan": "wiki/ was added 2026-08-30. It was outside the scan list while being projected to the public GitHub wiki by tools/wiki-sync.js — a public Concert-voiced surface that the rule covered on paper and no check ever read. The absent control is the D-19 shape, recorded again on governance/defects.md D-33.",
   "scan": [
     "docs",
     "governance",
     "codelists",
     "schema",
     "conformance",
-    "state-model"
+    "state-model",
+    "wiki"
   ],
   "scanRootFiles": [
     "README.md",

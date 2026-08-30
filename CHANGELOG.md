@@ -66,10 +66,33 @@ condition is widened accordingly — the cross-reference check it waits on must 
 status claims**, not only enums and process, or the next reconciliation passes over them again.
 
 One further clause: `wiki/Home.md`, `wiki/FAQ.md` and the release-history table in
-`wiki/Governance-and-Versioning.md` are frozen at exactly **0.10.0**, and `_site/index.html` states
-the same 0.10.0 under D-23. Four surfaces at one value is not four independent lapses — it dates
-the last sweep and says the remedy is regeneration rather than editing. The release-history table
-is left as history and not backfilled.
+`wiki/Governance-and-Versioning.md` were frozen at exactly **0.10.0**, and `_site/index.html`
+states the same 0.10.0 under D-23. Four surfaces at one value is not four independent lapses — it
+dates the last sweep and says the remedy is regeneration rather than editing. The release-history
+table was subsequently cut rather than backfilled; see below.
+
+### Changed — `wiki/` is scanned by the naming check, and the release table is cut
+
+**`conformance/rules/naming-denylist.json` adds `wiki` to its `scan` list.** The rule that Concert
+names no individual and no commercial implementer covered `docs`, `governance`, `codelists`,
+`schema`, `conformance` and `state-model`. It did not cover `wiki/` — which `tools/wiki-sync.js`
+projects to the public GitHub wiki, a Concert-voiced surface with no pull requests and no CI of its
+own. The rule applied to it on paper and no check ever read it. That is the D-19 shape exactly: the
+defect is the absent control, and no breach is asserted. `check-naming.js`'s fallback list is kept
+in step so the two copies cannot disagree; no rule logic changed.
+
+Structurally the newly-scanned files are clean. Salted digest detection needs
+`SIGNET_NAMING_SALT`, which is held in CI and not in the repository, so the first pass with name
+detection actually on runs in CI for this change — not locally, and not before now.
+
+**The release-history table in `wiki/Governance-and-Versioning.md` is cut**, replaced by a pointer
+to `CHANGELOG.md` as the single release record. A table of releases in a wiki page is a second
+hand-maintained copy of the changelog — the file class this workstream exists to remove — and it
+drifted as a second copy does, stopping at `0.10.0` for six releases. It is cut rather than
+backfilled: six release summaries is authoring, not a correction. The finding is not lost, because
+it never lived in the table — D-33's dated note records the stale value as evidence dating the last
+sweep of these pages, and the register keeps the history of the drift while the drifting artifact
+goes.
 
 ### Added — the certification register
 

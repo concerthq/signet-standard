@@ -57,7 +57,7 @@ catch (e) { console.error('cannot read naming-denylist.json:', e.message); proce
 
 const denied = new Set(manifest.digests || []);
 const allow = new Set((manifest.allow || []).map((t) => t.toLowerCase()));
-const scan = manifest.scan || ['docs', 'governance', 'codelists', 'schema', 'conformance', 'state-model'];
+const scan = manifest.scan || ['docs', 'governance', 'codelists', 'schema', 'conformance', 'state-model', 'wiki'];
 const verbatim = manifest.verbatim || [];
 const scanRoot = manifest.scanRootFiles || [];
 
