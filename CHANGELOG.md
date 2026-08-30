@@ -40,6 +40,37 @@ Also corrected in the same class:
   extension toward the core, and `docs/profiles/auction-platform.md` referred a grammar question
   to it. Both now say what is true today and what changes on constitution.
 
+### Fixed — the same class in the other hand-maintained records, and what the pattern shows
+
+`governance/README.md` stated "Twenty interim resolutions are currently in force, across four
+documents" **directly above a table of seven** — D-33's fourteen-lines-apart shape compressed to
+one line. The count is removed rather than corrected: the table is the record, and a number
+restated in prose drifts out of step with it the moment a resolution is adopted. This is the shape
+the site checker now forbids on `/governance`, so the two records fail the same way or not at all.
+
+`wiki/Home.md`, `wiki/FAQ.md` and `wiki/Governance-and-Versioning.md` carried the same "v0.1
+(Working Draft / Request for Comments)" / "not yet frozen" self-description that
+`docs/specification.md` carried, and two of them stated the repository at **v0.10.0**. All are
+corrected the same way as the specification header: the CDM-versus-release identities are
+separated, and the release number is **removed, not re-pinned**. A hand-typed release number in
+wiki prose is the drift mechanism itself, and six releases is the proof.
+
+**The asymmetry is the finding, and it is recorded as a dated note on D-33 rather than a new row.**
+The v0.16.0 reconciliation corrected the Standards Committee clause in *both* records —
+`docs/specification.md` §12.2 and `wiki/Governance-and-Versioning.md:17` each say plainly that no
+Committee is constituted. The **version** claim was corrected in *neither*, surviving
+simultaneously in the spec header and on three wiki surfaces. The sweep discipline therefore works
+**per topic, not per record**: a reconciliation fixes the clause it was called for wherever that
+clause appears and leaves every other stale clause in the same paragraph standing. D-33's closure
+condition is widened accordingly — the cross-reference check it waits on must compare **version and
+status claims**, not only enums and process, or the next reconciliation passes over them again.
+
+One further clause: `wiki/Home.md`, `wiki/FAQ.md` and the release-history table in
+`wiki/Governance-and-Versioning.md` are frozen at exactly **0.10.0**, and `_site/index.html` states
+the same 0.10.0 under D-23. Four surfaces at one value is not four independent lapses — it dates
+the last sweep and says the remedy is regeneration rather than editing. The release-history table
+is left as history and not backfilled.
+
 ### Added — the certification register
 
 `conformance/certification-register.md`: normative, closed, append-only, **zero entries**.

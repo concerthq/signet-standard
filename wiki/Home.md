@@ -90,8 +90,13 @@ SIGNET defines a **Canonical Data Model (CDM)** organised into four layers:
 
 ## Status & licensing
 
-- **Specification version:** v0.1 (Working Draft / Request for Comments)
-- **Repository / artifact version:** v0.10.0
+- **CDM version:** v0.1 — the version-stable identity of the model, published at
+  `https://concert.foundation/signet/v0.1/`. It is not the repository release number, and the
+  two move independently. Field-level definitions are normative and change only under the
+  revision process; see [Governance & Versioning](Governance-and-Versioning#change-control).
+- **Repository / artifact version:** not restated here. It has one source — `package.json`,
+  with `CHANGELOG.md` as the release record. A release number typed into wiki prose is the
+  drift mechanism itself: this line read `v0.10.0` for six releases.
 - **Licence:** [CC0 1.0](https://github.com/concerthq/signet-standard/blob/main/LICENSE)
   (public-domain dedication of the artifacts; the marks are administered separately).
 - **Marks:** "SIGNET", "Concert", and "SIGNET Certified" are marks administered by Concert

@@ -102,8 +102,10 @@ expectations for AI-assisted evaluation under the **EU AI Act**; the
 ### How is the model versioned?
 [Semantic Versioning](Governance-and-Versioning). Major = breaking core change; minor =
 backward-compatible additions; patch = clarifications. Every version is permanently
-retrievable at a version-stable URI. The repository is at **v0.10.0**; the specification is a
-**v0.1 working draft**.
+retrievable at a version-stable URI. The **CDM** is at **v0.1** — the version-stable namespace,
+which does not move with the repository release. The release number is not restated here:
+`package.json` and `CHANGELOG.md` are the record, and a copy typed into this sentence read
+`v0.10.0` for six releases.
 
 ### How do I extend SIGNET for my domain?
 Publish a versioned **extension** package under its own namespace that *adds* (never changes)

@@ -78,8 +78,14 @@ From [CHANGELOG.md](https://github.com/concerthq/signet-standard/blob/main/CHANG
 | **0.2.0** (2026-06) | Complete OCDS-aligned process layer (Need, Evaluation, Award, Contract, Order, Catalogue, Obligation, Invoice); EN 16931 building blocks (Unit, InvoiceLine, VatBreakdown); EN 16931-mapped Invoice (33 BTs/BGs); Draft-07 `allOf` fix preserving BT annotations on `$ref`. |
 | **0.1.0** (2026-06) | Foundation layer; initial process layer (SourcingEvent, Submission, Policy); agent layer (SyntheticAgent, Mandate, Decision); trust layer (Event, Consent); JSON-LD context; codelists; CI-validated examples. |
 
-The **specification** itself is at **v0.1 (Working Draft / Request for Comments)** — field-
-level definitions are illustrative of the model's shape and not yet frozen.
+The **specification** is at **CDM v0.1** — the version-stable namespace at
+`https://concert.foundation/signet/v0.1/`, which does not move with the repository release.
+Field-level definitions are normative and change only under the revision process below; what a
+conformance check validates against is the published JSON Schema in `schema/`.
+
+No release number is restated in this prose, and the table above is a history rather than a
+statement of the current release: it ends at the last release swept into this page, not at the
+latest one. `package.json` and `CHANGELOG.md` are the record.
 
 ## Change control
 

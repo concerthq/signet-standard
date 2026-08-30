@@ -53,7 +53,13 @@ standard is published under a stable URI and DOI — and before the first mark i
 in that window are recorded as **interim resolutions**: in force, reasoned in writing, and
 reversible by the committee on the record rather than by silent drift.
 
-Twenty interim resolutions are currently in force, across four documents:
+The interim resolutions in force are indexed below; the table is the record.
+
+**No count is stated here, deliberately.** A number restated in prose drifts out of step with
+the table the moment a resolution is adopted. This line read "Twenty interim resolutions are
+currently in force, across four documents" *directly above a table of seven* — the
+fourteen-lines-apart shape of D-33, compressed to one line. The site checker forbids the same
+shape on `/governance`: a stated count, rather than any one number.
 
 | Document | Resolutions |
 |----------|-------------|
