@@ -4,7 +4,82 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
-## [Unreleased]
+## [0.16.1] — 2026-08-30
+
+### Added — a registration window, two registered proposals, and the constitution drafts
+
+`governance/IAR-0006-registration-window.md` reopens **registration only**, for change proposals
+that remedy a recorded defect or resolve a timing dependency in a change already in flight.
+Adoption stays parked and the harm carve-out is untouched. The window expires automatically on
+constitution of the Standards Committee or at 23:59 UTC 30 September 2026, whichever is earlier,
+and the record states the new facts that justify revisiting the 20 August standing rule nine days
+after its adoption, rather than editing the rule away.
+
+Registered under the window, each carrying the required banner, a role-based origin statement and
+the steward's recusal: `governance/proposals/CP-Requirement-Sockets.md` — the remedy for D-34,
+D-35 and D-36 as three additive, target-neutral core sockets — and
+`governance/proposals/CP-Extension-Composition-Amendment-A.md` — published-extension fields ride
+the landed Part 1 pattern with resolution by path, so Part 2 keeps the 2020-12 migration for its
+remaining merit (`$ref` siblings) and drops `unevaluatedProperties`. Registration is not
+adoption; both wait for the Committee, with their comment periods running meanwhile.
+
+Drafted and deciding nothing until executed at the first session:
+`governance/CONSTITUTION-2026-09.md` — appointments void without a completed assessment; quorum
+is both members; adoption is by unanimity; the steward does not vote; deadlock leaves a proposal
+Draft with the disagreement recorded; a recused matter falls to the remaining member; the change
+of constitution trigger is minuted as a decision, not drifted past — with
+`governance/interests-register.md` (initiates at execution; the steward's dual role and the
+SE-0001 recusal are entries 1 and 2), `governance/first-session-agenda.md` (the twenty interim
+resolutions triaged into ratification buckets) and `governance/member-brief.md` (the reading
+path in, and the habits of the record).
+
+### Added — the requirements extension, spec-first, and the defect rows that ground it
+
+`docs/extensions/requirements.md` (Working Draft — spec; schemas to follow): `Requirement` and
+`RequirementSet` as first-class, versioned, addressable objects; three closed relation types
+(`derivesFrom`, `varies` with a mandatory Decision as authority, `testedBy`); statement patterns
+adapted from EARS with deterministic checks only; parameters declared on the requirement and
+bound on the set; tenancy, quality assessment and requirement content explicitly out of scope.
+The three core sockets it relies on are proposed, not shipped, and the spec says so.
+
+Grounded by defect rows rather than argument: **D-34** (no object addresses an evaluation
+criterion), **D-35** (`Obligation` records what discharges it and nothing about where it came
+from), **D-36** (a submission cannot state a structured position on what was asked), **D-37**
+(two core `identifierScheme` codes collide with the extension prefix grammar), **D-38** (nine
+in-tree extension roots lack the Part 1 pattern), **D-39** (a generated bare `enum` would decide
+gate C-4 by generator shape; resolved on the record as an amendment folded into IAR-0003's open
+pull request — `anyOf` of the enum and the prefix pattern, plus a reservation rule for prefixes
+already used by core codes). **D-40..D-42** are recorded from verification candidates checked
+against `main`, and **D-43** records that forge state — pull requests, review decisions — is
+invisible to tree evidence, with three instances of records asserting forge state that did not
+hold; it closes when the inventory extractor gains a forge section or such assertions are
+forbidden.
+
+`.github/ISSUE_TEMPLATE/scope-enquiry.md` adds the intake route the originating enquiry had to
+do without; SE-0001 is the first record through it, filed with the recusal attached.
+
+### Added — dialect tooling, report-only
+
+`tools/migrate-2020-12.js` (mechanical Draft-07 → 2020-12 rewrite) and
+`conformance/rules/check-dialect-equivalence.js` (identical verdicts across the corpus under both
+dialects). Report-only until the v1.0 train decides the migration; a reported verdict difference
+is evidence for that decision, not a failure of this one.
+
+### Changed — CI: the binding step is temporarily non-gating, with its revert condition stated
+
+The closed-codelist binding step carries `continue-on-error` pending IAR-0003 as amended, whose
+branch generates the enums and fixes the four failures the step reports (D-14, D-30 — both
+unchanged by this). The failure stays visible as a warning annotation on every run, and the
+revert travels with that merge: the check goes hard again at the moment it starts passing. One
+dated workflow statement instead of repeated required-check overrides.
+
+### Added — the wiki becomes a projection
+
+`tools/wiki-sync.js`: the live GitHub wiki has no pull requests and no CI of its own, so it is
+treated as a projection of the reviewed `wiki/` directory, never an editing surface. The check
+mode reports drift in both directions — a live-only page is D-33's pattern and requires a human
+decision — and every push records the source commit, so each live-wiki state traces to a
+reviewed tree state.
 
 ### Fixed — the specification's self-description, and the registry it named but did not have
 
