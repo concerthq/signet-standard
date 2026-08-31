@@ -28,6 +28,9 @@ until balloted**. Nothing here has been balloted, because no Standards Committee
 | [CP-Mandate-Scope](CP-Mandate-Scope.md) | `Mandate.scope` is required and unconstrained: `{}` satisfies it | **Yes** | No — v1.0 or never | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
 | [CP-Process-Spine](CP-Process-Spine.md) | `SourcingEvent` has no link back to `Need` — the one break in the spine | No | No | **Parked** — see [WITHDRAWAL-2026-08](../WITHDRAWAL-2026-08.md) |
 | [CP-Amendments-Round-2](CP-Amendments-Round-2.md) | Revises CP-Tenancy and CP-Codelist-Enforcement; two gates dissolved | Inherited | No | Draft; **applied** to both |
+| [CP-Commodity-Risk-Linkage](CP-Commodity-Risk-Linkage.md) | The `commodity-risk` extension's core linkage, event types, `policyEvaluationStatus`, `Policy` subtype and `HedgeProposal` lifecycle exist in its spec and not in the tree (D-45..D-49) | Core no; extension yes (`CoveragePolicy`) | No | Draft; registered under IAR-0006 |
+| [CP-Quantity-Unit](CP-Quantity-Unit.md) | Unit of measure written three ways and bound nowhere; delivery period written two ways with no core primitive (D-50, D-51) | No | No | Draft; registered under IAR-0006 |
+| [CP-Market-Identifiers](CP-Market-Identifiers.md) | `market` is a free string; no identifier scheme for energy market areas or participants (D-52) | No | No | Draft; registered under IAR-0006 |
 
 ## Delivery and dependencies
 

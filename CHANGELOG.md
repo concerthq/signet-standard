@@ -9,6 +9,7 @@ version changes only on a breaking change to the core model.
 ### Governance
 - Defect register: D-45..D-52 recorded against the `commodity-risk` extension (spec/tree divergences: core linkage, event types, `policyEvaluationStatus` binding, `Policy` subtype, `HedgeProposal` lifecycle) and the core primitives it leans on (unit of measure, delivery period, market identifiers). Facts only; no artifact changed.
 - Interests register: entry 4 (steward's origination of the `commodity-risk` extension and of its remedies).
+- Registered under IAR-0006: `CP-Commodity-Risk-Linkage`, `CP-Quantity-Unit`, `CP-Market-Identifiers` — defect-remedying (D-45..D-52). Adoption parked; comment periods run from ready-for-review.
 
 ## [0.16.1] — 2026-08-30
 
