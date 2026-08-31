@@ -19,6 +19,7 @@ Everything here is CC0-1.0.
 | [person-assessment.md](person-assessment.md) | Non-normative | Working Draft |
 | [proposals/](proposals/) | Change proposals against the CDM, the suite, and the codelists | See the [proposals index](proposals/README.md) |
 | [reviews/](reviews/) | Point-in-time reviews of merged work | — |
+| [RESPONSE-2026-08-implementer-enquiry.md](RESPONSE-2026-08-implementer-enquiry.md) | Published response to the 20 August 2026 implementer enquiry (twenty-one questions against v0.15.0); comment period fourteen days from 31 August, not waived | Tier 1 record; closes D-40 |
 | [IAR-0002-state-model.md](IAR-0002-state-model.md) | Interim approval record — state model and the `Bid` correction | In force; comment period waived, departure recorded |
 | [IAR-0006-registration-window.md](IAR-0006-registration-window.md) | Pre-constitution registration window; expires on constitution |
 | [IR-2026-08-prior-normative-changes.md](IR-2026-08-prior-normative-changes.md) | Interim resolution — the eleven normative changes predating the written rule | In force |
