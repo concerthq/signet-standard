@@ -2,10 +2,14 @@
 /**
  * check-state-model.js — registry consistency and the basis rule.
  *
- * Ten checks. The basis rule (C7) is the neutrality control: every core
+ * Fourteen checks. The basis rule (C7) is the neutrality control: every core
  * transition must be justifiable from a source other than any single
  * implementer. It runs on every push; that is what makes it a control
  * rather than an intention.
+ *
+ * C11 (terminal reachability), C12 (registry completeness), C13 (authority
+ * evidence) and C14 (basis scope) were cited by CHANGELOG v0.16.0 and by the
+ * D-15 and D-16 closures before they were written; see D-53.
  *
  * Usage: node conformance/rules/check-state-model.js [repoRoot]
  * Exit 0 = pass, 1 = fail.
@@ -171,6 +175,35 @@ for (const o of model.objects) {
     if (!allCodes.has(e.eventType)) E('C8', `${e.id}: eventType "${e.eventType}" is in no codelist`);
   }
 
+  // C11 — terminal reachability (contributed; see CHANGELOG v0.16.0). Every lifecycle-bearing
+  // object must have at least one terminal state, and every non-terminal state must be able to
+  // reach one. Distinct from C9: C9 asks whether a state can be entered, C11 whether an object
+  // can end. Objects with no declared states are skipped — statelessness is C0's business.
+  if (declared.length) {
+    const terminals = declared.filter((st) => o.states[st].terminal);
+    if (terminals.length === 0) {
+      E('C11', `${tag}: no terminal state — the object can never end`);
+    } else {
+      const canEnd = new Set(terminals);
+      let growEnd = true;
+      while (growEnd) {
+        growEnd = false;
+        for (const t of transitions)
+          if (canEnd.has(t.to))
+            for (const f of t.from || [])
+              if (!canEnd.has(f)) { canEnd.add(f); growEnd = true; }
+      }
+      for (const st of declared)
+        if (!canEnd.has(st)) E('C11', `${tag}.${st} cannot reach any terminal state`);
+    }
+  }
+
+  // C13 — an edge requiring recorded authority must name how it is evidenced
+  // (docs/state-model.md §5a).
+  for (const t of transitions)
+    if (t.requiresAuthority && !t.decisionType)
+      E('C13', `${t.id}: requiresAuthority with no decisionType — the authority is asserted, not recorded`);
+
   // C9 — reachability from creation.
   const reach = new Set([creations[0] && creations[0].to].filter(Boolean));
   let grew = true;
@@ -183,6 +216,30 @@ for (const o of model.objects) {
       }
   }
   for (const st of declared) if (!reach.has(st)) E('C9', `${tag}.${st} is unreachable from creation`);
+}
+
+// C12 — registry completeness (docs/state-model.md L-2): every schema file has a declaration,
+// lifecycle-bearing or not. Statelessness by omission is a defect; by declaration it is a decision.
+try {
+  const onDisk = fs.readdirSync(p('schema')).filter((f) => f.endsWith('.schema.json'));
+  const inRegistry = new Set(model.objects.map((x) => path.basename(x.schema)));
+  for (const f of onDisk)
+    if (!inRegistry.has(f)) E('C12', `schema/${f} has no declaration in the registry`);
+  for (const x of model.objects)
+    if (!onDisk.includes(path.basename(x.schema))) W('C12', `${x.object}: declared against ${x.schema}, which is not present`);
+} catch (e) { W('C12', `could not enumerate schema/: ${e.message}`); }
+
+// C14 — basis scope (docs/state-model.md §6 B-3). Externality is not generality: a core entry
+// on a jurisdictional basis needs a corroborating general source; one on an implementer basis
+// must move to a profile.
+for (const x of model.objects) {
+  if (x.layer !== 'core') continue;
+  for (const e of x.entries || x.transitions || []) {
+    if (e.basisScope === 'jurisdictional' && !e.corroboratingBasis)
+      W('C14', `${e.id}: core entry on a jurisdictional basis ("${e.basis}") with no corroborating general source`);
+    if (e.basisScope === 'implementer')
+      E('C14', `${e.id}: core entry on an implementer basis — must move to a profile`);
+  }
 }
 
 // C10 — no orphan core event codes: every closed core code is registry-known or grant-lifecycle.
