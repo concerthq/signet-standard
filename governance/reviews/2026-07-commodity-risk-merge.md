@@ -9,6 +9,14 @@
 > note is added because the title reads as though a constituted body performed the review. The
 > title is left as written rather than changed after the fact.
 
+> **Note added 31 August 2026.** §1.3 ("Extension-field namespacing … satisfied") and §1.4
+> ("`CoveragePolicy` as an Agent-layer `Policy` subtype … satisfied") describe the specification
+> as submitted, not the schemas as merged. On `main` at v0.16.1 no core schema carries the
+> namespaced additions, `CoveragePolicy` shares no schema with `Policy`, and the event types of
+> spec §6 were not minted. Recorded as D-45..D-49 in `governance/defects.md`; remedies registered
+> as `CP-Commodity-Risk-Linkage`. The finding does not disturb the merge outcome — the artifacts
+> that landed pass CI and the checker — it corrects what this record claims about them.
+
 **Subject:** `commodity-risk` extension v0.1 — resubmission review and merge
 **Reference:** first review, `governance/reviews/2026-07-commodity-risk.md`
 **Date:** 5 July 2026 · **Outcome:** **Merged as Working Draft**
