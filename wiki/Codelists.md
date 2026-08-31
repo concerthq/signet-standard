@@ -36,7 +36,7 @@ The lists below belong to the [commodity-risk extension](Extensions#working-draf
 | [instrument](#instrument) | `ExposurePosition.instrument` |
 | [deliveryBasis](#deliverybasis) | position / horizon delivery basis |
 | [markType](#marktype) | `PriceMark.markType` |
-| [policyEvaluationStatus](#policyevaluationstatus) | `CoverageAssessment.status` — **closed** |
+| [policyEvaluationStatus](#policyevaluationstatus) | `CoverageAssessment.policyEvaluation.status` — specified **closed**, unbound on `main` (D-47) |
 | [portfolioScope](#portfolioscope) | portfolio classification band |
 | [executionRoute](#executionroute) | `HedgeProposal.executionRoute` |
 | [shockBand](#shockband) | `Scenario.shockBand` |
@@ -232,7 +232,9 @@ EN 16931 BT-151 / BT-118. Subset of UNTDID 5305.
 
 These lists belong to the [commodity-risk extension](Extensions#working-draft-the-commodity-risk-extension).
 `positionStatus` and `policyEvaluationStatus` are **closed** — conformance and reconciliation
-depend on their values; the rest are open.
+depend on their values; the rest are open. `policyEvaluationStatus` is not bound in
+`codelists/bindings.json` on `main`, so nothing enforces its closure — see
+`governance/defects.md` D-47.
 
 ### commodity
 
@@ -296,7 +298,8 @@ depend on their values; the rest are open.
 
 ### policyEvaluationStatus
 
-**Closed list** — conformance depends on it.
+**Closed list** — conformance depends on it. Unbound on `main`, so the closure is specified but
+not enforced — `governance/defects.md` D-47.
 
 | Code | Title | Description |
 |------|-------|-------------|
