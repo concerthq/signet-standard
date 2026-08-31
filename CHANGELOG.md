@@ -10,6 +10,7 @@ version changes only on a breaking change to the core model.
 - Defect register: D-45..D-52 recorded against the `commodity-risk` extension (spec/tree divergences: core linkage, event types, `policyEvaluationStatus` binding, `Policy` subtype, `HedgeProposal` lifecycle) and the core primitives it leans on (unit of measure, delivery period, market identifiers). Facts only; no artifact changed.
 - Interests register: entry 4 (steward's origination of the `commodity-risk` extension and of its remedies).
 - Registered under IAR-0006: `CP-Commodity-Risk-Linkage`, `CP-Quantity-Unit`, `CP-Market-Identifiers` — defect-remedying (D-45..D-52). Adoption parked; comment periods run from ready-for-review.
+- Published `governance/RESPONSE-2026-08-implementer-enquiry.md`, the response the v0.16.0 entry cited eleven days before it existed (D-40, closed). Drafted against v0.15.0 on 20 August; published against v0.16.1 stating per correction what has landed and what rides IAR-0003 (#43). The enquiry is published de-named; verbatim publication is forbidden by the naming rule. Comment period fourteen days from publication, not waived.
 
 ### Fixed
 - `check-state-model.js` gains C11 (terminal reachability), C12 (registry completeness), C13 (authority evidence) and C14 (basis scope). The v0.16.0 entry describing C11 and the D-15/D-16 closures citing C12 and C14 were premature: the registry changes had landed, the checks had not. Recorded as D-53.
