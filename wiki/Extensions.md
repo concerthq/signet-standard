@@ -165,18 +165,23 @@ core objects** (`Contract`, `Need`, `Award`, `Decision`) live under a dedicated
 `HedgeProposal` instantiates a core [`Need`](Process-Layer#need); the coverage corridor is a
 subtype of the Agent-layer [`Policy`](Agent-Layer#policy) so it bounds a synthetic agent's
 `Mandate`; and every assessment is a hash-anchored [`Event`](Trust-Layer#event).
+**Specified, not shipped:** no core schema on `main` carries a `commodityRisk` property, and
+the composition socket that did land admits only colon-prefixed keys, so this key form cannot
+validate — see `governance/defects.md` D-45.
 
 **Status: Working Draft, landed in-tree (v0.10.0).** The full technical package has shipped:
 six schemas (`ExposurePosition`, `CoveragePolicy` as a `Policy` subtype, `PriceMark`,
 `CoverageAssessment`, `Scenario`, `HedgeProposal`), ten codelists (`positionStatus` and
-`policyEvaluationStatus` are **closed**), an eleven-file full-loop worked example under
+`policyEvaluationStatus` are **closed** as specified, though `policyEvaluationStatus` is unbound
+on `main` — `governance/defects.md` D-47), an eleven-file full-loop worked example under
 `examples/commodity-risk/` (`belowMinimum` → proposal → `executed` → `withinCorridor`,
 arithmetically reconciled), and the six conformance rules as an executable checker
 (`conformance/rules/check-commodity-risk.js`, run by `npm run conformance:commodity-risk`) —
 three of them cross-object checks beyond schema validation: reconciliation arithmetic,
 scenario fixed-cost invariance, and escalation-first rule ordering. The new object schemas
-ship in-tree under the core `v0.1` namespace; the additive fields on core objects use the
-namespaced `commodityRisk` key. The Standards Committee has **merged it as a Working Draft**
+ship in-tree under the core `v0.1` namespace; the additive fields on core objects are specified
+to use the namespaced `commodityRisk` key, which is not on `main` (D-45). The Standards
+Committee has **merged it as a Working Draft**
 (`governance/reviews/2026-07-commodity-risk-merge.md`).
 
 ## Working Draft: the identity profile
