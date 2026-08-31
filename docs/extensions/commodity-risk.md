@@ -5,6 +5,12 @@
 **Extends:** SIGNET CDM v0.1 — Process layer (linkage), Agent layer (Policy subtype,
 Decision context), Trust layer (event types), Foundation (codelists).
 
+> **Known divergences from the tree (31 August 2026).** §4.2, §4.6, §5, §6 and §8 describe
+> structure that is not on `main` at v0.16.1. See `governance/defects.md` D-45..D-49 and
+> `governance/proposals/CP-Commodity-Risk-Linkage.md`. The schemas, examples and checker are
+> the artifacts; where this document and they disagree, they are right and this document is
+> wrong.
+
 This extension adds **portfolio-level commodity risk governance** to the SIGNET CDM:
 positions, coverage policies, price marks, assessments, scenarios, and hedge
 proposals, and their linkage into the core process chain. Electricity is the
