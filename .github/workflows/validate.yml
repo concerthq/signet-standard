@@ -117,7 +117,7 @@ jobs:
 
       - name: Upload inventory
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: signet-inventory-${{ github.sha }}
           path: signet-inventory.json
