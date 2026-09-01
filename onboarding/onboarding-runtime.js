@@ -15,6 +15,10 @@ const rd = (p) => JSON.parse(fs.readFileSync(path.join(DIR, p), "utf8"));
 const AGENT = { scheme: "did", id: "did:web:buyer.example#agent-qual-2" };
 const BUYER = { scheme: "did", id: "did:web:buyer.example#buyer" };
 const TS = "2026-06-22T00:00:00Z";
+// The category this scenario qualifies against. Held here, not read off the eligibility
+// Policy: core `Policy` declares no property for it and the onboarding extension declares
+// none either, so the Policy instance carried it as an undeclared key (defects D-55, D-57).
+const CATEGORY = { scheme: "cpv", id: "72720000", description: "Wide area network services" };
 const prov = (derivedFrom = [], usedPolicies = []) => ({
   generatedBy: AGENT, generatedAt: TS,
   ...(derivedFrom.length ? { derivedFrom } : {}),
@@ -122,7 +126,7 @@ function runScenario({ reasoner }) {
     qualifiedBy: BUYER,
     status: result.outcome === "qualified" ? "active" : result.outcome === "conditional" ? "conditional" : "offboarded",
     conditions: result.conditions,
-    classifications: [policy.appliesTo],
+    classifications: [CATEGORY],
     credentials: creds,
     validity: { startDate: "2026-06-22T00:00:00Z", endDate: "2027-06-22T00:00:00Z" },
     lastDecision: decision.id,
