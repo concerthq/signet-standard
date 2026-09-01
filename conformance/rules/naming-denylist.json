@@ -50,6 +50,10 @@
   ],
   "verbatim": [
     {
+      "path": "governance/appointments-register.md",
+      "reason": "Appointments register: the single naming point for appointed persons (constitution instrument §2). Every other path remains subject to the deny-list."
+    },
+    {
       "path": "governance/enquiries",
       "reason": "Third-party documents published unedited. Not Concert's voice; de-naming a document its author signed would be concealment rather than policy. The exclusion is recorded here so it is itself auditable."
     }
