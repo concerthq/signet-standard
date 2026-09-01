@@ -190,6 +190,19 @@ sidecar, meaning "where in an instance this codelist's values appear." This CP u
 Different artifacts, unrelated meanings. **Rename the sidecar key** — the Policy field is
 normative and permanent, the sidecar key is not. Proposed sidecar replacement: `valueLocations`.
 
+**A third meaning, recorded 2026-09-01 (D-57).** `Policy.appliesTo` has already existed once, in
+the withdrawn form that `governance/WITHDRAWAL-2026-08.md:20` records as a shipped defect, meaning
+*the category this policy governs*. It survived in `onboarding/policy-onboarding.json` as a
+`Classification` (CPV 72720000) until that instance was made schema-conformant and the key removed.
+That meaning now has no artifact home: the category an onboarding eligibility policy governs is
+expressed in the runtime and in prose, and nowhere in the policy a buyer would publish.
+
+This bears on §6 rather than sitting beside it. Taking `appliesTo` for "where this policy is
+required" is permanent and forecloses the earlier meaning under the name a reader would look for
+it under. Either this CP states that the governed-category meaning is out of scope and needs its
+own field, or the collision is resolved three ways rather than two. Evidence that the first meaning
+still needs a home: D-57.
+
 ---
 
 ## 7. Rejected alternatives
