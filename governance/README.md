@@ -20,6 +20,7 @@ Everything here is CC0-1.0.
 | [proposals/](proposals/) | Change proposals against the CDM, the suite, and the codelists | See the [proposals index](proposals/README.md) |
 | [reviews/](reviews/) | Point-in-time reviews of merged work | — |
 | [RESPONSE-2026-08-implementer-enquiry.md](RESPONSE-2026-08-implementer-enquiry.md) | Published response to the 20 August 2026 implementer enquiry (twenty-one questions against v0.15.0); comment period fourteen days from 31 August, not waived | Tier 1 record; closes D-40 |
+| [EAE-0001.md](EAE-0001.md) | External analyst enquiry, 9 September 2026 — decomposed into records; decides nothing itself. Originator is a Committee candidate; recusal consequence recorded at intake | Tier 1 record; origin of D-58..D-61, CP-Qualification-Lifecycle, SE-0002 |
 | [IAR-0002-state-model.md](IAR-0002-state-model.md) | Interim approval record — state model and the `Bid` correction | In force; comment period waived, departure recorded |
 | [IAR-0006-registration-window.md](IAR-0006-registration-window.md) | Pre-constitution registration window; expires on constitution |
 | [IR-2026-08-prior-normative-changes.md](IR-2026-08-prior-normative-changes.md) | Interim resolution — the eleven normative changes predating the written rule | In force |

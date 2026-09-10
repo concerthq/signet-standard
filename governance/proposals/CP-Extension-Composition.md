@@ -341,3 +341,20 @@ meanings for standards SIGNET maps to?
 - `Validation-and-Conformance.md` — update "Schema design notes"; the line "A migration to
   JSON Schema 2020-12 will be considered before v1.0" becomes a recorded decision.
 - `conformance/levels.md` — add the v1.0 tooling prerequisite (§3.2).
+
+---
+
+## 10. Evidence
+
+Appended after registration. Each entry is a statement from outside Concert, recorded because it
+bears on whether this proposal's problem is real, not because it proposes anything.
+
+**EAE-0001 (2026-09-09) — procurement practitioner, enterprise and public sector.** Procurement
+tooling is "really buyer specific… where most tools and frameworks in procurement face pushback or
+passivity"; organisations buy in structurally different ways. This is an independent practitioner
+statement of the adoption risk this proposal exists to manage: the core must be small enough to be
+true everywhere, with variation composed, or it will be resisted as one buyer's model.
+
+See also D-60 item 3. `codelists/procedure.csv` is framed on a single statute (the UK Procurement
+Act 2023) — the same core-versus-jurisdiction question this proposal answers for fields, arriving
+on a codelist, where the mechanism proposed here does not reach.
