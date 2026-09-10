@@ -98,3 +98,23 @@ index.
 Raised by implementer enquiry, verified against v0.15.0 before recording. Recording a defect is
 not adoption of any proposed remedy, and none of these was recorded on an implementer's assertion
 alone.
+
+## Evidence appended after recording
+
+Recorded here rather than inside the table rows, so that no existing row is edited and the date an
+item of evidence arrived stays visible. A defect's row is the fact; this section is what has since
+been said about it from outside Concert.
+
+**D-39 — EAE-0001 (2026-09-09).** Public bodies are "very sensitive about how each type [of
+sourcing event] is handled and the rules around what is allowed to happen how." Per-type
+procedural rules are a compliance requirement, not a convenience. The extension space D-39 records
+as foreclosed — `procedure` is one of its four names — is therefore load-bearing in exactly the
+deployments the standard targets, and the generator shape D-39 asks about decides whether it
+exists. See also D-60, which records that the same codelist's *contents* are wrong independently
+of how it is enforced.
+
+**D-57 — cross-reference, second surface.** EAE-0001 #2 and `CP-Qualification-Lifecycle` gate QL-2:
+category-scoped qualification status raises the same "where does the governed category live"
+question in `SupplierQualification` that D-57 records for `Policy`. One design decision, two
+surfaces; an answer for `Policy` that does not also answer `SupplierQualification` leaves the
+second surface open.
