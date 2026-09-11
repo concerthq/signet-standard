@@ -61,6 +61,34 @@ An enquiry may be answered: in scope (core), in scope (extension), in scope
 Every answer is recorded with its reasoning, so the question cannot be re-raised
 without new argument.
 
+## Declaring adoption
+
+Any organisation may declare that it adopts SIGNET by opening a pull request
+that adds one entry to [`registry/adopters.json`](registry/adopters.json). An
+entry is a statement of practice, not a conformance claim; SIGNET Certified
+status is established only through the public conformance suite, on identical
+terms for every implementer. The pull request must be opened from, or cite an
+email from, an address at the organisation's declared domain. The steward
+records that check in the merge record. Entries name organisations only; no
+individual appears in the register.
+
+An entry declares one or more of:
+
+- `accepts` — the organisation will accept SIGNET-conformant documents from
+  counterparties.
+- `emits` — the organisation produces SIGNET documents.
+- `internal-model` — the organisation uses the CDM as its internal canonical
+  model.
+
+The entry shape is fixed by
+[`registry/adopter-entry.schema.json`](registry/adopter-entry.schema.json):
+`organisation`, `domain`, `organisationType`, `statements`, `cdmVersion`,
+`declaredOn`, `record` (the pull request number, `#NN`), and optionally
+`founding`. Append the entry in `declaredOn` order and run
+`npm run registry:adopters`. An entry declared before the founding window
+closes may carry `founding: true`; the status is a fact about timing and
+confers nothing ([IAR-0007](governance/IAR-0007-founding-adopter-window.md)).
+
 ## Running validation locally
 
 ```

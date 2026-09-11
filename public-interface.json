@@ -440,6 +440,16 @@
       "consumer": "concert-website — proxied at https://concert.foundation/signet/v0.1/conformance/suite/document-conformance.json (next.config.mjs rewrite)"
     },
     {
+      "path": "registry/adopters.json",
+      "group": "consumed",
+      "consumer": "concert-website — /adopt register render (site reposition, commit S-2); build-time fetch from the first pin that carries this path. Declared ahead of the consumer so the path cannot be removed in the gap between release and pin bump."
+    },
+    {
+      "path": "registry/founding-window.json",
+      "group": "consumed",
+      "consumer": "concert-website — /adopt empty-state copy (site reposition, commit S-2); build-time fetch from the first pin that carries this path. Declared ahead of the consumer, as above."
+    },
+    {
       "path": "CHANGELOG.md",
       "group": "consumed",
       "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
