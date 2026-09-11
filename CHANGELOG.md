@@ -4,7 +4,7 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
-## [Unreleased]
+## [0.17.0] — 2026-09-11
 
 ### Governance
 - Defect register: D-45..D-52 recorded against the `commodity-risk` extension (spec/tree divergences: core linkage, event types, `policyEvaluationStatus` binding, `Policy` subtype, `HedgeProposal` lifecycle) and the core primitives it leans on (unit of measure, delivery period, market identifiers). Facts only; no artifact changed.
