@@ -1,6 +1,6 @@
 {
-  "$comment": "The founding-adopter window, machine-readable so tools/check-adopters.js rule 5 reads a date rather than parsing prose. Basis: governance/IAR-0007. The window closes at the earlier of closesAt and committee constitution, the same instant IAR-0006 expires. On constitution, the pull request that marks IAR-0006 expired sets constitutedOn to the constitution date (YYYY-MM-DD); an entry declared on or after that date may not carry founding: true.",
+  "$comment": "The founding-adopter window, machine-readable so tools/check-adopters.js rule 5 reads a date rather than parsing prose. Basis: governance/IAR-0007. The window closes at the earlier of closesAt and committee constitution. On constitution, the pull request that records it sets constitutedOn to the constitution date (YYYY-MM-DD); an entry declared on or after that date may not carry founding: true.",
   "basis": "governance/IAR-0007-founding-adopter-window.md",
-  "closesAt": "2026-09-30T23:59:00Z",
+  "closesAt": "2026-12-31T23:59:00Z",
   "constitutedOn": null
 }
