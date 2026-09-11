@@ -18,6 +18,7 @@
     "conformance:endorsements:broken": "node conformance/rules/check-endorsements.js --adapter conformance/adapter/broken-adapter.js",
     "conformance:codelists": "node conformance/rules/check-codelists.js",
     "lint:marks": "node tools/lint-mark-strings.js",
+    "registry:adopters": "node tools/check-adopters.js",
     "conformance:state-model": "node conformance/rules/check-state-model.js .",
     "conformance:public-interface": "node conformance/rules/check-public-interface.js .",
     "conformance:commodity-risk": "node conformance/rules/check-commodity-risk.js",

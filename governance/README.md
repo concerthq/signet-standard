@@ -23,6 +23,7 @@ Everything here is CC0-1.0.
 | [EAE-0001.md](EAE-0001.md) | External analyst enquiry, 9 September 2026 — decomposed into records; decides nothing itself. Originator is a Committee candidate; recusal consequence recorded at intake | Tier 1 record; origin of D-58..D-61, CP-Qualification-Lifecycle, SE-0002 |
 | [IAR-0002-state-model.md](IAR-0002-state-model.md) | Interim approval record — state model and the `Bid` correction | In force; comment period waived, departure recorded |
 | [IAR-0006-registration-window.md](IAR-0006-registration-window.md) | Pre-constitution registration window; expires on constitution |
+| [IAR-0007-founding-adopter-window.md](IAR-0007-founding-adopter-window.md) | Adopter register (`registry/adopters.json`) and the founding-adopter window; the window closes on constitution or at year end 2026, the register does not | In force; Tier 1, no comment period |
 | [IR-2026-08-prior-normative-changes.md](IR-2026-08-prior-normative-changes.md) | Interim resolution — the eleven normative changes predating the written rule | In force |
 | [WITHDRAWAL-2026-08.md](WITHDRAWAL-2026-08.md) | The v1.0 proposal train withdrawn to a parked state; eight defects kept | In force |
 | [site-alignment/](site-alignment/) | Drafted corrections for published copy outside this repository | Superseded, **not applied** — see [OUTCOME.md](site-alignment/OUTCOME.md) |

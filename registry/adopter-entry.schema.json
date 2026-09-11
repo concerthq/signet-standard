@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://concert.foundation/signet/registry/adopter-entry.schema.json",
+  "title": "AdopterEntry",
+  "description": "A self-declared statement of practice by an organisation. This is not a conformance claim. Conformance is established only by the public suite (conformance/levels.md).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["organisation", "domain", "organisationType", "statements", "cdmVersion", "declaredOn", "record"],
+  "properties": {
+    "organisation": { "type": "string", "minLength": 2, "maxLength": 120 },
+    "domain": { "type": "string", "pattern": "^([a-z0-9-]+\\.)+[a-z]{2,}$" },
+    "organisationType": { "type": "string", "enum": ["buyer", "supplier", "public-body", "operator", "adviser", "software-vendor"] },
+    "statements": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": { "type": "string", "enum": ["accepts", "emits", "internal-model"] }
+    },
+    "cdmVersion": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+$" },
+    "declaredOn": { "type": "string", "format": "date" },
+    "founding": { "type": "boolean", "description": "Permitted only while the founding window in registry/founding-window.json is open (governance/IAR-0007). A fact about timing; confers no right, priority or standing." },
+    "record": { "type": "string", "pattern": "^#[0-9]+$", "description": "The pull request that landed this entry. The PR is the audit trail; verification is recorded in its merge record." }
+  }
+}
