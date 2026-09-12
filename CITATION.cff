@@ -24,7 +24,7 @@ keywords:
   - Peppol BIS Billing
   - OCDS
 license: CC0-1.0
-version: 0.3.0
-date-released: "2026-06-22"
+version: 0.17.1
+date-released: "2026-09-12"
 url: https://concert.foundation/standard
 repository-code: https://github.com/concerthq/signet-standard
