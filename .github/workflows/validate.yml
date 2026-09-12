@@ -96,6 +96,13 @@ jobs:
       - name: Public interface — every declared path exists
         run: node conformance/rules/check-public-interface.js .
 
+      # v0.17.1 was tagged with a [0.17.1] changelog heading and 0.17.0 in package.json, because
+      # the release step cut a tag without the release commit. Nothing here noticed; the website
+      # build caught it two repositories downstream. A standard that needs a consumer to detect
+      # its own release inconsistency has the control in the wrong repository (D-19 shape).
+      - name: Release version — package.json and the changelog name the same version
+        run: node conformance/rules/check-release-version.js .
+
       # Draft-07 vs 2020-12 verdict equivalence across the corpus. Report-only until the v1.0
       # train decides the migration; --gate after. Precedent: "checks implemented, non-gating"
       # (CP-Mandate-enforcement). A reported difference is evidence for that decision, not a

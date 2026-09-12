@@ -1,6 +1,6 @@
 {
   "name": "signet-standard",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "SIGNET Canonical Data Model — the normative open standard for governed procurement networks. Stewarded by Concert Foundation.",
   "license": "CC0-1.0",
   "homepage": "https://concert.foundation/standard",
@@ -30,7 +30,8 @@
     "conformance:dialect": "node conformance/rules/check-dialect-equivalence.js",
     "inventory": "node tools/inventory/inventory.js",
     "inventory:verify": "node tools/inventory/inventory.js --verify",
-    "inventory:self-test": "node tools/inventory/inventory.js --self-test"
+    "inventory:self-test": "node tools/inventory/inventory.js --self-test",
+    "conformance:release-version": "node conformance/rules/check-release-version.js ."
   },
   "devDependencies": {
     "ajv": "^8.12.0",

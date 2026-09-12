@@ -22,6 +22,17 @@ version changes only on a breaking change to the core model.
   the rule and is recorded as one — any address the patterns admit stops being a failure.
   Every other address still fails.
 
+### Fixed
+- `check-release-version.js` (`npm run conformance:release-version`), in `validate.yml`: the
+  version in `package.json` and `package-lock.json` must equal the newest released heading in
+  this file. The v0.17.1 tag was first cut with a `[0.17.1]` heading and `0.17.0` in
+  `package.json`, because the release step cut a tag without the release commit every previous
+  release had made. Nothing in this repository noticed, and the failure surfaced two
+  repositories downstream in the website's build gate. A standard that depends on a consumer
+  to detect its own release inconsistency has the control in the wrong repository — the D-19
+  shape, recorded again. The tag was re-cut on the corrected commit; nothing consumed the
+  first cut, which existed for minutes and was never pinned by the site.
+
 ## [0.17.0] — 2026-09-11
 
 ### Governance
