@@ -84,7 +84,23 @@ const EMAIL = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
 const CORPORATE = /\b[A-Z][A-Za-z&.\-]*\s+(Ltd\.?|Limited|plc|PLC|GmbH|Inc\.?|LLC|LLP|S\.A\.|N\.V\.|A\/S|Pty)\b/g;
 const SIGNED_BY = /(?:^|\n)\s*(?:signed(?:\s+by)?|contact|from|prepared by|author)\s*[:\-–]\s*([A-Z][a-z]+(?:\s+[A-Z][a-z'’-]+){1,2})/gi;
 
-const emailAllow = new Set((manifest.allowEmails || []).map((e) => e.toLowerCase()));
+// allowEmails entries are literals unless they contain `*`, which stands for any run of
+// characters that is not an `@` or whitespace. The wildcard exists for the reserved domains
+// of RFC 2606 and RFC 6761 (`*@*.example`, `*@example.com`): an address there cannot reach a
+// person, so publishing one discloses nothing, and a worked example in a specification needs
+// to show the shape of a notice address. It is a widening of the rule, recorded as such: the
+// check no longer fails on any address whose domain a pattern admits.
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const emailAllow = (manifest.allowEmails || []).map((e) => {
+  const t = e.toLowerCase();
+  return t.includes('*')
+    ? new RegExp('^' + t.split('*').map(escapeRe).join('[^@\\s]*') + '$')
+    : t;
+});
+const emailAllowed = (addr) => {
+  const a = addr.toLowerCase();
+  return emailAllow.some((e) => (typeof e === 'string' ? e === a : e.test(a)));
+};
 
 const isVerbatim = (rel) => verbatim.some((v) => rel === v.path || rel.startsWith(v.path.replace(/\/?$/, '/')));
 
@@ -119,7 +135,7 @@ function checkFile(abs, rel) {
 
   // 2 — email addresses.
   for (const m of text.matchAll(EMAIL))
-    if (!emailAllow.has(m[0].toLowerCase()))
+    if (!emailAllowed(m[0]))
       fail.push(`${rel}:${lineOf(m.index)} — email address <${m[0].split('@')[0].slice(0, 2)}…@${m[0].split('@')[1]}>`);
 
   // 3 — corporate suffixes.
