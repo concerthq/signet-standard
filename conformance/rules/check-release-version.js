@@ -65,5 +65,34 @@ if (lock) {
   }
 }
 
-console.log(`\nSIGNET release version check\n\n  · package.json ${pkg.version} = newest changelog heading [${newest}]${lock ? ', package-lock.json agrees' : ''}\n\nPass.\n`);
+// CITATION.cff names the version a citation of this standard carries. It was added once at
+// 0.3.0 and never touched again, so it sat fourteen minor versions behind while every release
+// published — the same fault as the tag, undetected far longer because nothing downstream
+// reads it. It is in scope here for that reason: the files a release must keep in step are the
+// files that name a version, not the files a build happens to consume.
+//
+// `cff-version` is the CFF schema version and is deliberately NOT checked; only the top-level
+// `version` key, matched at column 0 so a nested `version:` inside another block is ignored.
+// The file is read line-wise rather than parsed: adding a YAML dependency to a check this
+// small would cost more than it verifies.
+let citation = null;
+try { citation = fs.readFileSync(p('CITATION.cff'), 'utf8'); } catch { citation = null; }
+if (citation !== null) {
+  const m = citation.match(/^version:[ \t]*["']?([^"'\s]+)["']?[ \t]*$/m);
+  if (!m) {
+    fail('CITATION.cff carries no top-level `version:` key. Either it names the release version, or it is not a citation of a released version.');
+  }
+  if (m[1] !== pkg.version) {
+    fail(
+      `CITATION.cff says ${m[1]} where package.json names ${pkg.version}.\n`
+      + '    A citation of this standard would name a version this repository never released.\n'
+      + '    Bump `version:` (and `date-released:`) in the release commit.',
+    );
+  }
+}
+
+console.log(
+  `\nSIGNET release version check\n\n  · package.json ${pkg.version} = newest changelog heading [${newest}]`
+  + `${lock ? ', package-lock.json agrees' : ''}${citation !== null ? ', CITATION.cff agrees' : ''}\n\nPass.\n`,
+);
 process.exit(0);
