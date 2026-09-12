@@ -4,6 +4,24 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [0.17.1] — 2026-09-12
+
+### Added
+- `docs/positions/onenda-and-signet.md` — a positioning paper on adopting oneNDA as the NDA
+  step in sourcing. Non-normative and a proposal only: it states in its own summary that SIGNET
+  does not currently model an NDA, and its front matter carries the claim triad
+  (`modelled: none`, `tested: none`, `certified: none`) as data rather than prose. No schema,
+  closed codelist, event code or governance register changes, and no change proposal is
+  registered by it. `public-interface.json` declares the file as consumed by the site build.
+
+### Changed
+- `check-naming.js` admits addresses on the domains reserved by RFC 2606 and RFC 6761.
+  `allowEmails` entries now take `*`, and the reserved domains are listed in the manifest as
+  data. The rule failed on a worked example showing the shape of a notice address; an address
+  on a reserved domain resolves to no one, so it discloses no person. This is a widening of
+  the rule and is recorded as one — any address the patterns admit stops being a failure.
+  Every other address still fails.
+
 ## [0.17.0] — 2026-09-11
 
 ### Governance

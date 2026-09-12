@@ -31,7 +31,11 @@
     "cabinet office"
   ],
   "allowEmails": [
-    "hello@concert.foundation"
+    "hello@concert.foundation",
+    "*@*.example",
+    "*@example.com",
+    "*@example.net",
+    "*@example.org"
   ],
   "$comment_scan": "wiki/ was added 2026-08-30. It was outside the scan list while being projected to the public GitHub wiki by tools/wiki-sync.js — a public Concert-voiced surface that the rule covered on paper and no check ever read. The absent control is the D-19 shape, recorded again on governance/defects.md D-33.",
   "scan": [
@@ -57,5 +61,6 @@
       "path": "governance/enquiries",
       "reason": "Third-party documents published unedited. Not Concert's voice; de-naming a document its author signed would be concealment rather than policy. The exclusion is recorded here so it is itself auditable."
     }
-  ]
+  ],
+  "$comment_allowEmails": "Wildcard entries cover the reserved domains of RFC 2606 and RFC 6761. An address there resolves to no one, so a worked example may show the shape of a notice address without disclosing a person. Every other address remains a failure."
 }
