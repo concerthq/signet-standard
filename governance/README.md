@@ -21,6 +21,7 @@ Everything here is CC0-1.0.
 | [reviews/](reviews/) | Point-in-time reviews of merged work | — |
 | [RESPONSE-2026-08-implementer-enquiry.md](RESPONSE-2026-08-implementer-enquiry.md) | Published response to the 20 August 2026 implementer enquiry (twenty-one questions against v0.15.0); comment period fourteen days from 31 August, not waived | Tier 1 record; closes D-40 |
 | [EAE-0001.md](EAE-0001.md) | External analyst enquiry, 9 September 2026 — decomposed into records; decides nothing itself. Originator is a Committee candidate; recusal consequence recorded at intake | Tier 1 record; origin of D-58..D-61, CP-Qualification-Lifecycle, SE-0002 |
+| [EAE-0002.md](EAE-0002.md) | Implementer enquiry, 14 September 2026, on auction extension readiness – decomposed into records; decides nothing itself. Originated by an engineer at the deploying implementer in which the steward holds a declared interest (interests register entry 5); adoption of derived proposals reserved to the Committee | Tier 1 record; origin of D-62..D-69 and D-72; D-70, D-71 found verifying it |
 | [IAR-0002-state-model.md](IAR-0002-state-model.md) | Interim approval record — state model and the `Bid` correction | In force; comment period waived, departure recorded |
 | [IAR-0006-registration-window.md](IAR-0006-registration-window.md) | Pre-constitution registration window; expires on constitution |
 | [IAR-0007-founding-adopter-window.md](IAR-0007-founding-adopter-window.md) | Adopter register (`registry/adopters.json`) and the founding-adopter window; the window closes on constitution or at year end 2026, the register does not | In force; Tier 1, no comment period |
@@ -29,7 +30,7 @@ Everything here is CC0-1.0.
 | [site-alignment/](site-alignment/) | Drafted corrections for published copy outside this repository | Superseded, **not applied** — see [OUTCOME.md](site-alignment/OUTCOME.md) |
 
 **Series gaps, recorded so a later reader does not infer a missing record.** The IAR series begins
-at 0002 — no IAR-0001 exists on any branch. The defect register on `main` runs to D-44 with one
+at 0002 — no IAR-0001 exists on any branch. The defect register on `main` has one
 gap: **D-32** is reserved by rows on `v0.16-iar-0003-codelist-enforcement` and
 `v0.16-iar-0004-registry-normative`, which have not merged, so the number is taken and D-34 onward
 were assigned across it and stay stable when those branches merge. **D-33** was reserved the same
