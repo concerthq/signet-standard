@@ -19,6 +19,10 @@ version changes only on a breaking change to the core model.
   hash is defined only in code; chain scope is per subject in the adapter contract and global in
   the auction runtime). D-72 records the supersession prose drift, closed by #69. Facts only; no
   artifact changed.
+- `governance/proposals/CP-Auction-Determinism.md` – registered under IAR-0006, remedying D-62..D-71
+  (EAE-0002). Registration is not adoption: adoption is reserved to the Standards Committee and the
+  proposal is not eligible for interim resolution (interests register entry 5). Added to the
+  Committee's first-session queue. No normative artifact changes.
 
 ### Fixed
 - Auction extension: supersession described as an event, matching the schema and state model
