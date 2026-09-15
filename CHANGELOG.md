@@ -4,6 +4,18 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Fixed
+- Auction extension: supersession described as an event, matching the schema and state model
+  (prose drift). `docs/extensions/auction.md` §4 no longer lists `superseded` as a `Bid.status`
+  value; a later bid from the same bidder supersedes the earlier one through `bid.superseded`
+  carrying `supersededBy`, and the standing bid is a projection of the event history.
+
+### Changed
+- auction-platform profile: identity-extension dependency marked provisional. AP-5 depends on
+  the identity extension, a Working Draft; no requirement text changes.
+
 ## [0.17.1] — 2026-09-12
 
 ### Added

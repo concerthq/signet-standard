@@ -73,10 +73,12 @@ e.g. a €5M `valueCap` structurally bars it from *winning* a €12M auction eve
 ## 4. `Bid` (normative)
 
 Required: `id`, `auction`, `bidder`, `value`, `submittedAt`, `status`
-(`active` | `superseded` | `withdrawn` | `winning` | `rejected`). May carry the bidder's
-`qualification` (eligibility provenance) and the `round`. Each bid placement is also
-emitted as a hash-chained `Event` (`bid.placed`); this object is the materialised
-standing bid.
+(`active` | `withdrawn` | `winning` | `rejected`). May carry the bidder's
+`qualification` (eligibility provenance) and the `round`. Each bid placement is an
+immutable record, also emitted as a hash-chained `Event` (`bid.placed`). A later bid from
+the same bidder supersedes the earlier one through a `bid.superseded` event whose payload
+carries `supersededBy`; supersession is a relation recorded as an event, not a `status`
+value. The standing bid is a projection of the event history.
 
 ## 5. The close (reuse, not new machinery)
 
