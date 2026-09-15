@@ -6,6 +6,20 @@ version changes only on a breaking change to the core model.
 
 ## [Unreleased]
 
+### Added
+- `governance/EAE-0002.md` – an implementer enquiry on auction extension readiness, received
+  14 September 2026 against v0.17.1 and decomposed into dispositions. Role-based throughout. It was
+  originated by an engineer at the deploying implementer in which the steward holds a declared
+  interest, recorded as interests register entry 5: proposals derived from it are registered, never
+  adopted by the steward, and reserved to the Standards Committee. The record decides nothing.
+- Defect register: D-62..D-72. D-62..D-69 from EAE-0002 (the close is defined over bids, not the
+  event history; round and step semantics; no authoritative order for `earliest-bid`; no seed
+  field; `split` against a single winner; no monetary precision rule; checker coverage narrower
+  than the claim; contradictory rule combinations). D-70 and D-71 found verifying it (the event
+  hash is defined only in code; chain scope is per subject in the adapter contract and global in
+  the auction runtime). D-72 records the supersession prose drift, closed by #69. Facts only; no
+  artifact changed.
+
 ### Fixed
 - Auction extension: supersession described as an event, matching the schema and state model
   (prose drift). `docs/extensions/auction.md` §4 no longer lists `superseded` as a `Bid.status`
