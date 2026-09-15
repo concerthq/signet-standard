@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/concerthq/signet-standard"
   },
+  "engines": {
+    "node": ">=20 <21"
+  },
   "scripts": {
     "validate": "node validate.js",
     "transform": "node tools/signet-to-ubl.js > examples/invoice.ubl.xml",

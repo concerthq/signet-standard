@@ -16,6 +16,30 @@ jobs:
         with:
           node-version: '20'
 
+      # The inventory is generated, never committed. The self-test is what stops the
+      # extractor rotting: if a directory it models is renamed, CI fails on the renaming
+      # change rather than three sessions later.
+      #
+      # It runs first, on the tree exactly as checked out. The conformance and endorsement
+      # steps below rewrite the four committed samples under conformance/reports/ (each gains
+      # a fresh timestamp), so an inventory taken after them recorded every run as dirty,
+      # with hashes for those files that no checkout can reproduce. The extractor uses Node
+      # built-ins only, so it needs nothing the install step provides. The upload is
+      # if: always() so the artifact still lands when a later step fails; that is exactly
+      # when the inventory is worth reading.
+      - name: Repository inventory
+        run: |
+          node tools/inventory/inventory.js --self-test
+          node tools/inventory/inventory.js --out signet-inventory.json
+
+      - name: Upload inventory
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: signet-inventory-${{ github.sha }}
+          path: signet-inventory.json
+          retention-days: 90
+
       - name: Install validation tooling
         run: npm install ajv@8 ajv-formats@3 ajv-cli@5 --no-save
 
@@ -109,26 +133,6 @@ jobs:
       # failure of this one.
       - name: Dialect equivalence — Draft-07 and 2020-12 must agree (report only)
         run: npm run conformance:dialect
-
-      # The inventory is generated, never committed. The self-test is what stops the
-      # extractor rotting: if a directory it models is renamed, CI fails on the renaming
-      # change rather than three sessions later.
-      #
-      # These steps run before the binding check below, which fails on main today. The
-      # upload is if: always() so the artifact still lands when a later step fails —
-      # that is exactly when the inventory is worth reading.
-      - name: Repository inventory
-        run: |
-          node tools/inventory/inventory.js --self-test
-          node tools/inventory/inventory.js --out signet-inventory.json
-
-      - name: Upload inventory
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: signet-inventory-${{ github.sha }}
-          path: signet-inventory.json
-          retention-days: 90
 
       # Closed codelists must be enforced in schema, not merely cited in a description.
       #

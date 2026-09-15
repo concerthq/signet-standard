@@ -1,0 +1,4 @@
+# Line endings are LF in the repository and in every working tree, whatever core.autocrlf says.
+# Without this, a Windows checkout under the system default rewrites tracked files to CRLF on disk,
+# and hashes taken from the working tree (the inventory manifest, sha256sum) stop matching CI.
+* text=auto eol=lf
