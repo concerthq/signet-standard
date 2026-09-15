@@ -22,7 +22,8 @@ Proposed disposition — the Committee may re-bucket freely:
 Comment periods elapsed pre-session; adoption is available, not obligatory.
 1. `CP-Requirement-Sockets` — additive, non-breaking, three defects closed (D-34..36). **Steward recused**; §3.4 applies.
 2. `CP-Extension-Composition-Amendment-A` — narrows a parked proposal's Part 2; decides nothing normative itself. **Steward recused.**
-3. Any further window registrations, in registration order.
+3. `CP-Auction-Determinism` – remedies D-62..D-71 (EAE-0002); core in form only, extension breaking for reserved combinations. **Steward recused** (interests register entry 5); adoption by the Committee only, no interim resolution; §3.4 applies.
+4. Any further window registrations, in registration order.
 
 ## D. Received, not decided (20 min)
 1. SE-0001 (recusal attached) — schedule the scope determination or defer with a stated condition.
