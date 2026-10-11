@@ -4,6 +4,14 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Added
+- `governance/defects.md` – D-73: `docs/specification.md` §5.11 says the CDM's EN 16931 alignment
+  makes a SIGNET network "natively compliant" with a tax mandate. Compliance is a determination a
+  tax authority makes about a taxpayer, not a property of a data model. Recorded as a defect, open.
+  Record only: the specification is not changed here.
+
 ## [0.17.2] — 2026-10-11
 
 ### Added
