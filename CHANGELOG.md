@@ -4,7 +4,7 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
-## [Unreleased]
+## [0.17.2] — 2026-10-11
 
 ### Added
 - `governance/EAE-0002.md` – an implementer enquiry on auction extension readiness, received
