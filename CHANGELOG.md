@@ -4,6 +4,27 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Added
+- `docs/positions/ai-ready-data-and-signet.md` – a positioning paper assessing SIGNET against the
+  Open Data Institute's Framework for AI-ready data (v2, December 2025), criterion by criterion.
+  Non-normative; status `assessment`; relates to v0.17.2. Its front matter carries the claim triad
+  (`modelled: none`, `tested: none`, `certified: none`). Nothing in the tree is changed by it and
+  no change proposal is registered by it: the standing rule closes registration until the
+  Standards Committee is constituted. `public-interface.json` declares the file as consumed by the
+  site build.
+
+### Changed
+- `docs/positions/onenda-and-signet.md` – second edition, re-verified against v0.17.2 and relating
+  to it. Corrections listed in the paper's §8: the example context URL; `noticeAddresses` typed
+  against a block that does not exist; `Mandate.constraints` are Policy references; composition
+  runs outward from the extension because every core schema is closed; `documentType` and
+  `decisionType` are closed codelists, so version 1 of the proposed extension touches open lists
+  only; the route to adoption reflects the standing rule and the expiry of IAR-0006. A no-personal-
+  data rule (R-3) is added following the identity extension. Still a proposal; still nothing
+  modelled, tested or certified.
+
 ## [0.17.2] — 2026-10-11
 
 ### Added

@@ -530,6 +530,11 @@
       "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
     },
     {
+      "path": "docs/positions/ai-ready-data-and-signet.md",
+      "group": "consumed",
+      "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
+    },
+    {
       "path": "docs/specification.md",
       "group": "consumed",
       "consumer": "concert-website — build-time fetch in scripts/generate-standard.mjs"
