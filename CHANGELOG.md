@@ -4,7 +4,7 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
-## [Unreleased]
+## [0.17.3] — 2026-10-15
 
 ### Added
 - `docs/positions/ai-ready-data-and-signet.md` – a positioning paper assessing SIGNET against the
