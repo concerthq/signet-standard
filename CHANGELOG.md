@@ -4,6 +4,16 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Added
+- `docs/positions/opentelemetry-and-signet.md` – a positioning paper on carrying OpenTelemetry's
+  trace context, baggage, semantic conventions and resource identity alongside the SIGNET record.
+  Non-normative; status `proposal`; relates to v0.17.3. Front matter carries the claim triad
+  (`modelled: none`, `tested: none`, `certified: none`). Proposes an `observability` extension and
+  a generated `signet.*` semantic-convention registry; both held under the standing rule until the
+  Standards Committee is constituted. `public-interface.json` declares the file as consumed.
+
 ## [0.17.3] — 2026-10-15
 
 ### Added
