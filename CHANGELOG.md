@@ -4,7 +4,7 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
-## [Unreleased]
+## [0.17.4] — 2026-11-04
 
 ### Added
 - `docs/positions/opentelemetry-and-signet.md` – a positioning paper on carrying OpenTelemetry's
