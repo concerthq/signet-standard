@@ -24,7 +24,9 @@ agent/         Runnable agent demonstration — a governed, conformance-verified
 onboarding/    Supplier-onboarding demonstration — a conditional qualification (v0.6.0)
 auction/       Reverse-auction demonstration — a deterministic close (v0.8.0)
 governance/    Standards Committee decision records (governance/reviews/)
+registry/      The adopter register — self-declared statements of practice (IAR-0007)
 docs/          The prose specification + docs/extensions/ (extension & profile specs)
+               + docs/positions/ (non-normative positioning papers)
 tools/         Reference transforms + the Pages renderer
 .github/       CI workflows, issue/PR templates, CODEOWNERS, Dependabot
 LICENSE        CC0 1.0 public-domain dedication
@@ -124,7 +126,7 @@ claim.
 | `role-register.md` | Closed, append-only. Governs which roles may appear in a person mark. |
 | `role-competency-framework.md` | Non-normative: what a person must be able to do, stated by reference to normative artifacts, with the assessment mode declared per domain. |
 | `person-assessment.md` | The rubric and the binding appeals route, required before any person mark issues. |
-| `proposals/` | Change proposals against the model and the suite. Four are open; none is balloted. |
+| `proposals/` | Change proposals against the model and the suite. None is balloted, and none is registered while the [standing rule](Governance-and-Versioning#change-proposals) holds. `proposals/README.md` is the index and states each one's status. |
 | `reviews/` | Public decision records versioning alongside the standard — e.g. the trail of the first **member-proposed** [extension](Extensions#working-draft-the-commodity-risk-extension). |
 
 See [Governance & Versioning](Governance-and-Versioning#review-records).
@@ -145,8 +147,27 @@ in-tree — adds the `Approval` object and the `delegationOfAuthority` credentia
 further specs are **spec-only Working Drafts** (schemas to follow per-extension after review):
 `receipt.md`, `performance.md`, `amendments.md`, `frameworks.md`, and `negotiation.md` — see
 [Extensions → Specified as Working Drafts](Extensions#specified-as-working-drafts-schemas-to-follow).
+Positioning papers live under **`docs/positions/`**: non-normative papers that set SIGNET
+beside another standard or framework and propose where it could land. Each one's front matter
+carries its status, the release it was verified against, and the claim triad (`modelled`,
+`tested`, `certified`). A positioning paper changes nothing in the tree and registers no
+proposal. The directory is the list; each paper is rendered under
+[concert.foundation/standard](https://concert.foundation/standard).
 `docs/WEBSITE_BUILD_NOTE.md` documents the Pages build. The spec is published to
 GitHub Pages by `.github/workflows/pages.yml`.
+
+## `registry/` — the adopter register
+
+`registry/adopters.json` is the adopter register, established by
+[IAR-0007](https://github.com/concerthq/signet-standard/blob/main/governance/IAR-0007-founding-adopter-window.md).
+An organisation adds one entry by pull request, stating a practice from a closed set: `accepts`,
+`emits` or `internal-model`. An entry is self-declared. It is not *modelled*, *tested* or
+*certified*, carries no mark, and names an organisation, never a person.
+`registry/adopter-entry.schema.json` is the entry schema, `registry/founding-window.json` records
+when the founding-adopter window closes (on constitution of the Standards Committee, or at
+23:59 UTC on 31 December 2026, whichever is earlier), and `tools/check-adopters.js`
+(`npm run registry:adopters`) checks the register against both. Founding status is a fact
+about timing and confers nothing.
 
 ## `tools/` — reference tooling
 
