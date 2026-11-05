@@ -127,6 +127,13 @@ jobs:
       - name: Release version — package.json and the changelog name the same version
         run: node conformance/rules/check-release-version.js .
 
+      # The adopter register (IAR-0007) shipped at v0.17.0 with its checker wired only as
+      # `npm run registry:adopters`, so an entry could merge without the claim ban (rule 6) or the
+      # founding-window rule (rule 5) ever running. The register is a list of statements of
+      # practice; the checker is what keeps it from being read as anything else.
+      - name: Adopter register — statements of practice only, founding window enforced
+        run: node tools/check-adopters.js
+
       # Draft-07 vs 2020-12 verdict equivalence across the corpus. Report-only until the v1.0
       # train decides the migration; --gate after. Precedent: "checks implemented, non-gating"
       # (CP-Mandate-enforcement). A reported difference is evidence for that decision, not a

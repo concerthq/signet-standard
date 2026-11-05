@@ -4,6 +4,15 @@ All notable changes to the SIGNET Canonical Data Model are recorded here.
 This standard uses [Semantic Versioning](https://semver.org/): the MAJOR
 version changes only on a breaking change to the core model.
 
+## [Unreleased]
+
+### Fixed
+- `tools/check-adopters.js` (`npm run registry:adopters`) now runs in `validate.yml`. The adopter
+  register shipped at v0.17.0 under IAR-0007 with its checker wired only as an npm script, so an
+  entry could merge without the claim ban (rule 6) or the founding-window rule (rule 5) running.
+  The register is empty, so no entry merged unchecked. Found while bringing the wiki up to date
+  (#79).
+
 ## [0.17.4] — 2026-11-04
 
 ### Added
