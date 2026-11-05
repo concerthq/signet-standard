@@ -99,8 +99,21 @@ structure, see [Extensions](Extensions).
 A substantive change is drafted as a **change proposal** in `governance/proposals/`: the problem
 stated against the shipped artifacts, the smallest change that closes it, the schema impact
 (stated as "none" explicitly where there is none), the conformance rules, backward compatibility,
-and what was rejected and why. Four are open — grant lifecycle, mandate enforcement, consent
-revocation, credential semantics — and **none has been balloted**.
+and what was rejected and why. **None has been balloted**; `governance/proposals/README.md` is
+the index and states each one's status.
+
+**Standing rule.** Under
+[`WITHDRAWAL-2026-08`](https://github.com/concerthq/signet-standard/blob/main/governance/WITHDRAWAL-2026-08.md),
+no further change proposals are registered until the Standards Committee is constituted. The one
+carve-out is a defect actively causing harm, which may be corrected under the bootstrap clause
+with an interim approval record, a stated comment period and the smallest Tier 2 surface that
+fixes it. Defects are still recorded in the defect register, which asserts facts and adopts
+nothing. A temporary window for registering defect-remedying proposals, opened by IAR-0006,
+expired on 30 September 2026.
+
+**Positioning papers** under `docs/positions/` are not change proposals. They are non-normative,
+change nothing in the tree, and hold any work they propose until registration reopens. See
+[Repository Structure → docs/](Repository-Structure#docs--the-prose-specification).
 
 ### Interim resolutions
 
@@ -110,8 +123,9 @@ before the standard is published under a stable URI — and before the first mar
 taken in that window are recorded as **interim resolutions**: in force, reasoned in writing, and
 ratifiable, amendable, or reversible by the committee once seated.
 
-Twenty are currently in force, listed in `governance/README.md`. An interim resolution is a
-decision, minuted as such — not a deferral.
+The resolutions in force are indexed in `governance/README.md`; that table is the record, and
+no count is restated here because a count in prose drifts. An interim resolution is a decision,
+minuted as such — not a deferral.
 
 ### Review records
 
